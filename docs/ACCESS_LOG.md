@@ -1,7 +1,5 @@
 # Access-log read contract
 
-Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
-
 `GET /patients/{patientId}/access-log` uses the same audited action boundary as the secured detail route. It accepts the test actor headers defined in the adopted access instruction. These declarations are impersonatable test inputs; a matching roster pair is not production authentication.
 
 A known STAFF actor or the known self PATIENT can read an existing patient's log. CLINICIAN and PROXY declarations cannot use this route, including when they can read clinical results. The entitlement query needs only patient existence. Well-formed unknown/mismatched actors and unavailable or unauthorized targets receive the shared404 envelope. Malformed actor headers receive400. These expected denials commit their categorical audit.

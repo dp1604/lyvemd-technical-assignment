@@ -1,6 +1,6 @@
 Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
 
-# Group 3 independent clinical oracle
+# the implementation independent clinical oracle
 
 Research/calculation lane completed 27 October 2026, 10:17 Sri Lanka time. Scratch evidence for the integrator; no canonical project files, Git state, database or supplied PR listing were changed. The task text and adopted Package B govern requirements; external sources verify the equation and terminology, not replacement policies.
 

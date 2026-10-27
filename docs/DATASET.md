@@ -1,8 +1,6 @@
 # Deterministic synthetic dataset
 
-Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
-
-**Assessment convention:** the supplied table calls code `2947-0` potassium, while official LOINC defines it as sodium in blood. Under the candidate's [D-17 decision](decisions/group-6-loinc-clarification.md), this adapter retains that mapping only for the synthetic assessment. It must not process real clinical feeds unchanged. Confirmed specimen, verified terminology mapping and clinical-owner approval are prerequisites for production use. This conflict does not establish the cause of the separate validation failure described below.
+**Assessment convention:** the supplied table calls code `2947-0` potassium, while official LOINC defines it as sodium in blood. Under the candidate's [D-17 decision](DECISIONS.md), this adapter retains that mapping only for the synthetic assessment. It must not process real clinical feeds unchanged. Confirmed specimen, verified terminology mapping and clinical-owner approval are prerequisites for production use. This conflict does not establish the cause of the separate validation failure described below.
 
 Version `atlas-g6-v1` defines **100 patients, 106 encounters and 10,000 stored source Observations**. The complete load, all eight secured end-to-end scenario checks and a separate fresh-local-journal replay passed. See the execution evidence for actual counts, failures investigated, preservation checks and limits. BP components belong to one source Observation. Calculated BMI/eGFR views are additional response rows, not stored source Observations. The deliberately rejected Bundle contributes no sources, and submitting the replay case twice contributes one source.
 
@@ -16,7 +14,7 @@ pwsh -NoProfile -File ./scripts/load-dataset.ps1
 
 On success, this single command prepares the designated local assessment database, builds the application, applies migrations, generates the inputs, starts its own loopback HTTP helper, submits the clinical Bundles, executes the actual clinician workflow, registers patient/proxy fixtures and verifies secured reads. It then stops its own helper. PostgreSQL, existing records and any separately running application are preserved. The command is a local assessment operator tool; it adds no administrative HTTP endpoint or production identity-provisioning feature.
 
-The helper uses port `18091` and refuses an existing listener. The public load command targets the assessment database `atlas`; automated verification remains separate in `atlas_test`. It reports stage progress and fails visibly if a stage does not finish successfully. A partial manifest or a progress counter is not a completion result. See [the current execution evidence](evidence/group-6-dataset.md) for what has actually passed.
+The helper uses port `18091` and refuses an existing listener. The public load command targets the assessment database `atlas`; automated verification remains separate in `atlas_test`. It reports stage progress and fails visibly if a stage does not finish successfully. A partial manifest or a progress counter is not a completion result. See [the current execution evidence](VERIFICATION.md) for what has actually passed.
 
 Generated requests, the assigned-ID manifest, the request-key plan and operational artifacts remain under ignored `work/dataset/v1`. Generator source and curated evidence are delivered; local tools, credentials and generated operational files are excluded from source publication. No Node installation or external generation package is required.
 
