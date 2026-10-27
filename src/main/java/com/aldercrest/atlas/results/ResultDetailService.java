@@ -19,8 +19,8 @@ public class ResultDetailService {
             var access=repository.access(patientId,actor);
             if(access==null) {return SafeErrors.response(404);}
             var view=repository.view(patientId,access);
-            var observation=view.series().observations().stream().filter(row -> observationId.equals(row.id())).findFirst().orElse(null);
-            return observation==null?SafeErrors.response(404):ResponseEntity.ok(ResultRendering.observation(observation,view));
+            var result=new ReadResults(view).find(observationId);
+            return result==null?SafeErrors.response(404):ResponseEntity.ok(result);
         });
     }
 }
