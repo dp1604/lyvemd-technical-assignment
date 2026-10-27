@@ -1,5 +1,8 @@
 # LyveMD technical lead assignment - Aldercrest Atlas
 
+**Known terminology conflict:** the brief labels2947-0as potassium; officialLOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](docs/decisions/group-6-loinc-clarification.md).
+
+
 This private repository contains the supplied technical assessment. Aldercrest, Careline and Atlas are fictional assessment context.
 
 **Current status:** Groups1–5 are complete. All five required API routes, caller-visible clinical views, attributable clinician release and individual proxy revocation are implemented. The complete204-case regression and final affected21-case notice/read/timing recheck passed; actual non-web CLI batches passed. [Group5 evidence](docs/evidence/group-5-reads-and-workflow.md) records conditions and limits. Persisted assignment dataset and browser client remain pending. The two-section note and static PR review have parallel AI drafts awaiting integration and guided review. This is not yet a complete submission or production system.

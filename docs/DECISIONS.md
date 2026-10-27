@@ -63,3 +63,7 @@ D-13–D-15 were explicitly adopted unchanged in actual candidate answer `01a17c
 ## Group6 dataset size
 
 D-16: the task leaves dataset size to the candidate. Codex proposed100syntheticpatients/about10,000sourceObservations, with all eight required scenarios plus held/critical/revoked cases, and explicitly separated this from the9-million-record production context. Candidate actually approved in `01a17c85-0aa5-7591-8064-e5ba870532fc`: "Approve 100 patients / about 10,000 Observations (Recommended)". [Actual request/adoption](ai/prompts/group-6-user-request.md) and [recipe/run contract](DATASET.md) preserve the rationale and limits. This is a sizing decision, not a measured performance claim or employer clarification.
+
+## Group6 terminology conflict
+
+D-17: officialLOINC2947-0 is sodium in blood, while the supplied table calls it potassium. Candidate explicitly adopted retaining the literal mapping only for this synthetic assessment with prominent disclosure and verified clinical/specimen mapping as a production prerequisite. [Verified sources, exact adoption and consequences](decisions/group-6-loinc-clarification.md) are authoritative; no silent2823-3 substitution or production semantic-conformance claim is made. This does not establish the separate HAPI runtime rejection's cause.
