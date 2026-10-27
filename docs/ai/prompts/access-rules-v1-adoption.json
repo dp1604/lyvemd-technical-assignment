@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "status": "adopted_unchanged",
+  "authorship": "AI-drafted prospectively; candidate adopted unchanged",
+  "instructionPath": "docs/ai/prompts/access-rules-v1.txt",
+  "instructionSha256": "af23a7677bf0163b2ae7ff20938f123b22d24e8bd43ac9c333fe605a08628680",
+  "encoding": "UTF-8 without BOM; LF; one terminal LF",
+  "questionContext": "Asked the candidate to review the full v1 instruction and either adopt it unchanged or request edits. Context is summarized; full question with workstation link remains local.",
+  "questionMessageId": "call_f85a4a8274424b15beb8c0bf6679c882",
+  "questionItemId": "[\"request_user_input_async\",\"call_f85a4a8274424b15beb8c0bf6679c882\",0]",
+  "sourceMessageId": "01a17b3c-2173-7002-8e7f-867679493c0b",
+  "answer": "Adopt v1 exactly as written",
+  "sourceThreadId": "01a1782c-e9ba-7022-b8ea-958dae51df21",
+  "sourceTurnStartedAtUtc": "2026-10-27T02:41:39Z",
+  "timingQualification": "Source turn start from the conversation API, not a fabricated exact message timestamp.",
+  "recordedAtUtc": "2026-10-27 02:42:32 UTC"
+}

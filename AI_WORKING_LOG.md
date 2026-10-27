@@ -1,6 +1,6 @@
 # AI working log
 
-Status: established and reconciled through Task 6. This is a maintained disclosure, not a completed final-submission log. Task 7 must record R1-R6 delegation and the actual access-rule implementation instruction; Task 91 must reconcile the final shipped work.
+Status: maintained through Task 7, including explicit R1-R6 delegation and the exact prospectively adopted access-rule instruction. This remains a development disclosure; Task 91 must reconcile the final shipped work.
 
 Codex and its AI agents produced the analysis, plans, preparatory code, documents and executed checks described below. The candidate supplied the assessment and context, confirmed decisions and requested guided assistance. Candidate-run tests or independent clinical verification have not been recorded, and no such credit is claimed.
 
@@ -110,10 +110,18 @@ The [provenance index](docs/ai/provenance-index.json) identifies the actual requ
 - Differences and reasons: earlier material is summarized with source locators rather than copied wholesale. The actual candidate requests and returned messages were recovered; no exact earlier request, finding, test or approval was invented. Source review corrected an omission of the earlier AI defect candidates and clarified that the initial tool-version proposals came from AI, not the candidate. Routine tool retries and file-formatting calls are grouped under their substantial item rather than generating a recursive transcript of log maintenance.
 - Verification and limits: source IDs were matched to retrieved messages and all eighteen recovered earlier-agent responses were assigned to a logged item. Exact prompt/excerpt, local-link, field-coverage and targeted publication checks passed; see [the Task 6 evidence](docs/evidence/task-6-ai-log.md). This does not finalize R1-R6 delegation, manufacture an access-rule implementation instruction, or turn a future plan into shipped behavior.
 
+## T7-001 - Explicit delegation and prospective exact access instruction
+
+- Asked: [the actual Task 7 request and adoption](docs/ai/prompts/task-7-user-request.md). Earlier confirmed directions delegate code to Codex and request assistance at every step; the later answer adopts v1 unchanged.
+- AI returned: [the six-row delegation record](docs/ai/DELEGATION.md), per-requirement engineering rationale and a prospective access-rule instruction with all eight house rules, R5, contract/exclusion boundaries and deferred policy decisions. An independent AI agent checked the draft against the supplied task and found no blocker or silently selected unresolved policy.
+- Retained/shipped: the unchanged [instruction body](docs/ai/prompts/access-rules-v1.txt), [actual adoption record](docs/ai/prompts/access-rules-v1-adoption.json), provenance and delegation record. Codex wrote the instruction; the candidate adopted it with "Adopt v1 exactly as written". No implementation was started by this adoption.
+- Differences and reasons: the broad work split was already confirmed, so it was applied explicitly to R1-R6 without reasking. Per-row reasons are Codex's rationale, not invented candidate quotations. The candidate adopted a new disclosed AI draft prospectively; no earlier exact user prompt, timestamp, policy approval, clinical sign-off or human-run check was fabricated. The adoption question context is summarized to avoid publishing a workstation link; the instruction body and answer remain unredacted. Verification caught a missing newline in the original review document code-fence wrapper; the complete instruction body was present unchanged. Preserve the original and correct only the current display wrapper.
+- Verification and limits: Codex source/hash, rule, delegation, local-link, targeted publication and working-diff checks passed; see [Task 7 evidence](docs/evidence/task-7-delegation.md). These are documentation/provenance checks only; software behavior, clinical validity, final compliance and candidate-run verification remain unclaimed.
+
 ## Continuing disclosure and final acceptance
 
 Follow [the logging protocol](docs/ai/LOGGING_PROTOCOL.md) for every further substantial item. Preserve actual requests, returned material, shipped material, reasons for differences and the checks actually performed. Reconcile entry status when implementation or final packaging changes it.
 
-Task 7 remains pending: record which of R1-R6 are delegated/retained and why, and preserve the actual access-rule implementation instruction exactly when issued. General planning instructions and the AI-authored access-rule summaries in AGENTS.md already exist; they are not relabelled as a separate candidate-issued implementation prompt.
+Task 7 recorded the [R1-R6 work split](docs/ai/DELEGATION.md) and [exact adopted instruction](docs/ai/ACCESS_RULE_INSTRUCTION.md). All six implementations are delegated to Codex; candidate decisions and guided verification remain retained. Earlier general planning/AGENTS directions are not relabelled as this prospective instruction. Preserve subsequent changes and actual evidence.
 
 Task 91 remains pending: reconcile every final shipped item, all material changes and review attribution, the exact access instruction, delegation decisions and actual evidence. No final application, review, legal compliance, performance or human-verification claim is made by starting this log.

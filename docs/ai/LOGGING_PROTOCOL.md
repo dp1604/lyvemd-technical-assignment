@@ -13,7 +13,7 @@ This protocol applies to the entire task list through delivery. The assignment r
 
 ## Exact access-rule instruction and delegation
 
-Task 7 must record the candidate's actual R1-R6 delegation choices and reasons, and the access-rule implementation instruction with its exact wording, role, source and timing. The assignment's supplied rules and earlier AI-authored summaries remain part of provenance; do not retroactively invent a distinct user prompt from them. If an implementation instruction is amended, retain both actual versions and explain what shipped.
+Task 7 recorded the agreed R1-R6 division with Codex-attributed reasons in [DELEGATION.md](DELEGATION.md), and the AI-drafted instruction adopted unchanged by the candidate in [ACCESS_RULE_INSTRUCTION.md](ACCESS_RULE_INSTRUCTION.md). Its exact body, actual adoption answer, roles, source and qualified timing are preserved. The assignment's supplied rules and earlier AI-authored summaries remain part of provenance; do not retroactively invent a distinct user prompt from them. If an implementation instruction is amended, retain both actual versions and explain what shipped.
 
 ## Privacy and publication
 

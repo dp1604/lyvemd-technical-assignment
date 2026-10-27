@@ -1,0 +1,25 @@
+Implement access control and clinical-read auditing for the LyveMD/Aldercrest Atlas assessment when the scheduled implementation tasks begin. Follow the whole supplied Technical Task, including R2, R5, the contract, required technology and exclusions. All eight house rules below remain mandatory in the design. Do not change a requirement or treat an unresolved policy as an assumed fact.
+
+Enforce the required access and visibility rules server-side on every clinical read: list, detail, trend, totals, pagination and any alternate route. Use authoritative stored relationships and a common enforcement path so a caller cannot bypass the rules through another endpoint or a count.
+
+The following house rules reproduce section 2.2 with PDF line wrapping normalized:
+1. A caller may read a patient’s record only if it is that patient, a registered proxy (proxy_link), or a clinician on one of their encounters; STAFF may read the access log only.
+2. A result becomes visible to a patient only after a clinician release action; critical values follow the critical-value path and are never released silently.
+3. Family and caregiver access is by individual, revocable, logged proxy link. Shared credentials are prohibited; every read is attributable to one person.
+4. For a patient aged 12 or over, encounters of class ABSL, SUBU or MHEV and their observations are never visible to a proxy; proxy access ends at 18.
+5. A response omitting a protected item is indistinguishable — status, body, timing — from one for an item that does not exist.
+6. Identifiable clinical data leaves the building only with a recorded legal basis and patient consent; absent both, only de-identified aggregates may leave.
+7. One canonical unit per analyte (UCUM code governs); ranges at the patient’s age and sex at the observation’s effective time; no flag where none applies; derived values never fabricated; amendments retain the original; every read audited in its own transaction.
+8. Nothing is assumed about upstream data formats; they are verified before anything is designed around them.
+
+R5 requires: "Every read of clinical content writes an access_log row in the same transaction as the read; denied reads are recorded."
+
+Use X-Test-Actor-Id and X-Test-Actor-Role (PATIENT, PROXY, CLINICIAN, STAFF) as the brief's untrusted test-caller interface. Validate inputs and stored entitlements. This test interface is not production authentication; do not claim that it prevents real-world impersonation or add excluded identity provisioning or login screens.
+
+Before coding an unspecified policy, explain it to me, recommend a reasoned choice, obtain my decision and record it in the specification/decision register. In particular, do not silently choose the age-time basis for confidentiality, other roles' access-log entitlement, release/critical-workflow representation or thresholds, or the relationship between R5 and house rule 7 and denied/audit-failure behavior. Resolve these in the scheduled decision tasks first.
+
+Use synthetic data, parameterized database access, minimal necessary responses, safe errors and credential/clinical-payload-free ordinary logs. Do not invent a legal jurisdiction or claim certification. Preserve clinician release, critical handling, revocable individual proxies, amendment history and the outbound-data/upstream-verification boundaries at the scope required by the brief. Keep notifications, insurance, scheduling, Careline write-back and container/cloud deployment outside the build.
+
+Test permitted and denied actors, stored clinician/proxy relationships, revocation, ages around 12 and 18, all three protected encounter classes, all read routes and metadata, and read/audit failure paths. Treat hidden/nonexistent status, body and timing indistinguishability as required behavior: investigate failed checks and disclose any unsatisfied requirement rather than declaring compliance. Do not equate a few timing measurements with universal proof.
+
+Keep the actual instruction, subsequent changes, code, evidence and AI origin traceable in the working log. Explain decisions and results so I can review and defend the work. Do not claim that I ran a check unless I actually did. Follow the task checklist; adoption of this instruction does not bypass the pending decision steps or start implementation early.

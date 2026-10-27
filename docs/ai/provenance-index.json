@@ -10,7 +10,16 @@
     "priorAgentFinalResponses": 18,
     "rawSourceLocation": "Ignored local work only; raw correspondence, paths and tool logs are not published.",
     "additionalTask6SteeringMessages": 1,
-    "sourceCutoff": "Initial conversation through Task 6 opening, plus the later exact direction to find the earlier material and complete Task 6."
+    "sourceCutoff": "Initial conversation through Task 6 opening, plus the later exact direction to find the earlier material and complete Task 6.",
+    "task7Extension": {
+      "requestMessage": "01a17b2b-6d1f-7e61-9c28-96b0eed42ed4",
+      "adoptionMessage": "01a17b3c-2173-7002-8e7f-867679493c0b",
+      "instructionQuestion": "call_f85a4a8274424b15beb8c0bf6679c882",
+      "rawSourceLocation": "Ignored local work/task7-source.json",
+      "sourceTurnStartedAtUtc": "2026-10-27T02:41:39Z",
+      "recordedAtUtc": "2026-10-27 02:42:32 UTC",
+      "independentAgentThread": "01a17b2c-06dd-70a2-bda4-38fb8302ea81"
+    }
   },
   "items": [
     {
@@ -189,12 +198,32 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "Exact current task request retained; current log/index/protocol are the returned artifacts."
+    },
+    {
+      "id": "T7-001",
+      "topic": "Explicit R1-R6 delegation and exact prospectively adopted access-rule instruction",
+      "requestMessages": [
+        "01a17b2b-6d1f-7e61-9c28-96b0eed42ed4",
+        "01a17b3c-2173-7002-8e7f-867679493c0b",
+        "01a1785c-a50b-7093-91e0-3d301a5ccd16",
+        "01a17862-b802-7551-be14-462edf849a9f"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016ae00dae48b081918e03b6f1882087de",
+        "call_f85a4a8274424b15beb8c0bf6679c882"
+      ],
+      "agentMessages": [
+        "msg_014a1956738121d3016ae0106149008191af2aee1adc987b94",
+        "msg_014a1956738121d3016ae00cea77fc8191962d509331f2db20",
+        "msg_014a1956738121d3016ae00ba157d481918123151dd898adee"
+      ],
+      "requestRecord": "Task request and adoption answer exact; adoption question context summarized; full unchanged instruction and hash preserved."
     }
   ],
   "limits": [
     "Records are reconciled now, not backdated.",
     "Original visible chat and earlier AI-agent final responses were recovered; hidden reasoning is not part of this record.",
     "The manifest records provenance, not implementation approval or verification of future software.",
-    "R1-R6 delegation and the exact access-rule implementation instruction remain Task 7 work; final log reconciliation remains Task 91."
+    "Task 7 records R1-R6 delegation and the prospective exact adopted instruction; final reconciliation of actual shipped work remains Task 91."
   ]
 }
