@@ -4,10 +4,12 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
+import ca.uhn.fhir.validation.SingleValidationMessage;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.hl7.fhir.utilities.i18n.I18nConstants;
 import org.hl7.fhir.common.hapi.validation.support.CommonCodeSystemsTerminologyService;
@@ -58,7 +60,14 @@ public class FhirValidation {
 
     public boolean valid(String json) {
         try {
-            for(var message:validator.validateWithResult(json).getMessages()) {
+            var messages=validator.validateWithResult(json).getMessages();
+            // A validator failure must never become a durable claim that the input is invalid.
+            // Inspect all messages before an ordinary validation error can short-circuit the scan.
+            if(classifyMessages(messages)==MessageDisposition.UNAVAILABLE) {
+                LOG.warn("ATLAS_FHIR_VALIDATOR_UNAVAILABLE");
+                throw new IllegalStateException("FHIR validation unavailable.");
+            }
+            for(var message:messages) {
                 if(message.getSeverity()==ResultSeverityEnum.ERROR || message.getSeverity()==ResultSeverityEnum.FATAL) {
                     // First failure category only. Never log message text, location, payload or a throwable.
                     LOG.warn("ATLAS_FHIR_VALIDATION_REJECTED severity={} rule={}",message.getSeverity().name(),diagnosticRule(message.getMessageId()));
@@ -70,6 +79,21 @@ public class FhirValidation {
             LOG.warn("ATLAS_FHIR_VALIDATOR_PARSE_REJECTED");return false;
         }
         catch (RuntimeException error) {throw new IllegalStateException("FHIR validation unavailable.",error);}
+    }
+
+    enum MessageDisposition { VALID, INVALID, UNAVAILABLE }
+
+    /** Exact trusted message IDs only; message text and resource paths never influence classification. */
+    static MessageDisposition classifyMessages(List<SingleValidationMessage> messages) {
+        boolean invalid=false;
+        for(var message:messages) {
+            if(message.getSeverity()!=ResultSeverityEnum.ERROR && message.getSeverity()!=ResultSeverityEnum.FATAL) {continue;}
+            String id=message.getMessageId();
+            if(I18nConstants.TYPE_SPECIFIC_CHECKS_DT_PRIMITIVE_REGEX_EXCEPTION.equals(id)
+                    || I18nConstants.REGEX_MATCH_TIMED_OUT.equals(id)) {return MessageDisposition.UNAVAILABLE;}
+            invalid=true;
+        }
+        return invalid?MessageDisposition.INVALID:MessageDisposition.VALID;
     }
     public org.hl7.fhir.r4.model.Resource parse(String json) {
         try {

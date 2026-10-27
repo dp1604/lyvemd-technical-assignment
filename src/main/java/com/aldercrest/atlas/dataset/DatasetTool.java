@@ -215,7 +215,7 @@ public final class DatasetTool implements AutoCloseable {
         var request=HttpRequest.newBuilder(base.resolve("/fhir")).timeout(Duration.ofSeconds(60)).header("Content-Type","application/fhir+json")
                 .header("X-Test-Actor-Id",actor).header("X-Test-Actor-Role","CLINICIAN").header("X-Idempotency-Key",key)
                 .POST(HttpRequest.BodyPublishers.ofString(body,StandardCharsets.UTF_8)).build();
-        var reply=http.send(request,HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+        var reply=DatasetRequestRetry.send(()->http.send(request,HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)), HttpResponse::statusCode,Thread::sleep);
         return new Reply(reply.statusCode(),reply.body(),JSON.readTree(reply.body()));
     }
     private Reply get(String patientKey,String suffix,String actor,String role) throws Exception {
