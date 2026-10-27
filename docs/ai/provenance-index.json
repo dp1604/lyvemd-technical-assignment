@@ -19,6 +19,15 @@
       "sourceTurnStartedAtUtc": "2026-10-27T02:41:39Z",
       "recordedAtUtc": "2026-10-27 02:42:32 UTC",
       "independentAgentThread": "01a17b2c-06dd-70a2-bda4-38fb8302ea81"
+    },
+    "task8Extension": {
+      "requestMessage": "01a17b43-1e2d-7641-bcb2-7f8dc6c9e0f0",
+      "independentAgentThreads": [
+        "01a17b43-7857-7870-b7b3-e664cd2527dc",
+        "01a17b43-9a9d-7253-bb18-ea2b24cabf6f"
+      ],
+      "rawSourceLocation": "Ignored local work/task8-source.json",
+      "purpose": "Baseline source coverage and planned evidence; not implementation acceptance."
     }
   },
   "items": [
@@ -218,6 +227,21 @@
         "msg_014a1956738121d3016ae00ba157d481918123151dd898adee"
       ],
       "requestRecord": "Task request and adoption answer exact; adoption question context summarized; full unchanged instruction and hash preserved."
+    },
+    {
+      "id": "T8-001",
+      "topic": "Requirement-to-evidence baseline and independent source/coverage audits",
+      "requestMessages": [
+        "01a17b43-1e2d-7641-bcb2-7f8dc6c9e0f0"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_006db2a79f102ae8016ae0130f1acc8191af523b4269029484",
+        "msg_006db2a79f102ae8016ae0118b0af4819185272227df9d60fe",
+        "msg_03647cd98af13842016ae0130da2708191b774a7104d43c214",
+        "msg_03647cd98af13842016ae01185f2e48191b4f59a5d903e1c3d"
+      ],
+      "requestRecord": "Exact task request retained; returned matrix/log/evidence are the artifacts; independent AI audit source locators retained."
     }
   ],
   "limits": [

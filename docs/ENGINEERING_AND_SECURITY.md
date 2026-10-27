@@ -29,4 +29,4 @@ These references support engineering verification without replacing the assignme
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/): use applicable testable accessibility criteria, including keyboard access and use of color. The assignment's explicit client requirements remain mandatory; full WCAG conformance requires broader verification.
 - [HL7 FHIR R4](https://hl7.org/fhir/R4/): use version 4.0.1 for the required input. Record and resolve any assessment-versus-standard discrepancy explicitly before implementing it.
 
-Each substantial decision must later have its reason, source, affected requirements and verification evidence recorded. The requirement matrix and decision register are separate scheduled tasks and remain pending.
+Each substantial decision must later have its reason, source, affected requirements and verification evidence recorded. The [requirement-to-evidence matrix](REQUIREMENT_MATRIX.md) establishes baseline coverage in Task 8; update it with actual evidence through reconciliation. The decision register remains scheduled for Task 10, and policy decisions remain open.

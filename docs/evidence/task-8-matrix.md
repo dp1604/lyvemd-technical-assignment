@@ -1,0 +1,13 @@
+# Task 8 - requirement-to-evidence matrix baseline
+
+Status: baseline independently reviewed and documentation checks passed. This is coverage evidence only; application behavior and final submission acceptance remain pending.
+
+The [matrix](../REQUIREMENT_MATRIX.md) maps source clauses to stable IDs, planned delivery areas, numbered checklist tasks, verification criteria and current evidence/status. All application rows remain PENDING; the setup-only stack rows remain PARTIAL. Actual recorded delegation and instruction are bounded documentation records, not approval of future software.
+
+Two independent AI agents read the primary task, relevant attachment scope and checklist. They separately inventoried the brief/contract and audited the concrete matrix. Contract review confirmed all six R requirements, eight house rules including HR7's six clauses, 27 model columns, five endpoints, eleven clinical table rows plus three bullets, and eight dataset cases. Brief review confirmed the two-section note, fictional constraints/Dana conflicts, eight PR files and printed bounds, review boundaries, four submission components, exclusions and source distinctions.
+
+The brief reviewer identified that approvable plain language applies to the whole Dana section. P1-01 was corrected accordingly. AccessLogWriter spans pages 11-12; the source inventory corrected a draft p11-only reference before final review. Exact source annotation caveats avoid inventing NOT NULL/FK mandates. Open decisions remain OPEN, including FHIR response conflicts, replay/amendment matching, identity/log rights, demographics/time, release/critical representation and audit interpretation/failure behavior.
+
+Codex checks passed: 139 unique complete matrix rows; all 96 checklist tasks mapped; all 27 source-model fields; eight supplied files with all 724 contiguous printed lines; seven decision groups still OPEN; no unbuilt application row closed; exact Task 8 request and four independent audit source locators; local document links; targeted credential/private-content inspection; working-diff formatting. The local source-line matcher initially skipped numbered blank lines, was corrected, and then verified the full listing inventory. Static/manual source audits are the substantive coverage check; row counts alone are not proof of semantic completeness. The source listing was not fixed, built or run. No application, clinical, UI, performance or production-compliance test is claimed here.
+
+Maintain the matrix throughout implementation, reconcile actual evidence/limitations in Task 90 and final disclosure/history in Task 91. Final publication/privacy/history checks remain required for this increment and at delivery.
