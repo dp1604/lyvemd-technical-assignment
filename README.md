@@ -11,7 +11,7 @@ Status: project structure and development environment prepared. Application impl
 | Specification and Architecture Note, with Dana and engineering sections | [SPECIFICATION_AND_ARCHITECTURE.md](SPECIFICATION_AND_ARCHITECTURE.md) | Outline only |
 | Build, history, generator and run instructions | src/, scripts/, Git history and this README | Structure only |
 | Static review of Attachment A | [PR_REVIEW.md](PR_REVIEW.md) | Pending |
-| AI working log | [AI_WORKING_LOG.md](AI_WORKING_LOG.md), docs/ai/ | Initial Task 4 record; earlier assistance pending reconciliation |
+| AI working log | [AI_WORKING_LOG.md](AI_WORKING_LOG.md), docs/ai/ | Maintained through Task 6; delegation/access prompt and final reconciliation pending |
 
 ## Approved approach
 

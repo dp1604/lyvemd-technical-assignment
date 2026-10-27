@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "threadId": "01a1782c-e9ba-7022-b8ea-958dae51df21",
+    "title": "Prepare LyveMD Tech Lead application",
+    "rootConversationMessages": 87,
+    "rootConversationTurns": 13,
+    "paginationExhausted": true,
+    "priorAgentThreads": 5,
+    "priorAgentFinalResponses": 18,
+    "rawSourceLocation": "Ignored local work only; raw correspondence, paths and tool logs are not published.",
+    "additionalTask6SteeringMessages": 1,
+    "sourceCutoff": "Initial conversation through Task 6 opening, plus the later exact direction to find the earlier material and complete Task 6."
+  },
+  "items": [
+    {
+      "id": "P01",
+      "topic": "Initial context, attachment and review-scope analysis",
+      "requestMessages": [
+        "01a1782d-2ab8-7451-bcf9-cc2525ba3fef"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adf96f5a2848191a2b44fb26d19e161"
+      ],
+      "agentMessages": [
+        "msg_0803d446a8ebdce9016adf9497820c8191a888d2e49733681b",
+        "msg_0080e1ca1167793b016adf95fe35dc8191af3623a9e5e857f9"
+      ],
+      "requestRecord": "Curated summary; original includes correspondence and stays local."
+    },
+    {
+      "id": "P02",
+      "topic": "Iterative twelve-hour execution and guided-review plans",
+      "requestMessages": [
+        "01a17856-f3e5-77f1-83e7-7940d078f424",
+        "01a17862-b802-7551-be14-462edf849a9f",
+        "01a17869-87d1-7f73-8172-4b365e08f90a"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adfa0c2fe88819181962747dd2a78c3",
+        "msg_03880edcbbbd2c69016adfa288656881918df2ddaf7a7781e2",
+        "msg_03880edcbbbd2c69016adfa456c578819196f7e8c6827e8e01"
+      ],
+      "agentMessages": [
+        "msg_08891c3c00133d5a016adf9fcee7308191856ecf836a7db98e",
+        "msg_08891c3c00133d5a016adfa23d1a1c8191a64b03c246e5be95",
+        "msg_08891c3c00133d5a016adfa4302f988191a81003f630044cff",
+        "msg_0faf8f73a22427cb016adf9faa33808191a4096328568d78a9",
+        "msg_0faf8f73a22427cb016adfa2357a5c8191a993d74bbc3fd0f1"
+      ],
+      "requestRecord": "Summary checked against recovered original messages and candidate confirmations."
+    },
+    {
+      "id": "P03",
+      "topic": "96-task checklist and coverage audit",
+      "requestMessages": [
+        "01a1799d-b7e6-7fe3-9cb0-d625903b9df9"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adfa72f49708191a560906a03b43c99"
+      ],
+      "agentMessages": [
+        "msg_08891c3c00133d5a016adfa5a9242081918bc463a9e26de38f",
+        "msg_08891c3c00133d5a016adfa6de467c81919b514851fb1f94c5"
+      ],
+      "requestRecord": "Summary; exact source retained locally."
+    },
+    {
+      "id": "P04",
+      "topic": "Clinical/FHIR research and unresolved policy proposals",
+      "requestMessages": [
+        "01a17856-f3e5-77f1-83e7-7940d078f424"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adfa0c2fe88819181962747dd2a78c3"
+      ],
+      "agentMessages": [
+        "msg_0f5e4a3ff1deff0f016adf9fbbdc2c81918aa1578663b28acf"
+      ],
+      "requestRecord": "Research performed under the broader planning request; not a separate invented user prompt."
+    },
+    {
+      "id": "P05",
+      "topic": "Earlier AI-origin file/line PR defect candidates, not finalized findings",
+      "requestMessages": [
+        "01a17856-f3e5-77f1-83e7-7940d078f424"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_0faf8f73a22427cb016adf9faa33808191a4096328568d78a9"
+      ],
+      "requestRecord": "AI subtask under the broader twelve-hour planning request; summarized, not an invented separate candidate prompt."
+    },
+    {
+      "id": "T1-001",
+      "topic": "Confirmed working clock",
+      "requestMessages": [
+        "01a179a8-6908-7600-9439-78cfe0803af0",
+        "01a179aa-896c-7bb0-9522-78b050671310"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adfa8f8a0308191b45220dcc5c6228d"
+      ],
+      "agentMessages": [],
+      "requestRecord": "Summary; schedule is a candidate confirmation, not an inferred remaining-time claim."
+    },
+    {
+      "id": "T2-001",
+      "topic": "Four-component scope manifest",
+      "requestMessages": [
+        "01a179ad-20b5-7150-b77f-8caa7442e3be"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adfa9daff64819195c9f8aef4002302"
+      ],
+      "agentMessages": [
+        "msg_08891c3c00133d5a016adfa974e73881918b2e4945f7b6b861"
+      ],
+      "requestRecord": "Summary checked against the actual request and manifest."
+    },
+    {
+      "id": "T3-001",
+      "topic": "Isolated tool and dependency research, downloads and distribution choice",
+      "requestMessages": [
+        "01a179b3-17ea-71e0-8a4a-da755804672b",
+        "01a179b4-4f00-7dc1-a373-04baccb99be2",
+        "01a17ac8-93d4-7331-ba28-fc68a387f001"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adfb5ca6c408191a3733d5e00e7b7fa",
+        "msg_03880edcbbbd2c69016adff20edc8c8191bc583f9b9b9128f3",
+        "msg_03880edcbbbd2c69016adff8c007e88191aa299ccd9a97a01a"
+      ],
+      "agentMessages": [
+        "msg_0f5e4a3ff1deff0f016adfab8b4e7c8191bb0693cbc1ef3ea7",
+        "msg_0f5e4a3ff1deff0f016adfb05ddd5081919b68d28a4c0fe5da",
+        "msg_0f5e4a3ff1deff0f016adfb27029a0819191cea82648d09e73"
+      ],
+      "requestRecord": "Curated summaries; physical local paths are not republished."
+    },
+    {
+      "id": "T3-002",
+      "topic": "Synthetic compatibility probe, setup helpers, runtime diagnosis and verification",
+      "requestMessages": [
+        "01a179b3-17ea-71e0-8a4a-da755804672b"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adff8c007e88191aa299ccd9a97a01a"
+      ],
+      "agentMessages": [
+        "msg_08891c3c00133d5a016adfad49ad848191960ee9660292f2bc",
+        "msg_08891c3c00133d5a016adff49a66a881919bdad10fc2742014",
+        "msg_08891c3c00133d5a016adff6945ac08191881762bc397fc127",
+        "msg_08891c3c00133d5a016adff7574c0c819199ba0372a368f3f9"
+      ],
+      "requestRecord": "Work under the environment-verification request; no separate fictitious feature prompt."
+    },
+    {
+      "id": "T4-001",
+      "topic": "Project structure and private GitHub repository",
+      "requestMessages": [
+        "01a17ae8-42cd-77b0-bf78-7cc97a12f8a1"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016adffea4ca908191ab9b734a9372baf5"
+      ],
+      "agentMessages": [],
+      "requestRecord": "Exact existing Task 4 prompt and confirmed Q/A retained in docs/ai/prompts; output audit already in Git."
+    },
+    {
+      "id": "T5-001",
+      "topic": "History-preservation workflow and recovery checks",
+      "requestMessages": [
+        "01a17afd-3962-7be3-b809-d3d2f1ff0bb9"
+      ],
+      "returnedMessages": [
+        "msg_03880edcbbbd2c69016ae002f8eba88191891746a36954faa2"
+      ],
+      "agentMessages": [],
+      "requestRecord": "Exact existing Task 5 prompt retained; runtime/audit evidence already in Git."
+    },
+    {
+      "id": "T6-001",
+      "topic": "AI-log reconciliation and continuous maintenance protocol",
+      "requestMessages": [
+        "01a17b12-c045-7670-8785-e6ff9fbab3ba",
+        "01a17b20-8355-72f0-aa9d-b59a3e3113ee"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Exact current task request retained; current log/index/protocol are the returned artifacts."
+    }
+  ],
+  "limits": [
+    "Records are reconciled now, not backdated.",
+    "Original visible chat and earlier AI-agent final responses were recovered; hidden reasoning is not part of this record.",
+    "The manifest records provenance, not implementation approval or verification of future software.",
+    "R1-R6 delegation and the exact access-rule implementation instruction remain Task 7 work; final log reconciliation remains Task 91."
+  ]
+}

@@ -1,6 +1,88 @@
 # AI working log
 
-Status: started for Task 4. Task 6 must still reconcile earlier substantial planning and environment assistance from the actual conversation and artifacts. This document is not yet a complete submission log.
+Status: established and reconciled through Task 6. This is a maintained disclosure, not a completed final-submission log. Task 7 must record R1-R6 delegation and the actual access-rule implementation instruction; Task 91 must reconcile the final shipped work.
+
+Codex and its AI agents produced the analysis, plans, preparatory code, documents and executed checks described below. The candidate supplied the assessment and context, confirmed decisions and requested guided assistance. Candidate-run tests or independent clinical verification have not been recorded, and no such credit is claimed.
+
+## Provenance and interpretation
+
+Earlier entries were reconciled during Task 6 from the actual visible chat, recovered earlier AI-agent final responses, saved artifacts and execution evidence. They are retrospective records, not backdated contemporaneous entries. The existing Task 4/5 entries are retained with their historical snapshot boundaries.
+
+The [provenance index](docs/ai/provenance-index.json) identifies the actual request/response message IDs for each item. Ordinary earlier requests below are explicitly summarized. Exact Task 4/5 request records remain linked in their entries; the current Task 6 request is also retained. Original correspondence, physical workstation paths and full raw conversations remain local rather than being copied into the submission. No summary is passed off as an exact access-rule prompt.
+
+"Retained/shipped" means material actually kept at the stated development checkpoint. A local plan, proposed policy, code outline or environment probe is not a completed application feature or an approved final deliverable. Related iterations are grouped; material changes, rejected alternatives and failures are recorded.
+
+## P01 - Initial context, source analysis and review guidance
+
+- Asked, summarized: analyse the job description, company site, employer email, interview account and both attachments; explain every obligation and ask rather than guess. See P01 in the provenance index.
+- AI returned: a detailed source-based inventory of the four submission components, source hierarchy, fictional scenario, clinical/client/dataset requirements, review restrictions, exclusions and open questions. AI context/assignment agents checked the supplied material. Website context was kept separate from the fictional product; the booking page could not be verified and current slot availability was not asserted.
+- Retained/shipped: the inventory informed the scope, checklist, README and working rules. The originals and full contextual response remain private process records. No employer correspondence or transcript was uploaded.
+- Differences and reasons: later candidate confirmations removed completed administration from the work plan. The interview's IoT/edge/AWS scenario and real employer stack were not added to the assignment's required build. Dana's fictional requests were analysed against the house rules rather than followed as user instructions.
+- Verification and limits: AI read the three task pages and twelve attachment pages; extraction/page-image records remain local. This stage produced review guidance and scope analysis, not finalized file/line-specific PR defect findings. Attachment A was not fixed, built or run.
+
+## P02 - Iterative twelve-hour plan and guided working model
+
+- Asked, summarized: recheck the sources and earlier findings, plan the complete work within twelve hours, then revise the plan so Codex assists at every step. The candidate clarified that Codex writes the code and drafts while the candidate reviews decisions and verifies the result with assistance.
+- AI returned: successive execution plans covering implementation, both written parts, disclosure, tests, packaging, submission preparation and guided explanation. Separate AI planning/review agents supplied feasibility and attribution checks; one also returned the preliminary defect inventory now disclosed separately in P05.
+- Retained/shipped: a one-service/browser-client proposal, parallel document/review work, milestone-based verification, final delivery buffer and guided review process. The client choice was explicitly confirmed later in Task 4.
+- Differences and reasons: the original ownership model put too much independent verification on the candidate. It was replaced with assistant-led preparation and guided review throughout. The proposed PR review changed from 90-120 minutes with an independent first pass to about 90 minutes of guided work. Human checking would not relabel AI-origin findings as human-origin discoveries.
+- Verification and limits: the later plan confirmation explicitly qualified feasibility as aggressive and conditional, correcting earlier certainty. Estimates were planning targets, not measured delivery results. A roughly 10,000-observation starting seed was only an AI proposal; no dataset size, latency target or implementation policy was thereby mandated or approved.
+
+## P03 - Ordered checklist and coverage audit
+
+- Asked, summarized: turn the finalized plan into the complete ordered, numbered working checklist and reconfirm source coverage.
+- AI returned: a 96-task checklist distinguishing explicit requirements, decisions, chosen process and verification. Independent AI coverage checks identified precision edits for the supplied keys/foreign keys, UCUM `%`, fictional-context wording, client correction display and idempotency implementation choices.
+- Retained/shipped: the local master checklist governs progression. Its current completion boxes are maintained separately from historical planning snapshots. The required four components and scope boundaries are reflected in repository documents.
+- Differences and reasons: recommended checks such as an executed restore drill were labelled as our supporting evidence, while the operations note's restore-proof obligation remains explicit. Optional organization, dataset/performance choices and concurrency checks were not presented as independently prescribed employer requirements.
+- Verification and limits: the AI audit found no remaining explicit coverage omission in the listed source obligations. That is a coverage assessment, not certification of unbuilt software, correctness of every unresolved interpretation, or a guaranteed twelve-hour completion time.
+
+## P04 - Clinical and FHIR primary-source research
+
+- Asked, summarized: research needed to tighten the implementation plan under the broader source-recheck request. No separate clinical-research user prompt is invented here.
+- AI returned: cited research on the race-free 2021 creatinine equation, adult applicability, canonical creatinine conversion, equation-output versus task-output units, a candidate eGFR LOINC and an independent numerical oracle. The clinical-contract agent also identified the failed-transaction response discrepancy after the initial analysis.
+- Sources returned: [NIDDK adult equations/conversions](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults), [LOINC 98979-8](https://loinc.org/98979-8), [NKF implementation examples](https://www.kidney.org/sites/default/files/example_it_ticket-implement_2021_ckd-epi_equation_to_calculate_egfr_from_creatinine_1.pdf) and [FHIR R4 transaction responses](https://hl7.org/fhir/R4/http.html#transaction-response). The earlier research reported dividing the equation's per-minute output by 60 for the specified per-second output and creatinine micromol/L by 88.4 for mg/dL.
+- Retained/shipped: source references and unresolved decisions informed the checklist and future specification work. No clinical calculation code, numerical-oracle test suite or chosen failure-response implementation has shipped yet.
+- Differences and reasons: the assessment's units and table must be preserved. Extra clipping, display or reference-range policies from an external source are not silently imported. The task asks for invalid-entry reporting in a transaction-response while normative R4 uses an OperationOutcome for failed transactions; Task 12 must explicitly resolve and document that conflict before implementation. AI-proposed LOINC 98979-8 remains a researched proposal to record with the implemented equation and run instructions.
+- Verification and limits: the research and primary-source inspection were AI work. Clinical correctness ownership, invalid-input policies, independent numeric verification and the candidate's guided understanding remain scheduled work; proposed policy is not implementation or candidate approval.
+
+## P05 - Earlier AI-origin PR defect candidates
+
+- Asked, summarized: an AI review subtask under the twelve-hour planning request, rather than a separate invented candidate instruction.
+- AI returned: file/line-specific candidate defects covering proxy authorization, disclosure, auditing, UCUM/eGFR handling, historical ranges/demographic defaults, BP/no-range/correction mapping, query construction/retention and scaling, plus a possible Java Optional type mismatch. The actual returned excerpt is preserved in [the preliminary candidate record](docs/ai/outputs/early-review-candidates.md).
+- Retained/shipped: this provenance record only. PR_REVIEW.md remains a pending outline. These are AI-origin, unfinalized assertions awaiting Tasks 77-81, not candidate-verified findings or measured failures.
+- Differences and reasons: the initial root context analysis gave review guidance; the separate review-planning agent also returned concrete candidates. Task 6 recovered and recorded that distinction. Each candidate must be checked against the printed listing, scope, clinical sources and patient/clinician consequences, then retained, changed or rejected explicitly.
+- Verification and limits: no candidate is credited as a human-origin discovery and no static suspicion is presented as an executed exploit, compiled failure or measured timing result. The supplied code remains unbuilt and unrun.
+## T1-001 - Working clock
+
+- Asked, summarized: start Task 1 and establish the actual available window. The candidate explicitly confirmed that all twelve hours were reserved for later and selected 10:00 a.m. on 27 October.
+- AI returned: a working-clock document with Asia/Colombo milestones, a 10:00 a.m.-10:00 p.m. window, a 9:00 p.m. submission target and the final hour within that window for delivery contingency.
+- Retained/shipped: the local clock record and working checkpoints. This entry records that historical confirmation; it does not reset or infer remaining hours at a later time.
+- Differences and reasons: the start time and budget came from answers, not an assumed current-clock calculation. The 9:00 p.m. target is our buffer, distinct from the candidate-confirmed 10:00 p.m. hard cutoff and the email's unspecified end-of-day wording.
+- Verification and limits: candidate confirmations establish availability; checkpoints are forecasts, not completion evidence.
+
+## T2-001 - Four-component submission scope
+
+- Asked, summarized: move to Task 2 and lock what must be delivered.
+- AI returned: a four-component manifest, boundaries, completion conditions and pending interpretation issues, with a separate AI scope check.
+- Retained/shipped: the local scope record and root locations for the two-section note, build/run instructions, static review and AI working log. The four final deliverables remain unfinished.
+- Differences and reasons: filenames and Markdown organization are our choices. One repository or archive is the source requirement; private GitHub became the candidate's explicit choice in Task 4. No final recipient, reviewer access or submission mechanism was invented.
+- Verification and limits: AI cross-checked the manifest against the supplied task/attachment. It records required future contents and does not certify their implementation.
+
+## T3-001 - Isolated tools, dependency research and distribution choice
+
+- Asked, summarized: verify the mandatory environment without guessing. The candidate selected isolated workspace tools, the existing LyveMD project folder, and the EDB PostgreSQL package; after the download delay, the candidate supplied its local archive.
+- AI returned: tool/version research, official-source download/checksum information, local activation/setup work and download-failure reports. Earlier AI-proposed tool candidates included Microsoft OpenJDK and HAPI 8.4.3; later metadata and runtime work used Temurin 21.0.12.1, Maven 3.9.16, Spring Boot 3.5.16 and HAPI 8.12.1. A smaller Zonky package was researched as a fallback.
+- Retained/shipped: the selected isolated JDK/Maven/EDB tools remain local; the repository contains [a curated environment record](docs/evidence/environment.md). Git is the existing installed tool. No tools or credentials are part of the tracked application source.
+- Differences and reasons: preliminary version candidates were replaced by the exact publisher-checked combination that was actually built and started. The EDB transfer timed out, so the candidate provided the official archive locally. Zonky was not selected or executed. The active EDB server/client subset and full extraction both came from the verified candidate-supplied archive.
+- Verification and limits: root Codex checked publisher checksums, actual versions and native server/client behavior. Isolated activation affected the process rather than system PATH. This environment work did not implement Part 2 or test Attachment A.
+
+## T3-002 - Compatibility probe, setup helpers and runtime correction
+
+- Asked, summarized: perform the actual environment checks under Task 3, including database connectivity. This was preparatory verification, not a separate request to implement clinical features.
+- AI returned: an AI agent authored a synthetic Spring Boot/FHIR/JDBC probe and instructions without running it. Root Codex wrote/revised local tool/database helpers, built and ran the probe, and obtained read-only AI gate/diagnostic reviews.
+- Retained/shipped: local probe/configuration/helpers and their evidence support the selected stack; only the curated environment summary is tracked. The probe uses synthetic Patient/Observation data and JDBC insert/select/rollback. No probe code is presented as the assignment application.
+- Differences and reasons: build success alone was insufficient. Runtime exposed HAPI-2200 because the original POM omitted a cache provider. The underlying diagnostic and local HAPI evidence identified the missing module; root added hapi-fhir-caching-caffeine:8.12.1 and reran the gate. The database-start helper was also corrected to detach its server cleanly and its restart was verified. Failed attempts were retained locally rather than erased from the account.
+- Verification and limits: root Codex obtained HTTP 200/final PASS; valid R4 input had zero validation errors and invalid input had two; JDBC saw one row before rollback and zero afterward, with an independent psql check. Direct configuration/authentication checks established loopback binding and SCRAM/password enforcement rather than inferring them from a successful connection. Nonfatal validation/definition-loading messages remained recorded. These are AI-executed environment checks, not candidate-run tests, clinical-equation tests or production-security certification.
 
 ## T4-001 - Project structure and private repository
 
@@ -11,10 +93,6 @@ Status: started for Task 4. Task 6 must still reconcile earlier substantial plan
 - Differences and reasons: the auditor suggested optional package subdivisions; the scaffold reserves only the base package to avoid choosing unneeded abstractions before implementation. No root build configuration or executable feature is claimed at this structure step. The existing local tools, credentials, database, attachments and scratch logs are excluded from Git.
 - Verified: directory/file inventory, ten representative ignore-rule checks, targeted staged-content inspection, successful first push, matching local/remote commit and 23-file inventory, private ownership and clean working tree. See [Task 4 evidence](docs/evidence/task-4-repository.md). These checks do not certify the future application. The independent audit request is retained with its local folder path explicitly redacted.
 
-## Required log work still pending
-
-Reconcile earlier substantial AI items from their actual sources; record each subsequent substantial request/output/shipped difference; explicitly document R1-R6 delegation and reasons; preserve the exact access-rule prompt when issued. No access-rule implementation prompt has been invented or reconstructed here.
-
 ## T5-001 - History-preservation workflow
 
 - Asked: continue the next task while applying defensible engineering, privacy/security and strict task adherence across the entire task list until delivery. The actual request is retained in [the prompt record](docs/ai/prompts/task-5-user-request.md).
@@ -22,4 +100,20 @@ Reconcile earlier substantial AI items from their actual sources; record each su
 - Shipped: scripts/checkpoint-history.ps1, docs/HISTORY.md, a secondary bundle-ignore rule, updated persistent working instructions and this disclosure. No application feature was added.
 - Differences and reasons: the temporary fixture-creation helper and synthetic test repository stay in ignored local work; they are verification tooling and must not be confused with the assignment's real history. Checkpoint artifacts also stay ignored; a fresh reviewed bundle is included deliberately if final delivery uses an archive.
 - Verified before shipping: the exact script recovered a three-commit fixture including a nonmerged branch and tag, kept an ignored environment file out, and refused dirty work before creating another checkpoint. Actual assignment recovery also passed: all refs and reachable commits matched an independent mirror; a fresh main working copy matched all 28 tracked files at the recorded three-commit snapshot. See [the snapshot-specific evidence](docs/evidence/task-5-history.md) and [actual independent AI audit output](docs/ai/outputs/task-5-history-audit.md). This verifies history handling, not application correctness, database restore or complete security compliance.
-- Continuing obligations: preserve meaningful commits through delivery, maintain provenance and reverify final history/package/access in Tasks 91-94. Task 6 still needs earlier-assistance reconciliation, and R1-R6 delegation/access-rule prompt work remains pending.
+- Continuing obligations: preserve meaningful commits through delivery, maintain provenance and reverify final history/package/access in Tasks 91-94. Task 6 later reconciled earlier assistance as recorded below; R1-R6 delegation/access-rule prompt work remains pending for Task 7.
+
+## T6-001 - Reconciliation and continuous AI disclosure
+
+- Asked: [the exact current request](docs/ai/prompts/task-6-user-request.md), "Continue next task", referring to Task 6 in the checklist.
+- AI returned: this reconciled log, a source-message provenance index and a continuous logging protocol. Root retrieved the visible conversation through the opening of Task 6 and eighteen earlier final responses from five linked AI-agent threads. A separate AI auditor reviewed source coverage and the distinction between review guidance, research proposals and completed findings.
+- Retained/shipped: the curated log/index/protocol and request record. Full source conversations and earlier agent outputs remain in ignored local work; correspondence, physical paths, credentials and private tool logs are not uploaded incidentally.
+- Differences and reasons: earlier material is summarized with source locators rather than copied wholesale. The actual candidate requests and returned messages were recovered; no exact earlier request, finding, test or approval was invented. Source review corrected an omission of the earlier AI defect candidates and clarified that the initial tool-version proposals came from AI, not the candidate. Routine tool retries and file-formatting calls are grouped under their substantial item rather than generating a recursive transcript of log maintenance.
+- Verification and limits: source IDs were matched to retrieved messages and all eighteen recovered earlier-agent responses were assigned to a logged item. Exact prompt/excerpt, local-link, field-coverage and targeted publication checks passed; see [the Task 6 evidence](docs/evidence/task-6-ai-log.md). This does not finalize R1-R6 delegation, manufacture an access-rule implementation instruction, or turn a future plan into shipped behavior.
+
+## Continuing disclosure and final acceptance
+
+Follow [the logging protocol](docs/ai/LOGGING_PROTOCOL.md) for every further substantial item. Preserve actual requests, returned material, shipped material, reasons for differences and the checks actually performed. Reconcile entry status when implementation or final packaging changes it.
+
+Task 7 remains pending: record which of R1-R6 are delegated/retained and why, and preserve the actual access-rule implementation instruction exactly when issued. General planning instructions and the AI-authored access-rule summaries in AGENTS.md already exist; they are not relabelled as a separate candidate-issued implementation prompt.
+
+Task 91 remains pending: reconcile every final shipped item, all material changes and review attribution, the exact access instruction, delegation decisions and actual evidence. No final application, review, legal compliance, performance or human-verification claim is made by starting this log.
