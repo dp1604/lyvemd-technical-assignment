@@ -1,8 +1,6 @@
-Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+# Independent clinical oracle
 
-# the implementation independent clinical oracle
-
-Research/calculation lane completed 27 October 2026, 10:17 Sri Lanka time. Scratch evidence for the integrator; no canonical project files, Git state, database or supplied PR listing were changed. The task text and adopted Package B govern requirements; external sources verify the equation and terminology, not replacement policies.
+The independent equation and source checks were completed on 27 October 2026. The task's clinical table and the documented assessment decisions govern application behavior; external sources verify the equation and terminology, rather than replace those policies.
 
 ## Primary sources checked
 
@@ -45,4 +43,4 @@ For a concrete unit pair, `79.56 umol/L / 88.4 = 0.9 mg/dL`; age-18 male output 
 
 ## Limits and candidate decisions
 
-No new candidate policy decision identified: the existing adopted package already resolves the unit notation, sex context, adult applicability and no-invented-assay-boundary issues. Actual standardized source assay/measurement interval, clinical freshness interpretation and production clinical sign-off remain explicit upstream gates, not verified facts. Independent transcription checks catch programming mistakes but cannot certify clinical suitability for a real patient. The candidate must still review the evidence and explain the shipped implementation; this lane does not claim their verification occurred.
+The documented decisions resolve unit notation, clinical-sex context, adult applicability and the lack of a supplied assay boundary. Actual standardized source assay/measurement interval, clinical freshness and production clinical sign-off remain upstream gates, not verified facts. Independent numerical checks help catch programming mistakes but cannot certify clinical suitability for a real patient. See the [verification summary](../VERIFICATION.md) for the actual execution and review scope.

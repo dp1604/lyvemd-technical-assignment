@@ -30,9 +30,7 @@ All eight house rules remain mandatory in the design. R2 explicitly requires rul
 | Earlier IoT / edge / AWS scenario | No device-streaming, clinical-network edge server or always-available cloud-ingestion project added | The scenario came from the first interview, separately from this take-home. It can inform later interview preparation without replacing or expanding the supplied assignment. |
 | Private GitHub workspace | Keep the authorized private repository and authentic history; final reviewer access/submission method is still a delivery check | Candidate workflow choice, not an employer requirement for a public repository or an invitation to send/share prematurely. |
 
-## Current inspection and continuing gate
-
-At the pre-Task-9 snapshot (`c63a7a7563b21056d957c1219a2740f8a8ca77b5`), the tracked tree contains 44 files: curated documents/configuration, reserved source/test/data directories and the history-checkpoint script. No application or excluded feature implementation is present in that inventory. Ignored tools, database files and environment-only probe remain local; they are not the deliverable application. This is a bounded inventory finding, not a future guarantee.
+## Scope checks
 
 For every material implementation/dependency/route addition, check its matrix IDs and this scope before adding it. Preserve every mandatory obligation. If an unclear requirement or policy conflict appears, verify the source, explain it to the candidate and record the decision in the specification/register; do not silently narrow the brief or add an excluded feature. The adopted policies and reasons are recorded in DECISIONS.md.
 

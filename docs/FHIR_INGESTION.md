@@ -3,7 +3,7 @@
 **Known terminology conflict:** the brief labels `2947-0` as potassium; official LOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](DECISIONS.md).
 
 
-This is a bounded JSON FHIR R4 (4.0.1) ingestion adapter, not a general FHIR server. The supported subset is an adopted assessment choice, not a claim that every restriction was specified by the employer. Actual upstream representations remain unverified; they must pass feed/clinical-owner verification before production use. See [decisions](DECISIONS.md), immutable Packages A/B and [the implementation clarifications](DECISIONS.md).
+This is a bounded JSON FHIR R4 (4.0.1) ingestion adapter, not a general FHIR server. The supported subset is an adopted assessment choice, not a claim that every restriction was specified by the employer. Actual upstream representations remain unverified; they must pass feed/clinical-owner verification before production use. The [decision register](DECISIONS.md) explains the selected policies and limits.
 
 ## Request and identity
 
