@@ -6,6 +6,10 @@ import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
+import org.hl7.fhir.utilities.i18n.I18nConstants;
 import org.hl7.fhir.common.hapi.validation.support.CommonCodeSystemsTerminologyService;
 import org.hl7.fhir.common.hapi.validation.support.InMemoryTerminologyServerValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.PrePopulatedValidationSupport;
@@ -18,6 +22,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FhirValidation {
+    private static final org.slf4j.Logger LOG=org.slf4j.LoggerFactory.getLogger(FhirValidation.class);
+    private static final Map<String,String> DIAGNOSTIC_RULES=diagnosticRules();
     private final FhirContext context;
     private final FhirValidator validator;
 
@@ -52,16 +58,40 @@ public class FhirValidation {
 
     public boolean valid(String json) {
         try {
-            return validator.validateWithResult(json).getMessages().stream().noneMatch(message ->
-                    message.getSeverity() == ResultSeverityEnum.ERROR || message.getSeverity() == ResultSeverityEnum.FATAL);
-        } catch (ca.uhn.fhir.parser.DataFormatException error) { return false; }
+            for(var message:validator.validateWithResult(json).getMessages()) {
+                if(message.getSeverity()==ResultSeverityEnum.ERROR || message.getSeverity()==ResultSeverityEnum.FATAL) {
+                    // First failure category only. Never log message text, location, payload or a throwable.
+                    LOG.warn("ATLAS_FHIR_VALIDATION_REJECTED severity={} rule={}",message.getSeverity().name(),diagnosticRule(message.getMessageId()));
+                    return false;
+                }
+            }
+            return true;
+        } catch (ca.uhn.fhir.parser.DataFormatException error) {
+            LOG.warn("ATLAS_FHIR_VALIDATOR_PARSE_REJECTED");return false;
+        }
         catch (RuntimeException error) {throw new IllegalStateException("FHIR validation unavailable.",error);}
     }
     public org.hl7.fhir.r4.model.Resource parse(String json) {
         try {
             return (org.hl7.fhir.r4.model.Resource)context.newJsonParser()
                     .setParserErrorHandler(new ca.uhn.fhir.parser.StrictErrorHandler()).parseResource(json);
-        } catch(ca.uhn.fhir.parser.DataFormatException error) {throw error;}
+        } catch(ca.uhn.fhir.parser.DataFormatException error) {LOG.warn("ATLAS_FHIR_STRICT_PARSE_REJECTED");throw error;}
         catch(RuntimeException error) {throw new IllegalStateException("FHIR parser unavailable.",error);}
+    }
+
+    /** Return a trusted compiled constant NAME, never any portion of an unrecognized message ID. */
+    static String diagnosticRule(String messageId) {return messageId==null?"UNKNOWN":DIAGNOSTIC_RULES.getOrDefault(messageId,"UNKNOWN");}
+    private static Map<String,String> diagnosticRules() {
+        Map<String,String> rules=new HashMap<>();
+        for(var field:I18nConstants.class.getFields()) {
+            int modifiers=field.getModifiers();String name=field.getName();
+            if(field.getType()!=String.class || !Modifier.isStatic(modifiers) || !Modifier.isFinal(modifiers)
+                    || !name.matches("[A-Za-z0-9_]{1,200}")) {continue;}
+            try {
+                String value=(String)field.get(null);
+                if(value!=null) {rules.merge(value,name,(first,second)->first.compareTo(second)<=0?first:second);}
+            } catch(IllegalAccessException ignored) { /* Unknown codes remain a fixed UNKNOWN category. */ }
+        }
+        return Map.copyOf(rules);
     }
 }

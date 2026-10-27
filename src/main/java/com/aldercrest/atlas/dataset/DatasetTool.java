@@ -40,9 +40,12 @@ public final class DatasetTool implements AutoCloseable {
             if(args.length<3 || !"--dataset".equals(args[0])) {throw new IllegalArgumentException();}
             String mode=args[1];Path directory=Path.of(args[2]).toAbsolutePath().normalize();
             Files.createDirectories(directory);
-            if("roster".equals(mode) || "relationships".equals(mode)) {
-                if("roster".equals(mode)) {DatasetFixtureBootstrap.checkConfiguration(directory.resolve("recipe-config.json"));}
-                DatasetFixtureBootstrap.run(mode,directory.resolve("load-manifest.json"));
+            if(Set.of("roster","roster-revalidate","relationships").contains(mode)) {
+                require(args.length==3,"INVALID_FIXTURE_ARGUMENTS");
+                boolean roster=!"relationships".equals(mode);
+                if(roster) {DatasetFixtureBootstrap.checkConfiguration(directory.resolve("recipe-config.json"));}
+                DatasetFixtureBootstrap.run(roster?"roster":mode,directory.resolve("load-manifest.json"));
+                if(roster) {DatasetFixtureBootstrap.prepareRequestKeys(directory,"roster-revalidate".equals(mode));}
                 System.out.println("ATLAS_DATASET FIXTURES_COMPLETED");return 0;
             }
             if(args.length!=6) {throw new IllegalArgumentException();}
@@ -102,6 +105,16 @@ public final class DatasetTool implements AutoCloseable {
         writeJson(directory.resolve("recipe-config.json"),descriptor);
     }
     private void load(WorkflowService workflow) throws Exception {
+        JsonNode keyPlan=JSON.readTree(Files.readAllBytes(directory.resolve("initial-request-keys.json")));
+        require(keyPlan.path("version").asText().equals(DatasetRecipe.VERSION) && keyPlan.path("requestKeys").isObject()
+                && keyPlan.path("requestKeys").size()==recipe.patients().size(),"INITIAL_KEY_PLAN_REQUIRED");
+        int revalidated=0;
+        for(var patient:recipe.patients()) {
+            String baseKey=DatasetRecipe.VERSION+"-initial-"+patient.key();String selected=keyPlan.path("requestKeys").path(patient.key()).asText();
+            require(selected.equals(baseKey) || selected.equals(baseKey+"-revalidated-1"),"INITIAL_KEY_PLAN_INVALID");
+            if(!selected.equals(baseKey)) {revalidated++;}
+        }
+        manifest.put("initialRequestsUsingRevalidatedKey",revalidated);
         ObjectNode descriptor=(ObjectNode)JSON.readTree(Files.readAllBytes(directory.resolve("recipe-config.json")));
         require(descriptor.path("version").asText().equals(DatasetRecipe.VERSION)
                 && descriptor.path("patients").asInt()==recipe.patients().size()
@@ -111,7 +124,7 @@ public final class DatasetTool implements AutoCloseable {
         require(marker.status()==200,"CONFIGURATION_MARKER_FAILED");
         int completed=0;
         for(var patient:recipe.patients()) {
-            String key=DatasetRecipe.VERSION+"-initial-"+patient.key();
+            String key=keyPlan.path("requestKeys").path(patient.key()).asText();
             String body=recipe.initialBundle(patient.key());
             Reply reply=post(body,key,patient.clinicianId());require(reply.status()==200,"INITIAL_BUNDLE_FAILED");
             mapResponse(body,key,patient.clinicianId(),reply);

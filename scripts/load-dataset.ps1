@@ -1,7 +1,9 @@
 [CmdletBinding()]
 param(
     # Internal child phases let the parent bound existing build/bootstrap commands without another script.
-    [ValidateSet('Load','Prepare','Build','Migrate')][string]$InternalPhase = 'Load'
+    [ValidateSet('Load','Prepare','Build','Migrate')][string]$InternalPhase = 'Load',
+    # Investigated rejection only: preserve its receipt and permit one explicit new attempt key.
+    [switch]$RevalidateRejected
 )
 . (Join-Path $PSScriptRoot 'lib\local-environment.ps1')
 
@@ -213,7 +215,8 @@ try {
     Write-AtlasDatasetStage '4_OF_8_GENERATE_AND_REGISTER'
     Invoke-AtlasDatasetJava -Label 'generate' -ToolArguments @('--dataset','generate',$atlasDatasetDirectory,$atlasDatasetBase,'100','10000') -TimeoutSeconds 180
     # The roster mode must also call checkConfiguration(recipe-config.json) before any initial POST.
-    Invoke-AtlasDatasetJava -Label 'roster-and-configuration' -ToolArguments @('--dataset','roster',$atlasDatasetDirectory) -OwnerFixture -TimeoutSeconds 180
+    $atlasRosterMode = if ($RevalidateRejected) { 'roster-revalidate' } else { 'roster' }
+    Invoke-AtlasDatasetJava -Label 'roster-and-configuration' -ToolArguments @('--dataset',$atlasRosterMode,$atlasDatasetDirectory) -OwnerFixture -TimeoutSeconds 180
 
     Write-AtlasDatasetStage '5_OF_8_START_HTTP_HELPER'
     Assert-AtlasDatasetPortFree

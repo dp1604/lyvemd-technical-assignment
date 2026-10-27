@@ -510,6 +510,28 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "Actual same two AI scratch threads supplied prevalidation and sixunit tests; root authored service integration/fallback and executed6unit plus35real-DB/HTTP/service regressions. Initial113source partialjournal preserved; unchanged recipe resume still pending."
+    },
+    {
+      "id": "G6-003",
+      "topic": "Verified task/official terminology conflict and actual candidate adoption",
+      "requestMessages": [
+        "01a17c7d-b4df-7fd1-8300-231e35be41c2"
+      ],
+      "returnedMessages": [
+        "call_804336dde2f84590812a1df7d016c23d"
+      ],
+      "agentMessages": [],
+      "requestRecord": "Actual user answered the retained question item: Retain assessment mapping and prominently disclose conflict (Recommended). Official LOINC source check by continuing AI worker thread 01a17c28-b2a2-7351-ad48-88e131b40511; exact later message locator unavailable, not invented. Original receipt discrepancy is not attributed to this conflict."
+    },
+    {
+      "id": "G6-004",
+      "topic": "Privacy-safe validation diagnostics and guarded explicit receipt-preserving revalidation",
+      "requestMessages": [
+        "01a17c7d-b4df-7fd1-8300-231e35be41c2"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Actual continuing scratch threads 01a17c28-82d1-7861-be76-af23874491ef and 01a17c28-b2a2-7351-ad48-88e131b40511 supplied diagnostics/category test, alternate-key selector/eight guards and read-only review. Root integrated actual tool/script behavior, executed 28 negative serving probes and focused tests, then full155-unit build. Current real load remains in progress; no full-load or recovery success inferred. Original400 and accepted IDs preserved; cause remains unresolved."
     }
   ],
   "limits": [
