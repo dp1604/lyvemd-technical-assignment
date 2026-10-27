@@ -6,7 +6,7 @@ Status: required working rules and verification plan. Their presence is not evid
 
 The supplied Technical Task, its house rules and contract govern the exercise. The candidate requires sound engineering, privacy and security practices and an explanation they can defend. Any ambiguous or believed-wrong requirement must be recorded in the specification and raised with the candidate before choosing uncertain behavior.
 
-The brief deliberately uses untrusted X-Test-Actor-Id and X-Test-Actor-Role headers and excludes real authentication. Preserve that interface, verify its inputs and enforce stored entitlements server-side. Explain the production trust boundary without adding excluded identity/login or cloud/container work. Do not assert an unprovided legal jurisdiction, certification, security assurance level or clinical policy.
+The brief deliberately uses untrusted X-Test-Actor-Id and X-Test-Actor-Role headers and excludes real authentication. Preserve that interface, verify its inputs and enforce stored entitlements server-side. Explain the production trust boundary without adding excluded identity/login or cloud/container work. Do not assert an unprovided legal jurisdiction, certification, security assurance level or clinical policy. Follow [scope boundaries](SCOPE_BOUNDARIES.md): exclusions do not waive authorization, audit, clinical/privacy rules, the required production architecture note or reproducible local operation. Native mobile, firmware and the interview IoT scenario are separate agreed non-additions.
 
 ## Rules for implementation and review
 

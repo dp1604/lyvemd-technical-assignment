@@ -28,6 +28,12 @@
       ],
       "rawSourceLocation": "Ignored local work/task8-source.json",
       "purpose": "Baseline source coverage and planned evidence; not implementation acceptance."
+    },
+    "task9Extension": {
+      "requestMessage": "01a17b51-ee48-7c33-a26d-472ef8567ff7",
+      "independentAgentThread": "01a17b52-417e-7420-a7d6-7293e96a08e6",
+      "rawSourceLocation": "Ignored local work/task9-source.json",
+      "requestQualification": "Exact request excerpt; automatically supplied browser context excluded from published copy."
     }
   },
   "items": [
@@ -242,6 +248,19 @@
         "msg_03647cd98af13842016ae01185f2e48191b4f59a5d903e1c3d"
       ],
       "requestRecord": "Exact task request retained; returned matrix/log/evidence are the artifacts; independent AI audit source locators retained."
+    },
+    {
+      "id": "T9-001",
+      "topic": "Build exclusions, agreed non-additions and preserved design duties",
+      "requestMessages": [
+        "01a17b51-ee48-7c33-a26d-472ef8567ff7"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_03c14bdbf8cd6795016ae015bfbd948191a0d81ec49633a53d",
+        "msg_03c14bdbf8cd6795016ae01578599c81918f88f3d993ce4b24"
+      ],
+      "requestRecord": "Exact request excerpt retained; source-scope and concrete-note independent AI audits; no new policy approval."
     }
   ],
   "limits": [
