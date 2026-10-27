@@ -213,3 +213,5 @@ Follow [the logging protocol](docs/ai/LOGGING_PROTOCOL.md) for every further sub
 Task 7 recorded the [R1-R6 work split](docs/ai/DELEGATION.md) and [exact adopted instruction](docs/ai/ACCESS_RULE_INSTRUCTION.md). All six implementations are delegated to Codex; candidate decisions and guided verification remain retained. Earlier general planning/AGENTS directions are not relabelled as this prospective instruction. Preserve subsequent changes and actual evidence.
 
 Task 91 remains pending: reconcile every final shipped item, all material changes and review attribution, the exact access instruction, delegation decisions and actual evidence. No final application, review, legal compliance, performance or human-verification claim is made by starting this log.
+
+Group4 closure: the154-case final regression passed; originalTasks42–47 plus the necessary early49dependency are complete. README/schema/clinical/current-decision/matrix/group/checklist records were reconciled in a separate documentation increment. All other pending duties stay open. Exact finalHEAD privatepublication/history recovery is checked after this commit; no human verification is inferred.

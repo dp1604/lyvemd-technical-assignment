@@ -44,7 +44,7 @@ All rows above are adopted as assessment policies. A was adopted in source messa
 4. The synthetic input contract asserts standardized creatinine; neither an ordinary Quantity nor LOINC alone verifies a real assay. Actual feed format, assay traceability/measuring interval and historical-demographic evidence remain production gates.
 5. Critical-path completion is a recorded demonstration attestation, not proof of real contact or a complete production workflow. No clinical thresholds, legal jurisdiction or vendor facts are invented.
 6. Test actors remain impersonatable. PostgreSQL unavailability prevents writing to that same database; fail closed without claiming impossible outage audit durability. Snapshot authorization cannot retract an already-authorized in-flight response.
-7. The Group2 service/schema foundation and focused tests exist; official FHIR extensions/profile examples, clinical/endpoint code, feature migrations, dataset commands and acceptance tests remain their implementation groups. A decided policy is not a passed behavior.
+7. Current foundation, clinical, ingestion and detail evidence is recorded through Group4. Local extension definitions and V2 are implemented. Remaining three GET routes, workflow, dataset/client, final specification/review integration and wider acceptance remain their groups. A decided policy alone is not a passed behavior.
 
 Future unclear facts/policies are added here with source, options, candidate decision, reason, affected matrix IDs, implementation/evidence links and limitations. Preserve adopted versions and explain changes. The production-design duties and scope exclusions remain intact.
 
@@ -54,4 +54,4 @@ D-09 derived-only incoming BMI/eGFR restriction and D-10 March1 leap-day complet
 
 ## Group4 clarifications
 
-D-11 corrects the extension canonical identifiers to HTTPS example URLs with locally supplied definitions; D-12 specifies identical indexed HTTP400 transaction failures for missing and unauthorized stored patient references in POST. Both actual candidate approvals, reasons and source locators are preserved in [Group4 clarifications](decisions/group-4-clarifications.md). Historical packages stay unchanged. Group4 implementation remains in progress until its HTTP/database acceptance checks pass.
+D-11 corrects the extension canonical identifiers to HTTPS example URLs with locally supplied definitions; D-12 specifies identical indexed HTTP400 transaction failures for missing and unauthorized stored patient references in POST. Both actual candidate approvals, reasons and source locators are preserved in [Group4 clarifications](decisions/group-4-clarifications.md). Historical packages stay unchanged. Group4 ingestion and the Task49 detail dependency passed their focused and complete154-case HTTP/database/clinical checks; [evidence](evidence/group-4-ingestion.md) records the bounded completion and remaining groups.

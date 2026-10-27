@@ -1,6 +1,6 @@
 # Grouped execution plan
 
-This grouping baseline assigned the87 items pending after Tasks1–9 exactly once to14 primary groups. Current completion/selection is authoritative in docs/EXECUTION_STATE.json; Groups1–3 are now complete after their recorded gates. This changes execution granularity; original task numbers, requirements and completion gates remain intact.
+This grouping baseline assigned the87 items pending after Tasks1–9 exactly once to14 primary groups. Current completion/selection is authoritative in docs/EXECUTION_STATE.json; Groups1–4 are now complete after their recorded gates. This changes execution granularity; original task numbers, requirements and completion gates remain intact.
 
 Main implementation order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 10 → 11 → 12 → 13 → 14. Start Groups 8 and 9 after Group 1 and run them alongside implementation; finish both before Group 13. Independent API/evidence work can continue if a guided check in Group 7 is awaiting the candidate.
 
@@ -130,3 +130,5 @@ Completion gate: Candidate sends. No inferred address, public access, collaborat
 10. Reforecast after the first working ingestion/read slices (Groups 4–5), using actual coding/testing throughput. These groups do not establish a new promise that all remaining work fits 12 hours. Protect final verification, packaging and delivery time.
 
 Coverage check: 87 assigned items, 87 unique items, no omissions or duplicates. Original checklist boxes are unchanged by this planning step. Group 1 is the next work unit.
+
+Group4 completion dependency: originalTask46 required both retained versions retrievable with correctionOf, so Task49 was implemented and verified early. It remains assigned once toGroup5; currentstate/checklist mark it complete. On next-group request Group5 performs its remaining ten tasks and all corresponding workflow/cross-route checks. No other original group allocation is changed.
