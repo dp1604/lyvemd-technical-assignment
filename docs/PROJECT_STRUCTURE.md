@@ -1,6 +1,6 @@
 # Project structure
 
-Status: Groups1–5 complete: foundation, clinical rules, allfiveAPIroutes and local clinician/proxy workflow implemented and verified. Dataset and UI remain pending. Directory names are our delivery choices; the mandatory contract comes from the supplied assignment.
+Status: Groups 1–6 complete: foundation, clinical rules, all five API routes, local workflow and deterministic dataset with actual scenario/recovery checks. UI and final assignment acceptance remain pending. Directory names are delivery choices; the supplied assignment remains authoritative.
 
 ```text
 README.md                              Run instructions and submission entry point
@@ -14,14 +14,14 @@ src/main/resources/static/             Same-origin HTML/CSS/JavaScript client
 src/test/java/com/aldercrest/atlas/     Meaningful automated tests
 src/test/resources/fhir/               Deliberate synthetic test fixtures
 scripts/                               Reproducible run/data/verification commands
-scripts/data/                          Deterministic dataset generator source
+src/main/java/com/aldercrest/atlas/dataset/  Java deterministic recipe, HTTP loader and fixture guard
 docs/                                  Decisions, traceability and supporting notes
 docs/evidence/                         Sanitized, reproducible verification evidence
 docs/ai/prompts/                       Exact substantial instruction records
 docs/ai/outputs/                       Relevant returned AI material
 ```
 
-Root pom.xml, service/configuration/transaction/error classes, V1–V3 migrations, clinical/ingestion/all-read/workflow code, tests and local build/start/verification commands now exist. See docs/evidence/group-5-reads-and-workflow.md for the204-case full checkpoint, final affected recheck and CLI/timing evidence. Remaining .gitkeep files reserve future feature/fixture/client locations; they are not implementations or tests. See docs/DATABASE.md and docs/evidence/group-2-foundation.md for actual scope and checks.
+Root pom.xml, service/configuration/transaction/error classes, V1–V3 migrations, clinical/ingestion/all-read/workflow code, tests and local build/start/verification commands now exist. See docs/evidence/group-5-reads-and-workflow.md for the204-case full checkpoint, final affected recheck and CLI/timing evidence. The Java dataset package and scripts/load-dataset.ps1 implement generation/loading; [Group 6 evidence](evidence/group-6-dataset.md) records actual effects. Remaining .gitkeep files reserve still-empty locations; they are not implementations or tests. See docs/DATABASE.md and docs/evidence/group-2-foundation.md for actual scope and checks.
 
 The candidate approved one Spring Boot service and a plain browser client. Serving the client from the service keeps one application build and a shared origin. A framework or native mobile build is not needed for the minimal client requirement. The note must still address Dana's iOS/Android request explicitly.
 

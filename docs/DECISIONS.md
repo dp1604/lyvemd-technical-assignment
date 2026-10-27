@@ -1,6 +1,6 @@
 # Decision register
 
-Status: Tasks 10-17 decisions are recorded from actual candidate adoptions; document/source checks passed. Foundation, clinical, ingestion, allGETs and localworkflow implementation/verification are recorded through Group5; assignment dataset/client and final acceptance remain pending. This register does not finalize the two-section note.
+Status: Tasks 10-17 decisions are recorded from actual candidate adoptions; document/source checks passed. Foundation, clinical, ingestion, allGETs and localworkflow implementation/verification are recorded through Group5; [assignment dataset/scenario/recovery evidence](evidence/group-6-dataset.md) is recorded; client and final acceptance remain pending. This register does not finalize the two-section note.
 
 ## Record rules
 
@@ -44,7 +44,7 @@ All rows above are adopted as assessment policies. A was adopted in source messa
 4. The synthetic input contract asserts standardized creatinine; neither an ordinary Quantity nor LOINC alone verifies a real assay. Actual feed format, assay traceability/measuring interval and historical-demographic evidence remain production gates.
 5. Critical-path completion is a recorded demonstration attestation, not proof of real contact or a complete production workflow. No clinical thresholds, legal jurisdiction or vendor facts are invented.
 6. Test actors remain impersonatable. PostgreSQL unavailability prevents writing to that same database; fail closed without claiming impossible outage audit durability. Snapshot authorization cannot retract an already-authorized in-flight response.
-7. Foundation/clinical/ingestion/allGETs/localworkflow evidence is recorded through [Group5](evidence/group-5-reads-and-workflow.md), with local extension definitions and V1–V3 implemented. Dataset/client, final specification/review integration and wider acceptance remain their groups. A decided policy alone is not a passed behavior.
+7. Foundation/clinical/ingestion/allGETs/localworkflow evidence is recorded through [Group5](evidence/group-5-reads-and-workflow.md), with local extension definitions and V1–V3 implemented. [Dataset/scenario/recovery evidence](evidence/group-6-dataset.md) is recorded through Group 6. Client, final specification/review integration and wider acceptance remain their groups. A decided policy alone is not a passed behavior.
 
 Future unclear facts/policies are added here with source, options, candidate decision, reason, affected matrix IDs, implementation/evidence links and limitations. Preserve adopted versions and explain changes. The production-design duties and scope exclusions remain intact.
 

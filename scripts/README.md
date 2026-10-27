@@ -5,6 +5,7 @@ The tested automation targets Windows with PowerShell7. JDK21+, Maven3.9+ and Po
 | Command from repository root | Effects |
 |---|---|
 | pwsh -NoProfile -File ./scripts/start.ps1 | Preserve/prepare the local assessment and test databases; Maven package with unit tests; migrate atlas in a short-lived process; remove migration credentials; serve on loopback18081 in the foreground. Ctrl+C stops the app. |
+| pwsh -NoProfile -File ./scripts/load-dataset.ps1 | Build/migrate atlas, generate the fixed cohort, submit through owned loopback HTTP, apply actual workflow, register receipt-verified fixtures and verify all eight cases; preserve data and stop only its helper. See [dataset/recovery details](../docs/DATASET.md). |
 | pwsh -NoProfile -File ./scripts/verify.ps1 | Prepare databases without resetting data; run unit and real-PostgreSQL integration tests against atlas_test only. Integration tests refuse another URL. |
 | pwsh -NoProfile -File ./scripts/prepare-local-database.ps1 | Prepare/start the local cluster and roles without building or migrating app tables. Existing data and credentials are preserved. |
 | pwsh -NoProfile -File ./scripts/stop-local-database.ps1 | Fast orderly stop of only work/local/postgres-data; never deletes data. Stop the app first. |
@@ -20,7 +21,7 @@ No command resets/drops/recreates an existing database, rotates its passwords or
 
 The packaged Java application reads ATLAS_DB_URL, ATLAS_DB_USER and ATLAS_DB_PASSWORD. An administrator must provision schema atlas, an owning migration role and runtime role atlas_runtime with the versioned migrations' grants; schema public must not be writable by runtime. Run the same JAR once with --migrate and ATLAS_MIGRATION_USER/PASSWORD (and DB URL), then remove those migration secrets and start it normally with runtime credentials. Boot's automatic migration/SQL initialization is disabled, so omitting this step must not silently create a schema. The source migration names atlas_runtime explicitly; a differently named deployment role requires a reviewed new provisioning/migration design, not an undocumented substitution. No production deployment is included.
 
-The required deterministic generator/loader is pending Group6. Restore/clean-run and full command acceptance remain Group12. These commands establishing a runnable foundation do not complete those later tasks.
+The deterministic generator/loader and actual recovery checks passed in [Group 6](../docs/evidence/group-6-dataset.md). Only an explicitly investigated eligible structural rejection may use `pwsh -NoProfile -File ./scripts/load-dataset.ps1 -RevalidateRejected`; this permits one new key, preserves the original receipt and rejects changed bytes/actors or an unsuccessful alternate. Ordinary runs can recover a previously successful alternate without that switch. Restore, fresh-checkout/empty-database and final command acceptance remain Group 12.
 
 ## Independent clinical oracle (optional)
 

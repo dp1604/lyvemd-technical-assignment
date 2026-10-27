@@ -542,6 +542,16 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "Actual continued AI thread01a17c28-82d1-7861-be76-af23874491ef supplied installed-bytecode/source diagnosis, message classification and3tests; root authored retryhelper/5tests and integration. Other worker01a17c28-b2a2-7351-ad48-88e131b40511 updated scratch preservation/replay proofs. Runtime failure66/6273 preserved. Focusedchecks/fullresume not yet complete when first recorded; final actual outcomes reconciled later. No invented message locator or underlying-cause assertion."
+    },
+    {
+      "id": "G6-006",
+      "topic": "Actual complete dataset/scenarios, three-prefix preservation, flag-free fresh-journal replay and closure reconciliation",
+      "requestMessages": [
+        "01a17c7d-b4df-7fd1-8300-231e35be41c2"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Actual continuing AI threads01a17c28-82d1-7861-be76-af23874491ef and01a17c28-b2a2-7351-ad48-88e131b40511 supplied scratch harness/guard/draft/source audits. Root authored final evidence/conditional installer, corrected proof-only audit-target-count assumption, executed all actual workloads and reconciled56-task state. Full163-unit build; focused23unit+35IT; main/replay8+extra scenarios;100/106/10000same IDs;2original400 unchanged/2alt200; review/proxy metadata preserved. Parallel8/9 draft refreshes remain AI drafts and human checks pending. No invented new source-message locator or underlying-cause claim."
     }
   ],
   "limits": [

@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "activeMainGroup": 6,
+  "activeMainGroup": 7,
   "completedGroups": [
     1,
     2,
     3,
     4,
-    5
+    5,
+    6
   ],
   "completedChecklistTasks": [
     1,
@@ -55,7 +56,16 @@
     59,
     60,
     61,
-    62
+    62,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74
   ],
   "mainSequence": [
     1,
@@ -76,8 +86,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "Group6 active: candidateapproved100syntheticpatients/about10000sourceObservations; D16 actualreply01a17c85-0aa5-7591-8064-e5ba870532fc. Implementfixedrecipe +realHTTPingest/replay/invalid +actualworkflow +owner-onlyroster/proxysetup; verify8cases and deterministicrerun. Preserveatlas; no datasetreset, no simulatedsubmission/releasedSQL. Rootssolecanonicalwriter/Git. Nextsourceincrementcompile/tests beforecommit/privatepush; keepallrequiredgatesopenuntilactualevidence.",
-  "recordedAtUtc": "2026-10-27 08:55:18 UTC",
+  "nextAction": "Select Group7 tasks63-65 and86. Build adopted same-origin plain HTML/CSS/JavaScript results, real trend and access-log views; textual flags, explicit no-applicable state, keyboard/error/empty states and prominent D17 assessment-only terminology notice. Actual candidate walkthrough86 remains a real pending gate; independent API/evidence/parallel8/9 can proceed while waiting. Groups10-14 and final acceptance/delivery stay open. Preserve dataset and meaningful commit/privatepush discipline.",
+  "recordedAtUtc": "2026-10-27 10:57:50 UTC",
   "groups": [
     {
       "group": 1,
@@ -171,7 +181,7 @@
         73,
         74
       ],
-      "status": "in-progress",
+      "status": "complete",
       "completionGate": "Reproduce scenarios and assert their effects; manual-looking rows do not substitute for actual submissions."
     },
     {
@@ -280,5 +290,5 @@
     }
   ],
   "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification.",
-  "nextMainGroup": 6
+  "nextMainGroup": 7
 }

@@ -1,6 +1,6 @@
 # Clinical engine contract
 
-**Known terminology conflict:** the brief labels2947-0as potassium; officialLOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](decisions/group-6-loinc-clarification.md).
+**Known terminology conflict:** the brief labels `2947-0` as potassium; official LOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](decisions/group-6-loinc-clarification.md).
 
 
 The supplied §2.4 table and candidate-adopted policies govern. The pure Java clinical layer has no JDBC, HTTP or authorization bypass. ClinicalInputNormalizer is the shared mapping that Group4 must call inside its validated transaction adapter; ReferenceRanges and ClinicalInterpreter are shared presentation rules that Group5 must call inside authorized audited actions. A pure-engine pass is not endpoint enforcement.

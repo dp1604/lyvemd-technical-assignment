@@ -1,16 +1,16 @@
 # LyveMD technical lead assignment - Aldercrest Atlas
 
-**Known terminology conflict:** the brief labels2947-0as potassium; officialLOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](docs/decisions/group-6-loinc-clarification.md).
+**Known terminology conflict:** the brief labels `2947-0` as potassium; official LOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](docs/decisions/group-6-loinc-clarification.md).
 
 
 This private repository contains the supplied technical assessment. Aldercrest, Careline and Atlas are fictional assessment context.
 
-**Current status:** Groups1–5 are complete. All five required API routes, caller-visible clinical views, attributable clinician release and individual proxy revocation are implemented. The complete204-case regression and final affected21-case notice/read/timing recheck passed; actual non-web CLI batches passed. [Group5 evidence](docs/evidence/group-5-reads-and-workflow.md) records conditions and limits. Persisted assignment dataset and browser client remain pending. The two-section note and static PR review have parallel AI drafts awaiting integration and guided review. This is not yet a complete submission or production system.
+**Current status:** Groups 1–6 are complete. All five required API routes, caller-visible clinical views, clinician release, individual proxy revocation and the deterministic 100-patient / 106-encounter / 10,000-source dataset are implemented. The current build passed 163 unit cases; the actual load, eight required scenarios and fresh-local-journal recovery passed. [Group 6 evidence](docs/evidence/group-6-dataset.md) records the earlier failures and preservation checks. The previous complete 204-case backend checkpoint and affected 21-case recheck are [Group 5 evidence](docs/evidence/group-5-reads-and-workflow.md), not a newly executed full suite after these changes. Browser client, final note/static-review integration, final regression, measured performance, restore/clean-run acceptance and candidate walkthroughs remain pending. This is not yet a complete submission or production system.
 
 | Required component | Location | Status |
 |---|---|---|
 | Specification and Architecture Note | [SPECIFICATION_AND_ARCHITECTURE.md](SPECIFICATION_AND_ARCHITECTURE.md) | Outline/adopted clarifications; parallel draft |
-| Build, history, generator and instructions | src/, scripts/, this README and authentic Git history | Five API routes, clinical engine and local workflow verified; generator pending |
+| Build, history, generator and instructions | src/, scripts/, this README and authentic Git history | Five API routes, clinical engine, local workflow and actual dataset/replay verified; final acceptance pending |
 | Static Attachment A review | [PR_REVIEW.md](PR_REVIEW.md) | Parallel draft; supplied code never built/run/fixed |
 | AI working log | [AI_WORKING_LOG.md](AI_WORKING_LOG.md), docs/ai/ | Maintained incrementally; final reconciliation pending |
 
@@ -26,7 +26,7 @@ From the repository root, one command builds, prepares/migrates the isolated dat
 pwsh -NoProfile -File ./scripts/start.ps1
 ```
 
-Default HTTP address: http://127.0.0.1:18081 (ATLAS_HTTP_PORT can override the port). POST /fhir and the four required GET routes are implemented under the [bounded ingestion](docs/FHIR_INGESTION.md), [visibility](docs/RESULT_VISIBILITY.md), [result-read](docs/RESULT_READS.md) and [access-log](docs/ACCESS_LOG.md) contracts. The root UI remains pending. No assignment roster/data generator exists yet; verification uses separate synthetic test fixtures. Ctrl+C stops the serving process. The database remains available for subsequent work. To stop only this assessment's database after the application stops:
+Default HTTP address: http://127.0.0.1:18081 (ATLAS_HTTP_PORT can override the port). POST /fhir and the four required GET routes are implemented under the [bounded ingestion](docs/FHIR_INGESTION.md), [visibility](docs/RESULT_VISIBILITY.md), [result-read](docs/RESULT_READS.md) and [access-log](docs/ACCESS_LOG.md) contracts. The root UI remains pending. The separate [dataset command](docs/DATASET.md) creates and loads the synthetic assignment cohort; integration tests use the separate atlas_test database. Ctrl+C stops the serving process. The database remains available for subsequent work. To stop only this assessment's database after the application stops:
 
 ```powershell
 pwsh -NoProfile -File ./scripts/stop-local-database.ps1
@@ -42,11 +42,18 @@ The meaningful automated foundation checks use real PostgreSQL16 in the designat
 pwsh -NoProfile -File ./scripts/verify.ps1
 ```
 
-This runs the normal unit tests and the integration profile. Maven package runs unit tests alone; it does not imply PostgreSQL/endpoint acceptance. Verification does not delete/reset a database. Synthetic test IDs vary to avoid clashes; deterministic assignment data is separate future work. Raw local test reports/logs stay ignored; curated outcomes belong in docs/evidence.
+This runs the normal unit tests and the integration profile. Maven package runs unit tests alone; it does not imply PostgreSQL/endpoint acceptance. Verification does not delete/reset a database. Synthetic test IDs vary to avoid clashes; the deterministic assignment cohort remains separate from those test fixtures. Raw local test reports/logs stay ignored; curated outcomes belong in docs/evidence.
 
-## Clinical engine and pending dataset
+## Dataset and clinical engine
 
-The required one-command deterministic generator/loader, dataset size/reproduction details and measured performance remain pending. No generated assignment dataset exists yet. The implemented [clinical engine](docs/CLINICAL_RULES.md) and [124-case verification](docs/evidence/group-3-clinical.md) use the [2021 adult CKD-EPI equation](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults) and [LOINC98979-8](https://loinc.org/98979-8). SCr umol/L divides by88.4 to canonical mg/dL; eGFR uses sex-specific κ/α,142,0.9938^age and female1.012, then converts the unrounded per-minute result by exactly60. Output display is mL/s/1.73m2, machine UCUM mL/s/{1.73_m2}. No race term/normal range is added. Only age18+ with explicit applicable clinical sex, positive standardized creatinine is computable; missing/inconsistent/unverified inputs return a reason. [NKF published examples](https://www.kidney.org/sites/default/files/example_it_ticket-implement_2021_ckd-epi_equation_to_calculate_egfr_from_creatinine_1.pdf) and a separate24-case oracle verify the calculation. Optional reproduction: node scripts/verify-clinical-oracle.mjs. Inbound BMI/eGFR values are rejected under the [adopted derived-only profile](docs/decisions/group-3-clarifications.md); ingestion storage and secured source-detail integration are verified in [Group4](docs/evidence/group-4-ingestion.md); derived list/trend/detail integration passed focused [Group5 checks](docs/RESULT_READS.md); browser UI remains pending.
+The required generator/loader and its actual cohort are documented in [DATASET.md](docs/DATASET.md). After the prerequisites above, one command creates and loads the fixed recipe:
+
+```powershell
+pwsh -NoProfile -File ./scripts/load-dataset.ps1
+```
+
+The command preserves existing data, uses its own bounded loopback helper, submits clinical inputs over real HTTP and performs actual clinician workflow actions. It verifies the eight cases and stops its own helper. [Execution evidence](docs/evidence/group-6-dataset.md) records 100 patients, 106 encounters, 10,000 stored sources, exact input reproduction and safe replay. It also records the original rejection, its unresolved cause and the narrowly guarded explicit recovery option; ordinary runs do not rotate failed keys. Measured read performance and final fresh-checkout/empty-database acceptance remain separate pending gates.
+ The implemented [clinical engine](docs/CLINICAL_RULES.md) and [124-case verification](docs/evidence/group-3-clinical.md) use the [2021 adult CKD-EPI equation](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults) and [LOINC98979-8](https://loinc.org/98979-8). SCr umol/L divides by88.4 to canonical mg/dL; eGFR uses sex-specific κ/α,142,0.9938^age and female1.012, then converts the unrounded per-minute result by exactly60. Output display is mL/s/1.73m2, machine UCUM mL/s/{1.73_m2}. No race term/normal range is added. Only age18+ with explicit applicable clinical sex, positive standardized creatinine is computable; missing/inconsistent/unverified inputs return a reason. [NKF published examples](https://www.kidney.org/sites/default/files/example_it_ticket-implement_2021_ckd-epi_equation_to_calculate_egfr_from_creatinine_1.pdf) and a separate24-case oracle verify the calculation. Optional reproduction: node scripts/verify-clinical-oracle.mjs. Inbound BMI/eGFR values are rejected under the [adopted derived-only profile](docs/decisions/group-3-clarifications.md); ingestion storage and secured source-detail integration are verified in [Group4](docs/evidence/group-4-ingestion.md); derived list/trend/detail integration passed focused [Group5 checks](docs/RESULT_READS.md); browser UI remains pending.
 
 ## Scope and safeguards
 

@@ -1,6 +1,6 @@
 # Specification and Architecture Note
 
-**Known terminology conflict:** the brief labels2947-0as potassium; officialLOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](docs/decisions/group-6-loinc-clarification.md).
+**Known terminology conflict:** the brief labels `2947-0` as potassium; official LOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](docs/decisions/group-6-loinc-clarification.md).
 
 
 Status: outline only. Candidate-adopted Group 1 assessment policies are recorded separately; the remaining note content is still an outline. The supplied Technical Task and house rules govern the note; ambiguity must be documented and resolved rather than guessed.
