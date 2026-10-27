@@ -1,0 +1,218 @@
+{
+  "status": "PASS",
+  "sourceCommit": "14a24f91e1b0d4dc18c098a93d199e1609b1d440",
+  "finishedAtUtc": "2026-10-27T12:18:30Z",
+  "mavenElapsed": "10:41",
+  "scope": "Complete backend run before the additional connection-provider outage test; client checks and later focused checks are separate.",
+  "groups": [
+    {
+      "kind": "unit",
+      "tests": 163,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": [
+        {
+          "name": "com.aldercrest.atlas.clinical.BmiVisibilityTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 1.145
+        },
+        {
+          "name": "com.aldercrest.atlas.clinical.ClinicalRulesTest",
+          "tests": 73,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 1.794
+        },
+        {
+          "name": "com.aldercrest.atlas.clinical.EgfrOracleTest",
+          "tests": 26,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 1.457
+        },
+        {
+          "name": "com.aldercrest.atlas.clinical.HistoricalContextTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 0.031
+        },
+        {
+          "name": "com.aldercrest.atlas.dataset.DatasetRecipeTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 65.884
+        },
+        {
+          "name": "com.aldercrest.atlas.dataset.DatasetRequestKeyTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 0.278
+        },
+        {
+          "name": "com.aldercrest.atlas.dataset.DatasetRequestRetryTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 0.078
+        },
+        {
+          "name": "com.aldercrest.atlas.FhirRuntimeTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 3.946
+        },
+        {
+          "name": "com.aldercrest.atlas.ingest.BundlePrevalidationTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 9.407
+        },
+        {
+          "name": "com.aldercrest.atlas.ingest.FhirProfileTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 11.06
+        },
+        {
+          "name": "com.aldercrest.atlas.ingest.FhirValidationAvailabilityTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 0.092
+        },
+        {
+          "name": "com.aldercrest.atlas.ingest.FhirValidationDiagnosticTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 0.068
+        },
+        {
+          "name": "com.aldercrest.atlas.ingest.IngestionPrevalidationTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 0.981
+        },
+        {
+          "name": "com.aldercrest.atlas.ingest.InputBoundaryTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 0.192
+        },
+        {
+          "name": "com.aldercrest.atlas.results.ReadQueriesTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 0.174
+        },
+        {
+          "name": "com.aldercrest.atlas.workflow.WorkflowCommandTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 2.486
+        }
+      ]
+    },
+    {
+      "kind": "integration",
+      "tests": 74,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": [
+        {
+          "name": "com.aldercrest.atlas.AccessLogIT",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 78.15
+        },
+        {
+          "name": "com.aldercrest.atlas.FoundationIT",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 9.336
+        },
+        {
+          "name": "com.aldercrest.atlas.Group5TimingIT",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 13.976
+        },
+        {
+          "name": "com.aldercrest.atlas.IngestionIT",
+          "tests": 23,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 78.381
+        },
+        {
+          "name": "com.aldercrest.atlas.ReadApiIT",
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 294.582
+        },
+        {
+          "name": "com.aldercrest.atlas.ReadSnapshotIT",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 13.294
+        },
+        {
+          "name": "com.aldercrest.atlas.WorkflowIT",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 21.042
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "tests": 237,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "connectionAcquisitionOutage": "Additional separate ConnectionOutageIT passed2026-10-27T12:32:52Z; see group-10-connection-outage.json. Not a single238-case full rerun or whole-cluster outage."
+}

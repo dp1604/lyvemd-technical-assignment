@@ -7,7 +7,8 @@
     3,
     4,
     5,
-    6
+    6,
+    10
   ],
   "completedChecklistTasks": [
     1,
@@ -68,7 +69,11 @@
     71,
     72,
     73,
-    74
+    74,
+    82,
+    83,
+    84,
+    85
   ],
   "mainSequence": [
     1,
@@ -89,8 +94,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "Group7 Tasks63-65implemented and Codex browser/model checks passed; awaitactualcandidate86worksheet observations on refresheddecimal-support client. KeepGroup7inprogress/next7untilgate. IndependentGroup10initial163unit/74IT run had one observationfailure; scopedharness and6unit+23IT recheckpassed. Freshwholesuitererun/evidencereconciliation remain before82-85completion. Parallel8/9draftsintegration/humanwalkthroughsopen; preserveapp/data/privatepush/history.",
-  "recordedAtUtc": "2026-10-27 12:06:53 UTC",
+  "nextAction": "Group7 remains in progress: actual candidate86partially reported historicalHb, missing-heightBMIlist/chart and trendkeyboard; continue remaining worksheet without inferring completion. IndependentGroup10 Tasks82-85complete: full237backendPASS plus separate1newconnection-providerITPASS, scope/limits in evidence. NextMainGroup7 until86gate; afterward skip completed10 and select11. Parallel8/9draftintegration/humanwalkthroughs open. Preserveapp/data and privatepush/history.",
+  "recordedAtUtc": "2026-10-27 12:39:11 UTC",
   "groups": [
     {
       "group": 1,
@@ -244,7 +249,7 @@
         84,
         85
       ],
-      "status": "in-progress",
+      "status": "complete",
       "completionGate": "Required failures investigated and resolved; an unmet requirement keeps its task open. Reuse meaningful earlier evidence and rerun affected integration checks."
     },
     {

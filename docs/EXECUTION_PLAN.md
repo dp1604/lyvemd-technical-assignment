@@ -1,6 +1,6 @@
 # Grouped execution plan
 
-This grouping baseline assigned the87 items pending after Tasks1–9 exactly once to14 primary groups. Current completion/selection is authoritative in docs/EXECUTION_STATE.json; Groups 1–6 are now complete after their recorded gates; Group7 Tasks63–65 are complete; actual candidate86 keeps Group7 in progress. Independent Group10 regression is being resolved while that human gate is pending. This changes execution granularity; original task numbers, requirements and completion gates remain intact.
+This grouping baseline assigned the87 items pending after Tasks1–9 exactly once to14 primary groups. Current completion/selection is authoritative in docs/EXECUTION_STATE.json; Groups 1–6 are now complete after their recorded gates; Group7 Tasks63–65 are complete; actual candidate86 keeps Group7 in progress. Independent Group10 Tasks82–85 are complete with actual evidence; Group7 remains in progress until the human gate. After86, skip already-complete10 and select11. This changes execution granularity; original task numbers, requirements and completion gates remain intact.
 
 Main implementation order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 10 → 11 → 12 → 13 → 14. Start Groups 8 and 9 after Group 1 and run them alongside implementation; finish both before Group 13. Independent API/evidence work can continue if a guided check in Group 7 is awaiting the candidate.
 
@@ -129,6 +129,6 @@ Completion gate: Candidate sends. No inferred address, public access, collaborat
 9. Candidate decisions, guided verification and final sending are real gates. Bundle related questions with clear recommendations; hold affected work until the answer arrives. Keep pending human-check items open while independent lanes proceed. Static review remains static; preserve all assignment/security/privacy duties.
 10. Reforecast after the first working ingestion/read slices (Groups 4–5), using actual coding/testing throughput. These groups do not establish a new promise that all remaining work fits 12 hours. Protect final verification, packaging and delivery time.
 
-Coverage check: 87 assigned items, 87 unique items, no omissions or duplicates. Current checklist/state mark56 tasks complete after Groups1–6. On the next-group request select Group7 (63–65 and actual candidate gate86).
+Coverage check: 87 assigned items, 87 unique items, no omissions or duplicates. Current checklist/state mark63 tasks complete after Groups1–6, Tasks63–65 and independent82–85. On the next-group request continue Group7 actual candidate gate86; do not infer completion.
 
 Group4 completion dependency: originalTask46 required both retained versions retrievable with correctionOf, so Task49 was implemented and verified early. It remains assigned once toGroup5; currentstate/checklist mark it complete. Group5 subsequently completed its remaining ten tasks and corresponding workflow/cross-route checks; Task49 is not counted again. No other original group allocation is changed.

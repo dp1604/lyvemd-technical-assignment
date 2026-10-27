@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "finishedAtUtc": "2026-10-27T12:32:52Z",
+  "mavenElapsed": "03:24",
+  "sourceFile": "src/test/java/com/aldercrest/atlas/ConnectionOutageIT.java",
+  "sourceSha256": "450fb338cf073453f1b36c86de68a224721cecae2d0a832520b968b67f2a4960",
+  "newIntegrationCases": 1,
+  "overlappingUnitCases": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suiteSeconds": 77.848,
+  "scope": "Actual HTTP and real PostgreSQL fixture; controlled serving DataSource connection-acquisition fault and recovery on all five required routes. Not a stopped database cluster/network partition/failover drill. Separate from the earlier complete237-case run."
+}

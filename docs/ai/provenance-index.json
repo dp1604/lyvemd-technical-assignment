@@ -552,6 +552,27 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "Actual continuing AI threads01a17c28-82d1-7861-be76-af23874491ef and01a17c28-b2a2-7351-ad48-88e131b40511 supplied scratch harness/guard/draft/source audits. Root authored final evidence/conditional installer, corrected proof-only audit-target-count assumption, executed all actual workloads and reconciled56-task state. Full163-unit build; focused23unit+35IT; main/replay8+extra scenarios;100/106/10000same IDs;2original400 unchanged/2alt200; review/proxy metadata preserved. Parallel8/9 draft refreshes remain AI drafts and human checks pending. No invented new source-message locator or underlying-cause claim."
+    },
+    {
+      "id": "G10-002",
+      "topic": "Actual full237 regression and separate connection-provider fault/recovery check",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Authorized independent Group10 lane while candidate86pending. Continuing AI reviewer mapped coverage and supplied frozen additional test; root integrated/reviewed/executed and reconciled actual counters/limits. No exact new source-message locator exposed; none invented. Full237PASS12:18:30Z; separate1newIT+1overlappingunitPASS12:32:52Z. Second read-only coverage review supplied no new production change."
+    },
+    {
+      "id": "G7-004",
+      "topic": "Partial actual candidate client observations; Task86 remains open",
+      "requestMessages": [],
+      "returnedMessages": [
+        "call_fc06bcf4af5d4f96bcf1e0778f8d7c2e",
+        "call_40f35282aada45588669ee96d7d4a0bf",
+        "call_5ec096350c52415090dd0a24f450a9d3",
+        "call_00263a2446da410e9c81d11dc00aa81f"
+      ],
+      "agentMessages": [],
+      "requestRecord": "Actual question-item replies report historicalHb, BMIlist, unavailableBMIchart/table and explicit keyboard focus/Tab/Enter success. Omitted or still-pending worksheet steps are not inferred. The earlier request for a suitable answer was guidance, not test evidence."
     }
   ],
   "limits": [
