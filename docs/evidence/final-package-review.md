@@ -1,3 +1,5 @@
+Current Task81 update: the focused joint review is now recorded and the expanded reports/package are [revalidated](task-81-package-check.md). The earlier dated checkpoint below is preserved as history; final v2 identity is in its manifest/external verification.
+
 # History, AI disclosure and review-package verification
 
 At 2026-10-27T13:53:33.6300792Z, root independently verified the actual review archive at source commit **9072f400f642662b1a77af4af749a65da73e9605**. It contained **213 committed source files plus four generated history/manifest files (217 total)**, with every inventoried byte size and SHA-256 matching. The four required component paths were present. The archive was1,161,823bytes; SHA-256 **99eec94d526e76ab954e3fa0f96cc4a8683c272b12f522cfa2b71e64ed1fd469**. This is the explicitly named review-candidate archive, not the later final delivery version.

@@ -1,3 +1,5 @@
+Current Task81 update: the focused joint review is now recorded and the expanded reports/package are [revalidated](task-81-package-check.md). The earlier dated checkpoint below is preserved as history; final v2 identity is in its manifest/external verification.
+
 # Final artifact reconciliation
 
 Root reconciled the four required components against the supplied task, adopted assessment decisions, actual source and bounded evidence. The independent source audit identified a broken oracle link and stale future/pending wrappers; these were corrected without changing application behavior or source obligations.

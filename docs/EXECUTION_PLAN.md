@@ -74,7 +74,7 @@ Original tasks: **77–81**. Start: Start after 1; finish before 13.
 
 Review all eight supplied files; verify printed locations, consequences/remedies/severity/origin; guided review walkthrough.
 
-Completion gate: Static only: do not fix, build or run Attachment A. Clinical-source checks and actual candidate walkthrough completed.
+Completion gate: Static only: do not fix, build or run Attachment A. Clinical-source checks and focused joint written/chat walkthrough recorded; findings remain AI-origin and independent human source verification is not claimed.
 
 ## 10. Integrated correctness and security regression
 

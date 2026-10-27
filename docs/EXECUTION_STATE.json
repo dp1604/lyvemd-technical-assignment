@@ -128,7 +128,7 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "93/96taskscompleteafter24B/3P/5VreviewandactualfocusedjointTask81discussion/polish. Revalidation90/91/93/94 requiredforchangedsubmissiondocs: stablematrix/links/disclosure,fullhistory/privacy,newv2archive/recipientrecovery. Runtimeunchanged. Then13remaining92guideddefense;86partial/expresslydeferred;96candidate sendscorrectlatestZIPby22:00Asia/Colombo. PreviousZIPnot sent.",
+  "nextAction": "93/96taskscomplete. Task81fullreview/naturalreports/focusedjointdiscussioncomplete;90/91/93/94revalidatedat21dbfd3reviewpackage,finalv2regeneration+exactverificationrequiredafterthiscommitbeforehandoff. Runtimeunchanged. Remaining86partial/expresslydeferred,92guideddefenseincomplete,96candidateowned sendcorrectlatestarchivebefore22:00Asia/Colombo. OldZIPnot sent.",
   "recordedAtUtc": "2026-10-27 13:31:32 UTC",
   "groups": [
     {
@@ -333,10 +333,12 @@
   ],
   "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification. Neweractualuserinstructionatcall_f89b0c538a704048a1d3629be5ff0b17 permitsadvancingotherworkwhilemanual86deferred; this doesnotcompleteGroup7. Followactualstate11next, then12/13/14; retainunperformedhumangatesexplicitly.",
   "nextMainGroup": 13,
-  "revalidationRequired": [
-    90,
-    91,
-    93,
-    94
-  ]
+  "revalidationRequired": [],
+  "lastReviewPackageVerification": {
+    "sourceCommit": "21dbfd3d73f5ea61ab7851882eac124a4a274db3",
+    "status": "PASS",
+    "files": 222,
+    "commits": 41,
+    "finalVersionPolicy": "Regenerate and independently verify v2 after the final evidence/status commit before handoff."
+  }
 }
