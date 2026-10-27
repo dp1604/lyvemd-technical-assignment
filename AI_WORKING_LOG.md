@@ -336,3 +336,16 @@ Group5 closure: source, decisions, allGET/workflow contracts, database/script/RE
 
 - Root declares the engineering target/workload in docs/PERFORMANCE_PLAN.md before actualGroup11measurement: per-casep95<=500ms, concurrency1,10warmups+100measured forfive fixedcase types/allfourGETroutes, completebodytiming including serverauditcommit. This is a chosen assessment target with disclosed rationale/limits, not an employerapproval or production claim. Actual counts/results/query evidence remain pending.
 - The continuing read AI reviewer proposed a bounded harness; root selected the100-sample/10-warmup workload and remains sole integrator/executor. Other two narrow reviewers prepare canonical-ready note/staticreview and a restoreharness in ignoredscratch. No AttachmentAexecution or human verification is delegated/invented.
+
+
+## G8-001 - Integrated two-section specification and architecture note
+
+- Asked: the approved parallelGroup8lane and actual continuation/deferral steer completion of Tasks18–32. No new exact candidate prompt or production approval is reconstructed. The workflow AI reviewer drafted/refreshed the note; bounded independent read/transaction reviewers checked requirements, clinical/method/index/source details and actual evidence.
+- Returned/shipped: the frozen two-section note, coverage and task/matrix integration manifest. Root reviewed/integrated the note and narrowed draft/status wording; all15writing obligations,13local links,8house-rule rows,9Dana criteria and1operations paragraph are accounted for. Recommendations/7–13week estimates remain conditional proposals; no vendor/source/clinical/legal facts are invented. Current full237backend/separateconnectionIT/eightclientchecks and partialactualhumanreports are correctly distinguished. Later actualperformance/restore/cleanstart facts will update bounded sections rather than inventing them. [Evidence](docs/evidence/group-8-note.md).
+- Tasks18–32 complete. Group8complete; this does not mark performance/recovery or actual81/86/92 human gates complete.
+
+## G9-001 - Integrated complete static PR review with true attribution
+
+- Asked: authorized parallelGroup9review of all8supplied files, under the explicit prohibition on fixing/building/running AttachmentA. Earlier AI candidates and refreshed cross-file/primarysource checks remain AI-origin. Continuing workflow/transaction reviewers supplied the frozen19blocker/3preference/2follow-up review; root read the entire final document and checked scope/attribution before integration.
+- Shipped: PR_REVIEW.md with precise printed locations, supported defect/patientconsequence/remedy/severity, explicit unseenhelper/test/timing limits and primary citations. The equation hybrid, Optional<Long>/Double typeissue and per-minute/per-second mismatch are statically sourced, not executed. Root changed only readiness/attribution wording and clarified that joint81hasnotbeenperformed; the manualclientdeferral is not a separate approval of this review. D17is a specification caveat, not an added junior defect. [Evidence](docs/evidence/group-9-static-review.md).
+- Tasks77–80 complete;81remains open. Total82of96tasks after both document integrations. Group9is in progress solely for the actual joint walkthrough. No AttachmentAcodeentered/executedbytheapplication and nohumanoriginorapprovalclaimisinferred.

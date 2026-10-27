@@ -584,6 +584,22 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "Latestactualuserdeferralsteerscompletion of authorizeddeliverables. AI reviewer proposedperformanceplan; rootselected500msp95/concurrency1/10warmups+100measuredper5cases. No actualperformanceresult at declaration; no newexactusermessageIDexposed."
+    },
+    {
+      "id": "G8-001",
+      "topic": "Actual parallel note drafting/review and root integration",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Approvedparallel8lane; continuingworkflowAIreviewerthread01a17c28-b2a2-7351-ad48-88e131b40511suppliedfrozennote/coverage/integrationmanifest. Readreviewerandboundedtransactionreviewercheckedcontent. Rootreviewed/integratedwithtitle/statusclarifications. Actualtooltasknames/root/group5_workflow_audit and/root/group4_transaction_reviewretaincurrentcontribution; no newexactmessageIDexposed."
+    },
+    {
+      "id": "G9-001",
+      "topic": "All8files static review, primarysource checking and true AI origins",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Approvedparallel9lane; earlierAIcandidatesandcontinuingworkflow/transactionAIreviewsproduced19B/3P/2V. Frozenreview/rootfullread/integrationonly;noAttachmentAexecution. Sourceauditcounts/printedlocationsandprimarycitationsretained. Candidate81unperformed; nohumanorigin/approvalinferred."
     }
   ],
   "limits": [
