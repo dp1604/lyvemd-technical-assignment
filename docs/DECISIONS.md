@@ -47,3 +47,7 @@ All rows above are adopted as assessment policies. A was adopted in source messa
 7. The Group2 service/schema foundation and focused tests exist; official FHIR extensions/profile examples, clinical/endpoint code, feature migrations, dataset commands and acceptance tests remain their implementation groups. A decided policy is not a passed behavior.
 
 Future unclear facts/policies are added here with source, options, candidate decision, reason, affected matrix IDs, implementation/evidence links and limitations. Preserve adopted versions and explain changes. The production-design duties and scope exclusions remain intact.
+
+## Group3 clarifications
+
+D-09 derived-only incoming BMI/eGFR restriction and D-10 March1 leap-day completed-age convention were explicitly adopted in actual candidate replies. See [source answers, reasons and limits](decisions/group-3-clarifications.md). A/B presentation files and exact access instruction remain immutable. Clinical core checks do not yet complete ingestion/read-route enforcement.

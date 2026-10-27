@@ -353,6 +353,28 @@
         "msg_022233db4e81ff94016ae0268cf4908191bd52230a187ea70b"
       ],
       "requestRecord": "Root delegated static-only plan; agent01a17b90-9e10-7ea3-8876-c2799c2562db; draft/hash retained, no source execution."
+    },
+    {
+      "id": "W01",
+      "topic": "Every meaningful change committed and privately pushed",
+      "requestMessages": [
+        "01a17bae-4f42-78b0-a9cc-855a267d3f1a"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Exact continuing instruction retained in Group3 request record; authentic workflow commit c100d2e."
+    },
+    {
+      "id": "G3-001",
+      "topic": "Clinical core and actual candidate profile/leap-day adoptions",
+      "requestMessages": [
+        "01a17bac-419f-7372-a9f3-1de9e21144d9",
+        "01a17bb0-f0e2-7933-b12e-2d966b970ec0",
+        "01a17bb1-9678-73f0-89bd-2fa90c9e39df"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Actual request/answers retained; initial request for advice is not treated as adoption. Root code/tests and later AI audit source locators retained incrementally."
     }
   ],
   "limits": [
