@@ -1,0 +1,52 @@
+# Local setup, source attachments, databases, credentials and scratch work.
+/work/
+/outputs/
+/.local/
+/data/generated/
+/scripts/data/generated/
+/docs/evidence/raw/
+
+# Build and tool output.
+**/target/
+**/node_modules/
+**/dist/
+*.class
+*.jar
+*.war
+*.log
+*.pid
+*.hprof
+
+# Local configuration and credential material.
+.env
+.env.*
+!.env.example
+**/application-local.properties
+**/application-local.yml
+**/application-local.yaml
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pgpass
+pgpass.conf
+
+# Database backups, source PDFs and downloaded distributions.
+*.dump
+*.backup
+*.sql.gz
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.pdf
+
+# Editor and operating-system files.
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+Desktop.ini
