@@ -570,10 +570,20 @@
         "call_40f35282aada45588669ee96d7d4a0bf",
         "call_5ec096350c52415090dd0a24f450a9d3",
         "call_00263a2446da410e9c81d11dc00aa81f",
-        "call_345367aad34a491b89907e773aca38ba"
+        "call_345367aad34a491b89907e773aca38ba",
+        "call_0a68afa8fad6440eba6486ddbf5789cb",
+        "call_f89b0c538a704048a1d3629be5ff0b17"
       ],
       "agentMessages": [],
-      "requestRecord": "Actual question-item replies report historicalHb, BMIlist, unavailableBMIchart/table and explicit keyboard focus/Tab/Enter success. Omitted or still-pending worksheet steps are not inferred. The earlier request for a suitable answer was guidance, not test evidence. Actual next reply reports unbounded sodium94points and2026window10; remaining checks not inferred."
+      "requestRecord": "Actual question-item replies report historicalHb, BMIlist, unavailableBMIchart/table and explicit keyboard focus/Tab/Enter success. Omitted or still-pending worksheet steps are not inferred. The earlier request for a suitable answer was guidance, not test evidence. Actual next reply reports unbounded sodium94points and2026window10; remaining checks not inferred. Actualfourroleviewsreported; nextactualreplyexpresslydeferredremainingmanualtests.86remainsincomplete; no sourcefocus/eGFRhumanPASSinferred."
+    },
+    {
+      "id": "G11-001",
+      "topic": "Assessment target/workload declaration before actual measurement",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Latestactualuserdeferralsteerscompletion of authorizeddeliverables. AI reviewer proposedperformanceplan; rootselected500msp95/concurrency1/10warmups+100measuredper5cases. No actualperformanceresult at declaration; no newexactusermessageIDexposed."
     }
   ],
   "limits": [

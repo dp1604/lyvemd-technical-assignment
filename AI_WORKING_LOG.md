@@ -329,3 +329,10 @@ Group5 closure: source, decisions, allGET/workflow contracts, database/script/RE
 - Task86 remains in progress. Candidate is next checking actual multi-year sodium/date-window counts; other worksheet cases are still pending. AI browser observations remain separate and do not substitute for this human gate.
 
 - Actual candidate follow-up to G7-004: in question call_345367aad34a491b89907e773aca38ba, the candidate reported sodium trend counts before94/after10 for empty bounds versus1January–31October2026. This matches the known synthetic history/window. Pagination, future/reversed windows and other worksheet cases are not inferred; next actual check is the STAFF/CLINICIAN log/clinical contrast. Task86 remains in progress; no additional original checklist task is completed by this partial reply.
+
+- Actual candidate follow-up to G7-004: call_0a68afa8fad6440eba6486ddbf5789cb reports the four STAFF/CLINICIANlog/clinicalviews exactly as curated in Group7evidence. The next question call_f89b0c538a704048a1d3629be5ff0b17 received the literal steering: 'let's skip these tests for now and complete the tasks since only 3.75hours remain'. Root defers the remaining manualclientchecks, keeps86incomplete and advances independent deliverable/evidence work under that newer instruction. No eGFR/source-focus result or full human walkthrough is inferred.
+
+## G11-001 - Target declared before measurement
+
+- Root declares the engineering target/workload in docs/PERFORMANCE_PLAN.md before actualGroup11measurement: per-casep95<=500ms, concurrency1,10warmups+100measured forfive fixedcase types/allfourGETroutes, completebodytiming including serverauditcommit. This is a chosen assessment target with disclosed rationale/limits, not an employerapproval or production claim. Actual counts/results/query evidence remain pending.
+- The continuing read AI reviewer proposed a bounded harness; root selected the100-sample/10-warmup workload and remains sole integrator/executor. Other two narrow reviewers prepare canonical-ready note/staticreview and a restoreharness in ignoredscratch. No AttachmentAexecution or human verification is delegated/invented.
