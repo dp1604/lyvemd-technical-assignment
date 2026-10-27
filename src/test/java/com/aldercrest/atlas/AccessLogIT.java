@@ -42,6 +42,7 @@ class AccessLogIT {
     }
 
     @Autowired JdbcTemplate jdbc;
+    @Autowired com.aldercrest.atlas.workflow.WorkflowService workflow;
     @LocalServerPort int port;
     private JdbcTemplate owner;
     private String patient,otherPatient,clinician,proxy,staff;
@@ -68,7 +69,7 @@ class AccessLogIT {
         assertThat(selfBody.path("total").asLong()).isEqualTo(1);
         assertThat(selfBody.path("items")).hasSize(1);
         assertThat(fields(selfBody.path("items").get(0))).containsExactlyInAnyOrder(
-                "id","actorId","actorRole","patientId","action","outcome","source","at","actorRosterVerified");
+                "id","actorId","actorRole","patientId","action","outcome","source","at","actorRosterVerified","targetProxyId");
         assertThat(selfBody.at("/items/0/patientId").asText()).isEqualTo(patient);
         assertThat(selfBody.at("/items/0/action").asText()).isEqualTo("RESULT_DETAIL");
         assertThat(selfBody.at("/items/0/actorRosterVerified").asBoolean()).isTrue();
@@ -242,6 +243,18 @@ class AccessLogIT {
         assertAudit(proxy,"PROXY",true,"DENIED");
     }
 
+    @Test void actualIndividualRevocationAppearsInThePermittedPatientLogWithItsTarget() throws Exception {
+        var result=workflow.revokeProxy(new com.aldercrest.atlas.security.TestActor(patient,"PATIENT",true,false),patient,proxy);
+        assertThat(result.status()).isEqualTo(200);
+        var response=get(patient,"",patient,"PATIENT");assertThat(response.statusCode()).isEqualTo(200);
+        JsonNode body=JSON.readTree(response.body());assertThat(body.path("total").asLong()).isEqualTo(1);
+        assertThat(body.at("/items/0/actorId").asText()).isEqualTo(patient);
+        assertThat(body.at("/items/0/action").asText()).isEqualTo("PROXY_REVOKE");
+        assertThat(body.at("/items/0/targetProxyId").asText()).isEqualTo(proxy);
+        assertThat(body.at("/items/0/source").asText()).isEqualTo("LOCAL_COMMAND");
+        assertThat(body.at("/items/0/outcome").asText()).isEqualTo("ALLOWED");
+        assertThat(jdbc.queryForObject("SELECT active FROM proxy_link WHERE patient_id=? AND proxy_id=?",Boolean.class,patient,proxy)).isFalse();
+    }
     private HttpResponse<String> get(String target,String query,String actorId,String actorRole) throws Exception {
         return send(target,query,List.of("X-Test-Actor-Id",actorId,"X-Test-Actor-Role",actorRole));
     }

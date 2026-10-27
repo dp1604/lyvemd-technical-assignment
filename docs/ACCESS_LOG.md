@@ -12,4 +12,4 @@ Items sort by UTC `at` descending then numeric audit ID descending. Count and pa
 
 The action commits before HTTP receives its body. An audit insert or commit failure withholds content and returns the safe unavailable envelope. Complete loss of the audit database cannot persist an event in that same database; only a categorical operational signal is possible. No-store/privacy headers apply. These are assessment boundaries, not a claim of authenticated identity, universal timing indistinguishability, clinical certification or complete production compliance.
 
-Individual revocation commands and any additional target-proxy field remain pending the separate C2 decision and implementation. This contract does not grant STAFF revocation authority.
+C2 is adopted and implemented: [patient-self individual revocation](WORKFLOW.md) writes the dedicated nullable targetProxyId field. The permitted patient/STAFF log view can show that attribution; it grants no STAFF revocation authority. Actual workflow-to-HTTP target projection passed in AccessLogIT.

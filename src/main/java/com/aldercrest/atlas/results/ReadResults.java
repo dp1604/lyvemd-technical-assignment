@@ -90,7 +90,10 @@ public final class ReadResults {
         body.put("flag",derived.interpretation().flag().name());body.put("flagReason",derived.interpretation().reason().name());
         body.put("computed",derived.computable());body.put("cannotComputeReason",derived.cannotComputeReason().name());
         body.put("sources",derived.sources().stream().map(source -> Map.of("observationId",source.observationId(),"effective",source.effective().toString())).toList());
-        body.put("method",derived.method());body.put("notice",derived.notice());body.put("correctionOf",null);
+        body.put("method",derived.method());
+        body.put("notice",derived.analyte()==Analyte.EGFR
+                ?"Computed from inputs visible to this caller; source dates shown. Equation source: "+derived.notice():derived.notice());
+        body.put("correctionOf",null);
         body.put("correctedBy",List.of());body.put("components",List.of());body.put("releaseState","INHERITED_FROM_VISIBLE_INPUTS");
         body.put("criticality",null);
         body.put("sourceCritical",derived.sources().stream().anyMatch(source -> view.states().get(source.observationId()).sourceCritical()));

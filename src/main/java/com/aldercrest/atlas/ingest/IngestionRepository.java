@@ -85,6 +85,13 @@ public class IngestionRepository {
                 encounter.id(),encounter.patientId(),encounter.encounterClass(),encounter.practitionerId(),encounter.status());
     }
     public void insert(ObservationRow observation) {
+        if(observation.correctionOf()!=null) {
+            // Serialize correction creation with a possible first release of its predecessor.
+            // An unchanged review value creates an MVCC version, forcing a stale RR updater
+            // to retry its whole action and observe the committed release/correction order.
+            int touched=jdbc.update("UPDATE observation_review SET criticality=criticality WHERE observation_id=?",observation.correctionOf());
+            if(touched!=1) {throw new IllegalStateException("Required predecessor review state unavailable.");}
+        }
         List<Map<String,Object>> components=observation.measurement().components().stream().map(component -> {
             Map<String,Object> result=new java.util.LinkedHashMap<>();
             result.put("code",component.analyte().code());result.put("unit_code",component.quantity().unitCode());

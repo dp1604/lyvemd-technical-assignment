@@ -451,7 +451,9 @@
       ],
       "agentMessages": [
         "msg_01b3d737a52d44e6016ae04d2b7abc81919f2b15c818636035",
-        "msg_081edc3217a18fcd016ae04cec874c8191a60b6f88bb8f07dd"
+        "msg_081edc3217a18fcd016ae04cec874c8191a60b6f88bb8f07dd",
+        "msg_081edc3217a18fcd016ae051a93fe48191bf2f9cd3f1c0b51e",
+        "msg_01b3d737a52d44e6016ae051fcbafc8191a1c28e63de40bd5d"
       ],
       "requestRecord": "Actual AI read/workflow agent threads01a17c28-82d1-7861-be76-af23874491ef and01a17c28-b2a2-7351-ad48-88e131b40511; initial returned-source locators retained. Subsequent scratch test drafts root reviewed/ran; final code/test source locators reconciled at later increment. Candidate adoption is separate from AI authorship and runtime evidence."
     },
@@ -463,8 +465,27 @@
         "01a17c40-e984-73a0-a0d1-3510d6e6cb1f"
       ],
       "returnedMessages": [],
-      "agentMessages": [],
+      "agentMessages": [
+        "msg_01b3d737a52d44e6016ae053e29f8881918ca29f95b3969021",
+        "msg_01b3d737a52d44e6016ae054cd36c48191aeaa66d17afa844c"
+      ],
       "requestRecord": "AI read worker thread01a17c28-82d1-7861-be76-af23874491ef supplied scratch16-case ReadApiIT and renderer audit. Root authored renderer/services, reviewed/integrated test draft and executed actual19-case focused run. Final agent-message locators to reconcile with subsequent workflow/timing increment."
+    },
+    {
+      "id": "G5-003",
+      "topic": "Actual workflow integration, review-row correction/release race, final verification and CLI/timing evidence",
+      "requestMessages": [
+        "01a17c28-0c94-71b1-953f-66983af753dd",
+        "01a17c40-e984-73a0-a0d1-3510d6e6cb1f"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_081edc3217a18fcd016ae053cedf288191bca47c33c1e0704d",
+        "msg_081edc3217a18fcd016ae0557bd7048191a5f471b63a98a24e",
+        "msg_081edc3217a18fcd016ae057ab226c8191bdb635ee831ed9a2",
+        "msg_01b3d737a52d44e6016ae05836efb081919bcfd1ea407f66b8"
+      ],
+      "requestRecord": "Actual same two AI scratch workers, source/test/renderer/workflow/task audits retained and root-reconciled. Root executed204-case full run and final21-case affected recheck, actual two-process CLI and100-pair timing probe. Root identified/fixed display notice, added batch mode, actual correction/release overlap and updated old lock-stage assertion. No candidate-run verification claimed."
     }
   ],
   "limits": [

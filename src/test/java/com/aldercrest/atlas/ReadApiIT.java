@@ -207,6 +207,7 @@ class ReadApiIT {
         assertThat(computed.path("unit").asText()).isEqualTo("mL/s/1.73m2");
         assertThat(computed.path("unitCode").asText()).isEqualTo("mL/s/{1.73_m2}");
         assertThat(computed.path("method").asText()).isEqualTo("CKD-EPI-2021-creatinine-v1");
+        assertThat(computed.path("notice").asText()).contains("visible to this caller","source dates","niddk.nih.gov");
         assertThat(computed.path("cannotComputeReason").asText()).isEqualTo("NONE");
         assertThat(computed.path("range").isNull()).isTrue();assertThat(computed.path("flag").asText()).isEqualTo("NO_APPLICABLE_FLAG");
         assertThat(notStandard.path("cannotComputeReason").asText()).isEqualTo("CREATININE_NOT_STANDARDIZED");
@@ -304,6 +305,26 @@ class ReadApiIT {
     @Test void insertAuditFailureWithholdsContentFromEveryClinicalReadRouteAndThenRecovers() throws Exception {auditFault(false);}
     @Test void deferredCommitAuditFailureWithholdsMaterializedContentFromEveryClinicalReadRouteAndThenRecovers() throws Exception {auditFault(true);}
 
+    @Test void missingDuplicateAndRosterMismatchedDeclarationsAreDeniedOnEveryClinicalRoute() throws Exception {
+        String source=row(ordinary,"2951-2","mmol/L","140","2026-01-01T00:00:00Z",true);
+        for(String route:List.of("/results","/results/"+source,"/trend?code=2951-2")) {
+            for(List<String> headers:List.of(List.<String>of(),
+                    List.of("X-Test-Actor-Id",patient),
+                    List.of("X-Test-Actor-Id",patient,"X-Test-Actor-Role","patient"),
+                    List.of("X-Test-Actor-Id",patient,"X-Test-Actor-Id",proxy,"X-Test-Actor-Role","PATIENT"),
+                    List.of("X-Test-Actor-Id",patient,"X-Test-Actor-Role","PATIENT","X-Test-Actor-Role","STAFF"))) {
+                long before=unverifiedAudits();
+                var request=HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/patients/"+patient+route)).timeout(Duration.ofSeconds(20)).GET();
+                for(int index=0;index<headers.size();index+=2) {request.header(headers.get(index),headers.get(index+1));}
+                assertThat(HTTP.send(request.build(),HttpResponse.BodyHandlers.ofString()).statusCode()).isEqualTo(400);
+                assertThat(unverifiedAudits()).isEqualTo(before+1);
+            }
+            long before=audits(staff);
+            assertThat(get(route,staff,"PATIENT").statusCode()).isEqualTo(404);
+            assertThat(audits(staff)).isEqualTo(before+1);
+            assertThat(jdbc.queryForObject("SELECT actor_roster_verified FROM access_log WHERE patient_id=? AND actor_id=? ORDER BY id DESC LIMIT 1",Boolean.class,patient,staff)).isFalse();
+        }
+    }
     private void auditFault(boolean deferred) throws Exception {
         String source=row(ordinary,"2951-2","mmol/L","141.12345","2026-01-01T00:00:00Z",true);
         List<String> routes=List.of("/results","/results/"+source,"/trend?code=2951-2");long before=audits(patient);

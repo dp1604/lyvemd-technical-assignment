@@ -41,6 +41,8 @@ class IngestionIT {
     }
     @Autowired JdbcTemplate jdbc;
     @org.springframework.test.context.bean.override.mockito.MockitoSpyBean FhirValidation validator;
+    @org.springframework.test.context.bean.override.mockito.MockitoSpyBean IngestionRepository repository;
+    @Autowired com.aldercrest.atlas.workflow.WorkflowService workflow;
     @LocalServerPort int port;
     private JdbcTemplate owner;
     private String clinician,otherClinician,patient,encounter,proxy,staff;
@@ -223,15 +225,19 @@ class IngestionIT {
         String body=bundle(entry(corrected,urn()));
         try(var gate=owner.getDataSource().getConnection();ExecutorService pool=Executors.newFixedThreadPool(2)) {
             gate.setAutoCommit(false);
-            try(var lock=gate.createStatement()) {lock.execute("LOCK TABLE observation IN SHARE MODE");}
+            int gatePid;
+            try(var query=gate.createStatement();var result=query.executeQuery("SELECT pg_backend_pid()")) {result.next();gatePid=result.getInt(1);}
+            try(var lock=gate.prepareStatement("SELECT observation_id FROM observation_review WHERE observation_id=? FOR UPDATE")) {
+                lock.setString(1,target);lock.executeQuery().close();
+            }
             CountDownLatch start=new CountDownLatch(1);
             Callable<Integer> request=() -> {start.await();return post(body,key()).statusCode();};
             var a=pool.submit(request);var b=pool.submit(request);start.countDown();
             boolean waiting;
-            try {waiting=waitForTwoLocks("relation","observation");}
+            try {waiting=waitForTwoReviewWaiters(gatePid);}
             finally {gate.commit();}
             assertThat(List.of(a.get(20,TimeUnit.SECONDS),b.get(20,TimeUnit.SECONDS))).containsExactlyInAnyOrder(200,400);
-            assertThat(waiting).as("Both correction plans reached INSERT before either was committed").isTrue();
+            assertThat(waiting).as("Both correction plans reached the predecessor review-row lock before either committed").isTrue();
             assertThat(jdbc.queryForObject("SELECT count(*) FROM observation WHERE correction_of=?",Integer.class,target)).isEqualTo(1);
         }
     }
@@ -413,6 +419,49 @@ class IngestionIT {
         assertThat(clinicianView.path("releaseState").asText()).isEqualTo("HELD");assertThat(clinicianView.path("sourceCritical").asBoolean()).isTrue();
     }
 
+    @Test void committedCorrectionWinsAgainstAnOverlappingFirstReleaseUsingFreshSnapshotRetry() throws Exception {
+        ObjectNode source=observation("Patient/"+patient,"29463-7","kg",60);
+        String original=created(JSON.readTree(post(bundle(entry(source,urn())),key()).body()),0);
+        var actor=new com.aldercrest.atlas.security.TestActor(clinician,"CLINICIAN",true,false);
+        assertThat(workflow.review(actor,patient,original,"NONCRITICAL").status()).isEqualTo(200);
+        CountDownLatch correctionWritten=new CountDownLatch(1),allowCorrectionCommit=new CountDownLatch(1);
+        java.util.concurrent.atomic.AtomicInteger correctionPid=new java.util.concurrent.atomic.AtomicInteger();
+        org.mockito.Mockito.doAnswer(invocation -> {
+            IngestionRecords.ObservationRow row=invocation.getArgument(0);
+            Object result=invocation.callRealMethod();
+            if(original.equals(row.correctionOf())) {
+                correctionPid.set(jdbc.queryForObject("SELECT pg_backend_pid()",Integer.class));
+                correctionWritten.countDown();
+                if(!allowCorrectionCommit.await(10,TimeUnit.SECONDS)) {throw new IllegalStateException("Synthetic correction gate timed out.");}
+            }
+            return result;
+        }).when(repository).insert(org.mockito.ArgumentMatchers.any(IngestionRecords.ObservationRow.class));
+        ObjectNode corrected=source.deepCopy();corrected.put("status","corrected");correction(corrected,"Observation/"+original);
+        try(var pool=Executors.newFixedThreadPool(2)) {
+            var ingest=pool.submit(() -> post(bundle(entry(corrected,urn())),key()));
+            assertThat(correctionWritten.await(10,TimeUnit.SECONDS)).isTrue();
+            var release=pool.submit(() -> workflow.release(actor,patient,original));
+            boolean waiting=false;
+            try {
+                long deadline=System.nanoTime()+Duration.ofMillis(1800).toNanos();
+                while(System.nanoTime()<deadline) {
+                    int blocked=owner.queryForObject("""
+                            SELECT count(DISTINCT a.pid) FROM pg_stat_activity a JOIN pg_locks l ON l.pid=a.pid AND NOT l.granted
+                            WHERE a.datname=current_database() AND a.usename='atlas_runtime' AND ?=ANY(pg_blocking_pids(a.pid))
+                            """,Integer.class,correctionPid.get());
+                    if(blocked>0) {waiting=true;break;}Thread.sleep(10);
+                }
+            } finally {allowCorrectionCommit.countDown();}
+            assertThat(waiting).as("First release actually waited behind the uncommitted correction review-row touch").isTrue();
+            var response=ingest.get(20,TimeUnit.SECONDS);assertThat(response.statusCode()).isEqualTo(200);
+            assertThat(release.get(20,TimeUnit.SECONDS).status()).isEqualTo(409);
+            assertThat(jdbc.queryForObject("SELECT released_at IS NULL FROM observation_review WHERE observation_id=?",Boolean.class,original)).isTrue();
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM access_log WHERE patient_id=? AND action='RESULT_RELEASE' AND outcome='DENIED'",Integer.class,patient)).isEqualTo(1);
+            String child=created(JSON.readTree(response.body()),0);
+            assertThat(get(child,patient,"PATIENT").statusCode()).isEqualTo(404);
+        } finally {allowCorrectionCommit.countDown();}
+    }
+
     private HttpResponse<String> post(String body,String key) throws Exception {return send(body.getBytes(StandardCharsets.UTF_8),key,clinician,"CLINICIAN","application/fhir+json");}
     private HttpResponse<String> get(String observation,String actor,String role) throws Exception {
         try(HttpClient client=HttpClient.newHttpClient()) {
@@ -454,6 +503,19 @@ class IngestionIT {
     private static String created(JsonNode response,int index) {String location=response.at("/entry/"+index+"/response/location").asText();assertThat(location).contains("/");return location.substring(location.indexOf('/')+1);}
     private int count(String table) {return jdbc.queryForObject("SELECT count(*) FROM "+table,Integer.class);}
     private int audits(String patient,String outcome) {return jdbc.queryForObject("SELECT count(*) FROM access_log WHERE actor_id=? AND patient_id=? AND action='INGEST' AND outcome=?",Integer.class,clinician,patient,outcome);}
+    private boolean waitForTwoReviewWaiters(int gatePid) throws InterruptedException {
+        long deadline=System.nanoTime()+Duration.ofMillis(1800).toNanos();
+        do {
+            int waiting=owner.queryForObject("""
+                    SELECT count(DISTINCT a.pid) FROM pg_stat_activity a JOIN pg_locks l ON l.pid=a.pid AND NOT l.granted
+                    WHERE a.datname=current_database() AND a.usename='atlas_runtime'
+                    AND (?=ANY(pg_blocking_pids(a.pid)) OR EXISTS
+                      (SELECT 1 FROM unnest(pg_blocking_pids(a.pid)) AS blocker(pid) WHERE ?=ANY(pg_blocking_pids(blocker.pid))))
+                    """,Integer.class,gatePid,gatePid);
+            if(waiting>=2) {return true;}Thread.sleep(10);
+        } while(System.nanoTime()<deadline);
+        return false;
+    }
     private boolean waitForTwoLocks(String kind,String relation) throws InterruptedException {
         long deadline=System.nanoTime()+Duration.ofSeconds(2).toNanos();
         do {
