@@ -767,7 +767,8 @@
       "requestMessages": [],
       "returnedMessages": [],
       "agentMessages": [],
-      "requestRecord": "ContinuedauthorizedrepositoryupdateincludingactualCodexcontributions;checked147responses/139IDs/694links/originalbytes;twohistoryprivacyscansandactual226file43commitpackedrecoveryat805340bPASS. See docs/evidence/candidate-update-verification.md. Finalv3exactmanifestandexternalverificationfollowevidencecommit;nosend/runtimechange/newtestpassinferred."
+      "requestRecord": "ContinuedauthorizedrepositoryupdateincludingactualCodexcontributions;checked147responses/139IDs/694links/originalbytes;twohistoryprivacyscansandactual226file43commitpackedrecoveryat805340bPASS. See docs/evidence/candidate-update-verification.md. Finalv3exactmanifestandexternalverificationfollowevidencecommit;nosend/runtimechange/newtestpassinferred.",
+      "finalHandoff": "Actualv3atbf429fd227files44commitsPASS;GitHubconnector404fellbacktoauthenticatedCLIandverifiedPRIVATE;oneREADMEanchor/currentnextActioncorrectedbeforefinalreplacement.Exactfinalmanifest/externalchecksbindlatercommit."
     }
   ],
   "limits": [

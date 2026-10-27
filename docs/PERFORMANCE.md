@@ -43,7 +43,7 @@ The current list/detail/trend implementation obtains the authorized patient's fu
 
 ## Reproduce locally
 
-Use the [dataset prerequisites/command](DATASET.md) and [start instructions](../README.md#build-and-start). Load the fixed recipe, then keep the normal restricted-runtime app listening on loopback 18081. Finish other loads, migrations, integration suites or restore work before measuring. Do not run them concurrently on this database.
+Use the [dataset prerequisites/command](DATASET.md) and [start instructions](../README.md#the-two-required-commands). Load the fixed recipe, then keep the normal restricted-runtime app listening on loopback 18081. Finish other loads, migrations, integration suites or restore work before measuring. Do not run them concurrently on this database.
 
 From the repository root, with Node 24 available, use a new ignored output name for each run:
 

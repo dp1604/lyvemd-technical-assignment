@@ -130,8 +130,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "94/96tasksrecordedcomplete. Candidate86remains partial;96not submitted. Generate and verify finalv3 afterthisevidencecommit, then candidate manually sends the latest verified archive. Candidatecontribution:docs/CANDIDATE_REVIEW.md; currentchecks:docs/evidence/candidate-update-verification.md. Noactualexternalmessageorclinical/runtimechange.",
-  "recordedAtUtc": "2026-10-27T17:08:56.932Z",
+  "nextAction": "94/96tasksrecordedcomplete. Candidate manually sends the latest independently verified replacement identified by its manifest and external delivery verification. Client86 remains partial;96 is explicitly not submitted. Do not re-run completed implementation groups or infer delivery. Candidatecontributions:docs/CANDIDATE_REVIEW.md.",
+  "recordedAtUtc": "2026-10-27T17:11:52.012Z",
   "groups": [
     {
       "group": 1,
@@ -337,12 +337,12 @@
   "nextMainGroup": 14,
   "revalidationRequired": [],
   "lastReviewPackageVerification": {
-    "sourceCommit": "805340b164172d80e446164a20411287c3fcbb3c",
+    "sourceCommit": "bf429fdec69c5ea6ce5157e7f72b990b1e46360e",
     "status": "PASS",
-    "files": 226,
-    "commits": 43,
-    "archive": "lyvemd-candidate-review-check-805340b.zip",
-    "finalVersionPolicy": "Historical verified review checkpoint; final v3 is released only after its own exact-version verification."
+    "files": 227,
+    "commits": 44,
+    "archive": "LyveMD-Technical-Assignment-2026-10-27-v3.zip",
+    "finalVersionPolicy": "Verified prior checkpoint. A subsequent live-anchor/status correction is included in the final replacement; its exact identity and results are bound externally."
   },
   "candidateReviewRecord": "docs/CANDIDATE_REVIEW.md",
   "task92CompletionBasis": "Candidate reports independent submission walkthrough Yes/Yes; not a new AI-observed oral assessment."
