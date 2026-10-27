@@ -1,0 +1,7 @@
+{
+  "name": "atlas-client-checks",
+  "private": true,
+  "type": "module",
+  "scripts": { "test:client": "node scripts/client/client-model.test.mjs" },
+  "engines": { "node": ">=20" }
+}

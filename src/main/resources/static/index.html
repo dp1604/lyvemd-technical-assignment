@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
+  <title>Atlas · Results workspace</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to patient workspace</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="/" aria-label="Atlas results workspace home">
+        <span class="brand-mark" aria-hidden="true">A</span>
+        <span><span class="brand-name">Atlas</span><span class="brand-owner">Aldercrest Health Group</span></span>
+      </a>
+      <span class="environment-badge">Synthetic assessment</span>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell main-shell" tabindex="-1">
+    <div class="page-introduction">
+      <div><p class="eyebrow">Patient information</p><h1>Results workspace</h1></div>
+      <p class="intro-copy">Results, their history and a record of access, in one place.</p>
+    </div>
+
+    <aside class="terminology-notice" aria-labelledby="terminology-heading">
+      <span class="notice-symbol" aria-hidden="true">!</span>
+      <div>
+        <h2 id="terminology-heading">Clinical terminology notice — synthetic assessment only</h2>
+        <p>The supplied task calls code <code>2947-0</code> potassium. Official LOINC defines it as <strong>sodium in blood</strong>. This demonstration retains the task's mapping with that conflict disclosed. Real clinical feeds require a verified specimen and terminology mapping, with clinical-owner approval, before use.</p>
+      </div>
+    </aside>
+
+    <noscript><p class="message message--error">JavaScript is required to load the results, chart and access log. No clinical data is included in this page.</p></noscript>
+
+    <section class="context-card card" aria-labelledby="context-heading">
+      <div class="section-heading context-heading">
+        <div><p class="eyebrow">Assessment controls</p><h2 id="context-heading">Choose a test context</h2></div>
+        <span class="subtle-tag">Test declarations</span>
+      </div>
+      <p id="context-help" class="supporting-copy">These IDs and roles are impersonatable test declarations, not a login or proof of identity. Access is checked by the server. Use synthetic records only.</p>
+      <form id="context-form" class="context-form" action="/" method="get" autocomplete="off" aria-describedby="context-help">
+        <div class="field">
+          <label for="patient-id">Patient ID</label>
+          <input id="patient-id" type="text" maxlength="64" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Synthetic patient ID">
+        </div>
+        <div class="field">
+          <label for="actor-id">Actor ID</label>
+          <input id="actor-id" type="text" maxlength="64" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Known synthetic actor ID">
+        </div>
+        <div class="field">
+          <label for="actor-role">Declared role</label>
+          <select id="actor-role" required>
+            <option value="PATIENT">PATIENT</option>
+            <option value="PROXY">PROXY</option>
+            <option value="CLINICIAN">CLINICIAN</option>
+            <option value="STAFF">STAFF</option>
+          </select>
+        </div>
+        <button id="apply-context" class="button button--primary" type="submit">Apply test context</button>
+      </form>
+      <p id="context-error" class="message message--error" role="alert" tabindex="-1" hidden></p>
+    </section>
+
+    <section class="record-context" aria-label="Current test context">
+      <div><span class="context-label">Patient</span><span id="current-patient" class="context-value identifier">Not selected</span></div>
+      <div><span class="context-label">Actor</span><span id="current-actor" class="context-value identifier">Not selected</span></div>
+      <div><span class="context-label">Role</span><span id="current-role" class="context-value">Not selected</span></div>
+    </section>
+
+    <p id="app-status" class="application-status" role="status" aria-live="polite" aria-atomic="true">Choose a test context to begin.</p>
+
+    <nav class="view-navigation" aria-label="Patient workspace views">
+      <button id="nav-results" class="view-button" type="button" data-view="results" aria-controls="view-results" aria-current="page">Results</button>
+      <button id="nav-trend" class="view-button" type="button" data-view="trend" aria-controls="view-trend">Trend</button>
+      <button id="nav-access-log" class="view-button" type="button" data-view="access-log" aria-controls="view-access-log">Access log</button>
+    </nav>
+
+    <section id="view-results" class="workspace-panel card" aria-labelledby="results-heading">
+      <div class="section-heading">
+        <div><p class="eyebrow">Clinical history</p><h2 id="results-heading">Results</h2></div>
+        <div class="count-summary"><span id="results-count">—</span><span>visible results</span></div>
+      </div>
+      <p class="supporting-copy">Ranges and flags are shown with each result. “No applicable flag” is different from “Normal.” Details include components, corrections and calculation inputs where available.</p>
+      <p id="results-status" class="view-status" role="status" aria-live="polite" aria-atomic="true">Results have not been loaded.</p>
+      <div class="table-scroll" role="region" aria-label="Results table" tabindex="0">
+        <table id="results-table">
+          <caption class="sr-only">Results available to the current test actor, ordered by measurement time.</caption>
+          <thead><tr><th scope="col">Date · UTC</th><th scope="col">Result</th><th scope="col">Value / unit</th><th scope="col">Reference range</th><th scope="col">Flag</th><th scope="col"><span class="sr-only">Details</span></th></tr></thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+      <p id="results-empty" class="empty-state" hidden>No results are available in this view.</p>
+      <div class="pagination" aria-label="Results pagination">
+        <div class="page-size-control"><label for="results-page-size">Rows per page</label><select id="results-page-size"><option value="25">25</option><option value="50" selected>50</option><option value="100">100</option><option value="200">200</option></select></div>
+        <span id="results-page-label" class="pagination-label">Not loaded</span>
+        <div class="pagination-buttons"><button id="results-prev" class="button button--secondary" type="button" disabled>Previous</button><button id="results-next" class="button button--secondary" type="button" disabled>Next</button></div>
+      </div>
+
+      <section id="result-detail" class="detail-panel" aria-labelledby="detail-heading" tabindex="-1" hidden>
+        <div class="section-heading"><h3 id="detail-heading">Result details</h3><button id="detail-close" class="button button--secondary" type="button">Close details</button></div>
+        <div id="detail-body"></div>
+      </section>
+    </section>
+
+    <section id="view-trend" class="workspace-panel card" aria-labelledby="trend-heading" hidden>
+      <div class="section-heading">
+        <div><p class="eyebrow">History over time</p><h2 id="trend-heading">Trend</h2></div>
+        <div class="count-summary"><span id="trend-count">—</span><span>visible points</span></div>
+      </div>
+      <p id="trend-help" class="supporting-copy">Choose a measurement and an optional date window. Both dates are inclusive UTC dates. Leave a date blank for an open boundary.</p>
+      <form id="trend-form" class="trend-form" action="/" method="get" aria-describedby="trend-help">
+        <div class="field field--measurement"><label for="trend-code">Measurement</label><select id="trend-code">
+          <option value="2951-2">Sodium · 2951-2</option>
+          <option value="2947-0">Potassium — task convention · 2947-0</option>
+          <option value="2160-0">Creatinine · 2160-0</option>
+          <option value="98979-8">eGFR · 98979-8</option>
+          <option value="718-7">Haemoglobin · 718-7</option>
+          <option value="4548-4">HbA1c · 4548-4</option>
+          <option value="8480-6">Systolic blood pressure · 8480-6</option>
+          <option value="8462-4">Diastolic blood pressure · 8462-4</option>
+          <option value="8302-2">Height · 8302-2</option>
+          <option value="29463-7">Weight · 29463-7</option>
+          <option value="39156-5">BMI · 39156-5</option>
+        </select></div>
+        <div class="field"><label for="trend-from">From date · UTC</label><input id="trend-from" type="date"></div>
+        <div class="field"><label for="trend-to">To date · UTC</label><input id="trend-to" type="date"></div>
+        <button id="trend-submit" class="button button--primary" type="submit">Show trend</button>
+      </form>
+      <p id="trend-status" class="view-status" role="status" aria-live="polite" aria-atomic="true">The trend has not been loaded.</p>
+      <p class="chart-legend" aria-label="Chart marker legend">
+        <span class="flag flag--normal">Normal ○</span>
+        <span class="flag flag--high">High ▲</span>
+        <span class="flag flag--low">Low ▼</span>
+        <span class="flag flag--no-applicable-flag">No applicable flag □</span>
+      </p>
+      <figure class="chart-figure">
+        <div class="chart-frame">
+          <svg id="trend-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" role="img" aria-labelledby="trend-chart-title trend-chart-description" focusable="false">
+            <title id="trend-chart-title">Measurement trend</title>
+            <desc id="trend-chart-description">No trend has been loaded. Exact dates, values and flags will also appear in the table below.</desc>
+            <g id="trend-chart-content"></g>
+          </svg>
+        </div>
+        <figcaption>Exact dates, values, ranges and text flags are available in the equivalent table below.</figcaption>
+      </figure>
+      <p id="trend-empty" class="empty-state" hidden>No trend points are available in this view and date window.</p>
+      <div class="table-scroll" role="region" aria-label="Trend values table" tabindex="0">
+        <table id="trend-table"><caption class="sr-only">Accessible table of the same trend points shown in the chart.</caption><thead><tr><th scope="col">Date · UTC</th><th scope="col">Value / unit</th><th scope="col">Reference range</th><th scope="col">Flag</th></tr></thead><tbody id="trend-body"></tbody></table>
+      </div>
+    </section>
+
+    <section id="view-access-log" class="workspace-panel card" aria-labelledby="access-log-heading" hidden>
+      <div class="section-heading">
+        <div><p class="eyebrow">Accountability</p><h2 id="access-log-heading">Access log</h2></div>
+        <div class="count-summary"><span id="access-log-count">—</span><span>recorded events</span></div>
+      </div>
+      <p class="supporting-copy">This view is available to the patient themself or STAFF under the assessment policy. Events show allowed and denied actions; the current log-read event appears on a later request.</p>
+      <p id="access-log-status" class="view-status" role="status" aria-live="polite" aria-atomic="true">The access log has not been loaded.</p>
+      <div class="table-scroll" role="region" aria-label="Access log table" tabindex="0">
+        <table id="access-log-table"><caption class="sr-only">Patient-scoped access events, most recent first.</caption><thead><tr><th scope="col">Time · UTC</th><th scope="col">Actor / role</th><th scope="col">Action</th><th scope="col">Outcome</th><th scope="col">Source</th><th scope="col">Affected proxy</th></tr></thead><tbody id="access-log-body"></tbody></table>
+      </div>
+      <p id="access-log-empty" class="empty-state" hidden>No access events are available in this view.</p>
+      <div class="pagination" aria-label="Access log pagination">
+        <div class="page-size-control"><label for="access-log-page-size">Rows per page</label><select id="access-log-page-size"><option value="25">25</option><option value="50" selected>50</option><option value="100">100</option><option value="200">200</option></select></div>
+        <span id="access-log-page-label" class="pagination-label">Not loaded</span>
+        <div class="pagination-buttons"><button id="access-log-prev" class="button button--secondary" type="button" disabled>Previous</button><button id="access-log-next" class="button button--secondary" type="button" disabled>Next</button></div>
+      </div>
+    </section>
+
+    <footer class="page-footer"><span>Atlas · Aldercrest assessment</span><span>Synthetic data. Test identities. No production authentication.</span></footer>
+  </main>
+</body>
+</html>
