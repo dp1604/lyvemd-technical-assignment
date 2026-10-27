@@ -55,3 +55,7 @@ D-09 derived-only incoming BMI/eGFR restriction and D-10 March1 leap-day complet
 ## Group4 clarifications
 
 D-11 corrects the extension canonical identifiers to HTTPS example URLs with locally supplied definitions; D-12 specifies identical indexed HTTP400 transaction failures for missing and unauthorized stored patient references in POST. Both actual candidate approvals, reasons and source locators are preserved in [Group4 clarifications](decisions/group-4-clarifications.md). Historical packages stay unchanged. Group4 ingestion and the Task49 detail dependency passed their focused and complete154-case HTTP/database/clinical checks; [evidence](evidence/group-4-ingestion.md) records the bounded completion and remaining groups.
+
+## Group5 clarifications
+
+D-13–D-15 were explicitly adopted unchanged in actual candidate answer `01a17c40-e984-73a0-a0d1-3510d6e6cb1f`. [Preserved proposal, exact answer, reasons and limits](decisions/group-5-clarifications.md) define the one-way local workflow, patient-self individual proxy revocation, retained raw/derived list and latest-visible-head trend conventions. Adoption is separate from later implementation verification.

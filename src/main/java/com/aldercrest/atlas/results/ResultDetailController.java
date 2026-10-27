@@ -11,6 +11,6 @@ public class ResultDetailController {
     public ResultDetailController(ResultDetailService service) {this.service=service;}
     @GetMapping("/patients/{patientId}/results/{observationId}")
     public ResponseEntity<?> detail(@PathVariable String patientId,@PathVariable String observationId,HttpServletRequest request) {
-        return service.detail(ActorHeaders.parse(request),patientId,observationId);
+        return service.detail(ActorHeaders.parse(request),patientId,observationId,request.getParameterMap());
     }
 }

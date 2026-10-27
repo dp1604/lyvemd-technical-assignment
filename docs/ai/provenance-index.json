@@ -438,6 +438,22 @@
         "msg_0f4deff779876861016ae03fa6fbe481919e6168267c5bb105"
       ],
       "requestRecord": "Actual worker outputs retained via locators; final root-executed checks include later birthday/range/BP/null assertions and raw R4 representation guards. Task49 dependency brought forward explicitly to complete46. Human verification not inferred."
+    },
+    {
+      "id": "G5-001",
+      "topic": "Shared audited reads, actual C1-C3 adoption and root-executed HTTP/audit/snapshot checks",
+      "requestMessages": [
+        "01a17c28-0c94-71b1-953f-66983af753dd",
+        "01a17c40-e984-73a0-a0d1-3510d6e6cb1f"
+      ],
+      "returnedMessages": [
+        "call_5947a65daf20457cbf0b13468e7617cc"
+      ],
+      "agentMessages": [
+        "msg_01b3d737a52d44e6016ae04d2b7abc81919f2b15c818636035",
+        "msg_081edc3217a18fcd016ae04cec874c8191a60b6f88bb8f07dd"
+      ],
+      "requestRecord": "Actual AI read/workflow agent threads01a17c28-82d1-7861-be76-af23874491ef and01a17c28-b2a2-7351-ad48-88e131b40511; initial returned-source locators retained. Subsequent scratch test drafts root reviewed/ran; final code/test source locators reconciled at later increment. Candidate adoption is separate from AI authorship and runtime evidence."
     }
   ],
   "limits": [
