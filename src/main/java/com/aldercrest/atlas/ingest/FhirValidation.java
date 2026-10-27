@@ -1,0 +1,58 @@
+package com.aldercrest.atlas.ingest;
+
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
+import ca.uhn.fhir.validation.FhirValidator;
+import ca.uhn.fhir.validation.ResultSeverityEnum;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import org.hl7.fhir.common.hapi.validation.support.CommonCodeSystemsTerminologyService;
+import org.hl7.fhir.common.hapi.validation.support.InMemoryTerminologyServerValidationSupport;
+import org.hl7.fhir.common.hapi.validation.support.PrePopulatedValidationSupport;
+import org.hl7.fhir.common.hapi.validation.support.SnapshotGeneratingValidationSupport;
+import org.hl7.fhir.common.hapi.validation.support.ValidationSupportChain;
+import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
+import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.StructureDefinition;
+import org.springframework.stereotype.Component;
+
+@Component
+public class FhirValidation {
+    private final FhirContext context;
+    private final FhirValidator validator;
+
+    public FhirValidation(FhirContext context) throws IOException {
+        // Validation uses bundled R4 resources and our local definitions. Never resolve URLs over HTTP.
+        org.hl7.fhir.utilities.http.ManagedWebAccess.setAccessPolicy(
+                org.hl7.fhir.utilities.http.ManagedWebAccess.WebAccessPolicy.PROHIBITED);
+        this.context = context;
+        PrePopulatedValidationSupport local = new PrePopulatedValidationSupport(context);
+        for (String name : new String[]{"clinical-sex-context","correction-of","standardized-creatinine"}) {
+            try (var stream = getClass().getResourceAsStream("/fhir/StructureDefinition-"+name+".json")) {
+                if (stream == null) { throw new IllegalStateException("Missing local FHIR definition."); }
+                local.addStructureDefinition(context.newJsonParser().parseResource(StructureDefinition.class,
+                        new String(stream.readAllBytes(),StandardCharsets.UTF_8)));
+            }
+        }
+        ValidationSupportChain support = new ValidationSupportChain(local,new DefaultProfileValidationSupport(context),
+                new CommonCodeSystemsTerminologyService(context),new InMemoryTerminologyServerValidationSupport(context),
+                new SnapshotGeneratingValidationSupport(context));
+        FhirInstanceValidator module = new FhirInstanceValidator(support);
+        module.setAnyExtensionsAllowed(false);
+        module.setErrorForUnknownProfiles(true);
+        validator = context.newValidator().registerValidatorModule(module);
+        // Load local base definitions before the serving socket opens, not inside a request transaction.
+        validator.validateWithResult(new Patient().setActive(true));
+    }
+
+    public boolean valid(String json) {
+        try {
+            return validator.validateWithResult(json).getMessages().stream().noneMatch(message ->
+                    message.getSeverity() == ResultSeverityEnum.ERROR || message.getSeverity() == ResultSeverityEnum.FATAL);
+        } catch (RuntimeException error) { return false; }
+    }
+    public org.hl7.fhir.r4.model.Resource parse(String json) {
+        return (org.hl7.fhir.r4.model.Resource)context.newJsonParser()
+                .setParserErrorHandler(new ca.uhn.fhir.parser.StrictErrorHandler()).parseResource(json);
+    }
+}

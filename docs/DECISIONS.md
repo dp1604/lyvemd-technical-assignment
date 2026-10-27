@@ -51,3 +51,7 @@ Future unclear facts/policies are added here with source, options, candidate dec
 ## Group3 clarifications
 
 D-09 derived-only incoming BMI/eGFR restriction and D-10 March1 leap-day completed-age convention were explicitly adopted in actual candidate replies. See [source answers, reasons and limits](decisions/group-3-clarifications.md). A/B presentation files and exact access instruction remain immutable. Clinical core checks do not yet complete ingestion/read-route enforcement.
+
+## Group4 clarifications
+
+D-11 corrects the extension canonical identifiers to HTTPS example URLs with locally supplied definitions; D-12 specifies identical indexed HTTP400 transaction failures for missing and unauthorized stored patient references in POST. Both actual candidate approvals, reasons and source locators are preserved in [Group4 clarifications](decisions/group-4-clarifications.md). Historical packages stay unchanged. Group4 implementation remains in progress until its HTTP/database acceptance checks pass.

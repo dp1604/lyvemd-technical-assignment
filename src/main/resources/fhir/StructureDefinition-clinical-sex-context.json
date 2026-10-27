@@ -1,0 +1,141 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "atlas-clinical-sex-context",
+  "url": "https://example.org/fhir/StructureDefinition/atlas-clinical-sex-context",
+  "version": "1.0.0",
+  "name": "AtlasClinicalSexContext",
+  "status": "draft",
+  "experimental": true,
+  "description": "Assessment-specific definition supplied locally. The example.org canonical is an example identifier, not a deployed production namespace.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Patient",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "max": "*",
+        "min": 0,
+        "path": "Extension",
+        "id": "Extension",
+        "short": "Explicit historical clinical sex context"
+      },
+      {
+        "slicing": {
+          "rules": "closed",
+          "discriminator": [
+            {
+              "path": "url",
+              "type": "value"
+            }
+          ],
+          "ordered": false
+        },
+        "path": "Extension.extension",
+        "id": "Extension.extension"
+      },
+      {
+        "max": "1",
+        "min": 1,
+        "path": "Extension.extension",
+        "id": "Extension.extension:code",
+        "sliceName": "code"
+      },
+      {
+        "max": "0",
+        "path": "Extension.extension.extension",
+        "id": "Extension.extension:code.extension"
+      },
+      {
+        "fixedUri": "code",
+        "path": "Extension.extension.url",
+        "id": "Extension.extension:code.url"
+      },
+      {
+        "max": "1",
+        "min": 1,
+        "path": "Extension.extension.value[x]",
+        "id": "Extension.extension:code.value[x]",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "max": "1",
+        "min": 1,
+        "path": "Extension.extension",
+        "id": "Extension.extension:validFrom",
+        "sliceName": "validFrom"
+      },
+      {
+        "max": "0",
+        "path": "Extension.extension.extension",
+        "id": "Extension.extension:validFrom.extension"
+      },
+      {
+        "fixedUri": "validFrom",
+        "path": "Extension.extension.url",
+        "id": "Extension.extension:validFrom.url"
+      },
+      {
+        "max": "1",
+        "min": 1,
+        "path": "Extension.extension.value[x]",
+        "id": "Extension.extension:validFrom.value[x]",
+        "type": [
+          {
+            "code": "date"
+          }
+        ]
+      },
+      {
+        "max": "1",
+        "min": 0,
+        "path": "Extension.extension",
+        "id": "Extension.extension:validToExclusive",
+        "sliceName": "validToExclusive"
+      },
+      {
+        "max": "0",
+        "path": "Extension.extension.extension",
+        "id": "Extension.extension:validToExclusive.extension"
+      },
+      {
+        "fixedUri": "validToExclusive",
+        "path": "Extension.extension.url",
+        "id": "Extension.extension:validToExclusive.url"
+      },
+      {
+        "max": "1",
+        "min": 1,
+        "path": "Extension.extension.value[x]",
+        "id": "Extension.extension:validToExclusive.value[x]",
+        "type": [
+          {
+            "code": "date"
+          }
+        ]
+      },
+      {
+        "fixedUri": "https://example.org/fhir/StructureDefinition/atlas-clinical-sex-context",
+        "path": "Extension.url",
+        "id": "Extension.url"
+      },
+      {
+        "max": "0",
+        "path": "Extension.value[x]",
+        "id": "Extension.value[x]"
+      }
+    ]
+  }
+}

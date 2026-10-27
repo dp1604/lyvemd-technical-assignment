@@ -1,0 +1,53 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "atlas-standardized-creatinine",
+  "url": "https://example.org/fhir/StructureDefinition/atlas-standardized-creatinine",
+  "version": "1.0.0",
+  "name": "AtlasStandardizedCreatinine",
+  "status": "draft",
+  "experimental": true,
+  "description": "Assessment-specific definition supplied locally. The example.org canonical is an example identifier, not a deployed production namespace.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Observation",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "max": "1",
+        "min": 0,
+        "path": "Extension",
+        "id": "Extension"
+      },
+      {
+        "max": "0",
+        "path": "Extension.extension",
+        "id": "Extension.extension"
+      },
+      {
+        "fixedUri": "https://example.org/fhir/StructureDefinition/atlas-standardized-creatinine",
+        "path": "Extension.url",
+        "id": "Extension.url"
+      },
+      {
+        "max": "1",
+        "min": 1,
+        "path": "Extension.value[x]",
+        "id": "Extension.value[x]",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      }
+    ]
+  }
+}

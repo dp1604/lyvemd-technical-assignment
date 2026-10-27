@@ -393,6 +393,22 @@
         "msg_09027fed588bafe1016ae02f6149248191bf3cc43c560b482d"
       ],
       "requestRecord": "Two actual AI agent lanes: oracle01a17bac-a973-7330-9633-bd4df417ab5d and rules01a17bac-d7a6-7013-9d37-032d7fbeb5fa. Retained audit/findings/followups; runtime checks root executed. Drafted test-design response is represented by retained report; source transcript remains ignored."
+    },
+    {
+      "id": "G4-001",
+      "topic": "FHIR ingestion boundaries and actual HTTPS/POST-reference adoptions",
+      "requestMessages": [
+        "01a17bc7-5815-77d0-b6b3-a7b10a79634d",
+        "01a17bcc-7d18-7233-9191-52b51cb381fe",
+        "01a17bcd-56b9-7b10-bd2c-1eba3a615450",
+        "01a17bd9-54e8-7a92-8259-6da13f7647a3"
+      ],
+      "returnedMessages": [
+        "call_b6ae7aa92871439ca67eec0f1af096a4",
+        "call_67f8afb82ef64c7cb5c74c7b824a4401"
+      ],
+      "agentMessages": [],
+      "requestRecord": "Actual source questions/answers retained in Group4 clarifications. AI audit agent threads01a17bc7-a332-77a1-91d5-dd1715aae911 and01a17bc7-cbd1-7b11-8069-bffda6f28508; scratch reports retained; root integrates/tests. Final audit output locators reconciled later."
     }
   ],
   "limits": [
