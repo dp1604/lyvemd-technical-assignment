@@ -332,7 +332,7 @@
     },
     {
       "id": "G8-001",
-      "topic": "Parallel specification draft, not final adoption/completion",
+      "topic": "Parallel note draft and later root integration; both provenance stages preserved",
       "requestMessages": [
         "01a17b8d-8e2c-7211-ae8f-0927addb4e34"
       ],
@@ -340,11 +340,39 @@
       "agentMessages": [
         "msg_05b8047b65414630016ae0272ac44081919a8276ea54f82ba0"
       ],
-      "requestRecord": "Root delegated under agreed parallel plan; agent01a17b90-7616-7841-ab43-fa7a7b6147a8; scratch draft/hash retained, candidate review pending."
+      "requestRecord": "Final reconciliation merges the earlier draft and later integration under one stable ID. Every complete original record and actual source locator is preserved in provenanceStages. Top-level message arrays are their stable union; no new source ID or candidate approval is inferred.",
+      "provenanceStages": [
+        {
+          "stage": "early_draft",
+          "originalRecord": {
+            "id": "G8-001",
+            "topic": "Parallel specification draft, not final adoption/completion",
+            "requestMessages": [
+              "01a17b8d-8e2c-7211-ae8f-0927addb4e34"
+            ],
+            "returnedMessages": [],
+            "agentMessages": [
+              "msg_05b8047b65414630016ae0272ac44081919a8276ea54f82ba0"
+            ],
+            "requestRecord": "Root delegated under agreed parallel plan; agent01a17b90-7616-7841-ab43-fa7a7b6147a8; scratch draft/hash retained, candidate review pending."
+          }
+        },
+        {
+          "stage": "later_integration",
+          "originalRecord": {
+            "id": "G8-001",
+            "topic": "Actual parallel note drafting/review and root integration",
+            "requestMessages": [],
+            "returnedMessages": [],
+            "agentMessages": [],
+            "requestRecord": "Approvedparallel8lane; continuingworkflowAIreviewerthread01a17c28-b2a2-7351-ad48-88e131b40511suppliedfrozennote/coverage/integrationmanifest. Readreviewerandboundedtransactionreviewercheckedcontent. Rootreviewed/integratedwithtitle/statusclarifications. Actualtooltasknames/root/group5_workflow_audit and/root/group4_transaction_reviewretaincurrentcontribution; no newexactmessageIDexposed."
+          }
+        }
+      ]
     },
     {
       "id": "G9-001",
-      "topic": "Parallel static AttachmentA review draft, candidate walkthrough pending",
+      "topic": "Parallel static review draft and later root integration; both provenance stages preserved",
       "requestMessages": [
         "01a17b8d-8e2c-7211-ae8f-0927addb4e34"
       ],
@@ -352,7 +380,35 @@
       "agentMessages": [
         "msg_022233db4e81ff94016ae0268cf4908191bd52230a187ea70b"
       ],
-      "requestRecord": "Root delegated static-only plan; agent01a17b90-9e10-7ea3-8876-c2799c2562db; draft/hash retained, no source execution."
+      "requestRecord": "Final reconciliation merges the earlier draft and later integration under one stable ID. Every complete original record and actual source locator is preserved in provenanceStages. Top-level message arrays are their stable union; no new source ID or candidate approval is inferred.",
+      "provenanceStages": [
+        {
+          "stage": "early_draft",
+          "originalRecord": {
+            "id": "G9-001",
+            "topic": "Parallel static AttachmentA review draft, candidate walkthrough pending",
+            "requestMessages": [
+              "01a17b8d-8e2c-7211-ae8f-0927addb4e34"
+            ],
+            "returnedMessages": [],
+            "agentMessages": [
+              "msg_022233db4e81ff94016ae0268cf4908191bd52230a187ea70b"
+            ],
+            "requestRecord": "Root delegated static-only plan; agent01a17b90-9e10-7ea3-8876-c2799c2562db; draft/hash retained, no source execution."
+          }
+        },
+        {
+          "stage": "later_integration",
+          "originalRecord": {
+            "id": "G9-001",
+            "topic": "All8files static review, primarysource checking and true AI origins",
+            "requestMessages": [],
+            "returnedMessages": [],
+            "agentMessages": [],
+            "requestRecord": "Approvedparallel9lane; earlierAIcandidatesandcontinuingworkflow/transactionAIreviewsproduced19B/3P/2V. Frozenreview/rootfullread/integrationonly;noAttachmentAexecution. Sourceauditcounts/printedlocationsandprimarycitationsretained. Candidate81unperformed; nohumanorigin/approvalinferred."
+          }
+        }
+      ]
     },
     {
       "id": "W01",
@@ -586,22 +642,6 @@
       "requestRecord": "Latestactualuserdeferralsteerscompletion of authorizeddeliverables. AI reviewer proposedperformanceplan; rootselected500msp95/concurrency1/10warmups+100measuredper5cases. No actualperformanceresult at declaration; no newexactusermessageIDexposed."
     },
     {
-      "id": "G8-001",
-      "topic": "Actual parallel note drafting/review and root integration",
-      "requestMessages": [],
-      "returnedMessages": [],
-      "agentMessages": [],
-      "requestRecord": "Approvedparallel8lane; continuingworkflowAIreviewerthread01a17c28-b2a2-7351-ad48-88e131b40511suppliedfrozennote/coverage/integrationmanifest. Readreviewerandboundedtransactionreviewercheckedcontent. Rootreviewed/integratedwithtitle/statusclarifications. Actualtooltasknames/root/group5_workflow_audit and/root/group4_transaction_reviewretaincurrentcontribution; no newexactmessageIDexposed."
-    },
-    {
-      "id": "G9-001",
-      "topic": "All8files static review, primarysource checking and true AI origins",
-      "requestMessages": [],
-      "returnedMessages": [],
-      "agentMessages": [],
-      "requestRecord": "Approvedparallel9lane; earlierAIcandidatesandcontinuingworkflow/transactionAIreviewsproduced19B/3P/2V. Frozenreview/rootfullread/integrationonly;noAttachmentAexecution. Sourceauditcounts/printedlocationsandprimarycitationsretained. Candidate81unperformed; nohumanorigin/approvalinferred."
-    },
-    {
       "id": "G12-001",
       "topic": "AI restore harness, root-targeted corrections and actual full executed restore",
       "requestMessages": [],
@@ -616,6 +656,58 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "ContinuingreadAIreviewer/root/group5_read_auditdraftedmeasurement/querytoolsandfrozenfinalcuration,independentlyreadactualartifacts. Rootselected/declaredtarget,addedp99/CPUmodel,correctedactualatlas-schemaquery,reviewed/executedallworkloads. Fullrawsamples/planconditionsremainignored.551HTTP200/exact551audits; fivep95targetsPASSwithdisclosedmaximaabove500. Rootintegratedcurateddocs/taskclosure; nohumanorproductionclaim."
+    },
+    {
+      "id": "G7-001",
+      "topic": "Same-origin clinical results, trend and access-log client; AI source reviews and root integration",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Actual group-selection request is retained in docs/ai/prompts/group-7-user-request.md; no exact new source-message ID was exposed. Root authored JS/model/tests. Continuing AI task /root/group5_workflow_audit drafted HTML/CSS and reviewed DOM/keyboard; /root/group5_read_audit reviewed exact API/privacy/request lifetimes. Actual continuing thread locators and returned audit text are retained in docs/ai/outputs/group-7-client-audits.md. Root integrated the module/focus/filter fixes, used direct node:test invocation after the runner's EPERM child-spawn failure, and executed actual checks. Development checkpoints and later browser evidence are distinguished in AI_WORKING_LOG G7-001/G7-003; no candidate-run or policy-change claim is inferred.",
+      "requestArtifact": "docs/ai/prompts/group-7-user-request.md",
+      "returnedArtifact": "docs/ai/outputs/group-7-client-audits.md",
+      "shippedEvidence": "docs/evidence/group-7-client.md"
+    },
+    {
+      "id": "G7-002",
+      "topic": "Exact decimal display, browser capability boundary and representability wording",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Continuing authorized Group7 implementation and source review under the retained group request; no new exact candidate prompt or message ID is reconstructed. Root discovered Number display rounding, verified standard reviver context.source, authored original-token retention and geometry guards. Continuing task /root/group5_read_audit independently checked semantics/capability/privacy and returned a display-wording correction, retained in docs/ai/outputs/group-7-client-audits.md. Root retained 'unplotted' wording, ran eight pure cases and actual affected browser checks, and repacked changed static resources while explicitly reusing the just-completed Java unit result. G7-002 also preserves the failed initial full-regression contention observation; that failure is not converted into a PASS or established production cause. Actual candidate verification remains separate.",
+      "requestArtifact": "docs/ai/prompts/group-7-user-request.md",
+      "returnedArtifact": "docs/ai/outputs/group-7-client-audits.md",
+      "shippedEvidence": "docs/evidence/group-7-client.md"
+    },
+    {
+      "id": "G7-003",
+      "topic": "Root-executed client/browser evidence and explicit human verification boundary",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Actual retained Group7 request and adopted client/contracts continued. Root executed IAB results/detail/provenance, correction, BP, history/window/gap/log/pagination/context/keyboard checks, compared served assets and authored curated evidence. Source contributions from /root/group5_read_audit and /root/group5_workflow_audit remain AI review/drafting, not browser execution or candidate verification. Tasks63-65 were closed against actual evidence; candidate86 was kept open. Actual later partial candidate reports and the literal deferral are separately recorded in G7-004 and docs/ai/prompts/manual-test-deferral.md. No new exact message ID is exposed or invented.",
+      "requestArtifact": "docs/ai/prompts/group-7-user-request.md",
+      "returnedArtifact": "docs/ai/outputs/group-7-client-audits.md",
+      "shippedEvidence": "docs/evidence/group-7-client.md"
+    },
+    {
+      "id": "G10-001",
+      "topic": "Failed contention-observation diagnosis and scoped real-lock synchronization test",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Authorized independent Group10 lane while actual candidate86 was pending, under the retained grouped execution plan; no exact new candidate prompt is reconstructed. Root requested narrow scratch diagnosis from continuing AI task /root/group5_read_audit after the actual full run had163 unit passes and one failed observation among74 integration cases. The returned source diagnosis/frozen IngestionIT scope both real prevalidations and exact transaction PIDs/advisory object while retaining real locks, production limits and effect assertions. Source/hash and actual continuing thread locator are retained in docs/ai/outputs/group-10-concurrency-audit.md. Root reviewed/integrated the test and executed the focused29-case pass, then the separate later full run recorded in G10-002. Source-supported harness coupling is not asserted as the unique runtime cause or candidate discovery.",
+      "requestArtifact": "docs/EXECUTION_PLAN.md",
+      "returnedArtifact": "docs/ai/outputs/group-10-concurrency-audit.md",
+      "shippedEvidence": "docs/evidence/group-10-regression.md"
+    },
+    {
+      "id": "FINAL-001",
+      "topic": "Actual matrix/path/disclosure reconciliation and optional personal preparation",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Actualusercontinuedeliverables/manual86deferral; rootdelegatedboundedsourceaudits/currenttasknames=root/group4_transaction_review,/root/group5_read_audit,/root/group5_workflow_audit.139rowmap/readpathinventory/disclosuregaps+preservingindexmerge/optionalguide+localemaildraftreturned. Rootintegratedactualboundedfacts; retainedcompleteearly/laterG8/G9recordsandfourmissingG7/G10items; exactv1unchanged. Guideonlylocaloutputsnotemployerarchive. Clean89/finalhistory/package/sendingnotyetclaimed."
     }
   ],
   "limits": [

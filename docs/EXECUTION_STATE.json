@@ -97,7 +97,9 @@
     83,
     84,
     85,
-    87
+    87,
+    88,
+    95
   ],
   "mainSequence": [
     1,
@@ -119,7 +121,7 @@
   ],
   "parallelStartAfterGroup": 1,
   "nextAction": "85taskscomplete including75-76actualperformanceand87actualrestore. Current89freshcheckout/twocommand runsession57824inprogress; no otherDBworkloads, oldsourceclustertemporarilystopped/freshcluster55433. Poll existingrunandrequirecleanup/source-restartPASS. Complete88/89onlyafteractualacceptance, then90/91/93package/reconciliation and94/95deliveryprep. Actualhuman81/86/92remainopen (86expresslydeferred);96candidate-sentonly.",
-  "recordedAtUtc": "2026-10-27 13:16:57 UTC",
+  "recordedAtUtc": "2026-10-27 13:31:32 UTC",
   "groups": [
     {
       "group": 1,

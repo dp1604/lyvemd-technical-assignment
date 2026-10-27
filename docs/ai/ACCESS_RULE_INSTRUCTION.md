@@ -1,6 +1,6 @@
 # Exact access-rule instruction
 
-Status: instruction v1 was drafted by Codex prospectively and then adopted unchanged by the candidate. It is the actual instruction from this point onward, not a reconstructed or backdated earlier prompt. Implementation and the scheduled policy decisions remain pending.
+Status: v1 was AI-drafted prospectively and actually adopted unchanged by the candidate. Its exact body/adoption/hash remain immutable. Subsequent actual assessment decisions and implementation are separately recorded; original prospective wording is historical. AI authorship, candidate adoption and executed verification remain distinct.
 
 - [Exact instruction body](prompts/access-rules-v1.txt): the complete unchanged text presented for review.
 - [Actual adoption record](prompts/access-rules-v1-adoption.json): exact answer, source identifiers and qualified timing.
@@ -16,7 +16,7 @@ Source message: `01a17b3c-2173-7002-8e7f-867679493c0b`, responding to question `
 
 Instruction-body SHA-256: `af23a7677bf0163b2ae7ff20938f123b22d24e8bd43ac9c333fe605a08628680`. Encoding: UTF-8 without BOM, LF line endings, one terminal LF. The public body must remain byte-identical to the presented v1 draft.
 
-The instruction quotes all eight house rules with PDF line wrapping normalized and R5 unchanged, and covers the contract, untrusted test actor headers, server-side reads and metadata, testing, privacy and exclusions. Policy questions are still decided with the candidate in their scheduled tasks; adoption is not approval of an unspecified policy or a claim that access control has been implemented.
+The instruction quotes all eight house rules with PDF line wrapping normalized and R5 unchanged, and covers the contract, untrusted test actor headers, server-side reads and metadata, testing, privacy and exclusions. At the original checkpoint, policy questions still required candidate decisions; subsequent actual decisions D-01–D-17 and implemented checks are recorded separately. The original adoption itself is not approval of an unspecified policy or implementation proof.
 
 Preserve subsequent actual instructions as separate versions with their source and adoption, rather than editing v1. Record what finally shipped and why it differs in the working log and Task 91 reconciliation. Earlier general planning/AGENTS directions remain earlier provenance; they are not relabelled as this exact instruction.
 

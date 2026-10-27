@@ -1,6 +1,6 @@
 # Decision register
 
-Status: Tasks 10-17 decisions are recorded from actual candidate adoptions; document/source checks passed. Foundation, clinical, ingestion, allGETs and localworkflow implementation/verification are recorded through Group5; [assignment dataset/scenario/recovery evidence](evidence/group-6-dataset.md) is recorded; client and final acceptance remain pending. This register does not finalize the two-section note.
+Status: actual candidate-adopted assessment policies are recorded with immutable source/adoption records. Foundation, clinical, ingestion, allGETs/localworkflow, actual dataset/recovery, client automation, two-section note/static review, full regression, measured performance and scoped restore are documented. Manualclient86is partial/deferred;81/92areunperformed. Clean-start and final history/package/delivery acceptance remain separate current gates.
 
 ## Record rules
 

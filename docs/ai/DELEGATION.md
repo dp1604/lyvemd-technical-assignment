@@ -1,6 +1,6 @@
 # R1-R6 delegation and retained decisions
 
-Status: the broad work split is confirmed by the candidate's actual earlier directions; these rows make its application to R1-R6 explicit. Implementation and verification below are future work, not completion claims.
+Status: the original candidate-confirmed R1–R6 split remains unchanged: all implementation was delegated to Codex, with actual decisions/guided review retained by the candidate. Prospective implementation/verification described at the original checkpoint is now documented in the working log/evidence. Human verification is credited only to actual partial reports; outstanding checks remain explicit. Per-row reasons are Codex rationale, not invented candidate quotations.
 
 The candidate selected: "Codex writes the code; you review decisions and verify the result" (source message 01a1785c-a50b-7093-91e0-3d301a5ccd16). The candidate then requested assistance at every step (source message 01a17862-b802-7551-be14-462edf849a9f). Thus all six implementation requirements are delegated to Codex; none is reserved for exclusively human implementation.
 
