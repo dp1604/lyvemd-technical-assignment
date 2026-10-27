@@ -424,6 +424,20 @@
         "msg_0f4deff779876861016ae033dcea608191b5c490a147563060"
       ],
       "requestRecord": "Actual source outputs recovered; scratch-only workers, root integration/testing. Initial15-test result14pass+1observationfailure retained; strengthened18-test suite passed. Secured detail dependency remains before Group4 closure."
+    },
+    {
+      "id": "G4-003",
+      "topic": "Secured detail dependency, final representation guards and actual154-case verification",
+      "requestMessages": [
+        "01a17bc7-5815-77d0-b6b3-a7b10a79634d"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_0fadcf161a6692c9016ae04129a8048191a91c8d8102cccd5b",
+        "msg_0f4deff779876861016ae041227a7c819195edaa5e339a1bbd",
+        "msg_0f4deff779876861016ae03fa6fbe481919e6168267c5bb105"
+      ],
+      "requestRecord": "Actual worker outputs retained via locators; final root-executed checks include later birthday/range/BP/null assertions and raw R4 representation guards. Task49 dependency brought forward explicitly to complete46. Human verification not inferred."
     }
   ],
   "limits": [

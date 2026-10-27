@@ -1,0 +1,18 @@
+# Group4 AI audit reconciliation
+
+This is a root-authored summary of actual AI-worker reports, not a verbatim transcript or human-origin review. Full source messages and scratch reports remain local. Runtime evidence was executed by root; the workers inspected source and proposed tests only. AttachmentA was not built, run or changed.
+
+## Actual contributions and resolution
+
+| AI lane / source locator | Finding/contribution | Retained change or limit |
+|---|---|---|
+| FHIR worker `01a17bc7-a332-77a1-91d5-dd1715aae911`; initial/profile output `msg_0fadcf161a6692c9016ae03c461a8081919f21bad4c068245c` | R4 extension identifiers, strict supported semantics and local definitions; broad runtime catches could cache infrastructure failures as400 | Candidate adopted HTTPS correction D-11; both catches narrowed; unexpected-validator503/no-receipt/same-key recovery test |
+| Same worker; offline output `msg_0fadcf161a6692c9016ae039019b9081918a6cd11cb9a560f6` | Pinned HAPI8.12.1/core6.9.12 full StructureDefinition self-validation entered a package-download branch | Managed HTTP policy PROHIBITED; bundled support/local snapshots; strict artifact parsing/metadata plus valid/invalid extension instances; fresh workspace home had no package cache. This is not full SD/implementation-guide certification or OS egress proof |
+| Same worker; final source review `msg_0fadcf161a6692c9016ae04129a8048191a91c8d8102cccd5b` | Confirmed validator/planner exception fixes, empty Bundle-entry array rejection, local validation gate and constant warning | No remaining FHIR-side source blocker found. Later list/trend/log/release/performance/timing work remains open |
+| Transaction worker `01a17bc7-cbd1-7b11-8069-bffda6f28508`; test plan `msg_0f4deff779876861016ae033dcea608191b5c490a147563060` | Waiting on an advisory lock does not refresh a Repeatable Read snapshot; avoid two-connection pool deadlock; immutable receipts and unique correction-successor guard | One connection per action; bounded whole-action new-transaction retries; forced overlap checks with two waiters observed in pg_locks; no clinical UPDATE/DELETE privilege added |
+| Same worker; actual ingestion review `msg_0f4deff779876861016ae03c17c4408191b53006fdb51d295d` | Direct terminal DB503 bypassed generic handler's operational signal | Constant-only ATLAS_DATABASE_ACTION_FAILED warning added, no exception/SQL/IDs/body attached; audit-fault recovery test |
+| Same worker; read design `msg_0f4deff779876861016ae03fa6fbe481919e6168267c5bb105` and final source review `msg_0f4deff779876861016ae041227a7c819195edaa5e339a1bbd` | Filter before ancestry/DTO; conceal hidden successor/ancestor metadata; future/missing DOB and18+proxy deny; source-critical inconsistent review fails closed; nullable-safe DTO; whole-view scaling cost | Shared SQL-filtered view, complete visible chains, visible-only successor map, exact12/18 birthday assertions, fixed assessment test clock, read-audit fault check and disclosed per-patient memory/CPU cost. Final static review found no blocker. Worker had not executed the later added birthday assertions |
+
+Root additionally tightened the raw supported profile against R4 JSON empty objects/arrays/strings and unsupported null properties. Primitive-extension null-alignment forms are outside the adopted bounded profile, not silently reinterpreted. Regression tests exercise these forms. [R4 JSON](https://hl7.org/fhir/R4/json.html) is the primary representation source.
+
+Final source review is bounded evidence, not a guarantee of no defect or completed Group5/final acceptance. The actual counts/results, corrections made after failed probes and outstanding obligations are in [Group4 evidence](../../evidence/group-4-ingestion.md).

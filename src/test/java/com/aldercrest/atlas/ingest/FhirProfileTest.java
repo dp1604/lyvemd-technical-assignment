@@ -49,7 +49,9 @@ class FhirProfileTest {
         assertThat(validation.valid(template.formatted("{\"url\":\""+FhirDefinitions.STANDARDIZED+"\",\"valueBoolean\":true}"))).isTrue();
         assertThat(validation.valid(template.formatted("{\"url\":\""+FhirDefinitions.STANDARDIZED+"\",\"valueString\":\"true\"}"))).isFalse();
         assertThat(validation.valid(template.formatted("{\"url\":\""+FhirDefinitions.CORRECTION+"\",\"valueReference\":{\"reference\":\"Observation/o1\"}}"))).isTrue();
+        assertThat(validation.valid(template.formatted("{\"url\":\""+FhirDefinitions.CORRECTION+"\",\"valueBoolean\":true}"))).isFalse();
         assertThat(validation.valid(template.formatted("{\"url\":\"https://example.org/unknown-extension\",\"valueString\":\"never-fetch\"}"))).isFalse();
+        assertThat(validation.valid("{\"resourceType\":\"Patient\",\"extension\":[{\"url\":\""+FhirDefinitions.SEX_CONTEXT+"\",\"extension\":[{\"url\":\"code\",\"valueCode\":\"male\"}]}]}")).isFalse();
     }
 
     @Test void strictJsonRejectsDuplicatePropertiesTrailingDocumentsAndRepresentationAbuse() {
@@ -64,6 +66,10 @@ class FhirProfileTest {
                 "{\"resourceType\":\"Patient\",\"modifierExtension\":[]}",
                 "{\"resourceType\":\"Patient\",\"_birthDate\":{\"extension\":[]}}",
                 "{\"resourceType\":\"Patient\",\"meta\":{\"security\":[]}}",
+                "{\"resourceType\":\"Patient\",\"name\":[]}",
+                "{\"resourceType\":\"Patient\",\"name\":[{}]}",
+                "{\"resourceType\":\"Patient\",\"gender\":null}",
+                "{\"resourceType\":\"Patient\",\"birthDate\":\"\"}",
                 "{\"resourceType\":\"Patient\",\"active\":false}",
                 "{\"resourceType\":\"Patient\",\"identifier\":[{\"type\":{\"extension\":[]}}]}"}) {
             JsonNode parsed=JSON.readTree(resource);

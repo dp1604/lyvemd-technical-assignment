@@ -67,6 +67,9 @@ public final class RawProfile {
         }
     }
     private void forbiddenRecursively(JsonNode node,int depth,boolean inExtension) {
+        // R4 JSON omits empty/null elements. Primitive-extension null alignment is outside this profile.
+        if(node.isNull() || ((node.isObject() || node.isArray()) && node.isEmpty())
+                || (node.isTextual() && node.textValue().isEmpty())) {fail();}
         if(node.isObject()) {
             Iterator<Map.Entry<String,JsonNode>> fields=node.fields();
             while(fields.hasNext()) {

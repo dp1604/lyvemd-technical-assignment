@@ -26,7 +26,13 @@ import static org.assertj.core.api.Assertions.*;
 
 /** Real loopback HTTP + PostgreSQL16; only designated synthetic atlas_test is permitted. */
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
+@org.springframework.context.annotation.Import(IngestionIT.FixedClock.class)
 class IngestionIT {
+    @org.springframework.boot.test.context.TestConfiguration
+    static class FixedClock {
+        @org.springframework.context.annotation.Bean @org.springframework.context.annotation.Primary
+        java.time.Clock assessmentClock() {return java.time.Clock.fixed(Instant.parse("2026-10-27T00:00:00Z"),java.time.ZoneOffset.UTC);}
+    }
     private static final ObjectMapper JSON=IngestionJson.mapper();
     @DynamicPropertySource static void database(DynamicPropertyRegistry registry) {
         String url=System.getenv("ATLAS_DB_URL");
@@ -37,13 +43,14 @@ class IngestionIT {
     @org.springframework.test.context.bean.override.mockito.MockitoSpyBean FhirValidation validator;
     @LocalServerPort int port;
     private JdbcTemplate owner;
-    private String clinician,otherClinician,patient,encounter;
+    private String clinician,otherClinician,patient,encounter,proxy,staff;
 
     @BeforeEach void fixture() {
         owner=new JdbcTemplate(new DriverManagerDataSource(System.getenv("ATLAS_DB_URL")+"&currentSchema=atlas",
                 System.getenv("ATLAS_MIGRATION_USER"),System.getenv("ATLAS_MIGRATION_PASSWORD")));
-        clinician=id();otherClinician=id();patient=id();encounter=id();
+        clinician=id();otherClinician=id();patient=id();encounter=id();proxy=id();staff=id();
         owner.update("INSERT INTO actor(id,role) VALUES (?,'CLINICIAN'),(?,'CLINICIAN')",clinician,otherClinician);
+        owner.update("INSERT INTO actor(id,role) VALUES (?,'PATIENT'),(?,'PROXY'),(?,'STAFF')",patient,proxy,staff);
         owner.update("INSERT INTO patient(id,sex,birth_date) VALUES (?,'male','2000-01-01')",patient);
         owner.update("INSERT INTO patient_sex_context(patient_id,valid_from,sex) VALUES (?,'2000-01-01','male')",patient);
         owner.update("INSERT INTO encounter(id,patient_id,class,practitioner_id,fhir_status) VALUES (?,?,'AMB',?,'finished')",encounter,patient,clinician);
@@ -177,6 +184,16 @@ class IngestionIT {
         assertThat(jdbc.queryForObject("SELECT value_num FROM observation WHERE id=?",java.math.BigDecimal.class,originalId)).isEqualByComparingTo("1");
         assertThat(jdbc.queryForObject("SELECT correction_of FROM observation WHERE id=?",String.class,amendedId)).isEqualTo(originalId);
         assertThat(jdbc.queryForObject("SELECT released_at IS NULL FROM observation_review WHERE observation_id=?",Boolean.class,amendedId)).isTrue();
+        var originalDetail=get(originalId,clinician,"CLINICIAN");var amendedDetail=get(amendedId,clinician,"CLINICIAN");
+        assertThat(originalDetail.statusCode()).isEqualTo(200);assertThat(amendedDetail.statusCode()).isEqualTo(200);
+        assertThat(JSON.readTree(originalDetail.body()).path("value").decimalValue()).isEqualByComparingTo("1");
+        assertThat(JSON.readTree(originalDetail.body()).path("unit").asText()).isEqualTo("mg/dL");
+        assertThat(JSON.readTree(originalDetail.body()).at("/range/low").decimalValue()).isEqualByComparingTo("0.7");
+        assertThat(JSON.readTree(originalDetail.body()).at("/range/high").decimalValue()).isEqualByComparingTo("1.3");
+        assertThat(JSON.readTree(originalDetail.body()).path("flag").asText()).isEqualTo("NORMAL");
+        assertThat(JSON.readTree(amendedDetail.body()).path("correctionOf").asText()).isEqualTo(originalId);
+        assertThat(JSON.readTree(amendedDetail.body()).path("value").decimalValue()).isEqualByComparingTo("2");
+        assertThat(JSON.readTree(amendedDetail.body()).path("flag").asText()).isEqualTo("HIGH");
         assertThat(post(bundle(entry(corrected,urn())),key()).body()).contains("CORRECTION_NOT_HEAD");
         for(String change:List.of("time","analyte","encounter")) {
             ObjectNode wrong=corrected.deepCopy();correction(wrong,"Observation/"+amendedId);
@@ -252,6 +269,18 @@ class IngestionIT {
         assertThat(jdbc.queryForObject("SELECT source_critical FROM observation WHERE id=?",Boolean.class,observation)).isTrue();
         assertThat(jdbc.queryForObject("SELECT criticality='CRITICAL' AND released_at IS NULL AND reviewed_at IS NULL FROM observation_review WHERE observation_id=?",Boolean.class,observation)).isTrue();
         assertThat(jdbc.queryForObject("SELECT source_interpretation::text FROM observation WHERE id=?",String.class,observation)).contains("HH");
+        JsonNode detail=JSON.readTree(get(observation,clinician,"CLINICIAN").body());
+        assertThat(detail.path("flag").asText()).isEqualTo("NO_APPLICABLE_FLAG");
+        assertThat(detail.at("/components/0/code").asText()).isEqualTo("8480-6");
+        assertThat(detail.at("/components/0/flag").asText()).isEqualTo("HIGH");
+        assertThat(detail.at("/components/0/range/low").decimalValue()).isEqualByComparingTo("90");
+        assertThat(detail.at("/components/1/range/high").decimalValue()).isEqualByComparingTo("80");
+        ObjectNode unavailable=observation("Patient/"+patient,"8302-2","cm",0);unavailable.remove("valueQuantity");
+        unavailable.set("dataAbsentReason",concept("http://terminology.hl7.org/CodeSystem/data-absent-reason","unknown"));
+        String absentId=created(JSON.readTree(post(bundle(entry(unavailable,urn())),key()).body()),0);
+        JsonNode absent=JSON.readTree(get(absentId,clinician,"CLINICIAN").body());
+        assertThat(absent.path("value").isNull()).isTrue();assertThat(absent.path("range").isNull()).isTrue();
+        assertThat(absent.path("flag").asText()).isEqualTo("NO_APPLICABLE_FLAG");
     }
 
     @Test void strictTransportMalformedJsonHeadersAndEmptyTransactionsHaveSafeOutcomes() throws Exception {
@@ -309,7 +338,92 @@ class IngestionIT {
         var response=post(bundle(tooMany),key());assertThat(response.statusCode()).isEqualTo(400);assertThat(response.body()).contains("ENTRY_COUNT_BOUND");
     }
 
+    @Test void secureDetailChecksAllRolesReleaseProxyExpiryAndIdenticalMissingOutcome() throws Exception {
+        owner.update("UPDATE patient SET birth_date='2010-01-01' WHERE id=?",patient);
+        owner.update("INSERT INTO proxy_link(patient_id,proxy_id) VALUES (?,?)",patient,proxy);
+        String ordinary=created(JSON.readTree(post(bundle(entry(observation("Patient/"+patient,"29463-7","kg",60),urn())),key()).body()),0);
+        var patientHeld=get(ordinary,patient,"PATIENT");assertThat(patientHeld.statusCode()).isEqualTo(404);
+        assertThat(patientHeld.body()).isEqualTo(get(id(),patient,"PATIENT").body());
+        assertThat(get(ordinary,otherClinician,"CLINICIAN").statusCode()).isEqualTo(404);
+        assertThat(get(ordinary,staff,"STAFF").statusCode()).isEqualTo(404);
+        releaseFixture(ordinary);
+        assertThat(get(ordinary,patient,"PATIENT").statusCode()).isEqualTo(200);assertThat(get(ordinary,proxy,"PROXY").statusCode()).isEqualTo(200);
+        String e=urn();ObjectNode protectedObservation=observation("Patient/"+patient,"29463-7","kg",61);protectedObservation.set("encounter",ref(e));
+        String protectedId=created(JSON.readTree(post(bundle(entry(protectedObservation,urn()),entry(encounter("Patient/"+patient,"ABSL",clinician),e)),key()).body()),0);
+        releaseFixture(protectedId);
+        var hidden=get(protectedId,proxy,"PROXY");var missing=get(id(),proxy,"PROXY");
+        assertThat(hidden.statusCode()).isEqualTo(404);assertThat(hidden.body()).isEqualTo(missing.body());
+        assertThat(get(protectedId,patient,"PATIENT").statusCode()).isEqualTo(200);
+        owner.update("UPDATE patient SET birth_date='2016-01-01' WHERE id=?",patient);
+        assertThat(get(protectedId,proxy,"PROXY").statusCode()).isEqualTo(200);
+        owner.update("UPDATE patient SET birth_date='2014-10-28' WHERE id=?",patient);
+        assertThat(get(protectedId,proxy,"PROXY").statusCode()).isEqualTo(200); // Day before 12.
+        owner.update("UPDATE patient SET birth_date='2014-10-27' WHERE id=?",patient);
+        assertThat(get(protectedId,proxy,"PROXY").statusCode()).isEqualTo(404); // Exact 12th birthday.
+        owner.update("UPDATE patient SET birth_date='2008-10-28' WHERE id=?",patient);
+        assertThat(get(ordinary,proxy,"PROXY").statusCode()).isEqualTo(200); // Day before 18.
+        owner.update("UPDATE patient SET birth_date='2008-10-27' WHERE id=?",patient);
+        assertThat(get(ordinary,proxy,"PROXY").statusCode()).isEqualTo(404); // Exact 18th birthday.
+        owner.update("UPDATE patient SET birth_date='2010-01-01' WHERE id=?",patient);
+        owner.update("UPDATE proxy_link SET active=false,revoked_at=clock_timestamp() WHERE patient_id=? AND proxy_id=?",patient,proxy);
+        assertThat(get(ordinary,proxy,"PROXY").statusCode()).isEqualTo(404);
+        owner.update("UPDATE proxy_link SET active=true,revoked_at=NULL WHERE patient_id=? AND proxy_id=?",patient,proxy);
+        owner.update("UPDATE patient SET birth_date='2000-01-01' WHERE id=?",patient);
+        assertThat(get(ordinary,proxy,"PROXY").statusCode()).isEqualTo(404);
+        owner.update("UPDATE patient SET birth_date=NULL WHERE id=?",patient);
+        assertThat(get(ordinary,proxy,"PROXY").statusCode()).isEqualTo(404);
+        owner.update("UPDATE patient SET birth_date='2027-01-01' WHERE id=?",patient);
+        assertThat(get(ordinary,proxy,"PROXY").statusCode()).isEqualTo(404);
+    }
+
+    @Test void hiddenSuccessorMetadataAndConcealedAncestorNeverLeakThroughDetail() throws Exception {
+        ObjectNode original=observation("Patient/"+patient,"2160-0","mg/dL",1);
+        String originalId=created(JSON.readTree(post(bundle(entry(original,urn())),key()).body()),0);releaseFixture(originalId);
+        String before=get(originalId,patient,"PATIENT").body();
+        ObjectNode amended=original.deepCopy();amended.put("status","amended");correction(amended,"Observation/"+originalId);
+        String amendedId=created(JSON.readTree(post(bundle(entry(amended,urn())),key()).body()),0);
+        assertThat(get(originalId,patient,"PATIENT").body()).isEqualTo(before);
+        assertThat(get(amendedId,patient,"PATIENT").body()).isEqualTo(get(id(),patient,"PATIENT").body());
+        releaseFixture(amendedId);owner.update("UPDATE observation_review SET released_at=NULL,released_by=NULL WHERE observation_id=?",originalId);
+        assertThat(get(amendedId,patient,"PATIENT").statusCode()).isEqualTo(404);
+        assertThat(get(originalId,clinician,"CLINICIAN").statusCode()).isEqualTo(200);assertThat(get(amendedId,clinician,"CLINICIAN").statusCode()).isEqualTo(200);
+    }
+
+    @Test void clinicalDetailAuditFailureWithholdsContentAndKeepsExpectedDenials() throws Exception {
+        String observation=created(JSON.readTree(post(bundle(entry(observation("Patient/"+patient,"2160-0","mg/dL",1),urn())),key()).body()),0);
+        owner.execute("CREATE FUNCTION atlas.test_g4_detail_audit_failure() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN IF NEW.actor_id=TG_ARGV[0] AND NEW.action='RESULT_DETAIL' THEN RAISE EXCEPTION 'private synthetic read audit failure' USING ERRCODE='23514'; END IF; RETURN NEW; END $$");
+        owner.execute("CREATE TRIGGER test_g4_detail_audit_failure BEFORE INSERT ON access_log FOR EACH ROW EXECUTE FUNCTION atlas.test_g4_detail_audit_failure('"+clinician+"')");
+        try {
+            var failed=get(observation,clinician,"CLINICIAN");assertThat(failed.statusCode()).isEqualTo(503);
+            assertThat(failed.body()).doesNotContain(observation,"correctionOf","value","synthetic","Exception");
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM access_log WHERE actor_id=? AND action='RESULT_DETAIL'",Integer.class,clinician)).isZero();
+        } finally {owner.execute("DROP TRIGGER test_g4_detail_audit_failure ON access_log");owner.execute("DROP FUNCTION atlas.test_g4_detail_audit_failure()");}
+        assertThat(get(observation,clinician,"CLINICIAN").statusCode()).isEqualTo(200);
+        assertThat(get(observation,otherClinician,"CLINICIAN").statusCode()).isEqualTo(404);
+        assertThat(jdbc.queryForObject("SELECT count(*) FROM access_log WHERE actor_id=? AND patient_id=? AND action='RESULT_DETAIL' AND outcome='DENIED' AND actor_roster_verified",Integer.class,otherClinician,patient)).isEqualTo(1);
+    }
+
+    @Test void sourceCriticalCannotEscapeViaInconsistentNoncriticalReleaseState() throws Exception {
+        ObjectNode source=observation("Patient/"+patient,"2160-0","mg/dL",8);
+        source.set("interpretation",JSON.valueToTree(List.of(concept("http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation","HH"))));
+        String observation=created(JSON.readTree(post(bundle(entry(source,urn())),key()).body()),0);
+        releaseFixture(observation); // Deliberately inconsistent fixture: runtime workflow must not permit this.
+        assertThat(get(observation,patient,"PATIENT").statusCode()).isEqualTo(404);
+        var clinicianView=JSON.readTree(get(observation,clinician,"CLINICIAN").body());
+        assertThat(clinicianView.path("releaseState").asText()).isEqualTo("HELD");assertThat(clinicianView.path("sourceCritical").asBoolean()).isTrue();
+    }
+
     private HttpResponse<String> post(String body,String key) throws Exception {return send(body.getBytes(StandardCharsets.UTF_8),key,clinician,"CLINICIAN","application/fhir+json");}
+    private HttpResponse<String> get(String observation,String actor,String role) throws Exception {
+        try(HttpClient client=HttpClient.newHttpClient()) {
+            return client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/patients/"+patient+"/results/"+observation)).timeout(Duration.ofSeconds(15))
+                    .header("X-Test-Actor-Id",actor).header("X-Test-Actor-Role",role).GET().build(),HttpResponse.BodyHandlers.ofString());
+        }
+    }
+    private void releaseFixture(String observation) {
+        // Test state only, not evidence that the pending clinician workflow/generator exists.
+        owner.update("UPDATE observation_review SET criticality='NONCRITICAL',reviewed_by=?,reviewed_at=clock_timestamp(),released_by=?,released_at=clock_timestamp() WHERE observation_id=?",clinician,clinician,observation);
+    }
     private HttpResponse<String> send(byte[] body,String key,String actor,String role,String type) throws Exception {
         try(HttpClient client=HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build()) {
             return client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/fhir")).timeout(Duration.ofSeconds(25))
