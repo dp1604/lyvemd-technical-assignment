@@ -600,6 +600,22 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "Approvedparallel9lane; earlierAIcandidatesandcontinuingworkflow/transactionAIreviewsproduced19B/3P/2V. Frozenreview/rootfullread/integrationonly;noAttachmentAexecution. Sourceauditcounts/printedlocationsandprimarycitationsretained. Candidate81unperformed; nohumanorigin/approvalinferred."
+    },
+    {
+      "id": "G12-001",
+      "topic": "AI restore harness, root-targeted corrections and actual full executed restore",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "ApprovedTask87supportingdrill. BoundedtransactionAIreviewer/root/group4_transaction_reviewsuppliedscratchsource; rootreviewed/integrated/diagnosedtwofailedharnessattemptsandranfullPASS13:07:00UTC. Actualmetadata/identifierfoldingcorrectionsretained; sourceunchanged/10tablesequal/4restoredHTTPaudits. No newexactcandidateprompt orproductionapprovalinvented."
+    },
+    {
+      "id": "G11-002",
+      "topic": "Actual551-request measurement, source-matched planned queries and curated evidence",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "ContinuingreadAIreviewer/root/group5_read_auditdraftedmeasurement/querytoolsandfrozenfinalcuration,independentlyreadactualartifacts. Rootselected/declaredtarget,addedp99/CPUmodel,correctedactualatlas-schemaquery,reviewed/executedallworkloads. Fullrawsamples/planconditionsremainignored.551HTTP200/exact551audits; fivep95targetsPASSwithdisclosedmaximaabove500. Rootintegratedcurateddocs/taskclosure; nohumanorproductionclaim."
     }
   ],
   "limits": [

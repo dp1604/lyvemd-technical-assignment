@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeMainGroup": 11,
+  "activeMainGroup": 12,
   "completedGroups": [
     1,
     2,
@@ -9,7 +9,8 @@
     5,
     6,
     8,
-    10
+    10,
+    11
   ],
   "completedChecklistTasks": [
     1,
@@ -86,6 +87,8 @@
     72,
     73,
     74,
+    75,
+    76,
     77,
     78,
     79,
@@ -93,7 +96,8 @@
     82,
     83,
     84,
-    85
+    85,
+    87
   ],
   "mainSequence": [
     1,
@@ -114,8 +118,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "Group11actualperformanceactive; declared500msp95targetbeforemeasurement. Group8noteTasks18-32complete; staticreview77-80complete,81actualwalkthroughopen. Manualclient86expresslydeferred/incomplete. Finish11then12restore/twocommandfreshcheckout,13reconciliation/history/package,14delivery; do notinferhuman81/86/92orsent96.",
-  "recordedAtUtc": "2026-10-27 12:57:00 UTC",
+  "nextAction": "85taskscomplete including75-76actualperformanceand87actualrestore. Current89freshcheckout/twocommand runsession57824inprogress; no otherDBworkloads, oldsourceclustertemporarilystopped/freshcluster55433. Poll existingrunandrequirecleanup/source-restartPASS. Complete88/89onlyafteractualacceptance, then90/91/93package/reconciliation and94/95deliveryprep. Actualhuman81/86/92remainopen (86expresslydeferred);96candidate-sentonly.",
+  "recordedAtUtc": "2026-10-27 13:16:57 UTC",
   "groups": [
     {
       "group": 1,
@@ -279,7 +283,7 @@
         75,
         76
       ],
-      "status": "in-progress",
+      "status": "complete",
       "completionGate": "Use one controlled database workload at a time; report actual dataset/latencies and distinguish production projections."
     },
     {
@@ -290,7 +294,7 @@
         88,
         89
       ],
-      "status": "pending",
+      "status": "in-progress",
       "completionGate": "Use designated synthetic databases; prove commands work and protect the working dataset. Integrate fixes and rerun affected checks."
     },
     {
@@ -318,5 +322,5 @@
     }
   ],
   "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification. Neweractualuserinstructionatcall_f89b0c538a704048a1d3629be5ff0b17 permitsadvancingotherworkwhilemanual86deferred; this doesnotcompleteGroup7. Followactualstate11next, then12/13/14; retainunperformedhumangatesexplicitly.",
-  "nextMainGroup": 11
+  "nextMainGroup": 12
 }

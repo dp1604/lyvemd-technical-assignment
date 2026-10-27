@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "startedAtUtc": "2026-10-27T13:05:16.8078539Z",
+  "finishedAtUtc": "2026-10-27T13:07:00.2034884Z",
+  "elapsedSeconds": 103.3855237,
+  "source": "Preserved synthetic assessment database",
+  "target": "New isolated restore database",
+  "backup": {
+    "file": "atlas.dump",
+    "format": "PostgreSQL custom",
+    "sha256": "5116baa9095bbab143d529f06dee0c0312e2e2e6dc9c99f11ce7b293e79f17d3",
+    "bytes": 1626278,
+    "startedAtUtc": "2026-10-27T13:05:21.8607596Z",
+    "finishedAtUtc": "2026-10-27T13:05:23.2388176Z"
+  },
+  "restoreSeconds": 5.7861244,
+  "tools": {
+    "pgRestore": "pg_restore (PostgreSQL) 16.15",
+    "pgDump": "pg_dump (PostgreSQL) 16.15"
+  },
+  "tableCounts": [
+    {
+      "table": "access_log",
+      "rows": 54877
+    },
+    {
+      "table": "actor",
+      "rows": 108
+    },
+    {
+      "table": "encounter",
+      "rows": 106
+    },
+    {
+      "table": "flyway_schema_history",
+      "rows": 3
+    },
+    {
+      "table": "ingestion_receipt",
+      "rows": 134
+    },
+    {
+      "table": "observation",
+      "rows": 10000
+    },
+    {
+      "table": "observation_review",
+      "rows": 10000
+    },
+    {
+      "table": "patient",
+      "rows": 100
+    },
+    {
+      "table": "patient_sex_context",
+      "rows": 100
+    },
+    {
+      "table": "proxy_link",
+      "rows": 5
+    }
+  ],
+  "sourceRestoredFinalInventorySha256": "343255c37ee6df5c935115a4ff1f50860e8cb91a303526635af04a31d337328d",
+  "allTablesSchemaGrantsSequencesMatched": true,
+  "sourceStayedUnchanged": true,
+  "restoredHttpChecks": [
+    "Clinician p000 list:5rows, two canonical1mg/dL creatinine and two equal positive eGFR views.",
+    "STAFF clinical list denied404.",
+    "Retained individual proxy list:1visible row.",
+    "Revoked proxy list denied404.",
+    "All four requests persisted exact attributable allowed/denied audits.",
+    "All non-audit table counts/content unchanged after restored HTTP reads."
+  ],
+  "restoredAuditRowsAdded": 4,
+  "applicationJarSha256": "6a4571ed57b1bca44759fad1d96fa4373e29aa035bf77c06bace1cb7ce1d3312",
+  "scriptSha256": "bec7270ec3b3658c2e782f4e7bfd25e9ff75cc24b741254933d7ba14076314ea",
+  "limits": [
+    "Small synthetic logical database restore using existing local roles, not whole-cluster/global-role/key recovery.",
+    "No approved production RPO/RTO; elapsed time is not production recovery proof.",
+    "Row MD5 supports accidental-mutation comparison; backup integrity uses SHA-256.",
+    "Restored HTTP reads add four audits only after exact snapshot comparison."
+  ],
+  "earlierFailedAttempts": [
+    "Locale preflight used non-GUC names; corrected to pg_database catalog fields before any dump/target creation.",
+    "Mixed-case temporary database name conflicted with unquoted SQL identifier folding; corrected to a strictly validated lowercase name. Earlier empty target/backup preserved."
+  ],
+  "rawReportsAndBackup": "Ignored local evidence only; not shipped."
+}

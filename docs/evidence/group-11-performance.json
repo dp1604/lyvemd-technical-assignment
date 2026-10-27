@@ -1,0 +1,132 @@
+{
+  "schema": "atlas-group-11-performance-v1",
+  "status": "PASS",
+  "scope": "Actual warmed serial loopback read probe and separate non-ANALYZE planner observations; no production benchmark claim.",
+  "target": {
+    "metric": "Per-case nearest-rank p95 milliseconds",
+    "atMost": 500,
+    "unsuccessfulResponsesAllowed": 0,
+    "source": "Engineering-selected assessment target, not a brief-supplied target or production SLO",
+    "declaredAtUtc": "2026-10-27T12:52:12.6873129Z",
+    "priorDeclarationCommit": "3449416b974c4cf1999216e741bd3abf19d900fa",
+    "planSha256": "e2632574f1438f0c5b578c7169fb99e3be372ed1d7d3b599fc489a9c97f1dcac",
+    "earlierSmallerViewTimingsKnown": true,
+    "targetMet": true
+  },
+  "recipe": {
+    "version": "atlas-g6-v1",
+    "seed": 20261027,
+    "semanticAsOf": "2026-10-27",
+    "sha256": "f0a5f4cbbfd88d7f54dd27713862beb827e4f531bb8b5e40d74933f522345be6"
+  },
+  "measurement": {
+    "startedAtUtc": "2026-10-27T12:55:39.819Z",
+    "finishedAtUtc": "2026-10-27T12:55:57.466Z",
+    "concurrency": 1,
+    "client": "Reused built-in Node HTTP keep-alive agent with maximum one socket",
+    "warmupsPerCase": 10,
+    "measuredPerCase": 100,
+    "measuredTotal": 500,
+    "warmupTotal": 50,
+    "authorizedBpDiscoveryRequests": 1,
+    "totalRequests": 551,
+    "status200": 551,
+    "basicContractFailures": 0,
+    "retries": 0,
+    "excludedSamples": 0,
+    "interval": "Immediately before HTTP dispatch to final body byte; JSON validation follows the monotonic timer",
+    "p50": "Median, averaging central pair for even sample count",
+    "p95AndP99": "Nearest rank",
+    "requestTimeoutMs": 15000,
+    "wholeRunTimeoutMs": 600000,
+    "maximumResponseBytes": 4194304,
+    "caseOrder": ["mixed_result_list", "blood_pressure_detail", "multi_year_sodium_trend", "derived_egfr_trend", "staff_access_log"]
+  },
+  "environment": {
+    "sourceCommitAtMeasurement": "3449416b974c4cf1999216e741bd3abf19d900fa",
+    "harnessSha256": "030bd23cbec265b56cb6e93d3a9725c4834d40fbbf1d3ccb97edf66dd1e9c22d",
+    "servingJarSha256": "6a4571ed57b1bca44759fad1d96fa4373e29aa035bf77c06bace1cb7ce1d3312",
+    "runtimeStartedAtUtc": "2026-10-27T11:57:54.9977989Z",
+    "java": "21.0.12.1+1",
+    "postgresql": "16.15",
+    "node": "24.22.1",
+    "os": "Windows_NT10.0.19045",
+    "architecture": "x64",
+    "cpuModel": "AMD A9-9425 RADEON R5, 5 COMPUTE CORES 2C+3G",
+    "logicalCpuCount": 2,
+    "totalMemoryBytes": 7935598592,
+    "poolMaximum": 8,
+    "poolMinimum": 1,
+    "isolation": "REPEATABLE_READ",
+    "network": "HTTP loopback without TLS",
+    "otherControlledDatabaseWorkloads": "none",
+    "hostBackgroundLoad": "uncontrolled"
+  },
+  "inventory": {
+    "before": {"patients": 100, "encounters": 106, "sourceObservations": 10000, "reviews": 10000, "receipts": 134, "audits": 54326},
+    "after": {"patients": 100, "encounters": 106, "sourceObservations": 10000, "reviews": 10000, "receipts": 134, "audits": 54877},
+    "sourceStable": true,
+    "auditDelta": 551,
+    "expectedAuditDelta": 551
+  },
+  "cases": [
+    {"case": "mixed_result_list", "logicalPatient": "p010", "route": "GET /patients/{id}/results?offset=0&limit=50", "count": 100, "p50Ms": 34.5055, "p95Ms": 57.7036, "p99Ms": 152.3717, "maxMs": 631.5012, "status200": 100, "targetMet": true},
+    {"case": "blood_pressure_detail", "logicalPatient": "p010", "route": "GET /patients/{id}/results/{observationId}", "count": 100, "p50Ms": 21.97615, "p95Ms": 36.3106, "p99Ms": 62.2656, "maxMs": 122.3204, "status200": 100, "targetMet": true},
+    {"case": "multi_year_sodium_trend", "logicalPatient": "p006", "route": "GET /patients/{id}/trend?code=2951-2", "points": 94, "count": 100, "p50Ms": 19.76055, "p95Ms": 40.6085, "p99Ms": 140.2020, "maxMs": 761.7399, "status200": 100, "targetMet": true},
+    {"case": "derived_egfr_trend", "logicalPatient": "p010", "route": "GET /patients/{id}/trend?code=98979-8", "count": 100, "p50Ms": 18.78495, "p95Ms": 27.0271, "p99Ms": 31.8438, "maxMs": 38.8710, "status200": 100, "targetMet": true},
+    {"case": "staff_access_log", "logicalPatient": "p000", "route": "GET /patients/{id}/access-log?offset=0&limit=50", "declaredRole": "STAFF", "count": 100, "p50Ms": 20.99725, "p95Ms": 48.4941, "p99Ms": 72.5437, "maxMs": 81.9538, "status200": 100, "targetMet": true}
+  ],
+  "queryPlans": {
+    "status": "COMPLETED",
+    "capturedAtUtc": "2026-10-27T13:01:33.0183935Z",
+    "completedAtUtc": "2026-10-27T13:01:36.4454026Z",
+    "mode": "Source-extracted parameterized PREPARE and EXPLAIN FORMAT JSON without ANALYZE; read-only repeatable-read transactions",
+    "executesClinicalRows": false,
+    "planCacheMode": "auto",
+    "planCount": 6,
+    "indexDefinitionCount": 14,
+    "schema": "atlas",
+    "sourceHashes": {
+      "ClinicalViewRepository.java": "563fb181612ec0b7f16e07fbe7c596471937ed392a3b8d269cb01feca4494e97",
+      "AccessLogRepository.java": "a262a5f43483d04dbe7f40d43155b0f63dbed7af6f2d4d20696d0794f43980b8"
+    },
+    "observations": [
+      {"cases": ["p010_clinical_access", "p006_clinical_access"], "nodes": ["Index Scan patient_pkey", "Seq Scan encounter"], "estimatedPatientRows": 1, "estimatedEncounterRows": 52},
+      {"case": "p010_clinical_view", "nodes": ["Sort", "Right Hash Join", "Seq Scan observation_review", "Hash", "Bitmap Heap Scan observation", "Bitmap Index Scan observation_exact_trend_idx"], "estimatedOutputRows": 113, "estimatedReviewRows": 10039},
+      {"case": "p006_clinical_view", "nodes": ["Sort", "Right Hash Join", "Seq Scan observation_review", "Hash", "Bitmap Heap Scan observation", "Bitmap Index Scan observation_exact_trend_idx"], "estimatedOutputRows": 96, "estimatedReviewRows": 10039},
+      {"case": "p000_log_count", "nodes": ["Aggregate", "Index Only Scan access_log_patient_time_idx"], "estimatedScanRows": 51},
+      {"case": "p000_log_page", "nodes": ["Limit", "Sort", "Bitmap Heap Scan access_log", "Bitmap Index Scan access_log_patient_time_idx"], "estimatedScanRows": 51, "estimatedOutputRows": 50}
+    ],
+    "indexes": [
+      {"name": "access_log_patient_time_idx", "definition": "CREATE INDEX access_log_patient_time_idx ON atlas.access_log USING btree (patient_id, at DESC, id DESC)"},
+      {"name": "access_log_pkey", "definition": "CREATE UNIQUE INDEX access_log_pkey ON atlas.access_log USING btree (id)"},
+      {"name": "encounter_entitlement_idx", "definition": "CREATE INDEX encounter_entitlement_idx ON atlas.encounter USING btree (patient_id, practitioner_id)"},
+      {"name": "encounter_id_patient_id_key", "definition": "CREATE UNIQUE INDEX encounter_id_patient_id_key ON atlas.encounter USING btree (id, patient_id)"},
+      {"name": "encounter_pkey", "definition": "CREATE UNIQUE INDEX encounter_pkey ON atlas.encounter USING btree (id)"},
+      {"name": "observation_exact_time_idx", "definition": "CREATE INDEX observation_exact_time_idx ON atlas.observation USING btree (patient_id, effective DESC, effective_submicro_nanos DESC, id)"},
+      {"name": "observation_exact_trend_idx", "definition": "CREATE INDEX observation_exact_trend_idx ON atlas.observation USING btree (patient_id, code, effective, effective_submicro_nanos, id)"},
+      {"name": "observation_id_patient_id_key", "definition": "CREATE UNIQUE INDEX observation_id_patient_id_key ON atlas.observation USING btree (id, patient_id)"},
+      {"name": "observation_one_successor_idx", "definition": "CREATE UNIQUE INDEX observation_one_successor_idx ON atlas.observation USING btree (correction_of) WHERE (correction_of IS NOT NULL)"},
+      {"name": "observation_pkey", "definition": "CREATE UNIQUE INDEX observation_pkey ON atlas.observation USING btree (id)"},
+      {"name": "observation_review_pkey", "definition": "CREATE UNIQUE INDEX observation_review_pkey ON atlas.observation_review USING btree (observation_id)"},
+      {"name": "patient_pkey", "definition": "CREATE UNIQUE INDEX patient_pkey ON atlas.patient USING btree (id)"},
+      {"name": "proxy_actor_idx", "definition": "CREATE INDEX proxy_actor_idx ON atlas.proxy_link USING btree (proxy_id, patient_id) WHERE active"},
+      {"name": "proxy_link_pkey", "definition": "CREATE UNIQUE INDEX proxy_link_pkey ON atlas.proxy_link USING btree (patient_id, proxy_id)"}
+    ],
+    "limits": ["Planner estimates and costs are not executed row counts or SQL latency.", "Fresh prepared auto-mode plans may differ from warmed JDBC custom/generic plans.", "Current list/detail/trend materialize authorized full patient source history before Java derivation/windowing/paging."]
+  },
+  "limitations": [
+    "Representative fixed case order; not a verified worst case or blinded experiment.",
+    "The retained631.5012ms list and761.7399ms sodium maxima exceed500ms; their causes are not established.",
+    "P95 success does not mean every request was under500ms.",
+    "No TLS/remote-network/browser rendering, cold-start, concurrent, sustained-load or production-scale claim.",
+    "No9million/90million-row validation or universal timing-indistinguishability claim.",
+    "Raw samples and bound operational plans remain ignored local artifacts; no operational UUIDs, credentials or absolute workstation paths are published."
+  ],
+  "attribution": {
+    "designAndDrafting": "AI proposed method/harness; root selected the100-sample/10-warmup workload and declared target before measurement",
+    "execution": "Root executed the actual HTTP benchmark, before/after inventory and final query-plan capture",
+    "independentReview": "Continuing AI read reviewer inspected source and actual artifacts without rerunning workloads",
+    "candidateManualRunClaimed": false
+  }
+}
