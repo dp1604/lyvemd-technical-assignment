@@ -2,12 +2,12 @@
 
 This private repository contains the supplied technical assessment. Aldercrest, Careline and Atlas are fictional assessment context.
 
-**Current status:** Group2 service/database foundation is implemented. Clinical APIs, calculations, data generator and browser client remain pending. The two-section note and static PR review have parallel AI drafts awaiting integration and guided review. This is not yet a complete submission or production system.
+**Current status:** Group2 foundation and Group3 clinical calculations/input mapping are implemented and verified. Clinical HTTP APIs, persisted assignment dataset and browser client remain pending. The two-section note and static PR review have parallel AI drafts awaiting integration and guided review. This is not yet a complete submission or production system.
 
 | Required component | Location | Status |
 |---|---|---|
 | Specification and Architecture Note | [SPECIFICATION_AND_ARCHITECTURE.md](SPECIFICATION_AND_ARCHITECTURE.md) | Outline/adopted clarifications; parallel draft |
-| Build, history, generator and instructions | src/, scripts/, this README and authentic Git history | Foundation runnable; clinical implementation/generator pending |
+| Build, history, generator and instructions | src/, scripts/, this README and authentic Git history | Foundation and clinical engine verified; HTTP integration/generator pending |
 | Static Attachment A review | [PR_REVIEW.md](PR_REVIEW.md) | Parallel draft; supplied code never built/run/fixed |
 | AI working log | [AI_WORKING_LOG.md](AI_WORKING_LOG.md), docs/ai/ | Maintained incrementally; final reconciliation pending |
 
@@ -41,9 +41,9 @@ pwsh -NoProfile -File ./scripts/verify.ps1
 
 This runs the normal unit tests and the integration profile. Maven package runs unit tests alone; it does not imply PostgreSQL/endpoint acceptance. Verification does not delete/reset a database. Synthetic test IDs vary to avoid clashes; deterministic assignment data is separate future work. Raw local test reports/logs stay ignored; curated outcomes belong in docs/evidence.
 
-## Dataset and clinical sources — pending implementation
+## Clinical engine and pending dataset
 
-The required one-command deterministic generator/loader, dataset size/reproduction details, clinical equation implementation and measured performance will be added and verified in their groups. No generated assignment dataset exists yet. Adopted eGFR choice98979-8 and equation/unit policies are in [the decision register](docs/DECISIONS.md); final run instructions must cite the actually implemented/verified [2021 adult CKD-EPI equation](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults) and [LOINC](https://loinc.org/98979-8).
+The required one-command deterministic generator/loader, dataset size/reproduction details and measured performance remain pending. No generated assignment dataset exists yet. The implemented [clinical engine](docs/CLINICAL_RULES.md) and [124-case verification](docs/evidence/group-3-clinical.md) use the [2021 adult CKD-EPI equation](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults) and [LOINC98979-8](https://loinc.org/98979-8). SCr umol/L divides by88.4 to canonical mg/dL; eGFR uses sex-specific κ/α,142,0.9938^age and female1.012, then converts the unrounded per-minute result by exactly60. Output display is mL/s/1.73m2, machine UCUM mL/s/{1.73_m2}. No race term/normal range is added. Only age18+ with explicit applicable clinical sex, positive standardized creatinine is computable; missing/inconsistent/unverified inputs return a reason. [NKF published examples](https://www.kidney.org/sites/default/files/example_it_ticket-implement_2021_ckd-epi_equation_to_calculate_egfr_from_creatinine_1.pdf) and a separate24-case oracle verify the calculation. Optional reproduction: node scripts/verify-clinical-oracle.mjs. Inbound BMI/eGFR values are rejected under the [adopted derived-only profile](docs/decisions/group-3-clarifications.md); HTTP/DB integration remains Group4.
 
 ## Scope and safeguards
 

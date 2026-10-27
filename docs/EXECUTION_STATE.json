@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
-  "activeMainGroup": 3,
+  "activeMainGroup": null,
   "completedGroups": [
     1,
-    2
+    2,
+    3
   ],
   "completedChecklistTasks": [
     1,
@@ -24,7 +25,18 @@
     16,
     17,
     33,
-    34
+    34,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62
   ],
   "mainSequence": [
     1,
@@ -45,8 +57,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "Group3 clinical engine in progress. Independent oracle/rules-review lanes running; BMI/eGFR inbound policy and leap-day age convention asked explicitly. Units/ranges work continues independently. Every meaningful change must be committed/pushed; full recovery at group end.",
-  "recordedAtUtc": "2026-10-27 04:47:36 UTC",
+  "nextAction": "On next-group request start Group4 Tasks42–47 FHIR ingestion, using verified clinical mapping/history and adopted D09/D10. Check local resume-state for final publication/recovery. Enforce normalizer/context persistence, exact-body idempotency, localreferences, append-onlycorrections, held state and internal clinicalread auditing. Parallel8/9 drafts remain open.",
+  "recordedAtUtc": "2026-10-27 05:10:42 UTC",
   "groups": [
     {
       "group": 1,
@@ -90,7 +102,7 @@
         61,
         62
       ],
-      "status": "in-progress",
+      "status": "complete",
       "completionGate": "Every clinical row and boundary has evidence; explain the calculations and limits to the candidate."
     },
     {
@@ -249,5 +261,5 @@
     }
   ],
   "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification.",
-  "nextMainGroup": 3
+  "nextMainGroup": 4
 }

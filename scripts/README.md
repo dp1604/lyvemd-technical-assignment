@@ -21,3 +21,7 @@ No command resets/drops/recreates an existing database, rotates its passwords or
 The packaged Java application reads ATLAS_DB_URL, ATLAS_DB_USER and ATLAS_DB_PASSWORD. An administrator must provision schema atlas, an owning migration role and runtime role atlas_runtime with V1's grants; schema public must not be writable by runtime. Run the same JAR once with --migrate and ATLAS_MIGRATION_USER/PASSWORD (and DB URL), then remove those migration secrets and start it normally with runtime credentials. Boot's automatic migration/SQL initialization is disabled, so omitting this step must not silently create a schema. The source migration names atlas_runtime explicitly; a differently named deployment role requires a reviewed new provisioning/migration design, not an undocumented substitution. No production deployment is included.
 
 The required deterministic generator/loader is pending Group6. Restore/clean-run and full command acceptance remain Group12. These commands establishing a runnable foundation do not complete those later tasks.
+
+## Independent clinical oracle (optional)
+
+With Node20+ available, run node scripts/verify-clinical-oracle.mjs from the repository. It compares a separate piecewise equation against the24saved reference values and8published rounded examples without rewriting fixtures. Node is optional; normal Maven tests consume the saved synthetic fixture. Sources, tolerances and physiological-validation limits are in docs/evidence/clinical-oracle.md and docs/CLINICAL_RULES.md.

@@ -1,6 +1,6 @@
 # Grouped execution plan
 
-This grouping baseline assigned the87 items pending after Tasks1–9 exactly once to14 primary groups. Current completion/selection is authoritative in docs/EXECUTION_STATE.json; Groups1–2 are now complete after their recorded gates. This changes execution granularity; original task numbers, requirements and completion gates remain intact.
+This grouping baseline assigned the87 items pending after Tasks1–9 exactly once to14 primary groups. Current completion/selection is authoritative in docs/EXECUTION_STATE.json; Groups1–3 are now complete after their recorded gates. This changes execution granularity; original task numbers, requirements and completion gates remain intact.
 
 Main implementation order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 10 → 11 → 12 → 13 → 14. Start Groups 8 and 9 after Group 1 and run them alongside implementation; finish both before Group 13. Independent API/evidence work can continue if a guided check in Group 7 is awaiting the candidate.
 
