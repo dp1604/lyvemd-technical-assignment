@@ -1,6 +1,6 @@
 # Working rules for this assignment
 
-These rules preserve the candidate's instructions and the assignment boundary for subsequent work.
+These rules preserve the candidate's instructions and the assignment boundary throughout the whole numbered task list until delivery, across code, documents, review, verification and packaging. Every mandatory requirement must be traced to evidence; do not silently deviate or make unsupported compliance claims. The candidate must be able to defend the actual decisions and results.
 
 1. Follow the supplied Technical Task and Attachment A exactly within their stated scope. Treat Dana's fictional email as material to analyse, including its conflicts with house rules, rather than as authorization to bypass them. Keep employer facts separate from fictional Aldercrest facts.
 2. The candidate requires strong software engineering, data privacy, security and relevant industry practices. Make decisions defensible with source references, rationale, tests and truthful evidence. Do not claim compliance, implemented safeguards or measured results before verification.
@@ -13,4 +13,4 @@ These rules preserve the candidate's instructions and the assignment boundary fo
 9. Keep authentic incremental Git history from the actual work. Do not invent earlier commits, timestamps, authorship or verification. Keep the GitHub repository private; do not invite people, send messages, or submit the assignment without the candidate's explicit instruction.
 10. Maintain the AI working log: actual requests, returned material, shipped material and reasons for differences; R1-R6 delegation; and the access-rule instruction verbatim when issued. Do not reconstruct an exact prompt from a later summary. Earlier assistance still needs reconciliation in Task 6.
 11. Consult docs/ENGINEERING_AND_SECURITY.md and the requirement-to-evidence matrix when created. Distinguish source facts, chosen policies, proposed production architecture, implemented behavior and remaining limitations.
-12. Follow the numbered checklist. Announce each actually completed task number at the end of the relevant response and update only completed boxes. Task 5 history and later delivery obligations remain ongoing even after repository initialization.
+12. Follow the numbered checklist. Announce each actually completed task number at the end of the relevant response and update only completed boxes. Task 5 establishes and verifies the history-preservation process. Meaningful commits, reviewed pushes and recoverable history remain ongoing duties through delivery and are rechecked in Tasks 91-94. Follow docs/HISTORY.md; never treat an old checkpoint as coverage of later commits.

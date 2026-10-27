@@ -36,6 +36,7 @@ pgpass.conf
 # Database backups, source PDFs and downloaded distributions.
 *.dump
 *.backup
+*.bundle
 *.sql.gz
 *.zip
 *.7z

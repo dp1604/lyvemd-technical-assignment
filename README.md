@@ -28,3 +28,7 @@ The final instructions will provide one command to build and start the service, 
 Follow [engineering and security rules](docs/ENGINEERING_AND_SECURITY.md) and [AGENTS.md](AGENTS.md). The brief excludes identity provisioning, login screens, notifications, billing/insurance, scheduling, Careline write-back and container/cloud deployment. Its test actor headers do not provide production authentication. Attachment A is reviewed statically and will not be built or run.
 
 Only curated source, documents and sanitized evidence belong in this repository. Local tools, credentials, database files, source attachments, generated output and scratch material are excluded. The four completed submission components and recoverable history must be checked together before delivery.
+
+## Development history
+
+See [history preservation and recovery](docs/HISTORY.md). The checkpoint script preserves committed Git history; build/start and dataset commands remain pending.

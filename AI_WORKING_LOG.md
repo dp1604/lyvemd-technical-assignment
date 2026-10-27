@@ -14,3 +14,12 @@ Status: started for Task 4. Task 6 must still reconcile earlier substantial plan
 ## Required log work still pending
 
 Reconcile earlier substantial AI items from their actual sources; record each subsequent substantial request/output/shipped difference; explicitly document R1-R6 delegation and reasons; preserve the exact access-rule prompt when issued. No access-rule implementation prompt has been invented or reconstructed here.
+
+## T5-001 - History-preservation workflow
+
+- Asked: continue the next task while applying defensible engineering, privacy/security and strict task adherence across the entire task list until delivery. The actual request is retained in [the prompt record](docs/ai/prompts/task-5-user-request.md).
+- AI returned: a documented incremental-history/delivery workflow and a PowerShell checkpoint command using a complete Git bundle, independent mirror recovery, integrity/ref/commit/tree comparisons, source-stability checks and SHA-256 evidence. An independent AI agent reviewed the requirements and actual script read-only; it found no concrete blocker before runtime testing.
+- Shipped: scripts/checkpoint-history.ps1, docs/HISTORY.md, a secondary bundle-ignore rule, updated persistent working instructions and this disclosure. No application feature was added.
+- Differences and reasons: the temporary fixture-creation helper and synthetic test repository stay in ignored local work; they are verification tooling and must not be confused with the assignment's real history. Checkpoint artifacts also stay ignored; a fresh reviewed bundle is included deliberately if final delivery uses an archive.
+- Verified before shipping: the exact script recovered a three-commit fixture including a nonmerged branch and tag, kept an ignored environment file out, and refused dirty work before creating another checkpoint. Actual assignment recovery is recorded after execution. This verifies history handling, not application correctness, database restore or complete security compliance.
+- Continuing obligations: preserve meaningful commits through delivery, maintain provenance and reverify final history/package/access in Tasks 91-94. Task 6 still needs earlier-assistance reconciliation, and R1-R6 delegation/access-rule prompt work remains pending.
