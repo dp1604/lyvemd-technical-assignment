@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeMainGroup": 13,
+  "activeMainGroup": 14,
   "completedGroups": [
     1,
     2,
@@ -12,7 +12,8 @@
     9,
     10,
     11,
-    12
+    12,
+    13
   ],
   "completedChecklistTasks": [
     1,
@@ -129,8 +130,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "94/96tasksrecordedcomplete; client86partial and96not submitted. Candidate review incorporated; current documentation/history/newarchive verification required before replacement release. Latestcandidateworkingcutoff22:30Asia/Colombo; noemployerextensionasserted.",
-  "recordedAtUtc": "2026-10-27T17:02:10.707Z",
+  "nextAction": "94/96tasksrecordedcomplete. Candidate86remains partial;96not submitted. Generate and verify finalv3 afterthisevidencecommit, then candidate manually sends the latest verified archive. Candidatecontribution:docs/CANDIDATE_REVIEW.md; currentchecks:docs/evidence/candidate-update-verification.md. Noactualexternalmessageorclinical/runtimechange.",
+  "recordedAtUtc": "2026-10-27T17:08:56.932Z",
   "groups": [
     {
       "group": 1,
@@ -317,8 +318,8 @@
         92,
         93
       ],
-      "status": "in-progress",
-      "completionGate": "Candidate-reported independent walkthrough92 recorded; new document/history/package revalidation follows the review update."
+      "status": "complete",
+      "completionGate": "Candidate-reported independent walkthrough92 and actual document/disclosure/history/review-package checks recorded; final replacement exact identity is bound by its manifest/external verification."
     },
     {
       "group": 14,
@@ -333,19 +334,15 @@
     }
   ],
   "selectionRule": "Current human review is in docs/CANDIDATE_REVIEW.md. Finish document/history/replacement-package revalidation, then candidate-owned delivery. Client86 remains partial and can proceed only from actual further observations. Do not repeat completed implementation groups or infer human verification.",
-  "nextMainGroup": 13,
-  "revalidationRequired": [
-    90,
-    91,
-    93,
-    94
-  ],
+  "nextMainGroup": 14,
+  "revalidationRequired": [],
   "lastReviewPackageVerification": {
-    "sourceCommit": "21dbfd3d73f5ea61ab7851882eac124a4a274db3",
+    "sourceCommit": "805340b164172d80e446164a20411287c3fcbb3c",
     "status": "PASS",
-    "files": 222,
-    "commits": 41,
-    "finalVersionPolicy": "Historical review package checkpoint; verify the replacement archive after the candidate-contribution update."
+    "files": 226,
+    "commits": 43,
+    "archive": "lyvemd-candidate-review-check-805340b.zip",
+    "finalVersionPolicy": "Historical verified review checkpoint; final v3 is released only after its own exact-version verification."
   },
   "candidateReviewRecord": "docs/CANDIDATE_REVIEW.md",
   "task92CompletionBasis": "Candidate reports independent submission walkthrough Yes/Yes; not a new AI-observed oral assessment."

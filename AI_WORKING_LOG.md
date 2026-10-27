@@ -434,3 +434,7 @@ The candidate's requested natural wording is shipped in both reports with all24B
 - Verification: source report is preserved with its hash and every selection in [structured evidence](docs/evidence/candidate-review-report.json). Current document/unchanged-runtime/link/history/package checks are recorded against their actual checkpoints.
 
 - CR-001 contribution reconciliation: the candidate also requested credit for work performed through Codex. The contribution record now separately lists actual context, work-model/tool/repository choices, engineering workflow requirements, original policy adoptions, concrete browser reports, review direction/feedback and administration. These are not counted as additional independent reviews, new code authorship or new test passes.
+
+## CR-002 — Contribution update verification and replacement-package gate
+
+Root verified unchanged runtime/original prompt/package/AI-output bytes, preserved147responses and139source IDs, checked694local links, and privately committed/pushed the update. Initial raw-file/Git newline comparison and sandbox-child failure were corrected as recorded in [verification evidence](docs/evidence/candidate-update-verification.md). Both bounded privacy scans and actual43commit/226file review-checkpoint archive recovery passed. Finalv3 is generated after this evidence commit and has its own external exact-version verification. No fresh runtime test, clinical approval, new human result or sending is inferred.
