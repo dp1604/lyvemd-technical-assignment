@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeMainGroup": null,
+  "activeMainGroup": 3,
   "completedGroups": [
     1,
     2
@@ -45,8 +45,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "Finish Group2 private publication/history checkpoint; on next-group instruction start Group3 Tasks52–62 clinical engine and independent numeric checks. Parallel8/9 drafts retained in ignored work/parallel; root review/integration and guided checks remain open. Inspect work/resume-state.json after interruption.",
-  "recordedAtUtc": "2026-10-27 04:36:02 UTC",
+  "nextAction": "Group3 clinical engine in progress. Independent oracle/rules-review lanes running; BMI/eGFR inbound policy and leap-day age convention asked explicitly. Units/ranges work continues independently. Every meaningful change must be committed/pushed; full recovery at group end.",
+  "recordedAtUtc": "2026-10-27 04:47:36 UTC",
   "groups": [
     {
       "group": 1,
@@ -90,7 +90,7 @@
         61,
         62
       ],
-      "status": "pending",
+      "status": "in-progress",
       "completionGate": "Every clinical row and boundary has evidence; explain the calculations and limits to the candidate."
     },
     {

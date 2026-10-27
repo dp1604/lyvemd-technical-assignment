@@ -50,3 +50,7 @@ git -C restored-assignment fsck --full
 ```
 
 The checkpoint's mirror restore verifies all included refs; this normal clone is for browsing the delivered main branch. Both rely on Git's documented [bundle](https://git-scm.com/docs/git-bundle) and [clone](https://git-scm.com/docs/git-clone) behavior.
+
+## Continuing candidate instruction — Group3 onward
+
+Every meaningful repository change must receive its own meaningful commit message and be pushed to the private remote. This applies throughout future groups and delivery. Keep focused checks and AI disclosure with each increment; the full bundle/recovery checkpoint remains a coherent-group/final milestone. Do not wait until a large group ends to commit and push already-meaningful changes, and never fabricate history. Source: actual user message 01a17bae-4f42-78b0-a9cc-855a267d3f1a.

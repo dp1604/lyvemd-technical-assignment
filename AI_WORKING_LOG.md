@@ -171,6 +171,11 @@ The [provenance index](docs/ai/provenance-index.json) identifies the actual requ
 - AI returned: draft with19 proposed blockers,3 preferences,2 evidence follow-ups; eight-file/724-printed-line coverage and walkthrough notes; reconciliation against earlier AI candidates and official clinical/API sources.
 - Retained/status: ignored work/parallel/pr-review-draft.md and pr-review-coverage-and-walkthrough.md with local hashes/source locators. Root must review locations/severity/scope, integrate the final report and guide the actual candidate verification. Group9/Tasks77–81 remain open; the19/3 counts are draft counts, not final accepted findings.
 - Differences/limits: author tests/coverage/performance remain unverified claims; review is static, no exploit or patient harm is asserted as executed evidence. This is new AI assistance, not candidate-origin discovery. The worker's separate own-build foundation audit is logged under G2-001, not confused with reviewing AttachmentA.
+## W01 - Every meaningful change committed and pushed
+
+- Asked: actual user message01a17bae-4f42-78b0-a9cc-855a267d3f1a during Group3: "Every meaningful change to the repository should get a meaningful commit with a meaningful commit message and pushed to remote. Remember this for future tasks as well. Do not interrupt the current task. Just update this requirement. And continue execution of current group".
+- AI returned/shipped: persistent AGENTS/history instruction and active Group3 continuation state. Each meaningful implementation/documentation increment will have focused verification, disclosure, a descriptive commit and private push; full recovery remains at group/final milestones.
+- Differences/limits: no task/group completion or policy approval is implied by this workflow update. Group3 clinical work continues; no earlier history was changed or fabricated.
 ## Continuing disclosure and final acceptance
 
 Follow [the logging protocol](docs/ai/LOGGING_PROTOCOL.md) for every further substantial item. Preserve actual requests, returned material, shipped material, reasons for differences and the checks actually performed. Reconcile entry status when implementation or final packaging changes it.
