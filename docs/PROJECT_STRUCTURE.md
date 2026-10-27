@@ -1,6 +1,6 @@
 # Project structure
 
-Status: Groups 1–6 complete: foundation, clinical rules, all five API routes, local workflow and deterministic dataset with actual scenario/recovery checks. UI and final assignment acceptance remain pending. Directory names are delivery choices; the supplied assignment remains authoritative.
+Status: Groups 1–6 complete: foundation, clinical rules, all five API routes, local workflow and deterministic dataset with actual scenario/recovery checks. Client Tasks63–65 are implemented and Codex-checked; actual candidate86 and final assignment acceptance remain pending. Directory names are delivery choices; the supplied assignment remains authoritative.
 
 ```text
 README.md                              Run instructions and submission entry point
