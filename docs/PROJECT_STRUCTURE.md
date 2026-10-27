@@ -1,6 +1,6 @@
 # Project structure
 
-Status: Groups2–4 foundation, clinical rules, ingestion and secured detail implemented; remaining three GET routes, workflow, dataset and UI remain pending. Directory names are our delivery choices; the mandatory contract comes from the supplied assignment.
+Status: Groups1–5 complete: foundation, clinical rules, allfiveAPIroutes and local clinician/proxy workflow implemented and verified. Dataset and UI remain pending. Directory names are our delivery choices; the mandatory contract comes from the supplied assignment.
 
 ```text
 README.md                              Run instructions and submission entry point
@@ -21,7 +21,7 @@ docs/ai/prompts/                       Exact substantial instruction records
 docs/ai/outputs/                       Relevant returned AI material
 ```
 
-Root pom.xml, service/configuration/transaction/error classes, V1/V2 migrations, clinical/ingestion/detail code, tests and local build/start/verification commands now exist. See docs/evidence/group-4-ingestion.md for the154-test checkpoint. Remaining .gitkeep files reserve future feature/fixture/client locations; they are not implementations or tests. See docs/DATABASE.md and docs/evidence/group-2-foundation.md for actual scope and checks.
+Root pom.xml, service/configuration/transaction/error classes, V1–V3 migrations, clinical/ingestion/all-read/workflow code, tests and local build/start/verification commands now exist. See docs/evidence/group-5-reads-and-workflow.md for the204-case full checkpoint, final affected recheck and CLI/timing evidence. Remaining .gitkeep files reserve future feature/fixture/client locations; they are not implementations or tests. See docs/DATABASE.md and docs/evidence/group-2-foundation.md for actual scope and checks.
 
 The candidate approved one Spring Boot service and a plain browser client. Serving the client from the service keeps one application build and a shared origin. A framework or native mobile build is not needed for the minimal client requirement. The note must still address Dana's iOS/Android request explicitly.
 

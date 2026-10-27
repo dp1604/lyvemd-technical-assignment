@@ -2,12 +2,12 @@
 
 This private repository contains the supplied technical assessment. Aldercrest, Careline and Atlas are fictional assessment context.
 
-**Current status:** Groups2–4 passed154 automated cases. All five required API routes are now implemented, with additional focused Group5 checks for authorized lists, source/derived detail, trend, logs and transaction/audit failures. Group5 clinician workflow and complete regression are active; persisted assignment dataset and browser client remain pending. The two-section note and static PR review have parallel AI drafts awaiting integration and guided review. This is not yet a complete submission or production system.
+**Current status:** Groups1–5 are complete. All five required API routes, caller-visible clinical views, attributable clinician release and individual proxy revocation are implemented. The complete204-case regression and final affected21-case notice/read/timing recheck passed; actual non-web CLI batches passed. [Group5 evidence](docs/evidence/group-5-reads-and-workflow.md) records conditions and limits. Persisted assignment dataset and browser client remain pending. The two-section note and static PR review have parallel AI drafts awaiting integration and guided review. This is not yet a complete submission or production system.
 
 | Required component | Location | Status |
 |---|---|---|
 | Specification and Architecture Note | [SPECIFICATION_AND_ARCHITECTURE.md](SPECIFICATION_AND_ARCHITECTURE.md) | Outline/adopted clarifications; parallel draft |
-| Build, history, generator and instructions | src/, scripts/, this README and authentic Git history | Five API routes and clinical engine verified in focused suites; workflow/generator pending |
+| Build, history, generator and instructions | src/, scripts/, this README and authentic Git history | Five API routes, clinical engine and local workflow verified; generator pending |
 | Static Attachment A review | [PR_REVIEW.md](PR_REVIEW.md) | Parallel draft; supplied code never built/run/fixed |
 | AI working log | [AI_WORKING_LOG.md](AI_WORKING_LOG.md), docs/ai/ | Maintained incrementally; final reconciliation pending |
 

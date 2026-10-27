@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
-  "activeMainGroup": 5,
+  "activeMainGroup": null,
   "completedGroups": [
     1,
     2,
     3,
-    4
+    4,
+    5
   ],
   "completedChecklistTasks": [
     1,
@@ -27,13 +28,23 @@
     17,
     33,
     34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
     42,
     43,
     44,
     45,
     46,
     47,
+    48,
     49,
+    50,
+    51,
     52,
     53,
     54,
@@ -65,8 +76,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "Group5 active: query/access boundary, remainingGETs and CLI workflow, focused/complete HTTP-DB privacy/audit/race tests, documentation/checklist/publication/recovery. Task49 alreadycomplete. Candidate adopted C1–C3 unchanged in actual answer01a17c40-e984-73a0-a0d1-3510d6e6cb1f; preserve reviewed proposal and record superseding clarifications. Every meaningful increment commit/private push.",
-  "recordedAtUtc": "2026-10-27 07:59:59 UTC",
+  "nextAction": "On the next-group request select Group6 Tasks66–74: read the exact eight dataset scenarios, implement deterministic generator/loader with actual FHIR replay/invalid submissions and actual workflow calls; assert cases and preserve synthetic atlas data. AllfiveAPIroutes and localworkflow verified; no assignment dataset/client exists yet. Group8/9 drafts ready for later integration/candidate walkthrough. Every meaningful increment commit/private push; never infer human checks or employer facts.",
+  "recordedAtUtc": "2026-10-27 08:12:26 UTC",
   "groups": [
     {
       "group": 1,
@@ -143,7 +154,7 @@
         50,
         51
       ],
-      "status": "in-progress",
+      "status": "complete",
       "completionGate": "All read paths use the controls; no content after audit failure. Use internal checkpoints for access rules, routes and failure tests."
     },
     {
@@ -269,5 +280,5 @@
     }
   ],
   "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification.",
-  "nextMainGroup": 5
+  "nextMainGroup": 6
 }

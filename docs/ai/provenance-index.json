@@ -483,7 +483,8 @@
         "msg_081edc3217a18fcd016ae053cedf288191bca47c33c1e0704d",
         "msg_081edc3217a18fcd016ae0557bd7048191a5f471b63a98a24e",
         "msg_081edc3217a18fcd016ae057ab226c8191bdb635ee831ed9a2",
-        "msg_01b3d737a52d44e6016ae05836efb081919bcfd1ea407f66b8"
+        "msg_01b3d737a52d44e6016ae05836efb081919bcfd1ea407f66b8",
+        "msg_081edc3217a18fcd016ae05db148e0819198b4e3b60497f99c"
       ],
       "requestRecord": "Actual same two AI scratch workers, source/test/renderer/workflow/task audits retained and root-reconciled. Root executed204-case full run and final21-case affected recheck, actual two-process CLI and100-pair timing probe. Root identified/fixed display notice, added batch mode, actual correction/release overlap and updated old lock-stage assertion. No candidate-run verification claimed."
     }

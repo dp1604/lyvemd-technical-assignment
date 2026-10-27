@@ -1,6 +1,6 @@
-# Decision register — Group 1
+# Decision register
 
-Status: Tasks 10-17 decisions are recorded from actual candidate adoptions; document/source checks passed. Clinical implementation and verification remain pending; the Group2 service/schema foundation is separately documented. This register does not finalize the two-section note.
+Status: Tasks 10-17 decisions are recorded from actual candidate adoptions; document/source checks passed. Foundation, clinical, ingestion, allGETs and localworkflow implementation/verification are recorded through Group5; assignment dataset/client and final acceptance remain pending. This register does not finalize the two-section note.
 
 ## Record rules
 
@@ -44,7 +44,7 @@ All rows above are adopted as assessment policies. A was adopted in source messa
 4. The synthetic input contract asserts standardized creatinine; neither an ordinary Quantity nor LOINC alone verifies a real assay. Actual feed format, assay traceability/measuring interval and historical-demographic evidence remain production gates.
 5. Critical-path completion is a recorded demonstration attestation, not proof of real contact or a complete production workflow. No clinical thresholds, legal jurisdiction or vendor facts are invented.
 6. Test actors remain impersonatable. PostgreSQL unavailability prevents writing to that same database; fail closed without claiming impossible outage audit durability. Snapshot authorization cannot retract an already-authorized in-flight response.
-7. Current foundation, clinical, ingestion and detail evidence is recorded through Group4. Local extension definitions and V2 are implemented. Remaining three GET routes, workflow, dataset/client, final specification/review integration and wider acceptance remain their groups. A decided policy alone is not a passed behavior.
+7. Foundation/clinical/ingestion/allGETs/localworkflow evidence is recorded through [Group5](evidence/group-5-reads-and-workflow.md), with local extension definitions and V1–V3 implemented. Dataset/client, final specification/review integration and wider acceptance remain their groups. A decided policy alone is not a passed behavior.
 
 Future unclear facts/policies are added here with source, options, candidate decision, reason, affected matrix IDs, implementation/evidence links and limitations. Preserve adopted versions and explain changes. The production-design duties and scope exclusions remain intact.
 
@@ -58,4 +58,4 @@ D-11 corrects the extension canonical identifiers to HTTPS example URLs with loc
 
 ## Group5 clarifications
 
-D-13–D-15 were explicitly adopted unchanged in actual candidate answer `01a17c40-e984-73a0-a0d1-3510d6e6cb1f`. [Preserved proposal, exact answer, reasons and limits](decisions/group-5-clarifications.md) define the one-way local workflow, patient-self individual proxy revocation, retained raw/derived list and latest-visible-head trend conventions. Adoption is separate from later implementation verification.
+D-13–D-15 were explicitly adopted unchanged in actual candidate answer `01a17c40-e984-73a0-a0d1-3510d6e6cb1f`. [Preserved proposal, exact answer, reasons and limits](decisions/group-5-clarifications.md) define the one-way local workflow, patient-self individual proxy revocation, retained raw/derived list and latest-visible-head trend conventions. Adoption is separate from [actual Group5 implementation verification](evidence/group-5-reads-and-workflow.md); original packages and source decisions remain preserved.

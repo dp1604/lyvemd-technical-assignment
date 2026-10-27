@@ -37,7 +37,7 @@ The Spring mode is NONE; process-owned listening-socket sampling observed no lis
 
 ## Hidden/missing timing investigation
 
-Final probe: known active16-year-old proxy, one ordinary visible result, a released MHEV-protected detail versus an absent same-length UUID, same patient and reused loopback client.10 warmup pairs then100 measured pairs, alternating which target goes first. Every220 request returned the identical404 body and committed a DENIED event. Timing includes request/content/audit/commit/response. Raw paired latency samples (no fixture identities) remain in ignored `work/group5-timing.json`.
+Final probe: known active16-year-old proxy, one ordinary visible result, a released MHEV-protected detail versus an absent same-length UUID, same patient and reused loopback client.10 warmup pairs then100 measured pairs, alternating which target goes first. All220 requests returned the identical404 body and committed a DENIED event. Timing includes request/content/audit/commit/response. Raw paired latency samples (no fixture identities) remain in ignored `work/group5-timing.json`.
 
 | Final100-pair measure | Hidden ms | Missing ms |
 |---|---:|---:|
@@ -51,4 +51,4 @@ System load was not controlled; scheduler/GC/cache/audit-flush causes were not i
 
 ## Reproduction and limits
 
-Run `pwsh -NoProfile -File ./scripts/verify.ps1` from the repository root with documented prerequisites. It preserves data and uses atlas_test only; no AttachmentA code is built/run/fixed. Current complete report includes204 cases. Runtime has no clinical/audit mutation or schema-creation privilege; V3 grants only separate workflow metadata/link-state columns. Test headers/local actor declarations remain impersonatable. Complete DB outage cannot audit into that same failed DB; actions fail closed with categorical operational signals. No candidate-run verification, real patient contact, clinical/legal/security certification or full assignment submission completion is inferred. Dataset/client/specification/static-review finalization and actual candidate walkthroughs remain open.
+Run `pwsh -NoProfile -File ./scripts/verify.ps1` from the repository root with documented prerequisites. It preserves data and uses atlas_test only; no AttachmentA code is built/run/fixed. Current complete report includes204 cases. Runtime has no source Observation/audit UPDATE/DELETE or schema-creation privilege; V3 grants only separate workflow metadata/link-state columns. Test headers/local actor declarations remain impersonatable. Complete DB outage cannot audit into that same failed DB; actions fail closed with categorical operational signals. No candidate-run verification, real patient contact, clinical/legal/security certification or full assignment submission completion is inferred. Dataset/client/specification/static-review finalization and actual candidate walkthroughs remain open.
