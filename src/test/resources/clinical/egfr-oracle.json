@@ -1,0 +1,416 @@
+{
+  "description": "Independent Group 3 clinical oracle. Synthetic calculations and official published rounded examples are explicitly distinguished.",
+  "checkedDateLocal": "2026-10-27",
+  "sources": {
+    "niddk": "https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults",
+    "nkfExamples": "https://www.kidney.org/sites/default/files/example_it_ticket-implement_2021_ckd-epi_equation_to_calculate_egfr_from_creatinine_1.pdf",
+    "loinc": "https://loinc.org/98979-8",
+    "ucum": "https://ucum.org/ucum"
+  },
+  "equation": {
+    "name": "CKD-EPI 2021 creatinine, race-free",
+    "coefficient": 142,
+    "ageFactor": 0.9938,
+    "femaleKappa": 0.7,
+    "maleKappa": 0.9,
+    "femaleLowExponent": -0.241,
+    "maleLowExponent": -0.302,
+    "highExponent": -1.2,
+    "femaleFactor": 1.012,
+    "minimumAgeYears": 18
+  },
+  "conversion": {
+    "creatinineUmolPerMgDl": 88.4,
+    "secondsPerMinute": 60,
+    "canonicalCreatinineUnit": "mg/dL",
+    "derivedUnitCode": "mL/s/{1.73_m2}",
+    "derivedDisplayUnit": "mL/s/1.73m2",
+    "loinc": "98979-8"
+  },
+  "tolerances": {
+    "canonicalCreatinineAbsolute": 1e-12,
+    "egfrPerMinuteAbsolute": 1e-9,
+    "egfrPerSecondAbsolute": 1e-11,
+    "publishedWholeNumber": "Math.round(unroundedPerMinute) must exactly equal NKF published integer; do not compare an unrounded value exactly to the rounded integer."
+  },
+  "valid": [
+    {
+      "id": "nkf-18-male-0.90-mg",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": 0.9,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.9,
+      "publishedWholePerMinute": 127,
+      "expectedPerMinute": 126.96096296130331,
+      "expectedPerSecond": 2.1160160493550553,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-18-male-0.90-umol",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": 79.56,
+      "unitCode": "umol/L",
+      "expectedCreatinineMgDl": 0.9,
+      "publishedWholePerMinute": 127,
+      "expectedPerMinute": 126.96096296130331,
+      "expectedPerSecond": 2.1160160493550553,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-18-male-0.91-mg",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": 0.91,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.91,
+      "publishedWholePerMinute": 125,
+      "expectedPerMinute": 125.28859767063041,
+      "expectedPerSecond": 2.0881432945105067,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-18-male-0.91-umol",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": 80.444,
+      "unitCode": "umol/L",
+      "expectedCreatinineMgDl": 0.91,
+      "publishedWholePerMinute": 125,
+      "expectedPerMinute": 125.28859767063041,
+      "expectedPerSecond": 2.0881432945105067,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-18-female-0.70-mg",
+      "ageYears": 18,
+      "clinicalSex": "female",
+      "creatinine": 0.7,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.7,
+      "publishedWholePerMinute": 128,
+      "expectedPerMinute": 128.48449451683896,
+      "expectedPerSecond": 2.141408241947316,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-18-female-0.70-umol",
+      "ageYears": 18,
+      "clinicalSex": "female",
+      "creatinine": 61.88,
+      "unitCode": "umol/L",
+      "expectedCreatinineMgDl": 0.7,
+      "publishedWholePerMinute": 128,
+      "expectedPerMinute": 128.48449451683896,
+      "expectedPerSecond": 2.141408241947316,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-18-female-0.71-mg",
+      "ageYears": 18,
+      "clinicalSex": "female",
+      "creatinine": 0.71,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.71,
+      "publishedWholePerMinute": 126,
+      "expectedPerMinute": 126.31599570409516,
+      "expectedPerSecond": 2.1052665950682528,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-18-female-0.71-umol",
+      "ageYears": 18,
+      "clinicalSex": "female",
+      "creatinine": 62.764,
+      "unitCode": "umol/L",
+      "expectedCreatinineMgDl": 0.71,
+      "publishedWholePerMinute": 126,
+      "expectedPerMinute": 126.31599570409516,
+      "expectedPerSecond": 2.1052665950682528,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-90-male-0.50-mg",
+      "ageYears": 90,
+      "clinicalSex": "male",
+      "creatinine": 0.5,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.5,
+      "publishedWholePerMinute": 97,
+      "expectedPerMinute": 96.89245452145748,
+      "expectedPerSecond": 1.6148742420242914,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-90-male-0.50-umol",
+      "ageYears": 90,
+      "clinicalSex": "male",
+      "creatinine": 44.2,
+      "unitCode": "umol/L",
+      "expectedCreatinineMgDl": 0.5,
+      "publishedWholePerMinute": 97,
+      "expectedPerMinute": 96.89245452145748,
+      "expectedPerSecond": 1.6148742420242914,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-90-male-1.50-mg",
+      "ageYears": 90,
+      "clinicalSex": "male",
+      "creatinine": 1.5,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 1.5,
+      "publishedWholePerMinute": 44,
+      "expectedPerMinute": 43.9520525875727,
+      "expectedPerSecond": 0.7325342097928783,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-90-male-1.50-umol",
+      "ageYears": 90,
+      "clinicalSex": "male",
+      "creatinine": 132.6,
+      "unitCode": "umol/L",
+      "expectedCreatinineMgDl": 1.5,
+      "publishedWholePerMinute": 44,
+      "expectedPerMinute": 43.95205258757271,
+      "expectedPerSecond": 0.7325342097928785,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-90-female-0.50-mg",
+      "ageYears": 90,
+      "clinicalSex": "female",
+      "creatinine": 0.5,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.5,
+      "publishedWholePerMinute": 89,
+      "expectedPerMinute": 89.04202544017481,
+      "expectedPerSecond": 1.4840337573362468,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-90-female-0.50-umol",
+      "ageYears": 90,
+      "clinicalSex": "female",
+      "creatinine": 44.2,
+      "unitCode": "umol/L",
+      "expectedCreatinineMgDl": 0.5,
+      "publishedWholePerMinute": 89,
+      "expectedPerMinute": 89.04202544017481,
+      "expectedPerSecond": 1.4840337573362468,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-90-female-1.50-mg",
+      "ageYears": 90,
+      "clinicalSex": "female",
+      "creatinine": 1.5,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 1.5,
+      "publishedWholePerMinute": 33,
+      "expectedPerMinute": 32.89927374006926,
+      "expectedPerSecond": 0.5483212290011543,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "nkf-90-female-1.50-umol",
+      "ageYears": 90,
+      "clinicalSex": "female",
+      "creatinine": 132.6,
+      "unitCode": "umol/L",
+      "expectedCreatinineMgDl": 1.5,
+      "publishedWholePerMinute": 33,
+      "expectedPerMinute": 32.89927374006926,
+      "expectedPerSecond": 0.5483212290011543,
+      "provenance": "Published NKF rounded test example; full-precision values independently evaluated in JavaScript."
+    },
+    {
+      "id": "independent-18-female-0.699999",
+      "ageYears": 18,
+      "clinicalSex": "female",
+      "creatinine": 0.699999,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.699999,
+      "expectedPerMinute": 128.48453875225414,
+      "expectedPerSecond": 2.1414089792042357,
+      "provenance": "Additional independent formula calculation; not a published patient or worked example."
+    },
+    {
+      "id": "independent-18-female-0.700001",
+      "ageYears": 18,
+      "clinicalSex": "female",
+      "creatinine": 0.700001,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.700001,
+      "expectedPerMinute": 128.48427425805158,
+      "expectedPerSecond": 2.1414045709675262,
+      "provenance": "Additional independent formula calculation; not a published patient or worked example."
+    },
+    {
+      "id": "independent-18-male-0.899999",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": 0.899999,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.899999,
+      "expectedPerMinute": 126.9610055637906,
+      "expectedPerSecond": 2.11601675939651,
+      "provenance": "Additional independent formula calculation; not a published patient or worked example."
+    },
+    {
+      "id": "independent-18-male-0.900001",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": 0.900001,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 0.900001,
+      "expectedPerMinute": 126.96079368022626,
+      "expectedPerSecond": 2.116013228003771,
+      "provenance": "Additional independent formula calculation; not a published patient or worked example."
+    },
+    {
+      "id": "independent-60-female-1",
+      "ageYears": 60,
+      "clinicalSex": "female",
+      "creatinine": 1,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 1,
+      "expectedPerMinute": 64.4950003539451,
+      "expectedPerSecond": 1.0749166725657517,
+      "provenance": "Additional independent formula calculation; not a published patient or worked example."
+    },
+    {
+      "id": "independent-60-male-1",
+      "ageYears": 60,
+      "clinicalSex": "male",
+      "creatinine": 1,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 1,
+      "expectedPerMinute": 86.16262077966914,
+      "expectedPerSecond": 1.4360436796611524,
+      "provenance": "Additional independent formula calculation; not a published patient or worked example."
+    },
+    {
+      "id": "independent-45-female-1.2",
+      "ageYears": 45,
+      "clinicalSex": "female",
+      "creatinine": 1.2,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 1.2,
+      "expectedPerMinute": 56.88839328971158,
+      "expectedPerSecond": 0.9481398881618597,
+      "provenance": "Additional independent formula calculation; not a published patient or worked example."
+    },
+    {
+      "id": "independent-45-male-1.2",
+      "ageYears": 45,
+      "clinicalSex": "male",
+      "creatinine": 1.2,
+      "unitCode": "mg/dL",
+      "expectedCreatinineMgDl": 1.2,
+      "expectedPerMinute": 76.00051214646228,
+      "expectedPerSecond": 1.2666752024410382,
+      "provenance": "Additional independent formula calculation; not a published patient or worked example."
+    }
+  ],
+  "unavailable": [
+    {
+      "id": "age17",
+      "ageYears": 17,
+      "clinicalSex": "male",
+      "creatinine": 0.9,
+      "unitCode": "mg/dL",
+      "reason": "Adult equation inapplicable under age 18."
+    },
+    {
+      "id": "age-missing",
+      "ageYears": null,
+      "clinicalSex": "male",
+      "creatinine": 0.9,
+      "unitCode": "mg/dL",
+      "reason": "No effective-time completed age."
+    },
+    {
+      "id": "sex-missing",
+      "ageYears": 18,
+      "clinicalSex": null,
+      "creatinine": 0.9,
+      "unitCode": "mg/dL",
+      "reason": "No applicable clinical sex assertion."
+    },
+    {
+      "id": "sex-unknown",
+      "ageYears": 18,
+      "clinicalSex": "unknown",
+      "creatinine": 0.9,
+      "unitCode": "mg/dL",
+      "reason": "Unknown clinical sex; do not guess a branch."
+    },
+    {
+      "id": "standardization-unverified",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": 0.9,
+      "unitCode": "mg/dL",
+      "standardizationVerified": false,
+      "reason": "Assay standardization unverified; Quantity and LOINC alone are insufficient."
+    },
+    {
+      "id": "creatinine-missing",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": null,
+      "unitCode": "mg/dL",
+      "reason": "Missing input; never substitute zero or a normal value."
+    },
+    {
+      "id": "creatinine-zero",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": 0,
+      "unitCode": "mg/dL",
+      "reason": "Nonpositive creatinine is unsuitable for the formula; explicit unavailable result."
+    },
+    {
+      "id": "creatinine-negative",
+      "ageYears": 18,
+      "clinicalSex": "male",
+      "creatinine": -1,
+      "unitCode": "mg/dL",
+      "reason": "Nonpositive creatinine is unsuitable for the formula; explicit unavailable result."
+    }
+  ],
+  "invalidRepresentation": [
+    {
+      "id": "nonfinite-nan",
+      "representation": "NaN",
+      "reason": "Not a valid finite clinical number; reject ingestion."
+    },
+    {
+      "id": "nonfinite-infinity",
+      "representation": "Infinity",
+      "reason": "Not a valid finite clinical number; reject ingestion."
+    },
+    {
+      "id": "micro-display-as-code",
+      "creatinine": 88.4,
+      "unitCode": "µmol/L",
+      "reason": "Display glyph is not the accepted UCUM machine code umol/L; reject unsupported representation."
+    },
+    {
+      "id": "wrong-unit",
+      "creatinine": 1,
+      "unitCode": "mmol/L",
+      "reason": "Not one of the declared accepted creatinine unit representations; reject ingestion."
+    }
+  ],
+  "limitations": [
+    "This independently transcribes the same published equation; it is not an independent physiological or assay validation.",
+    "No clinical assay interval or new clinical cutoffs are invented. Actual assay interval/standardization verification remains an upstream production gate.",
+    "Do not silently import NKF example-ticket reporting cutoffs or whole-number formatting into the assignment per-second contract.",
+    "Input age is completed years at the observation effective UTC date under the adopted policy, not age today.",
+    "Ranges are the task table; these sources do not replace it with different clinical intervals."
+  ]
+}

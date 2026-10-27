@@ -375,6 +375,24 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "Actual request/answers retained; initial request for advice is not treated as adoption. Root code/tests and later AI audit source locators retained incrementally."
+    },
+    {
+      "id": "G3-002",
+      "topic": "Visible-input derivations, dated sex context, independent numeric oracle and actual-code review",
+      "requestMessages": [
+        "01a17bac-419f-7372-a9f3-1de9e21144d9",
+        "01a17bb0-f0e2-7933-b12e-2d966b970ec0",
+        "01a17bb1-9678-73f0-89bd-2fa90c9e39df"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_064739089e7f2393016ae02f0820d08191a7cfc85181eb92c5",
+        "msg_064739089e7f2393016ae02d1146a08191adf38a8245dd594a",
+        "msg_09027fed588bafe1016ae03117474481918b5c9b8f572f6296",
+        "msg_09027fed588bafe1016ae02fa679748191938eb3171f8c2f7e",
+        "msg_09027fed588bafe1016ae02f6149248191bf3cc43c560b482d"
+      ],
+      "requestRecord": "Two actual AI agent lanes: oracle01a17bac-a973-7330-9633-bd4df417ab5d and rules01a17bac-d7a6-7013-9d37-032d7fbeb5fa. Retained audit/findings/followups; runtime checks root executed. Drafted test-design response is represented by retained report; source transcript remains ignored."
     }
   ],
   "limits": [
