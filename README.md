@@ -11,7 +11,7 @@ Status: project structure and development environment prepared. Application impl
 | Specification and Architecture Note, with Dana and engineering sections | [SPECIFICATION_AND_ARCHITECTURE.md](SPECIFICATION_AND_ARCHITECTURE.md) | Outline only |
 | Build, history, generator and run instructions | src/, scripts/, Git history and this README | Structure only |
 | Static review of Attachment A | [PR_REVIEW.md](PR_REVIEW.md) | Pending |
-| AI working log | [AI_WORKING_LOG.md](AI_WORKING_LOG.md), docs/ai/ | Maintained through Task 9; delegation, exact instruction, baseline traceability and scope boundaries recorded; final reconciliation pending |
+| AI working log | [AI_WORKING_LOG.md](AI_WORKING_LOG.md), docs/ai/ | Maintained through Group 1 decisions; adopted policies and grouped execution recorded; application and final reconciliation pending |
 
 ## Approved approach
 
@@ -27,7 +27,7 @@ The final instructions will provide one command to build and start the service, 
 
 Follow [engineering and security rules](docs/ENGINEERING_AND_SECURITY.md), [AGENTS.md](AGENTS.md) and the [requirement-to-evidence matrix](docs/REQUIREMENT_MATRIX.md). The matrix distinguishes source obligations, planned checks, open decisions and actual evidence; its baseline is not an application pass. The brief excludes identity provisioning, login screens, notifications, billing/insurance, scheduling, Careline write-back and container/cloud deployment. The [scope boundaries](docs/SCOPE_BOUNDARIES.md) distinguish these exclusions from our agreed non-additions and preserve required design duties. Its test actor headers do not provide production authentication. Attachment A is reviewed statically and will not be built or run.
 
-Only curated source, documents and sanitized evidence belong in this repository. Local tools, credentials, database files, source attachments, generated output and scratch material are excluded. The four completed submission components and recoverable history must be checked together before delivery.
+See the [decision register](docs/DECISIONS.md), [grouped execution plan](docs/EXECUTION_PLAN.md) and [current group state](docs/EXECUTION_STATE.json). Candidate-adopted policies and source/standards conflicts are explicit; implementation remains pending. Only curated source, documents and sanitized evidence belong in this repository. Local tools, credentials, database files, source attachments, generated output and scratch material are excluded. The four completed submission components and recoverable history must be checked together before delivery.
 
 ## Development history
 

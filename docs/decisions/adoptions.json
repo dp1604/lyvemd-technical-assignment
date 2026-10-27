@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "sourceThreadId": "01a1782c-e9ba-7022-b8ea-958dae51df21",
+  "adoptions": [
+    {
+      "package": "A",
+      "version": "v1",
+      "status": "adopted_unchanged",
+      "authorship": "Codex proposal, adopted by candidate; not an employer-supplied policy",
+      "path": "docs/decisions/package-a-v1.md",
+      "sha256": "e5ed7755453988c662e621b3f50245a9011f3f2088e824546bc231f3af4fa9c6",
+      "sourceMessageId": "01a17b79-8015-7d12-a414-e311a7cb218d",
+      "answer": "Adopt Package A v1 as written (recommended)",
+      "questionItemId": "[\"request_user_input_async\",\"call_aa115f0a616c47c9a5823d9e09e41ed7\",0]",
+      "questionContext": "Full reviewed package presented with summary; public record summarizes question to avoid copying workstation link.",
+      "recordedAtUtc": "2026-10-27 03:58:44 UTC",
+      "limits": "Policy choice only; no implementation, clinical sign-off, employer agreement or test pass inferred."
+    },
+    {
+      "package": "B",
+      "version": "v1",
+      "status": "adopted_unchanged",
+      "authorship": "Codex proposal, adopted by candidate; not an employer-supplied policy",
+      "path": "docs/decisions/package-b-v1.md",
+      "sha256": "b50b12a055140358f474ae18221dccf368166e818089884a23d7a4371a5c0fa9",
+      "sourceMessageId": "01a17b82-32b9-7673-b54d-42acaaab6ef8",
+      "answer": "Adopt Package B v1 as written (recommended)",
+      "questionItemId": "[\"request_user_input_async\",\"call_8cfd712fa03b4bd494e9521edb5b40e0\",0]",
+      "questionContext": "Full reviewed package presented with summary; public record summarizes question to avoid copying workstation link.",
+      "recordedAtUtc": "2026-10-27 03:58:44 UTC",
+      "limits": "Policy choice only; no implementation, clinical sign-off, employer agreement or test pass inferred."
+    }
+  ]
+}

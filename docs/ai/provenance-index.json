@@ -34,6 +34,27 @@
       "independentAgentThread": "01a17b52-417e-7420-a7d6-7293e96a08e6",
       "rawSourceLocation": "Ignored local work/task9-source.json",
       "requestQualification": "Exact request excerpt; automatically supplied browser context excluded from published copy."
+    },
+    "groupedPlanningExtension": {
+      "requestMessages": [
+        "01a17b60-aadc-7c53-a9db-bf20fdd4d00c",
+        "01a17b67-7e5f-7040-a867-7793218f7425"
+      ],
+      "rawSourceLocation": "Ignored local work/group1-audits-and-planning.json",
+      "returnedArtifact": "docs/EXECUTION_PLAN.md"
+    },
+    "group1Extension": {
+      "requestMessage": "01a17b70-86e7-7d01-aeb9-12ef108998f4",
+      "adoptionMessages": [
+        "01a17b79-8015-7d12-a414-e311a7cb218d",
+        "01a17b82-32b9-7673-b54d-42acaaab6ef8"
+      ],
+      "rawSourceLocation": "Ignored local work/group1-source.json and work/group1-audits-and-planning.json",
+      "independentAgentThreads": [
+        "01a17b71-36bb-72d1-aa1f-39182d84fd33",
+        "01a17b71-6f31-71e2-b22b-439393e58bff"
+      ],
+      "recordedAtUtc": "2026-10-27 03:58:44 UTC"
     }
   },
   "items": [
@@ -261,6 +282,40 @@
         "msg_03c14bdbf8cd6795016ae01578599c81918f88f3d993ce4b24"
       ],
       "requestRecord": "Exact request excerpt retained; source-scope and concrete-note independent AI audits; no new policy approval."
+    },
+    {
+      "id": "P06",
+      "topic": "Observed timing and grouped/resumable execution",
+      "requestMessages": [
+        "01a17b60-aadc-7c53-a9db-bf20fdd4d00c",
+        "01a17b67-7e5f-7040-a867-7793218f7425"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_0f19b713a8b0e0ed016ae01ae175848191974b7a1e921b2c32",
+        "msg_029b81fd5afb02cb016ae01919cc8c8191aa9d8ac0b88d76b6"
+      ],
+      "requestRecord": "Exact candidate requests retained; recorded-turn arithmetic/limits and actual grouped plan retained."
+    },
+    {
+      "id": "G1-001",
+      "topic": "Tasks10-17 adopted policies, register and group continuation",
+      "requestMessages": [
+        "01a17b70-86e7-7d01-aeb9-12ef108998f4",
+        "01a17b79-8015-7d12-a414-e311a7cb218d",
+        "01a17b82-32b9-7673-b54d-42acaaab6ef8"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_0f87e7129213181b016ae0224bb1b081919d5ed9588b5c0a86",
+        "msg_0f87e7129213181b016ae020f07ea48191b88666bd83f98d3b",
+        "msg_0f87e7129213181b016ae0207d194c81919dfae355f5a551c5",
+        "msg_0f87e7129213181b016ae01dd0c8ac81919f8dd82baa4b212c",
+        "msg_02db6a6f960881c3016ae022572f948191b0991be15caaabf0",
+        "msg_02db6a6f960881c3016ae0204e46108191b540bd8abd93be77",
+        "msg_02db6a6f960881c3016ae01ddbb3e48191beef8b7462dbac9e"
+      ],
+      "requestRecord": "Actual group request/adoption answers and unchanged reviewed package hashes retained; question context explicitly summarized."
     }
   ],
   "limits": [

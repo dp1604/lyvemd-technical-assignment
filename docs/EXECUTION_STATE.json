@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "activeMainGroup": null,
+  "completedGroups": [
+    1
+  ],
+  "completedChecklistTasks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "mainSequence": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "parallelGroups": [
+    8,
+    9
+  ],
+  "parallelStartAfterGroup": 1,
+  "nextAction": "Complete private publication/history checkpoint for this policy milestone; on next-group instruction start Group2 Tasks33-34, with document/review lanes8/9 alongside. Check ignored work/resume-state.json and actual Git/publication state after interruption.",
+  "recordedAtUtc": "2026-10-27 03:58:44 UTC",
+  "groups": [
+    {
+      "group": 1,
+      "title": "Decisions and contract",
+      "tasks": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "status": "complete",
+      "completionGate": "Candidate decisions required before affected code. An unanswered decision remains open."
+    },
+    {
+      "group": 2,
+      "title": "Service and database foundation",
+      "tasks": [
+        33,
+        34
+      ],
+      "status": "pending",
+      "completionGate": "Build/start and schema checks pass; added constraints are documented as choices."
+    },
+    {
+      "group": 3,
+      "title": "Clinical rules and calculation verification",
+      "tasks": [
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "status": "pending",
+      "completionGate": "Every clinical row and boundary has evidence; explain the calculations and limits to the candidate."
+    },
+    {
+      "group": 4,
+      "title": "FHIR ingestion and retained history",
+      "tasks": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "status": "pending",
+      "completionGate": "Focused own-build tests cover successful/invalid/replayed/concurrent/reference/amendment cases."
+    },
+    {
+      "group": 5,
+      "title": "Secure reads and transactional auditing",
+      "tasks": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        48,
+        49,
+        50,
+        51
+      ],
+      "status": "pending",
+      "completionGate": "All read paths use the controls; no content after audit failure. Use internal checkpoints for access rules, routes and failure tests."
+    },
+    {
+      "group": 6,
+      "title": "Deterministic dataset and eight scenarios",
+      "tasks": [
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74
+      ],
+      "status": "pending",
+      "completionGate": "Reproduce scenarios and assert their effects; manual-looking rows do not substitute for actual submissions."
+    },
+    {
+      "group": 7,
+      "title": "Client and guided client verification",
+      "tasks": [
+        63,
+        64,
+        65,
+        86
+      ],
+      "status": "pending",
+      "completionGate": "Actual guided checks recorded. If candidate verification is pending, keep 86 open and continue independent API/evidence work."
+    },
+    {
+      "group": 8,
+      "title": "Specification and architecture — parallel lane",
+      "tasks": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "status": "pending",
+      "completionGate": "Draft alongside 2–12; finish against actual decisions, implementation and evidence. Never describe a projection as a measurement."
+    },
+    {
+      "group": 9,
+      "title": "Static PR review — parallel lane",
+      "tasks": [
+        77,
+        78,
+        79,
+        80,
+        81
+      ],
+      "status": "pending",
+      "completionGate": "Static only: do not fix, build or run Attachment A. Clinical-source checks and actual candidate walkthrough completed."
+    },
+    {
+      "group": 10,
+      "title": "Integrated correctness and security regression",
+      "tasks": [
+        82,
+        83,
+        84,
+        85
+      ],
+      "status": "pending",
+      "completionGate": "Required failures investigated and resolved; an unmet requirement keeps its task open. Reuse meaningful earlier evidence and rerun affected integration checks."
+    },
+    {
+      "group": 11,
+      "title": "Dataset and performance evidence",
+      "tasks": [
+        75,
+        76
+      ],
+      "status": "pending",
+      "completionGate": "Use one controlled database workload at a time; report actual dataset/latencies and distinguish production projections."
+    },
+    {
+      "group": 12,
+      "title": "Restore, run instructions and clean startup",
+      "tasks": [
+        87,
+        88,
+        89
+      ],
+      "status": "pending",
+      "completionGate": "Use designated synthetic databases; prove commands work and protect the working dataset. Integrate fixes and rerun affected checks."
+    },
+    {
+      "group": 13,
+      "title": "Reconciliation, guided defense and package freeze",
+      "tasks": [
+        90,
+        91,
+        92,
+        93
+      ],
+      "status": "pending",
+      "completionGate": "Actual user walkthrough required; package/history/privacy checks completed. A later fix reopens affected checks and requires a new package/checksum."
+    },
+    {
+      "group": 14,
+      "title": "Delivery",
+      "tasks": [
+        94,
+        95,
+        96
+      ],
+      "status": "pending",
+      "completionGate": "Candidate sends. No inferred address, public access, collaborator invitation or automatic send; confirm delivery before 22:00 Asia/Colombo."
+    }
+  ],
+  "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification.",
+  "nextMainGroup": 2
+}
