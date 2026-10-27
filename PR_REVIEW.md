@@ -1,142 +1,239 @@
-# Static review — Attachment A, PR #418
+# Review of Attachment A — PR #418
 
-Prepared with AI assistance and checked by static inspection against the supplied listing and primary sources. Recommendation: **request changes; do not merge**. The joint candidate walkthrough (Task81) has not been performed; this review does not claim candidate verification or approval.
+**Request changes; do not merge.** The review identifies 24 blockers, three preferences and five follow-up checks. The main risks are confidential results reaching the wrong reader, clinical values being misinterpreted, loss of correction history and reads succeeding without a durable audit. Two separate type errors also contradict the claim that this exact listing builds.
 
-This is a static review of the eight supplied files, using their printed line numbers. The listing was not fixed, compiled, built, run or tested. Codex read all 724 numbered lines and traced the three shown GET paths into the supplied service, mapper, repository and log writer. Unshown helpers are accepted as defect-free as the attachment instructs. The author's fourteen passing tests, 88% coverage and staging performance remain unverified claims: their source, assertions and measurements were not supplied.
+All findings originated with AI assistance. The eight supplied files—724 numbered lines—were inspected against the task and the primary sources linked below. The attachment was not changed, compiled, built or run. Its examples describe possible consequences, not observed patient events. As instructed, unshown helpers are treated as defect-free. The author's 14 passing tests, 88% coverage and staging performance remain unverified because the tests and measurements were not supplied.
 
-All findings below originated with AI assistance. Earlier AI candidates were checked again against the actual printed listing; additional findings came from that second AI review. No candidate-origin discovery or independent human verification is claimed. The candidate walkthrough and any candidate amendments will be recorded separately without changing discovery origin.
+The [written walkthrough](PR_REVIEW_WALKTHROUGH.md) explains each blocker through an example. The candidate requested the review and discussed key findings; that does not make AI-origin findings human discoveries or establish a completed line-by-line verification. Actual discussion, source checks and review history are in the [Task 81 record](docs/evidence/task-81-review.md).
+
+## Files reviewed
+
+| File | Printed lines | Main findings |
+|---|---:|---|
+| ResultController.java | 110 | Contract, authorization, denials, auditing and pagination — B02–B06, B17, B19, B22, B24 |
+| ResultService.java | 157 | Proxy policy, visibility, totals, ordering and read cost — B01–B03, B05, B14, B17, B21, B24 |
+| ReferenceRangeResolver.java | 101 | Age/sex rules, historical context, flags and model types — B11–B13, B20–B21 |
+| EgfrCalculator.java | 77 | Equation, units, applicability, types and qualified input — B07–B11, B18, B20, B23 |
+| UnitNormalizer.java | 64 | Coded units, optional fields and integration — B07, B21 |
+| ResultMapper.java | 77 | Values, components, flags, derivations and corrections — B07, B09–B11, B13–B15, B21, B23 |
+| ResultRepository.java | 84 | Queries, identity, retention, ordering and read cost — B02–B03, B15–B17, B22, B24 |
+| AccessLogWriter.java | 54 | Transaction boundaries, denials and failures — B04–B06 |
+| **Total** | **724** | All eight files |
 
 ## Merge blockers
 
-### B01 — Proxy confidentiality uses fixed encounter IDs; the shown policy omits the age18 cutoff
+### B01 — Proxy confidentiality depends on a fixed list of encounter IDs
 
-**Location:** `ResultService.java` 27–33, 57–72, 80–82, 106–107, 116–122 and 142–143 (Attachment pp3–5). **Requirement:** house rules1,3,4 and R2.
+**Location:** `ResultService.java` 27–33, 57–72, 80–82, 106–107, 116–122 and 142–143 (pp3–5). **Requirement:** house rules 1, 3, 4; R2.
 
-`isVisibleToProxy` excludes eight encounter IDs; it never reads the encounter class or the patient's age. Proxy eligibility checks membership in `actor.proxyPatientIds()` but the shown policy never applies the age18 cutoff. A newly created MHEV, ABSL or SUBU encounter for a teenager is visible unless its ID happens to be in the list. No shown age check rejects an adult proxy who remains in that list; whether an unshown helper independently filters adult links is not established. The same ID list can also over-hide records where the stated age/class rule does not apply. **Remedy:** use the authoritative active proxy link, explicit age basis and actual encounter class in a shared visibility predicate applied before list, detail, trend, count and derived-input selection. Test ages11/12/17/18 and all three classes. Do not infer that the unseen Actor helper trusts a client-provided proxy list or mishandles revocation; that is not established here.
+`isVisibleToProxy` excludes eight IDs instead of checking encounter class and patient age. A new MHEV, ABSL or SUBU encounter for a teenager passes this filter. The list can also hide records where the age/class rule does not apply. Proxy membership has no explicit age-18 cutoff here; the unshown Actor helper might independently restrict adult links, so that part needs confirmation.
 
-### B02 — Patient reads have no clinician-release or critical-path gate
+Use the authoritative individual proxy link, an explicit age basis and the actual encounter class. Apply the same visibility rule before list, detail, trend, count and derived-input selection. Verify all three protected classes and ages 11/12/17/18. This finding does not assume that Actor trusts client-provided proxy lists or mishandles revocation.
 
-**Location:** `ResultController.java` 99–101; `ResultService.java` 74–109 and125–149; `ResultRepository.java`25–40 (pp2–5,10). **Requirement:** house rule2.
+### B02 — Patient reads do not check clinician release or critical handling
 
-Self access passes immediately; retrieval selects observations without a release condition, and the service filters only proxy encounter IDs. No shown read checks a separate clinician release or critical-path completion. A patient can therefore receive an otherwise eligible newly recorded result before the required review, including a critical result. **Remedy:** default new/corrected results to held, require an attributable clinician release action and the critical workflow before patient visibility, and enforce that predicate on every patient-facing read. A lab `final` status must not stand in for a clinician release. This finding concerns the shown read gate, not an invented claim that a notification service belongs in this PR.
+**Location:** `ResultController.java` 99–101; `ResultService.java` 74–109 and 125–149; `ResultRepository.java` 25–40 (pp2–5,10). **Requirement:** house rule 2.
 
-### B03 — Pagination total discloses concealed observations
+Self-access passes immediately. The queries then retrieve observations without a release condition, and the service only filters proxy encounter IDs. A newly recorded result, including a critical one, can reach the patient before the required review.
 
-**Location:** `ResultController.java`51–58; `ResultService.java`80–98; `ResultRepository.java`30–34 (pp2,4,10). **Requirement:** house rule5 and R2.
+Keep new and corrected results held until an attributable clinician release, with the critical workflow completed where required. Enforce that condition on every patient-facing read. Lab `final` status is not a substitute for release. The missing read gate must be repaired; notification transport is outside this PR's scope.
 
-The page filters some observations for proxies, while `countResults` counts every observation for the patient without the caller or visibility predicate. A proxy seeing two items and total three learns that another result exists. Separate page/count transactions can also observe different database states. **Remedy:** compute both from the same authorized, visibility-filtered snapshot and stable ordering; the total must describe the items this caller can see. Include hidden-versus-absent totals and pagination tests.
+### B03 — The total reveals observations removed from the page
 
-### B04 — Denial exposes the patient's name and creates unnecessary operational PHI
+**Location:** `ResultController.java` 51–58; `ResultService.java` 80–98; `ResultRepository.java` 30–34 (pp2,4,10). **Requirement:** house rule 5; R2.
 
-**Location:** `ResultController.java`104–108; also56; `AccessLogWriter.java`44–45 (pp2–3,12). **Requirement:** house rule5; privacy/minimization.
+The list filters observations for proxies, but `countResults` counts every observation for the patient. Two visible rows with a total of three disclose a concealed result. The separate list/count transactions can also observe different states.
 
-After deciding the caller is unauthorized, the controller retrieves a display name and puts it into the exception reason and warning log. The exception carries patient-identifying information; whether a particular global error renderer exposes that reason is not shown, but creating the patient-specific denial is already the wrong boundary. It also adds an identifiable lookup to the denial path. Application logs additionally contain patient identifiers and, on logging failure, arbitrary exception text. **Consequence:** an unauthorized caller may learn identity/existence through the error response, while routine diagnostic logs unnecessarily spread patient-linked information. **Remedy:** use one generic unavailable response for inaccessible and nonexistent resources; do not resolve a name on denial. Put necessary attributable access events in the controlled audit store and use PHI-free diagnostic categories/correlation IDs, without raw exception/payload text.
+Count and page the same authorized, filtered collection in one consistent snapshot and stable order. Add hidden-versus-absent count and pagination cases.
 
-### B05 — Clinical content and its audit are not one atomic transaction
+### B04 — The denial path creates and logs patient-identifying information
 
-**Location:** `ResultService.java`74,95,100,125; `ResultController.java`51–54,70–74,89–91; `AccessLogWriter.java`27–45 (pp2,4–5,11–12). **Requirement:** R5 and house rule7.
+**Location:** `ResultController.java` 104–108 and 56; `AccessLogWriter.java` 44–45 (pp2–3,12). **Requirement:** house rule 5; privacy/minimization.
 
-The service's read-only transaction ends when it returns. The controller then schedules `record`, whose exception handler deliberately swallows persistence failure. With async enabled, the audit runs later on another thread; even without interception, the shown code still provides no common read/audit transaction and still suppresses failure. A response can be delivered without the required durable access row. **Remedy:** place authorization, content reads and synchronous audit insertion in one read-write service transaction; materialize the response and complete the commit before sending content. Audit/commit failure must withhold content. A normal diagnostic log is not the required `access_log`. Spring documents thread-bound transactions and asynchronous execution separately; see [transaction semantics](https://docs.spring.io/spring-framework/docs/6.2.x/javadoc-api/org/springframework/transaction/annotation/Transactional.html) and [Async](https://docs.spring.io/spring-framework/docs/6.2.x/javadoc-api/org/springframework/scheduling/annotation/Async.html).
+After rejecting access, the controller looks up the patient's display name and embeds it in an exception and warning log. Whether the exception reason reaches the caller depends on the unshown renderer; the identifying lookup and log already occur. Routine logs also contain patient IDs/counts and arbitrary audit-failure messages.
 
-### B06 — Denied clinical attempts are never sent to the audit writer
+Return one generic unavailable response for inaccessible and nonexistent resources, without resolving a name. Keep necessary attribution in the controlled audit store. Operational diagnostics should use safe categories/correlation IDs, without names, raw payloads or exception text that may contain clinical data.
 
-**Location:** `ResultController.java`67–75 and99–108; `AccessLogWriter.java`49–52 (pp2–3,12). **Requirement:** R5.
+### B05 — A clinical response can succeed without its audit
 
-All three controller audit calls are after successful service returns. Authorization rejection and the detail path's empty result throw before those calls; `recordDenied` has no caller in the listing. An unauthorized probe or a proxy requesting a concealed result leaves no required denied row. **Remedy:** model an expected denial as an outcome whose audit can commit, then return the generic denial; avoid throwing inside a transaction in a way that rolls back the denied event. Verify authorization denials, concealed detail probes and audit-write failures separately.
+**Location:** `ResultService.java` 74, 95, 100, 125; `ResultController.java` 51–54, 70–74, 89–91; `AccessLogWriter.java` 27–45 (pp2,4–5,11–12). **Requirement:** R5; house rule 7.
 
-### B07 — Unit conversion follows display text and the shown eGFR path bypasses it
+The service's transaction boundaries do not include the controller's later `record` call. With async enabled, the audit runs on another thread; the writer also catches and suppresses persistence failures. Disabling async would still leave the missing shared transaction and swallowed failure.
 
-**Location:** `UnitNormalizer.java`24–54 and61–62; `ResultMapper.java`34–50 and73–74; `EgfrCalculator.java`38 and70–75 (pp7–10). **Requirement:** R3 and house rule7.
+Put authorization, content reads and synchronous audit insertion in one read-write service transaction. Materialize the response and commit before sending it. If audit insertion or commit fails, withhold the content. A warning log does not satisfy `access_log`. Spring documents the [thread-bound transaction boundary](https://docs.spring.io/spring-framework/docs/6.2.x/javadoc-api/org/springframework/transaction/annotation/Transactional.html) and [async execution](https://docs.spring.io/spring-framework/docs/6.2.x/javadoc-api/org/springframework/scheduling/annotation/Async.html).
 
-The normalizer reads `Quantity.unit`, lowercases it and searches substrings, rather than matching the coded UCUM unit. A valid creatinine Quantity with `code=umol/L` and human display `µmol/L`, or without optional display text, is not converted. `isCanonical`61–62 also dereferences the optional display without a null check and calls haemoglobin in `g/L` canonical even though `normalise`45–50 would convert it; no caller of `isCanonical` is shown, so these are helper defects rather than an observed GET failure. The mapper's `calculateFromFeed` route passes the numeric feed value directly to the calculator; none of the eight files calls `normalise`. Thus no supplied path establishes canonical numeric input before range checking or eGFR calculation, and an SI value can be treated as mg/dL. **Remedy:** validate the analyte plus `Quantity.system`/`code`, normalize once before persistence/calculation, retain input provenance and reject unsupported/ambiguous units. For example, 88.4umol/L must normalize to1mg/dL independently of display spelling. FHIR distinguishes the [human-readable unit from the computable code](https://hl7.org/fhir/R4/datatypes-definitions.html#Quantity.code). This is not a claim that an unseen ingest service is defective; the supplied conversion and read/calculation paths do not provide the required guarantee.
+### B06 — Denied attempts never reach the audit writer
 
-### B08 — eGFR is a hybrid with a race multiplier, not the required 2021 equation
+**Location:** `ResultController.java` 48–58, 67–75, 86–92 and 99–108; `AccessLogWriter.java` 49–52 (pp2–3,12). **Requirement:** R5.
 
-**Location:** `EgfrCalculator.java`13–14,44–53 and62–67 (p7). **Requirement:** R3.
+Every controller audit call follows a successful service return. Authorization failures and empty detail results throw before it. `recordDenied` has no caller, so those attempts leave no required denied row.
 
-The alpha values match the newer equation, but coefficient141, upper exponent−1.209, age base0.993, female factor1.018 and race factor1.159 do not. The required 2021 expression uses142, upper exponent−1.200, age base0.9938, female factor1.012 and no race term. This is a hybrid, not simply a faithful implementation of the cited2009 equation. **Consequence:** kidney estimates and trends differ by incorrect factors, including race. **Remedy:** implement the published race-free2021 equation with version/source provenance and independent reference cases covering both creatinine branches and clinical-sex inputs; remove race from calculation. Checked against [NIDDK's adult equation](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults).
+Represent an expected denial as an outcome whose audit commits before the generic error is returned. Avoid throwing inside that transaction in a way that rolls back the denial event. Check unauthorized access, concealed details and audit-write failure separately.
 
-### B09 — Per-minute calculation is labelled as per-second output
+### B07 — Conversion uses display text, and the eGFR path bypasses it
 
-**Location:** `EgfrCalculator.java`20 and44–55; `ResultMapper.java`48–65 (pp7,9). **Requirement:** R3 and §2.4.
+**Location:** `UnitNormalizer.java` 24–54 and 61–62; `ResultMapper.java` 34–50 and 73–74; `EgfrCalculator.java` 38 and 70–75 (pp7–10). **Requirement:** R3; house rule 7.
 
-The equation computes a per-minute quantity but no conversion to seconds occurs. `EGFR_UNIT` claims `mL/s/1.73m2`; that constant is not referenced by the mapper, which returns an unaccompanied derived number. If consumed as the claimed per-second quantity, the scale error is a factor of60, apart from the equation defects. **Remedy:** convert the correct per-minute value by dividing by60, return its explicit unit and chosen LOINC/provenance, and test the conversion independently. NIDDK identifies the [equation's units and SI conversion](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults). Do not claim the unused constant itself proves how an unshown client labels the response.
+The normalizer checks substrings in `Quantity.unit` rather than coded UCUM identity. A quantity coded `umol/L` but displayed as `µmol/L`, or without optional display text, is not converted. `isCanonical` also dereferences an absent unit and treats haemoglobin in `g/L` as canonical despite the conversion in `normalise`.
 
-### B10 — eGFR applicability and failure reasons are missing
+More importantly, the mapper passes the feed value straight into the calculator; none of these files calls `normalise`. An SI creatinine value can therefore be interpreted as mg/dL. Validate analyte and `Quantity.system`/`code`, normalize before persistence/calculation and retain provenance: 88.4 umol/L must become 1 mg/dL regardless of display spelling. FHIR distinguishes [display units from computable codes](https://hl7.org/fhir/R4/datatypes-definitions.html#Quantity.code). No caller of `isCanonical` or separate ingestion implementation is supplied.
 
-**Location:** `EgfrCalculator.java`29–42 and47–55; `ResultMapper.java`48–50 (pp7,9). **Requirement:** R3, house rule7 and §2.4 derived-input rule.
+### B08 — The eGFR formula mixes versions and includes a race multiplier
 
-The calculator accepts zero/negative creatinine and any present administrative gender, treating every non-female value as male; it does not restrict the adult equation to adults. Zero/negative inputs enter fractional negative powers rather than producing a declared invalid-input result. Missing inputs become an undifferentiated `null` in the DTO, without the required cannot-compute reason. **Consequence:** an inapplicable or nonsensical estimate can be presented as a number, or a patient/clinician cannot tell why it is absent. **Remedy:** validate positive suitable standardized creatinine, explicit applicable clinical context and adult eligibility; return a typed unavailable result with a safe reason instead of fabricated estimates. The [NIDDK adult applicability statement](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults) supports the18+ boundary. No claim is made that specific bad inputs were executed.
+**Location:** `EgfrCalculator.java` 13–14, 44–53 and 62–67 (p7). **Requirement:** R3.
 
-### B11 — Historical interpretation uses today's age, current demographics and an invented age99
+The α values match the newer equation, but the coefficient 141, exponent −1.209, age base 0.993, female factor 1.018 and race factor 1.159 do not. The required 2021 values are 142, −1.200, 0.9938 and 1.012, without a race term. This is a hybrid, rather than a faithful implementation of either the required equation or its cited 2009 source.
 
-**Location:** `ReferenceRangeResolver.java`64 and75–99; `EgfrCalculator.java`34–42; `ResultMapper.java`29 (pp6–7,9). **Requirement:** house rule7 and R4.
+These differences change kidney estimates and any trend built from them. Implement the published race-free 2021 expression, record its version/source and check both creatinine branches and clinical-sex inputs against independent reference cases. [NIDDK adult equation](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults).
 
-Ranges call `ageNow` and the equation passes today's date to the otherwise defect-free age helper. The resolver substitutes99 when birth date is absent. Both use the current Patient gender without effective-time clinical-sex provenance. A haemoglobin taken at13 can change interpretation after the patient's14th birthday; unknown age can falsely acquire an adult range. Current administrative gender is also not proof of historical clinical sex: [FHIR defines it as administrative](https://hl7.org/fhir/R4/patient-definitions.html#Patient.gender). **Remedy:** resolve completed age and the relevant clinical-sex assertion at observation effective time, preserve provenance/versioning, and return an explicit unavailable interpretation when a required historical input is unknown. Do not invent age or silently treat unknown/other gender as male.
+### B09 — The per-minute result is not converted to the advertised per-second unit
 
-### B12 — A universal age14 switch applies the wrong table rows
+**Location:** `EgfrCalculator.java` 20 and 44–55; `ResultMapper.java` 48–65 (pp7,9). **Requirement:** R3; §2.4.
 
-**Location:** `ReferenceRangeResolver.java`38–50 and66–85 (pp5–6). **Requirement:** R4 and §2.4.
+The formula produces a per-minute estimate; no division by 60 occurs. `EGFR_UNIT` says `mL/s/1.73m2`, while the mapper returns a derived number without that unit. Consuming it as the advertised per-second quantity creates a sixtyfold scale error, separate from B08. The unused constant does not establish what an unshown client actually displays.
 
-All analytes below14 use a map containing only haemoglobin, while all14+ use the adult map. Consequently a15-year-old receives adult BP/BMI ranges although those start at18; a10-year-old sodium/potassium/HbA1c result has no range even though those rows specify no age restriction. Creatinine's sex-specific row is also incorrectly suppressed below14. **Consequence:** abnormal values can lose their flag, and adolescent values can receive an inapplicable flag. **Remedy:** encode each supplied analyte's own applicability criteria; test exact boundaries13/14 and17/18 plus analytes with no specified age cutoff. The table, rather than an imported general adult/paediatric convention, governs this exercise.
+Divide the correct per-minute result by 60 and return its explicit unit, chosen LOINC and provenance. Check that conversion independently. [NIDDK units and conversion](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults).
 
-### B13 — No applicable range is falsely called NORMAL
+### B10 — The calculator accepts unsuitable inputs and hides failure reasons
 
-**Location:** `ResultMapper.java`37–46 (p9). **Requirement:** R4, R6 and house rule7.
+**Location:** `EgfrCalculator.java` 29–42 and 47–55; `ResultMapper.java` 48–50 (pp7,9). **Requirement:** R3; house rule 7; §2.4.
 
-The flag starts as `NORMAL` and changes only when a range exists. Height, weight and other legitimate no-range results therefore assert clinical normality without an applicable comparison. **Consequence:** patients and clinicians receive false reassurance; the client cannot distinguish the required no-applicable state. **Remedy:** return an explicit `NO_APPLICABLE`/equivalent state and reason when appropriate; use normal only after comparison with an applicable range. Test no-range and insufficient-context results independently from normal.
+Presence is checked, but positive creatinine and adult eligibility are not. Every present non-female gender is treated as male. Zero/negative values enter fractional negative powers; missing inputs become an unexplained `null`. This can produce an inapplicable estimate or leave the reader unable to understand its absence.
 
-### B14 — Scalar-only mapping cannot represent the required component BP or absent values
+Validate suitable positive standardized creatinine, adult applicability and explicit clinical context. Return a typed cannot-compute result with a reason when those conditions fail. The [published adult equation applies at 18+](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults); do not invent defaults for missing age or sex.
 
-**Location:** `ResultMapper.java`31–45 and69–75; `ResultService.java`135–145 (pp5,9–10). **Requirement:** R4, §2.3 nullable value and §2.4 BP rule.
+### B11 — Historical results are interpreted using today's demographics
 
-Both mappings dereference a top-level numeric Quantity unconditionally. The required blood-pressure Observation contains two components, whose values/ranges must be handled individually; it need not have a parent numeric value. The mapper therefore cannot produce the required BP result and can dereference a missing numeric value. Trend filtering also looks only at the parent's first coding, so a component analyte query is not resolved into its component value. **Consequence:** a supported BP record can fail the results page or fail to expose a systolic/diastolic abnormality; missing measurements become errors rather than an explicit unavailable state. **Remedy:** model scalar, component and absent-value results explicitly, check each BP component against its own code/range and build component trends deliberately. [FHIR describes Observation components separately](https://hl7.org/fhir/R4/observation-definitions.html#Observation.component). Do not describe the exact exception response or a measured outage without execution evidence.
+**Location:** `ReferenceRangeResolver.java` 64 and 75–99; `EgfrCalculator.java` 34–42; `ResultMapper.java` 29 (pp6–7,9). **Requirement:** house rule 7; R4.
 
-### B15 — Amendments delete originals and the response discards their link
+Ranges use `ageNow`; eGFR passes today's date to the age helper. Missing birth date becomes age 99. Both use current Patient gender without effective-time clinical-sex provenance. A haemoglobin measured at 13 can acquire a different range after the patient's 14th birthday, while unknown age can acquire an adult interpretation.
 
-**Location:** `ResultRepository.java`57–66 and79–82; `ResultMapper.java`63–65 (pp9–11). **Requirement:** R1, detail contract and §2.4 amendment rule.
+Resolve age and applicable clinical sex at measurement time, retain the context/version and explain unavailable interpretation when necessary. The age helper is not the defect: it receives the wrong temporal input. [Patient.gender is administrative](https://hl7.org/fhir/R4/patient-definitions.html#Patient.gender), not proof of historical clinical sex.
 
-`upsert` deletes rows sharing patient/code/effective time before insertion. A correction normally preserves that clinical context, so this method destroys the previous result instead of retaining both. The mapper independently hardcodes `correctionOf` to null even if the resource carries a correction link. **Consequence:** clinicians lose the original record and cannot distinguish a correction from an unrelated result. **Remedy:** append a new immutable observation and explicit validated predecessor link; preserve both retrievable versions and map that link into the DTO. `upsert` is not called by these three GET paths; the destructive behavior is a defect in the supplied persistence method, not an observed GET side effect.
+### B12 — One age-14 switch applies to every analyte
 
-### B16 — Dynamic search interpolates untrusted SQL values and sort syntax
+**Location:** `ReferenceRangeResolver.java` 38–50 and 66–85 (pp5–6). **Requirement:** R4; §2.4.
 
-**Location:** `ResultRepository.java`44–54 (p10). **Requirement:** protected clinical records; safe database access.
+Below 14, the map contains only haemoglobin; at 14+, every analyte uses the adult map. A 15-year-old therefore receives BP/BMI ranges that start at 18, while a 10-year-old sodium, potassium or HbA1c result has no range. Sex-specific creatinine is also incorrectly suppressed below 14.
 
-`String.format` embeds patientId and code inside SQL quotes and inserts sortDir directly into ORDER BY. When called with untrusted values, they become SQL syntax rather than bound data; a patient boundary can be changed. **Consequence:** a caller of this search method may expose other patients' clinical rows or trigger expensive/erroring database work. **Remedy:** bind patient/code values, select direction from a server-owned enum/allowlist, and validate/bound the limit. Check authorization and filtered counts with the same policy as other clinical paths. The shown controller never calls `search`; its `sort` argument does not flow into this SQL method, and no exploit or external reachability was tested.
+Use each table row's own applicability conditions. Verify 13/14 and 17/18 boundaries, plus rows with no specified age cutoff. Otherwise abnormalities can go unflagged and adolescents can receive inapplicable flags. The supplied numeric intervals are not a general adult/paediatric rule.
 
-### B17 — Read cost is unbounded by the requested page or trend window
+### B13 — A missing range is returned as NORMAL
 
-**Location:** `ResultController.java`43–45; `ResultService.java`78–89 and129–148; `ResultRepository.java`25–27 (pp2,4–5,10). **Requirement:** the production-scale architecture/read behavior; reliable patient access.
+**Location:** `ResultMapper.java` 37–46 (p9). **Requirement:** R4, R6; house rule 7.
 
-Every page and trend first loads and decodes all observations for that patient; visibility, ordering, range filtering and pagination occur in memory. `offset`/`limit` have no shown bounds; negative values reach Stream skip/limit and extreme values do not bound database work. The query ignores the requested trend code/time range. **Consequence:** a long record or repeated requests can consume large heap/CPU and delay results for other users; a small requested page does not protect availability. **Remedy:** validate bounded parameters, push caller visibility plus code/time/order/page into parameterized indexed SQL, keep page/count consistent, and profile representative long histories before claiming a budget. This establishes the work-growth mechanism, not a measured latency failure or a numerical capacity limit.
+`flag` starts as NORMAL and changes only when a range exists. Height, weight and other results without an applicable interval can therefore imply normality without any valid comparison, preventing the client from showing the required distinction.
 
-### B18 — Declared Optional<Double> cannot return the boxed long from round
+Return a separate no-applicable state and reason where appropriate. Use NORMAL only after comparison with an applicable range, and test those states separately.
 
-**Location:** `EgfrCalculator.java`27 and55 (p7). **Requirement:** deliverable correctness; the author's build/test claim.
+### B14 — The mapper assumes every result has one scalar value
 
-`Math.round(double)` returns primitive long. `Optional.of` boxes the supplied value as Long; it cannot satisfy the declared `Optional<Double>` return type. Assignment context does not provide a long-to-Double widening-then-boxing conversion. **Consequence:** the listed source is not type-correct, so it cannot provide these features as written. **Remedy:** use a return type/precision policy consistent with the actual numeric result and round only at the agreed display boundary, then have the author provide the actual successful checks. Verified from [Math.round](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Math.html#round(double)), [Optional.of](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html#of(T)) and [Java conversion rules](https://docs.oracle.com/javase/specs/jls/se21/html/jls-5.html#jls-5.2), not by compiling the supplied code.
+**Location:** `ResultMapper.java` 31–45 and 69–75; `ResultService.java` 135–145 (pp5,9–10). **Requirement:** R4; nullable value in §2.3; BP rule in §2.4.
 
-### B19 — The shown routes add an undocumented prefix to the required paths
+Both mappings dereference a top-level numeric Quantity. The required BP Observation has two components and need not have a parent scalar, so a supported record can fail the page or lose its component abnormalities. Trend selection also checks only the parent coding and cannot select a systolic/diastolic component by its code.
 
-**Location:** `ResultController.java`23 and41/62/79 (pp1–2). **Requirement:** §2.3 endpoint contract.
+Handle scalar, component and absent-value results explicitly. Range-check each BP component independently and project its trend from the authorized parent. Do not manufacture a parent number. [FHIR Observation components](https://hl7.org/fhir/R4/observation-definitions.html#Observation.component).
 
-The class maps `/api/v1/patients/{patientId}`, producing `/api/v1/patients/...`; the task requires `/patients/...`. No supplied rewrite or compatibility mapping establishes the required URLs. **Consequence:** a client using the documented contract cannot reach these methods as shown. **Remedy:** expose the specified paths, or explicitly resolve the contract change with the owner and provide a verified mapping. This is a shown mapping mismatch; no claim is made about unseen deployment routing. Missing ingestion/access-log/client implementation is not automatically assigned as a defect in this explicitly partial results PR.
+### B15 — Correction writes delete the original
 
-## Nonblocking preferences and follow-up checks
+**Location:** `ResultRepository.java` 57–66 and 79–82; `ResultMapper.java` 63–65 (pp9–11). **Requirement:** R1; detail contract; §2.4.
 
-- **P01 — Remove unused wiring and misleading comments.** `ResultService.java`35–53 holds/injects ranges, egfrCalculator and FhirContext without using them; `ResultController.java`19–20 claims authorization before clinical reads while its denial branch reads a name. Clean up after the policy fixes so the dependency graph and comments match behavior. The resulting clarity helps reviewers find real enforcement; unused fields alone do not prove a patient safety defect.
-- **P02 — Either remove or implement the advertised sort option.** Controller45 passes sort, but `ResultService.java`75–82 always sorts by descending effective time. Sort is not a mandatory task parameter. Choose a small documented allowlist only if needed; add an ID tie-breaker for deterministic pagination. Do not connect this ignored argument to the unrelated repository SQL injection.
-- **P03 — Agree display precision separately from calculation precision.** `EgfrCalculator.java`25/55 promises whole-number rounding. After fixing equation and unit conversion, retain internal precision and have the clinical owner approve display precision. No extra numeric tolerance or clinical threshold was supplied, so this is a design follow-up rather than an invented grading rule.
-- **V01 — Timing equivalence needs evidence.** `ResultService.java`102–107 does a visibility check only for existing observations. Both hidden and missing details return empty to the same controller404, which is a positive body/status pattern; the work paths differ. Static inspection does not establish a measurable timing oracle or prove equivalence. Require hidden/missing timing tests under realistic noisy conditions after a fix, use a common authorization-aware query/error path, and state residual limits honestly.
-- **V02 — Authorization/read consistency needs concurrency tests.** `ResultController.java`48–51,67–70,86–89 authorizes before the service read transactions at `ResultService.java`74–75,100–102,125–129. A proxy revocation between the checks and the content read could be missed. Bring policy/content/audit into one declared snapshot and test the documented revocation boundary; this is a concurrency follow-up, not an executed race or a defect assigned to an unshown helper. Do not promise that already-authorized in-flight responses can be retracted.
+`upsert` deletes rows matching patient/code/effective before insertion. A correction sharing that tuple destroys its original, and the broad match can remove another same-time observation too. The mapper separately hardcodes `correctionOf` to null. Clinicians lose both the retained record and its explicit correction relationship.
 
-## Scope and verification record
+Append an immutable version linked to one validated predecessor, retain both and return that link. Neither `upsert` nor `insert` is called by these GET paths; the problem is in the supplied persistence method, not a read-side deletion.
 
-The first AI candidates were retained with corrections: the equation is described as hybrid; the details path's hidden/missing body/status similarity is acknowledged; the unused repository search is not attributed to GET endpoints; no defects are assigned to unshown Actor, AgeUtil, DateUtil, codec or repository helpers. The review does not demand real authentication, notification delivery or the entire Part2 implementation from a PR explicitly covering part of the feature. Header input validation cannot be pronounced broken without inspecting Actor, which the attachment stipulates is defect-free.
+### B16 — Dynamic search interpolates values into SQL
 
-AI checks actually completed: read all supplied numbered lines; trace each shown GET success/denial path; compare flags/range boundaries to the supplied table; compare the eGFR constants/applicability/units against NIDDK; check Quantity/component/demographic semantics against FHIR R4; check async/transaction semantics against Spring6.2 documentation and return-type semantics against Java21 documentation. No executed tests, payload attacks, timing measurements, load results or successful builds of Attachment A are claimed. The candidate walkthrough has not been performed and remains incomplete.
+**Location:** `ResultRepository.java` 44–54 (p10). **Requirement:** safe access to protected clinical records.
 
+`String.format` puts patientId/code inside SQL quotes and sortDir into ORDER BY. Untrusted values become SQL syntax and can change the patient boundary or create expensive/erroring work.
 
-## Supplied terminology conflict
+Bind patient/code as data, choose direction from a server-owned allowlist and validate/bound limit. Apply the same authorization and visibility rules as other reads. The controller does not call `search`, and its ignored `sort` argument does not flow here; external reachability is unproven.
 
-The task itself assigns potassium code `2947-0`, although official LOINC identifies it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment, with verified specimen/mapping and clinical-owner approval required before real clinical use. This is a specification conflict, not an additional PR defect assigned to the junior for following the supplied table. No silent replacement code or specimen is inferred. See the [D-17 source conflict and actual adoption](docs/decisions/group-6-loinc-clarification.md) and [official LOINC 2947-0 definition](https://loinc.org/2947-0).
+### B17 — A small page still loads and decodes the entire history
+
+**Location:** `ResultController.java` 43–45; `ResultService.java` 78–89 and 129–148; `ResultRepository.java` 25–27 (pp2,4–5,10). **Requirement:** scale and reliable clinical access.
+
+Every page/trend fetches all observations for the patient before filtering, sorting and slicing. The SQL does not use trend code/time bounds. Offset/limit have no bounds, and negative values reach Stream operations that reject them. A small requested page therefore does not bound database, heap or CPU work.
+
+Validate parameters early and move appropriate visibility, code/time, ordering and paging into parameterized indexed queries. Keep counts consistent and profile long histories before claiming a response budget. The work-growth problem is evident; no latency failure or capacity limit was measured.
+
+### B18 — The declared return type cannot accept the result of round
+
+**Location:** `EgfrCalculator.java` 27 and 55 (p7). **Requirement:** build correctness; the author's test claim.
+
+`Math.round(double)` returns `long`. `Optional.of` boxes that as Long, which cannot satisfy `Optional<Double>`; Java does not insert a long-to-Double widening-then-boxing conversion. The expression is not type-correct.
+
+Use a return type and precision policy that agree, round only at the display boundary, and request the author's actual verified revision. This follows from [Math.round](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Math.html#round(double)), [Optional.of](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html#of(T)) and [Java conversion rules](https://docs.oracle.com/javase/specs/jls/se21/html/jls-5.html#jls-5.2).
+
+### B19 — The routes do not match the required URLs
+
+**Location:** `ResultController.java` 23 and 41/62/79 (pp1–2). **Requirement:** §2.3 endpoint contract.
+
+The class adds `/api/v1` to `/patients/{patientId}`, while the contract requires `/patients/...`. Clients using the contract cannot reach these methods without a compatibility mapping that has not been supplied.
+
+Expose the required paths, or resolve an explicit contract change and verify the mapping. A deployment rewrite cannot be assumed. Other absent Part 2 features are not automatically defects in this partial results PR.
+
+### B20 — Both clinical classes name the wrong R4 gender enum
+
+**Location:** `ReferenceRangeResolver.java` 98–99; `EgfrCalculator.java` 39–40 (pp6–7). **Requirement:** HAPI FHIR R4; build correctness.
+
+The code names `org.hl7.fhir.r4.model.AdministrativeGender.FEMALE`. R4's type is `org.hl7.fhir.r4.model.Enumerations.AdministrativeGender`, also returned by `Patient.getGender()`. These references are another build blocker, separate from B18.
+
+Use the actual model type and verify the exact reviewed revision. This fixes type resolution, not the historical/clinical-sex errors. The [Patient API](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/org/hl7/fhir/r4/model/Patient.html) and [nested enum API](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/org/hl7/fhir/r4/model/Enumerations.AdministrativeGender.html) confirm it. Read-only archive inspection of official `org.hl7.fhir.r4:6.9.12` found the nested class and no top-level class; that reference library is not a claimed junior dependency version. No classes were loaded.
+
+### B21 — Clinical meaning changes with coding order
+
+**Location:** `ReferenceRangeResolver.java` 59; `ResultMapper.java` 31–32 and 49–50; `ResultService.java` 135–137; `UnitNormalizer.java` 29 and 36–45; `ResultRepository.java` 64 and 74 (pp5–6,8–11). **Requirement:** R3–R4; house rules 7–8.
+
+Every path takes the first coding's bare code without checking its system. With local `HB` first and LOINC `718-7` second, haemoglobin loses its range, B13 calls it normal and the LOINC trend skips it. Reordering equivalent codings changes the result. Conversely, a local code named `2160-0` can select creatinine logic without establishing that meaning.
+
+Resolve one supported, unambiguous `(system, code)` identity consistently across interpretation and storage. Test permutations/system collisions and prove any narrower internal profile. No such profile is supplied. FHIR [assigns no meaning to coding order](https://hl7.org/fhir/R4/datatypes.html#CodeableConcept) and defines [Coding.system](https://hl7.org/fhir/R4/datatypes-definitions.html#Coding.system); an unseen ingestion defect is not being presumed.
+
+### B22 — Writes store a reference while reads use a patient key
+
+**Location:** `ResultRepository.java` 25–40 and 69–76, especially 73; `ResultController.java` 42/51, 63/70 and 80/89 (pp2,10–11). **Requirement:** patient-key and endpoint contracts.
+
+`insert` stores `obs.getSubject().getReference()` directly as patient_id. Readers instead bind the route's patientId. For `Patient/p1`, the write value differs from `/patients/p1/results`'s `p1`. If the column accepts that string, retrieval misses the result; if its type/constraints reject it, insertion fails. DDL is unprovided, so the precise symptom is unknown.
+
+Resolve supported typed references to the authoritative local key, validate locality/existence, and use that key consistently. Retain the original reference separately; do not fetch arbitrary remote URLs. Verify a persistence-to-read case using a [normal relative FHIR reference](https://hl7.org/fhir/R4/references.html#literal). The GETs do not call this writer, so no unseen ingestion failure is assumed.
+
+### B23 — A qualified value is turned into an exact measurement
+
+**Location:** `ResultMapper.java` 34–45, 53–65 and 69–75; `EgfrCalculator.java` 29–38 and 47–55 (pp7,9–10). **Requirement:** house rule 7; §2.4.
+
+The mapper copies the number/unit and the calculator treats the number as exact. Neither reads `Quantity.comparator`. If admitted, creatinine `<1 mg/dL` becomes exact 1 and can produce a fabricated estimate; task-potassium `>5.1 mmol/L` can become the normal endpoint 5.1. The result is more certain, or clinically different, than the supplied measurement.
+
+Preserve and deliberately interpret supported qualifiers, or reject/mark the input unavailable before exact calculation. A profile excluding qualifiers must be demonstrated. FHIR defines [comparator as a modifier](https://hl7.org/fhir/R4/datatypes-definitions.html#Quantity.comparator) whose [meaning must be honored](https://hl7.org/fhir/R4/datatypes.html#Quantity). This finding is conditional on such input reaching the mapper; no unseen validator is declared defective.
+
+### B24 — Equal-time results can move between pages
+
+**Location:** `ResultRepository.java` 24–27; `ResultService.java` 80–88; `ResultController.java` 42–58 (pp2,4,10). **Requirement:** correct pagination under §2.3.
+
+SQL returns rows without ORDER BY. Java sorts only by effective time, then applies skip/limit. Ties retain the database's unspecified order. If A and B share a timestamp, fetches ordered A,B then B,A can make page 1/limit 1 and page 2/offset 1 return A twice and omit B, even without a logical record change.
+
+Define a total order—effective time plus immutable ID—and use it consistently before paging. Test tied rows at boundaries. This is separate from optional custom sort, and a tie-breaker alone does not freeze independent pages against concurrent inserts. [PostgreSQL ordering](https://www.postgresql.org/docs/16/queries-order.html), [pagination guidance](https://www.postgresql.org/docs/16/queries-limit.html) and [Java's stable sort](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html#sorted(java.util.Comparator)) explain why preserving an input tie order does not make it repeatable.
+
+## Preferences
+
+- **P01 — Remove unused wiring and correct the comments.** Service lines 35–53 inject ranges, calculator and FhirContext without using them. Controller lines 19–20 promise authorization before clinical reads, yet denial looks up a name. Simplify the dependencies and make the comments describe the repaired path; unused fields alone are not a patient-safety defect.
+- **P02 — Remove or deliberately support optional sort.** Controller line 45 accepts sort, but Service 75–82 always uses descending effective time. It is not a required task parameter. Keep a small documented allowlist if useful, otherwise remove the option. B24 addresses mandatory stable paging; B16's unrelated SQL method is not reached by this argument.
+- **P03 — Agree display precision.** Calculator lines 25/55 promise whole-number rounding. Preserve calculation precision and have the clinical owner agree display rounding after equation/unit fixes. The brief supplies no additional tolerance, assay precision or formatting rule.
+
+## Follow-up checks
+
+- **V01 — Investigate hidden/missing timing.** Service 102–107 checks visibility only when an observation exists. Both paths return empty to the same controller 404, which is a useful body/status pattern. It proves neither timing equivalence nor a practical timing attack. Verify realistic noisy cases through a common authorized query/error path and document residual limits.
+- **V02 — Put revocation and reads under a declared snapshot.** Controller 48–51, 67–70 and 86–89 authorizes before the service transactions at 74–75, 100–102 and 125–129. A revocation between those operations may be missed. Define the boundary, bring policy/content/audit together and verify concurrency. An already-authorized response cannot be promised retractable; no race was executed here.
+- **V03 — Specify accepted effective-time and request forms.** Service 131–139/152–155, Mapper 62/72 and Repository 65/75 assume populated effectiveDateTime. The fallback checks a typed getter that can create an empty child or reject another type. Establish allowed effective[x]/precision/date-window inputs and validate them; an edit timestamp is not clinical measurement time. No admitted profile is supplied, so a supported-input failure is not established. Controller from/to are required as written; the brief does not promise open windows. DateUtil/AgeUtil remain defect-free. [FHIR effective time](https://hl7.org/fhir/R4/observation-definitions.html#Observation.effective_x_), [R4 accessors](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/org/hl7/fhir/r4/model/Observation.html#getEffectiveDateTimeType()).
+- **V04 — Verify the write transaction.** Repository 61–66 deletes then inserts without a transaction annotation or supplied caller. Without an outer transaction, insert failure can leave the deletion committed; an outer transaction could prevent that additional failure. Identify the owner and verify rollback/concurrency. B15 still applies even if replacement is atomic.
+- **V05 — Define status eligibility and derived provenance.** Mapper 34–50/62–65 calculates before copying status; trend mapping 69–75 omits status. If entered-in-error/ineligible sources are admitted, distinguish retained history from a current estimate. [Observation.status is a modifier](https://hl7.org/fhir/R4/observation-definitions.html#Observation.status). Supply the accepted-status/amendment-trend policy and where BMI/eGFR links, versions and unavailable reasons originate. No particular allowlist, latest-head convention or unseen implementation defect is assumed.
+
+## Scope and verification
+
+The review covers this partial results PR, not the entire Part 2 application. It assigns no extra defects to Actor, DateUtil, AgeUtil, FhirCodec or unshown repositories/DTOs, and does not demand production authentication, notifications or other excluded features. Where a finding depends on input admission, external callers, schema or transaction configuration, the qualification remains with it.
+
+Checks consisted of reading the listing, tracing all three success/denial paths, comparing the supplied table and clinical equation, and consulting FHIR, Spring and Java sources. Relevant printed pages were visually checked and official-library entry names inspected without loading classes. Exact source checks, provenance and discussion are retained in the [Task 81 evidence](docs/evidence/task-81-review.md). No payload attack, timing/load result or successful build is claimed. The focused joint walkthrough is recorded separately; it does not establish independent human verification of every finding.
+
+## Conflict in the supplied terminology
+
+The task labels `2947-0` as potassium; official LOINC defines sodium in blood. This is a task conflict, not another junior defect for following the table. The candidate adopted retaining it only for synthetic assessment with prominent disclosure. Real clinical use requires verified specimen/mapping and clinical-owner approval; no replacement code or specimen is inferred. [D-17 decision](docs/decisions/group-6-loinc-clarification.md), [official LOINC definition](https://loinc.org/2947-0).

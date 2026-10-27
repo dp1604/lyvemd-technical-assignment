@@ -9,6 +9,7 @@
     5,
     6,
     8,
+    9,
     10,
     11,
     12
@@ -94,6 +95,7 @@
     78,
     79,
     80,
+    81,
     82,
     83,
     84,
@@ -126,7 +128,7 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "92/96taskscomplete. Group13remainsopenonlyforactualguideddefense92;Group7human86partial/expresslydeferredandGroup9human81unperformed. Task91/93/94actualreviewarchive/history/destinationverified; regeneratefinalcheckpoint/archiveafterthiscommitandrepeatexactversionchecks. Candidate96mustsendcorrectfinalarchiveandconfirmdeliverybefore22:00Asia/Colombo. Noautomaticexternalmessage.",
+  "nextAction": "93/96taskscompleteafter24B/3P/5VreviewandactualfocusedjointTask81discussion/polish. Revalidation90/91/93/94 requiredforchangedsubmissiondocs: stablematrix/links/disclosure,fullhistory/privacy,newv2archive/recipientrecovery. Runtimeunchanged. Then13remaining92guideddefense;86partial/expresslydeferred;96candidate sendscorrectlatestZIPby22:00Asia/Colombo. PreviousZIPnot sent.",
   "recordedAtUtc": "2026-10-27 13:31:32 UTC",
   "groups": [
     {
@@ -269,8 +271,8 @@
         80,
         81
       ],
-      "status": "in-progress",
-      "completionGate": "Static only: do not fix, build or run Attachment A. Clinical-source checks and actual candidate walkthrough completed."
+      "status": "complete",
+      "completionGate": "Staticreview/sourcechecks andactualfocusedwritten/chatwalkthroughcompleted; allfindingsAI-origin, noindependenthumanverificationclaim."
     },
     {
       "group": 10,
@@ -330,5 +332,11 @@
     }
   ],
   "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification. Neweractualuserinstructionatcall_f89b0c538a704048a1d3629be5ff0b17 permitsadvancingotherworkwhilemanual86deferred; this doesnotcompleteGroup7. Followactualstate11next, then12/13/14; retainunperformedhumangatesexplicitly.",
-  "nextMainGroup": 13
+  "nextMainGroup": 13,
+  "revalidationRequired": [
+    90,
+    91,
+    93,
+    94
+  ]
 }

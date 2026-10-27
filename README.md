@@ -8,7 +8,7 @@ Aldercrest, Careline and Atlas are fictional assessment context. The application
 |---|---|
 | Specification and Architecture Note | [Two sections: Dana and engineering](SPECIFICATION_AND_ARCHITECTURE.md) |
 | Build, generator, run instructions and authentic history | This README, `pom.xml`, `src/`, `scripts/` and [history/recovery process](docs/HISTORY.md) |
-| Static review of Attachment A | [PR review](PR_REVIEW.md): 19 blockers, 3 preferences, 2 follow-up checks; supplied code never built, run or fixed |
+| Static review of Attachment A | [PR review](PR_REVIEW.md): 24 blockers, 3 preferences, 5 qualified follow-up checks; supplied code never built, run or fixed; [written walkthrough](PR_REVIEW_WALKTHROUGH.md) |
 | AI working log | [Actual contributions, changes and evidence](AI_WORKING_LOG.md), [R1–R6 delegation](docs/ai/DELEGATION.md), [exact adopted instruction and provenance](docs/ai/ACCESS_RULE_INSTRUCTION.md) |
 
 ## Prerequisites

@@ -1,6 +1,6 @@
 # Decision register
 
-Status: actual candidate-adopted assessment policies are recorded with immutable source/adoption records. Foundation, clinical, ingestion, allGETs/localworkflow, actual dataset/recovery, client automation, two-section note/static review, full regression, measured performance and scoped restore are documented. Manualclient86is partial/deferred;81/92areunperformed. Clean-start and final history/package/delivery acceptance remain separate current gates.
+Status: actual candidate-adopted assessment policies are recorded with immutable source/adoption records. Foundation, clinical, ingestion, allGETs/localworkflow, actual dataset/recovery, client automation, two-section note/static review, full regression, measured performance and scoped restore are documented. Manual client86 is partial/deferred; focused joint review81 is recorded and guided defense92 is incomplete. Qualified clean-start evidence is recorded. Final history/package verification is repeated after later document changes; candidate delivery remains open.
 
 ## Record rules
 

@@ -1,3 +1,5 @@
+Current update: the [Task81 expanded review](task-81-review.md) has24blockers,3preferences,5qualifiedfollow-ups and a written walkthrough; the actual focused joint walkthrough is complete, with independent human source verification unclaimed. The earlier milestone below is preserved as history.
+
 # Group9 — complete static Attachment A review
 
 Original Tasks77–80 are complete. Actual joint candidate walkthrough81 has not been performed and remains open. [PR_REVIEW](../../PR_REVIEW.md) recommends request changes/do not merge, with19blockers,3nonblocking preferences and2follow-up checks across all8files/724printedlines. Every blocker has precise printed locations, requirement, supported defect/consequence and remedy. Review scope preserves the attachment's defect-free unseen helpers and does not infer unseen test assertions, external SQL exploitability, measured timing or runtime results.

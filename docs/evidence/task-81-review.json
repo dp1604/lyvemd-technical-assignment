@@ -1,0 +1,38 @@
+{
+  "schema": "atlas-task81-static-review-v1",
+  "staticReviewComplete": true,
+  "files": 8,
+  "printedLines": 724,
+  "blockers": 24,
+  "preferences": 3,
+  "qualifiedFollowups": 5,
+  "newFindings": [
+    "B20",
+    "B21",
+    "B22",
+    "B23"
+  ],
+  "promotedFinding": "B24",
+  "allFindingsOrigin": "AI",
+  "jointWalkthrough": {
+    "scope": "Written examples for all findings, five-topic chat explanation and actual candidate presentation feedback",
+    "candidateFeedback": "Yes this looks better, I need you to make the 2 reports a bit more non -AI like",
+    "independentHumanSourceVerificationClaimed": false
+  },
+  "attachmentFixedBuiltCompiledRun": false,
+  "inputPdfSha256": {
+    "task": "d52fd05739a59859b573acb1dc2fae66e0cd8d30b91a29908556bf8bc1da8663",
+    "attachment": "18a6030a3fb4c3a7eed6d547d2388bfa30b3dc109cf8ac50fd7c8b4ca791dda0"
+  },
+  "referenceLibraryMetadata": {
+    "artifact": "org.hl7.fhir.r4:6.9.12",
+    "sha256": "eb95034c79c5a3a6de2a82afaad3a8beec6ed6b2c720da430a40b2d0924bf0f8",
+    "nestedEnumEntryPresent": true,
+    "topLevelEnumEntryPresent": false,
+    "classesLoaded": false,
+    "juniorVersionClaimed": false
+  },
+  "reviewSha256": "597af520eeb50955561681f8a0abe3047b9fe415d067030e24888cc912553cf2",
+  "walkthroughSha256": "20cb52d9141a977f158aeb5590e07c01c643591b3e9d0a0315217a7741951510",
+  "runtimeChanged": false
+}
