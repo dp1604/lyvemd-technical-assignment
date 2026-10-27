@@ -500,6 +500,16 @@
       ],
       "agentMessages": [],
       "requestRecord": "Actual continued AI scratch threads01a17c28-82d1-7861-be76-af23874491ef and01a17c28-b2a2-7351-ad48-88e131b40511 supplied recipe/tests, fixture guard and loader script; root authored orchestration integration/scenario checks and executed10focused recipe/profile checks. Runtime effects pending at this increment."
+    },
+    {
+      "id": "G6-002",
+      "topic": "Actual initial-load timeout and pure structural-validation transaction correction",
+      "requestMessages": [
+        "01a17c7d-b4df-7fd1-8300-231e35be41c2"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Actual same two AI scratch threads supplied prevalidation and sixunit tests; root authored service integration/fallback and executed6unit plus35real-DB/HTTP/service regressions. Initial113source partialjournal preserved; unchanged recipe resume still pending."
     }
   ],
   "limits": [

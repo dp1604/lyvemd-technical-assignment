@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import java.util.function.LongSupplier;
 import org.springframework.stereotype.Component;
 import static com.aldercrest.atlas.ingest.ExtensionContent.text;
 import static com.aldercrest.atlas.ingest.IngestionRecords.*;
@@ -27,8 +29,55 @@ public class BundlePlanner {
     public static final String LOCAL_CLASS="https://example.org/fhir/CodeSystem/atlas-encounter-class";
     private final FhirValidation validation;
     private final IngestionRepository repository;
-    public BundlePlanner(FhirValidation validation,IngestionRepository repository) {this.validation=validation;this.repository=repository;}
-    public Planned plan(JsonNode bundle,TestActor actor) {return new Planning(actor).plan(bundle);}
+    private final LongSupplier nanoTime;
+    private static final long PREVALIDATION_BUDGET_NANOS=TimeUnit.SECONDS.toNanos(45);
+    @org.springframework.beans.factory.annotation.Autowired
+    public BundlePlanner(FhirValidation validation,IngestionRepository repository) {this(validation,repository,System::nanoTime);}
+    // Package-private time source permits a deterministic budget test without45seconds of waiting.
+    BundlePlanner(FhirValidation validation,IngestionRepository repository,LongSupplier nanoTime) {
+        this.validation=validation;this.repository=repository;this.nanoTime=nanoTime;
+    }
+    public record StructuralChecks(Set<Integer> invalidEntries,boolean available) {
+        public StructuralChecks {invalidEntries=Set.copyOf(invalidEntries);}
+    }
+    public Planned plan(JsonNode bundle,TestActor actor) {return plan(bundle,actor,prevalidate(bundle));}
+    public Planned plan(JsonNode bundle,TestActor actor,StructuralChecks checks) {
+        if(checks==null || !checks.available()) {throw new IllegalStateException("FHIR validation unavailable.");}
+        return new Planning(actor,checks).plan(bundle);
+    }
+
+    /**
+     * Only bounded local structure/strict-parser work. No roster, receipt, stored clinical
+     * reference, entitlement or audit query belongs here. The caller prepares this before
+     * opening its fresh read/write/audit transaction and preserves auth/replay precedence.
+     */
+    public StructuralChecks prevalidate(JsonNode bundle) {
+        Set<Integer> invalid=new HashSet<>();
+        if(bundle==null || !bundle.isObject() || !"Bundle".equals(bundle.path("resourceType").asText())
+                || !"transaction".equals(bundle.path("type").asText())) {return new StructuralChecks(invalid,true);}
+        JsonNode input=bundle.get("entry");
+        // The transactional planner retains the exact existing top-level error contract.
+        // In particular, never spend HAPI time on an over-bound or non-array entry collection.
+        if(input==null || !input.isArray() || input.size()>1000) {return new StructuralChecks(invalid,true);}
+        long started=nanoTime.getAsLong();RawProfile profile=new RawProfile();
+        for(int index=0;index<input.size();index++) {
+            if(nanoTime.getAsLong()-started>=PREVALIDATION_BUDGET_NANOS) {return new StructuralChecks(invalid,false);}
+            JsonNode resource=input.get(index).path("resource");boolean supported=true;
+            try {profile.resource(resource);}
+            catch(IllegalArgumentException error) {supported=false;} // Plan reports its original profile issue.
+            catch(RuntimeException error) {return new StructuralChecks(invalid,false);}
+            if(supported) {
+                try {
+                    String encoded=resource.toString();
+                    if(!validation.valid(encoded)) {invalid.add(index);}
+                    else {validation.parse(encoded);} // Strict parsing cannot silently discard a field.
+                } catch(ca.uhn.fhir.parser.DataFormatException error) {invalid.add(index);}
+                catch(RuntimeException error) {return new StructuralChecks(invalid,false);}
+            }
+            if(nanoTime.getAsLong()-started>=PREVALIDATION_BUDGET_NANOS) {return new StructuralChecks(invalid,false);}
+        }
+        return new StructuralChecks(invalid,true);
+    }
 
     private record Entry(int index,String type,String id,JsonNode resource) { }
     private static final class Invalid extends RuntimeException {
@@ -38,6 +87,7 @@ public class BundlePlanner {
 
     private final class Planning {
         private final TestActor actor;
+        private final StructuralChecks checks;
         private final RawProfile profile=new RawProfile();
         private final ExtensionContent extensions=new ExtensionContent();
         private final List<Entry> entries=new ArrayList<>();
@@ -48,7 +98,7 @@ public class BundlePlanner {
         private final Map<String,EncounterRow> encounters=new LinkedHashMap<>();
         private final Map<String,ObservationRow> observations=new LinkedHashMap<>();
         private final Set<String> affected=new LinkedHashSet<>();
-        Planning(TestActor actor) {this.actor=actor;}
+        Planning(TestActor actor,StructuralChecks checks) {this.actor=actor;this.checks=checks;}
 
         Planned plan(JsonNode bundle) {
             try {
@@ -103,9 +153,7 @@ public class BundlePlanner {
             });
             attempt(entry,() -> {
                 profile.resource(resource);
-                require(validation.valid(resource.toString()),"FHIR_INVALID");
-                // Strict parser is deliberately separate from the validator; neither may drop unknown fields.
-                validation.parse(resource.toString());
+                require(!checks.invalidEntries().contains(index),"FHIR_INVALID");
             });
             attempt(entry,() -> {
                 if(node.has("fullUrl")) {
