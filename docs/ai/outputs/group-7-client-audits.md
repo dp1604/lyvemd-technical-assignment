@@ -102,3 +102,15 @@ The reviewed protections and compatibility checks are supported directly by sour
 ## Gates still pending
 
 Actual browser/DOM/network/keyboard/layout execution, observed error/race behavior, and the candidate's real manual Task 86 check remain pending. Root reported the six pure Node checks passed by direct file invocation; this worker did not execute them. The source audit does not substitute for browser evidence or human approval.
+
+## Decimal source-text follow-up
+
+Read the scratch `parseApiResponse` change, display helpers, chart guards, eight pure tests and the updated `app.js` read path. Root reported those eight tests passed; this worker did not run them. No source-level blocker was found in the narrow precision change.
+
+The [TC39 JSON.parse definition and InternalizeJSONProperty algorithm](https://tc39.es/ecma262/multipage/structured-data.html#sec-json.parse) were reopened. They establish that a primitive's unmodified parsed value receives its original source text in the third reviver argument and that the reviver is called with the holder as `this`. The implementation stores the numeric lexeme for value/low/high under a local Symbol on that holder. Nested range/component objects retain their own text, while ordinary counts remain numbers. The exact text is rendered with textContent; it does not change units, server flags or clinical interpretation.
+
+A nonzero decimal that underflows to binary zero is not drawn as zero; overflow and unrepresentable plot bounds also result in chart gaps. Exact server text still appears in value/range labels and tooltips. Chart geometry remains approximate presentation. No clinical computation or new clinical eligibility rule is introduced.
+
+If a relevant numeric field lacks context.source, the parser throws BrowserCapabilityError rather than silently falling back to rounded clinical text. The app imports that class, checks the same request/context token after reading/parsing, and uses the safe browser-capability error callback before success rendering. The required bound is fail-closed behavior, not a custom JSON parser or an unverified polyfill. A browser capability probe and actual rendered-value check remain necessary; the standard alone proves no particular browser/version's implementation.
+
+One presentation correction was sent to root: the chart description/empty/gap text at scratch app.js lines 236, 239 and 268 calls every unplotted point unavailable or nonnumeric. Some gaps now mean a valid server decimal is not representable in chart geometry. Use “unplotted points” and “no representable chart points; exact values and reasons are in the table,” keeping client presentation limitations distinct from missing clinical input. This does not require a policy or API change.

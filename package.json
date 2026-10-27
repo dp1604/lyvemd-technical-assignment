@@ -3,5 +3,5 @@
   "private": true,
   "type": "module",
   "scripts": { "test:client": "node scripts/client/client-model.test.mjs" },
-  "engines": { "node": ">=20" }
+  "engines": { "node": ">=24" }
 }

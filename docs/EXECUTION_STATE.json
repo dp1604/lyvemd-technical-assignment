@@ -86,8 +86,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "Group7: integrate same-origin results/trend/access-log client; execute focused client/backend/browser checks and actual candidate walkthrough86. No task completion is inferred from code drafting. Preserve dataset; one owned app/process; no simultaneous database workload.",
-  "recordedAtUtc": "2026-10-27 11:34:56 UTC",
+  "nextAction": "Finish Group7 decimal-support browser recheck/evidence and actual candidate86 worksheet; keep86open. Independent Group10 full163unit/74IT run has one concurrency-observation failure requiring diagnosis and meaningful recheck; no full PASS. Preserve app/data and exact failed reports. Parallel8/9 integration-ready drafts/candidate walkthroughs remain open.",
+  "recordedAtUtc": "2026-10-27 11:56:06 UTC",
   "groups": [
     {
       "group": 1,
@@ -241,7 +241,7 @@
         84,
         85
       ],
-      "status": "pending",
+      "status": "in-progress",
       "completionGate": "Required failures investigated and resolved; an unmet requirement keeps its task open. Reuse meaningful earlier evidence and rerun affected integration checks."
     },
     {

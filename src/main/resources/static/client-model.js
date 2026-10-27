@@ -12,19 +12,48 @@ export const FLAG_LABELS = Object.freeze({
   NO_APPLICABLE_FLAG: 'No applicable flag □'
 });
 
+const decimalText = Symbol('serverDecimalText');
+export class BrowserCapabilityError extends Error { }
+
+// Standard JSON parsing remains responsible for syntax. Preserve the original
+// decimal token separately, so binary floating point cannot change clinical text.
+export function parseApiResponse(text) {
+  return JSON.parse(text, function(key, value, context) {
+    if (['value', 'low', 'high'].includes(key) && typeof value === 'number') {
+      if (typeof context?.source !== 'string') throw new BrowserCapabilityError();
+      (this[decimalText] ??= {})[key] = context.source;
+    }
+    return value;
+  });
+}
+
+function numericText(object, key) {
+  return object[decimalText]?.[key] ?? (typeof object[key] === 'number' && Number.isFinite(object[key]) ? String(object[key]) : null);
+}
+
+function chartValue(point) {
+  if (typeof point.value !== 'number' || !Number.isFinite(point.value)) return null;
+  const text = point[decimalText]?.value;
+  // A nonzero decimal may underflow to binary zero: retain its text but do not
+  // draw a false zero marker. Chart bounds may also be unrepresentable below.
+  if (point.value === 0 && text && /[1-9]/.test(text.split(/[eE]/)[0])) return null;
+  return point.value;
+}
+
 export function words(value) {
   return value == null ? 'Not recorded' : String(value).replaceAll('_', ' ').toLowerCase();
 }
 
 export function flagLabel(flag) { return FLAG_LABELS[flag] ?? 'Flag unavailable'; }
 export function rangeLabel(range) {
-  return range && Number.isFinite(range.low) && Number.isFinite(range.high)
-    ? `${range.low}–${range.high}` : 'No applicable range';
+  const low = range ? numericText(range, 'low') : null, high = range ? numericText(range, 'high') : null;
+  return low !== null && high !== null ? `${low}–${high}` : 'No applicable range';
 }
 
 export function valueLabel(result) {
-  if (typeof result.value === 'number' && Number.isFinite(result.value)) {
-    return `${result.value} ${result.unit ?? ''}`.trim();
+  const text = numericText(result, 'value');
+  if (text !== null) {
+    return `${text} ${result.unit ?? ''}`.trim();
   }
   if (result.cannotComputeReason) return `Cannot compute — ${words(result.cannotComputeReason)}`;
   return 'No numeric value';
@@ -42,21 +71,23 @@ export function timestampNs(value) {
 }
 
 export function plotModel(points) {
-  const entries = points.map(point => ({ point, time: timestampNs(point.effective) }));
+  const entries = points.map(point => ({ point, time: timestampNs(point.effective), value: chartValue(point) }));
   const times = entries.filter(entry => entry.time !== null).map(entry => entry.time);
   if (!times.length) return { segments: [], markers: [], gaps: points.length, min: null, max: null };
   const first = times.reduce((a, b) => a < b ? a : b);
   const last = times.reduce((a, b) => a > b ? a : b);
-  const values = entries.filter(entry => entry.time !== null &&
-    typeof entry.point.value === 'number' && Number.isFinite(entry.point.value)).map(entry => entry.point.value);
+  const values = entries.filter(entry => entry.time !== null && entry.value !== null).map(entry => entry.value);
   if (!values.length) return { segments: [], markers: [], gaps: points.length, min: null, max: null };
   const low = values.reduce((a, b) => Math.min(a, b)), high = values.reduce((a, b) => Math.max(a, b));
   const padding = low === high ? Math.max(Math.abs(low) * 0.05, 1) : (high - low) * 0.1;
   const min = low - padding, max = high + padding;
+  if (!Number.isFinite(min) || !Number.isFinite(max) || !Number.isFinite(max - min)) {
+    return { segments: [], markers: [], gaps: points.length, min: null, max: null };
+  }
   const segments = [], markers = [];
   let segment = [], gaps = 0;
   for (const entry of entries) {
-    const valid = entry.time !== null && typeof entry.point.value === 'number' && Number.isFinite(entry.point.value);
+    const valid = entry.time !== null && entry.value !== null;
     if (!valid) {
       if (segment.length) segments.push(segment);
       segment = []; gaps++; continue;
@@ -64,7 +95,7 @@ export function plotModel(points) {
     const marker = {
       point: entry.point,
       x: last === first ? 0.5 : Number(entry.time - first) / Number(last - first),
-      y: (max - entry.point.value) / (max - min)
+      y: (max - entry.value) / (max - min)
     };
     segment.push(marker); markers.push(marker);
   }

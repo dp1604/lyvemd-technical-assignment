@@ -22,10 +22,16 @@ Loading, empty, generic denial, invalid query, unavailable and network/30-second
 
 Native labelled form controls, buttons, view navigation, table regions, a skip link and visible focus styles support keyboard use. Hidden views have no reachable controls. Detail opens with focus in its region and closes to the original row control, including after following source/correction links; fallback is the Results heading. Pagination moves focus to the relevant heading before disabling its button. Text and marker shape distinguish High/Low/Normal/No applicable flag independently of colour. The chart's equivalent table supplies exact values and reasons.
 
-Optional focused checks require Node20+ and no downloaded packages:
+Optional focused checks require Node24+ and no downloaded packages:
 
 ```powershell
 node scripts/client/client-model.test.mjs
 ```
 
-Six meaningful cases cover missing-vs-normal/zero, null-gap segments, constant/all-null geometry, nanosecond positions/order, late context completion despite ignored abort, and independent new-read/detail cancellation. The root package also passed all163 Java unit cases. These checks and source review do not prove browser behavior, full accessibility conformance or human verification. Actual browser evidence and the candidate's separate Task86 check are recorded at the Group7 milestone. Production authentication, provisioning, workflow screens, mutation endpoints, exports and mobile applications remain outside this minimal-client build.
+Eight meaningful cases cover missing-vs-normal/zero, null-gap segments, constant/all-null geometry, nanosecond positions/order, late context completion despite ignored abort, and independent new-read/detail cancellation. The root package also passed all163 Java unit cases. These checks and source review do not prove browser behavior, full accessibility conformance or human verification. Actual browser evidence and the candidate's separate Task86 check are recorded at the Group7 milestone. Production authentication, provisioning, workflow screens, mutation endpoints, exports and mobile applications remain outside this minimal-client build.
+
+## Decimal text and chart representability
+
+The standard [ECMAScript JSON.parse reviver source context](https://tc39.es/ecma262/multipage/structured-data.html#sec-json.parse) preserves the server numeric token separately for value/low/high under a Symbol key. Display values and ranges retain that text instead of silently rounding through binary floating point. IDs stay strings and page counts stay bounded integers. A browser lacking reviver source support fails closed for these clinical numeric reads with an explicit capability message; actual support must be observed, not inferred from a guessed version. The optional pure checks use the locally verified Node24 runtime.
+
+Chart geometry remains approximate. A nonzero decimal that underflows to binary zero, a nonfinite approximation or overflowing chart bounds is left unplotted, while its exact text stays in the table. Such a gap is a display representability limit, not a newly inferred clinical missing-data reason. Table interpretation/flags are still returned by the server. Two additional checks preserve long decimal/range tokens and cover underflow/overflow/true-zero handling. The first six client cases remain in the eight-case suite; they are not eight additional tests. Actual IAB rechecks passed after this hardening: original decimal text in list/detail, missing-height gap,94-point chart/10-point window, rejected-window clearing and age-boundary flags. See the Group7 evidence. Candidate86 remains pending.

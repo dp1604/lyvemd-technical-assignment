@@ -1,6 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { flagLabel, valueLabel, rangeLabel, timestampNs, plotModel, RequestGate } from '../../src/main/resources/static/client-model.js';
+import { flagLabel, valueLabel, rangeLabel, timestampNs, plotModel, RequestGate, parseApiResponse } from '../../src/main/resources/static/client-model.js';
+
+test('server decimal value and range text survive binary-number rounding unchanged', () => {
+  const result = parseApiResponse('{"value":1.299999999999999999999,"unit":"mg/dL","range":{"low":0.70000000000000000001,"high":1.30000000000000000001},"total":1}');
+  assert.equal(valueLabel(result), '1.299999999999999999999 mg/dL');
+  assert.equal(rangeLabel(result.range), '0.70000000000000000001–1.30000000000000000001');
+  assert.equal(result.total, 1);
+  assert.equal(typeof result.value, 'number');
+});
+
+test('decimal underflow/overflow retains truthful text and never draws false zero or unsafe geometry', () => {
+  for (const value of ['1e-400', '1e400', '1.79e308']) {
+    const result = parseApiResponse(`{"value":${value},"effective":"2026-10-01T00:00:00Z"}`);
+    assert.equal(valueLabel(result), value);
+    assert.equal(plotModel([result]).markers.length, 0);
+  }
+  const zero = parseApiResponse('{"value":0.000,"effective":"2026-10-01T00:00:00Z"}');
+  assert.equal(valueLabel(zero), '0.000');
+  assert.equal(plotModel([zero]).markers.length, 1);
+});
 
 test('missing clinical interpretation is never presented as normal or numeric zero', () => {
   assert.equal(flagLabel('NO_APPLICABLE_FLAG'), 'No applicable flag □');

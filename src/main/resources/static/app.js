@@ -1,4 +1,4 @@
-import { LABELS, flagLabel, rangeLabel, valueLabel, words, plotModel, RequestGate } from './client-model.js';
+import { LABELS, flagLabel, rangeLabel, valueLabel, words, plotModel, RequestGate, parseApiResponse, BrowserCapabilityError } from './client-model.js';
 
 const byId = id => document.getElementById(id);
 const gate = new RequestGate();
@@ -90,12 +90,14 @@ async function read(channel, suffix, success, failure) {
     });
     if (!gate.current(channel, token)) return;
     if (response.status !== 200) { failure(failureMessage(response.status)); return; }
-    const body = await response.json();
+    const body = parseApiResponse(await response.text());
     if (!gate.current(channel, token)) return;
     success(body);
-  } catch {
+  } catch (error) {
     if (gate.current(channel, token)) {
-      failure(token.timedOut ? 'Request timed out. No content is displayed. Select the view to retry.' : failureMessage(0));
+      failure(error instanceof BrowserCapabilityError
+        ? 'This browser cannot preserve decimal source text. Use a browser with JSON parse source support. No content is displayed.'
+        : token.timedOut ? 'Request timed out. No content is displayed. Select the view to retry.' : failureMessage(0));
     }
   } finally {
     clearTimeout(timer);
@@ -231,10 +233,10 @@ function drawChart(points, code) {
   const x = marker => left + marker.x * (right - left), y = marker => top + marker.y * (bottom - top);
   const unit = points.find(point => point.unit)?.unit ?? '';
   byId('trend-chart-title').textContent = `${LABELS[code] ?? code} trend · ${unit}`;
-  byId('trend-chart-description').textContent = `${points.length} visible points; ${model.gaps} unavailable numeric points. Lines break at gaps. Exact timestamps, values, ranges and flags follow in the table.`;
+  byId('trend-chart-description').textContent = `${points.length} visible points; ${model.gaps} unplotted points. Lines break at gaps. Exact timestamps, values, ranges, flags and any missing-input reasons follow in the table.`;
   group.replaceChildren();
   if (model.min === null) {
-    group.append(svg('text', { x: 450, y: 155, 'text-anchor': 'middle', class: 'chart-gap' }, 'No numeric points to plot. See the table for reasons.'));
+    group.append(svg('text', { x: 450, y: 155, 'text-anchor': 'middle', class: 'chart-gap' }, 'No representable chart points. See the exact-value table.'));
     return;
   }
   group.append(svg('text', { x: left, y: 18, class: 'chart-label' }, unit));
@@ -263,7 +265,7 @@ function drawChart(points, code) {
   const first = points[0]?.effective ?? '', last = points.at(-1)?.effective ?? '';
   group.append(svg('text', { x: left, y: 292, class: 'chart-label' }, first.slice(0, 10)));
   group.append(svg('text', { x: right, y: 292, 'text-anchor': 'end', class: 'chart-label' }, last.slice(0, 10)));
-  if (model.gaps) group.append(svg('text', { x: 450, y: 313, 'text-anchor': 'middle', class: 'chart-gap' }, `${model.gaps} unavailable points — lines break at gaps`));
+  if (model.gaps) group.append(svg('text', { x: 450, y: 313, 'text-anchor': 'middle', class: 'chart-gap' }, `${model.gaps} unplotted points — lines break at gaps`));
 }
 function loadTrend() {
   clearView('trend'); status('trend', 'Loading trend…', 'loading');
