@@ -27,6 +27,11 @@ public class FhirValidation {
                 org.hl7.fhir.utilities.http.ManagedWebAccess.WebAccessPolicy.PROHIBITED);
         this.context = context;
         PrePopulatedValidationSupport local = new PrePopulatedValidationSupport(context);
+        try(var stream=getClass().getResourceAsStream("/fhir/CodeSystem-encounter-class.json")) {
+            if(stream==null) {throw new IllegalStateException("Missing local encounter class definition.");}
+            local.addCodeSystem(context.newJsonParser().parseResource(org.hl7.fhir.r4.model.CodeSystem.class,
+                    new String(stream.readAllBytes(),StandardCharsets.UTF_8)));
+        }
         for (String name : new String[]{"clinical-sex-context","correction-of","standardized-creatinine"}) {
             try (var stream = getClass().getResourceAsStream("/fhir/StructureDefinition-"+name+".json")) {
                 if (stream == null) { throw new IllegalStateException("Missing local FHIR definition."); }
@@ -49,10 +54,14 @@ public class FhirValidation {
         try {
             return validator.validateWithResult(json).getMessages().stream().noneMatch(message ->
                     message.getSeverity() == ResultSeverityEnum.ERROR || message.getSeverity() == ResultSeverityEnum.FATAL);
-        } catch (RuntimeException error) { return false; }
+        } catch (ca.uhn.fhir.parser.DataFormatException error) { return false; }
+        catch (RuntimeException error) {throw new IllegalStateException("FHIR validation unavailable.",error);}
     }
     public org.hl7.fhir.r4.model.Resource parse(String json) {
-        return (org.hl7.fhir.r4.model.Resource)context.newJsonParser()
-                .setParserErrorHandler(new ca.uhn.fhir.parser.StrictErrorHandler()).parseResource(json);
+        try {
+            return (org.hl7.fhir.r4.model.Resource)context.newJsonParser()
+                    .setParserErrorHandler(new ca.uhn.fhir.parser.StrictErrorHandler()).parseResource(json);
+        } catch(ca.uhn.fhir.parser.DataFormatException error) {throw error;}
+        catch(RuntimeException error) {throw new IllegalStateException("FHIR parser unavailable.",error);}
     }
 }

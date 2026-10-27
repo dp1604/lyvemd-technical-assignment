@@ -1,0 +1,355 @@
+package com.aldercrest.atlas;
+
+import com.aldercrest.atlas.config.SchemaMigration;
+import com.aldercrest.atlas.ingest.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.net.URI;
+import java.net.http.*;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.*;
+import java.util.concurrent.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import static org.assertj.core.api.Assertions.*;
+
+/** Real loopback HTTP + PostgreSQL16; only designated synthetic atlas_test is permitted. */
+@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
+class IngestionIT {
+    private static final ObjectMapper JSON=IngestionJson.mapper();
+    @DynamicPropertySource static void database(DynamicPropertyRegistry registry) {
+        String url=System.getenv("ATLAS_DB_URL");
+        if(url==null || !url.matches("jdbc:postgresql://127\\.0\\.0\\.1:55433/atlas_test(?:\\?.*)?")) {throw new IllegalStateException("Designated synthetic test DB required.");}
+        SchemaMigration.run(System.getenv());
+    }
+    @Autowired JdbcTemplate jdbc;
+    @org.springframework.test.context.bean.override.mockito.MockitoSpyBean FhirValidation validator;
+    @LocalServerPort int port;
+    private JdbcTemplate owner;
+    private String clinician,otherClinician,patient,encounter;
+
+    @BeforeEach void fixture() {
+        owner=new JdbcTemplate(new DriverManagerDataSource(System.getenv("ATLAS_DB_URL")+"&currentSchema=atlas",
+                System.getenv("ATLAS_MIGRATION_USER"),System.getenv("ATLAS_MIGRATION_PASSWORD")));
+        clinician=id();otherClinician=id();patient=id();encounter=id();
+        owner.update("INSERT INTO actor(id,role) VALUES (?,'CLINICIAN'),(?,'CLINICIAN')",clinician,otherClinician);
+        owner.update("INSERT INTO patient(id,sex,birth_date) VALUES (?,'male','2000-01-01')",patient);
+        owner.update("INSERT INTO patient_sex_context(patient_id,valid_from,sex) VALUES (?,'2000-01-01','male')",patient);
+        owner.update("INSERT INTO encounter(id,patient_id,class,practitioner_id,fhir_status) VALUES (?,?,'AMB',?,'finished')",encounter,patient,clinician);
+    }
+
+    @Test void resolvesForwardUuidReferencesNormalizesAndPreservesExactContextAndHeldState() throws Exception {
+        String p=urn(),e=urn();ObjectNode obs=observation(p,"2160-0","umol/L",88.4);
+        obs.put("id","client-observation");
+        obs.set("encounter",ref(e));obs.put("effectiveDateTime","2026-01-01T00:00:00.123456789Z");
+        obs.set("extension",JSON.valueToTree(List.of(Map.of("url",FhirDefinitions.STANDARDIZED,"valueBoolean",true))));
+        String body=bundle(entry(obs,urn()),entry(encounter(p,"AMB",clinician),e),entry(newPatient(),p));
+        var response=post(body,key());assertThat(response.statusCode()).isEqualTo(200);
+        JsonNode reply=JSON.readTree(response.body());String obsId=created(reply,0),encId=created(reply,1),patId=created(reply,2);
+        assertThat(patId).isNotEqualTo("client-patient");assertThat(obsId).isNotEqualTo("client-observation");
+        Map<String,Object> row=jdbc.queryForMap("SELECT * FROM observation WHERE id=?",obsId);
+        assertThat(row.get("patient_id")).isEqualTo(patId);assertThat(row.get("encounter_id")).isEqualTo(encId);
+        assertThat((java.math.BigDecimal)row.get("value_num")).isEqualByComparingTo("1");
+        assertThat(row.get("unit_code")).isEqualTo("mg/dL");assertThat(row.get("sex_context")).isEqualTo("female");
+        assertThat(row.get("standardized_creatinine")).isEqualTo(true);
+        assertThat(jdbc.queryForObject("SELECT effective_submicro_nanos FROM observation WHERE id=?",Integer.class,obsId)).isEqualTo(789);
+        Instant restored=jdbc.queryForObject("SELECT effective,effective_submicro_nanos FROM observation WHERE id=?",
+                (rs,n) -> ExactTime.restore(rs.getObject(1,OffsetDateTime.class),rs.getInt(2)),obsId);
+        assertThat(restored).isEqualTo(Instant.parse("2026-01-01T00:00:00.123456789Z"));
+        assertThat(jdbc.queryForObject("SELECT released_at IS NULL AND reviewed_at IS NULL FROM observation_review WHERE observation_id=?",Boolean.class,obsId)).isTrue();
+        assertThat(audits(patId,"ALLOWED")).isEqualTo(1);
+        assertThat(response.headers().firstValue("Cache-Control")).contains("no-store");
+    }
+
+    @Test void invalidEntryNamesItsIndexRejectsValidSiblingsAndDurablyReplaysFailure() throws Exception {
+        String p=urn();ObjectNode invalid=observation(p,"39156-5","kg/m2",22);
+        String body=bundle(entry(newPatient(),p),entry(observation(p,"29463-7","kg",65),urn()),entry(invalid,urn()));
+        int before=count("patient");String key=key();var response=post(body,key);
+        assertThat(response.statusCode()).isEqualTo(400);assertThat(count("patient")).isEqualTo(before);
+        JsonNode reply=JSON.readTree(response.body());assertThat(reply.path("type").asText()).isEqualTo("transaction-response");
+        assertThat(reply.at("/entry/0/response/status").asText()).startsWith("424");
+        assertThat(reply.at("/entry/1/response/status").asText()).startsWith("424");
+        assertThat(reply.at("/entry/2/response/outcome/issue/0/diagnostics").asText()).isEqualTo("DERIVED_INPUT_UNSUPPORTED");
+        assertThat(reply.at("/entry/2/response/outcome/issue/0/expression/0").asText()).isEqualTo("Bundle.entry[2]");
+        assertThat(post(body,key).body()).isEqualTo(response.body());
+        assertThat(jdbc.queryForObject("SELECT http_status FROM ingestion_receipt WHERE actor_id=? AND idempotency_key=?",Integer.class,clinician,key)).isEqualTo(400);
+    }
+
+    @Test void structuralAndUnitErrorsCannotLeavePartialClinicalRows() throws Exception {
+        for(String kind:List.of("status","unit","modifier","conditional")) {
+            String p=urn();ObjectNode bad=observation(p,"2160-0","mg/dL",1);
+            if(kind.equals("status")) {bad.remove("status");}
+            if(kind.equals("unit")) {((ObjectNode)bad.get("valueQuantity")).put("code","unsupported");}
+            if(kind.equals("modifier")) {bad.set("modifierExtension",JSON.createArrayNode());}
+            ObjectNode badEntry=entry(bad,urn());if(kind.equals("conditional")) {((ObjectNode)badEntry.get("request")).put("ifNoneExist","identifier=synthetic");}
+            int before=count("patient");var response=post(bundle(entry(newPatient(),p),badEntry),key());
+            assertThat(response.statusCode()).as(kind).isEqualTo(400);assertThat(count("patient")).as(kind).isEqualTo(before);
+            assertThat(JSON.readTree(response.body()).at("/entry/1/response/status").asText()).startsWith("400");
+        }
+    }
+
+    @Test void unavailableStoredPatientsHaveIdenticalFailureAndCannotBeSelfAuthorizedByNewEncounter() throws Exception {
+        String unavailable=id();owner.update("INSERT INTO patient(id) VALUES (?)",unavailable);
+        var hidden=post(bundle(entry(observation("Patient/"+unavailable,"29463-7","kg",60),urn())),key());
+        var missing=post(bundle(entry(observation("Patient/"+id(),"29463-7","kg",60),urn())),key());
+        assertThat(hidden.statusCode()).isEqualTo(400);assertThat(hidden.body()).isEqualTo(missing.body()).contains("REFERENCE_UNAVAILABLE");
+        int before=count("encounter");
+        var bootstrap=post(bundle(entry(encounter("Patient/"+unavailable,"AMB",clinician),urn()),
+                entry(observation("Patient/"+unavailable,"29463-7","kg",60),urn())),key());
+        assertThat(bootstrap.statusCode()).isEqualTo(400);assertThat(count("encounter")).isEqualTo(before);
+        assertThat(audits(unavailable,"DENIED")).isEqualTo(2);
+    }
+
+    @Test void rejectsRemoteWrongTypeDuplicateAndUnresolvedReferencesWithoutFetching() throws Exception {
+        for(String reference:List.of("https://example.org/private-patient","Encounter/"+encounter,urn(),"Patient/missing")) {
+            var response=post(bundle(entry(observation(reference,"29463-7","kg",60),urn())),key());
+            assertThat(response.statusCode()).as(reference).isEqualTo(400);assertThat(response.body()).doesNotContain(reference);
+        }
+        String duplicate=urn();int before=count("patient");
+        var response=post(bundle(entry(newPatient(),duplicate),entry(newPatient(),duplicate)),key());
+        assertThat(response.statusCode()).isEqualTo(400);assertThat(count("patient")).isEqualTo(before);
+        assertThat(response.body()).contains("DUPLICATE_REFERENCE_IDENTITY");
+        ObjectNode encounterMismatch=observation("Patient/"+patient,"29463-7","kg",60);
+        String foreignPatient=id(),foreignEncounter=id();owner.update("INSERT INTO patient(id) VALUES (?)",foreignPatient);
+        owner.update("INSERT INTO encounter(id,patient_id,class,practitioner_id) VALUES (?,?,'AMB',?)",foreignEncounter,foreignPatient,otherClinician);
+        encounterMismatch.set("encounter",ref("Encounter/"+foreignEncounter));
+        assertThat(post(bundle(entry(encounterMismatch,urn())),key()).body()).contains("REFERENCE_UNAVAILABLE");
+    }
+
+    @Test void exactBodyReplayDoesNotDuplicateAndChangedBytesConflict() throws Exception {
+        String body=bundle(entry(newPatient(),urn())),key=key();int before=count("patient");
+        var first=post(body,key);var replay=post(body,key);
+        assertThat(first.statusCode()).isEqualTo(200);assertThat(replay.statusCode()).isEqualTo(200);assertThat(replay.body()).isEqualTo(first.body());
+        assertThat(count("patient")).isEqualTo(before+1);
+        assertThat(post(body+" ",key).statusCode()).isEqualTo(409);assertThat(count("patient")).isEqualTo(before+1);
+        String patientId=created(JSON.readTree(first.body()),0);
+        assertThat(audits(patientId,"ALLOWED")).isEqualTo(2);assertThat(audits(patientId,"DENIED")).isEqualTo(1);
+    }
+
+    @Test void keysAreActorScopedAndRosterIsRecheckedBeforeReplay() throws Exception {
+        String body=bundle(entry(newPatient(),urn())),key=key();var first=post(body,key);
+        var other=send(body.getBytes(StandardCharsets.UTF_8),key,otherClinician,"CLINICIAN","application/fhir+json");
+        assertThat(first.statusCode()).isEqualTo(200);assertThat(other.statusCode()).isEqualTo(200);assertThat(other.body()).isNotEqualTo(first.body());
+        owner.update("UPDATE actor SET role='STAFF' WHERE id=?",clinician);
+        assertThat(post(body,key).statusCode()).isEqualTo(404);
+        assertThat(jdbc.queryForObject("SELECT count(*) FROM ingestion_receipt WHERE idempotency_key=?",Integer.class,key)).isEqualTo(2);
+    }
+
+    @Test void concurrentIdenticalRequestsContendInDatabaseAndReturnOneCommittedEffect() throws Exception {
+        String key=key(),body=bundle(entry(newPatient(),urn()));int before=count("patient");
+        try(var gate=owner.getDataSource().getConnection();ExecutorService pool=Executors.newFixedThreadPool(2)) {
+            try(var lock=gate.prepareStatement("SELECT pg_advisory_lock(hashtextextended(?,0))")) {lock.setString(1,clinician+":CLINICIAN:"+key);lock.execute();}
+            CountDownLatch start=new CountDownLatch(1);
+            Callable<HttpResponse<String>> request=() -> {start.await();return post(body,key);};
+            Future<HttpResponse<String>> a=pool.submit(request),b=pool.submit(request);start.countDown();
+            boolean waiting=false;
+            try {waiting=waitForTwoLocks("advisory",null);}
+            finally {
+                try(var unlock=gate.prepareStatement("SELECT pg_advisory_unlock(hashtextextended(?,0))")) {unlock.setString(1,clinician+":CLINICIAN:"+key);unlock.execute();}
+            }
+            var first=a.get(20,TimeUnit.SECONDS);var second=b.get(20,TimeUnit.SECONDS);
+            assertThat(waiting).as("Both requests blocked in PostgreSQL after acquiring their old snapshots").isTrue();
+            assertThat(first.statusCode()).isEqualTo(200);assertThat(second.statusCode()).isEqualTo(200);assertThat(first.body()).isEqualTo(second.body());
+            assertThat(count("patient")).isEqualTo(before+1);
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM ingestion_receipt WHERE actor_id=? AND idempotency_key=?",Integer.class,clinician,key)).isEqualTo(1);
+            assertThat(audits(created(JSON.readTree(first.body()),0),"ALLOWED")).isEqualTo(2);
+        }
+    }
+
+    @Test void correctionAppendsRetainsOriginalAndRejectsNonHeadOrChangedContext() throws Exception {
+        ObjectNode original=observation("Patient/"+patient,"2160-0","mg/dL",1);original.set("encounter",ref("Encounter/"+encounter));
+        var initial=post(bundle(entry(original,urn())),key());String originalId=created(JSON.readTree(initial.body()),0);
+        ObjectNode corrected=original.deepCopy();corrected.put("status","amended");((ObjectNode)corrected.get("valueQuantity")).put("value",2);
+        correction(corrected,"Observation/"+originalId);
+        var amendment=post(bundle(entry(corrected,urn())),key());assertThat(amendment.statusCode()).isEqualTo(200);
+        String amendedId=created(JSON.readTree(amendment.body()),0);
+        assertThat(jdbc.queryForObject("SELECT value_num FROM observation WHERE id=?",java.math.BigDecimal.class,originalId)).isEqualByComparingTo("1");
+        assertThat(jdbc.queryForObject("SELECT correction_of FROM observation WHERE id=?",String.class,amendedId)).isEqualTo(originalId);
+        assertThat(jdbc.queryForObject("SELECT released_at IS NULL FROM observation_review WHERE observation_id=?",Boolean.class,amendedId)).isTrue();
+        assertThat(post(bundle(entry(corrected,urn())),key()).body()).contains("CORRECTION_NOT_HEAD");
+        for(String change:List.of("time","analyte","encounter")) {
+            ObjectNode wrong=corrected.deepCopy();correction(wrong,"Observation/"+amendedId);
+            if(change.equals("time")) {wrong.put("effectiveDateTime","2026-01-01T00:00:00.000000001Z");}
+            if(change.equals("analyte")) {wrong.set("code",concept("http://loinc.org","29463-7"));((ObjectNode)wrong.get("valueQuantity")).put("code","kg");}
+            if(change.equals("encounter")) {wrong.remove("encounter");}
+            assertThat(post(bundle(entry(wrong,urn())),key()).body()).as(change).contains("CORRECTION_CONTEXT_MISMATCH");
+        }
+    }
+
+    @Test void bundleLocalCorrectionChainsSupportForwardReferencesAndRejectCyclesAndBranches() throws Exception {
+        String original=urn(),child=urn();ObjectNode a=observation("Patient/"+patient,"29463-7","kg",60),b=a.deepCopy(),c=a.deepCopy();
+        b.put("status","amended");correction(b,original);c.put("status","corrected");correction(c,child);
+        var chain=post(bundle(entry(c,urn()),entry(b,child),entry(a,original)),key());assertThat(chain.statusCode()).isEqualTo(200);
+        JsonNode ids=JSON.readTree(chain.body());assertThat(jdbc.queryForObject("SELECT correction_of FROM observation WHERE id=?",String.class,created(ids,0))).isEqualTo(created(ids,1));
+        ObjectNode cycleA=b.deepCopy(),cycleB=b.deepCopy();String u=urn(),v=urn();correction(cycleA,v);correction(cycleB,u);
+        int before=count("observation");assertThat(post(bundle(entry(cycleA,u),entry(cycleB,v)),key()).body()).contains("CORRECTION_CYCLE");
+        String target=urn();ObjectNode branch1=b.deepCopy(),branch2=b.deepCopy();correction(branch1,target);correction(branch2,target);
+        assertThat(post(bundle(entry(a,target),entry(branch1,urn()),entry(branch2,urn())),key()).body()).contains("CORRECTION_BRANCH");
+        assertThat(count("observation")).isEqualTo(before);
+    }
+
+    @Test void simultaneousDifferentKeyCorrectionsProduceOneSuccessor() throws Exception {
+        ObjectNode original=observation("Patient/"+patient,"29463-7","kg",60);
+        String target=created(JSON.readTree(post(bundle(entry(original,urn())),key()).body()),0);
+        ObjectNode corrected=original.deepCopy();corrected.put("status","amended");correction(corrected,"Observation/"+target);
+        String body=bundle(entry(corrected,urn()));
+        try(var gate=owner.getDataSource().getConnection();ExecutorService pool=Executors.newFixedThreadPool(2)) {
+            gate.setAutoCommit(false);
+            try(var lock=gate.createStatement()) {lock.execute("LOCK TABLE observation IN SHARE MODE");}
+            CountDownLatch start=new CountDownLatch(1);
+            Callable<Integer> request=() -> {start.await();return post(body,key()).statusCode();};
+            var a=pool.submit(request);var b=pool.submit(request);start.countDown();
+            boolean waiting;
+            try {waiting=waitForTwoLocks("relation","observation");}
+            finally {gate.commit();}
+            assertThat(List.of(a.get(20,TimeUnit.SECONDS),b.get(20,TimeUnit.SECONDS))).containsExactlyInAnyOrder(200,400);
+            assertThat(waiting).as("Both correction plans reached INSERT before either was committed").isTrue();
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM observation WHERE correction_of=?",Integer.class,target)).isEqualTo(1);
+        }
+    }
+
+    @Test void auditFailureRollsBackClinicalRowsAndReceiptAndSameKeyCanRetry() throws Exception {
+        String body=bundle(entry(newPatient(),urn())),key=key();int before=count("patient");
+        owner.execute("CREATE FUNCTION atlas.test_g4_audit_failure() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN IF NEW.actor_id=TG_ARGV[0] THEN RAISE EXCEPTION 'synthetic audit failure' USING ERRCODE='23514'; END IF; RETURN NEW; END $$");
+        owner.execute("CREATE TRIGGER test_g4_audit_failure BEFORE INSERT ON access_log FOR EACH ROW EXECUTE FUNCTION atlas.test_g4_audit_failure('"+clinician+"')");
+        try {
+            var failed=post(body,key);assertThat(failed.statusCode()).isEqualTo(503);assertThat(failed.body()).doesNotContain("synthetic","Exception","INSERT",clinician);
+            assertThat(count("patient")).isEqualTo(before);
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM ingestion_receipt WHERE actor_id=? AND idempotency_key=?",Integer.class,clinician,key)).isZero();
+        } finally {owner.execute("DROP TRIGGER test_g4_audit_failure ON access_log");owner.execute("DROP FUNCTION atlas.test_g4_audit_failure()");}
+        assertThat(post(body,key).statusCode()).isEqualTo(200);assertThat(count("patient")).isEqualTo(before+1);
+    }
+
+    @Test void unexpectedValidatorFailureDoesNotBecomeCachedInvalidInput() throws Exception {
+        String body=bundle(entry(newPatient(),urn())),key=key();int before=count("patient");
+        org.mockito.Mockito.doThrow(new IllegalStateException("private synthetic validation failure")).when(validator).valid(org.mockito.ArgumentMatchers.anyString());
+        try {
+            var failed=post(body,key);assertThat(failed.statusCode()).isEqualTo(503);assertThat(failed.body()).doesNotContain("private","validation failure","Exception");
+            assertThat(count("patient")).isEqualTo(before);
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM ingestion_receipt WHERE actor_id=? AND idempotency_key=?",Integer.class,clinician,key)).isZero();
+        } finally {org.mockito.Mockito.doCallRealMethod().when(validator).valid(org.mockito.ArgumentMatchers.anyString());}
+        assertThat(post(body,key).statusCode()).isEqualTo(200);
+    }
+
+    @Test void criticalParentAndComponentSignalsArePreservedAndNeverAutoReleased() throws Exception {
+        ObjectNode bp=observation("Patient/"+patient,"85354-9","mm[Hg]",0);bp.remove("valueQuantity");
+        ObjectNode systolic=JSON.createObjectNode();systolic.set("code",concept("http://loinc.org","8480-6"));systolic.set("valueQuantity",quantity("mm[Hg]",160));
+        systolic.set("interpretation",JSON.valueToTree(List.of(concept("http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation","HH"))));
+        ObjectNode diastolic=JSON.createObjectNode();diastolic.set("code",concept("http://loinc.org","8462-4"));diastolic.set("valueQuantity",quantity("mm[Hg]",95));
+        bp.set("component",JSON.valueToTree(List.of(systolic,diastolic)));
+        var response=post(bundle(entry(bp,urn())),key());assertThat(response.statusCode()).isEqualTo(200);String observation=created(JSON.readTree(response.body()),0);
+        assertThat(jdbc.queryForObject("SELECT source_critical FROM observation WHERE id=?",Boolean.class,observation)).isTrue();
+        assertThat(jdbc.queryForObject("SELECT criticality='CRITICAL' AND released_at IS NULL AND reviewed_at IS NULL FROM observation_review WHERE observation_id=?",Boolean.class,observation)).isTrue();
+        assertThat(jdbc.queryForObject("SELECT source_interpretation::text FROM observation WHERE id=?",String.class,observation)).contains("HH");
+    }
+
+    @Test void strictTransportMalformedJsonHeadersAndEmptyTransactionsHaveSafeOutcomes() throws Exception {
+        assertThat(post("{\"resourceType\":\"Bundle\",\"type\":\"transaction\"}",key()).statusCode()).isEqualTo(200);
+        for(String body:List.of("{}", "{", "{} {}", "{\"resourceType\":\"Bundle\",\"type\":\"transaction\",\"entry\":[]}","{\"type\":1,\"type\":2}")) {
+            var response=post(body,key());assertThat(response.statusCode()).isEqualTo(400);assertThat(response.body()).contains("OperationOutcome").doesNotContain("Exception","trace");
+        }
+        assertThat(send(new byte[]{(byte)0xC3,(byte)0x28},key(),clinician,"CLINICIAN","application/fhir+json").statusCode()).isEqualTo(400);
+        assertThat(send("{}".getBytes(StandardCharsets.UTF_8),key(),clinician,"CLINICIAN","application/xml").statusCode()).isEqualTo(415);
+        assertThat(post("{}","bad/key").statusCode()).isEqualTo(400);
+        assertThat(send("{}".getBytes(StandardCharsets.UTF_8),key(),"unknown-actor","CLINICIAN","application/fhir+json").statusCode()).isEqualTo(404);
+        assertThat(send("{}".getBytes(StandardCharsets.UTF_8),key(),clinician,"INVALID","application/fhir+json").statusCode()).isEqualTo(400);
+        assertThat(send(new byte[FhirController.MAX_BODY_BYTES+1],key(),clinician,"CLINICIAN","application/fhir+json").statusCode()).isEqualTo(413);
+    }
+
+    @Test void allInvalidEntriesAreNamedAndRelativeAliasesResolveWithoutClientIdentityOverwrite() throws Exception {
+        ObjectNode first=observation("Patient/"+patient,"39156-5","kg/m2",22);
+        ObjectNode valid=observation("Patient/"+patient,"2951-2","mmol/L",140);
+        ObjectNode last=observation("Patient/"+patient,"2160-0","unsupported",1);
+        int before=count("observation");var failed=post(bundle(entry(first,urn()),entry(valid,urn()),entry(last,urn())),key());
+        assertThat(failed.statusCode()).isEqualTo(400);JsonNode response=JSON.readTree(failed.body());
+        assertThat(response.at("/entry/0/response/status").asText()).startsWith("400");
+        assertThat(response.at("/entry/1/response/status").asText()).startsWith("424");
+        assertThat(response.at("/entry/2/response/status").asText()).startsWith("400");assertThat(count("observation")).isEqualTo(before);
+        ObjectNode p=newPatient();p.put("birthDate","2000");p.remove("extension");
+        ObjectNode observation=observation("Patient/client-patient","718-7","g/dL",12);
+        var success=post(bundle(entry(observation,urn()),entry(p,urn())),key());assertThat(success.statusCode()).isEqualTo(200);
+        String id=created(JSON.readTree(success.body()),0);
+        assertThat(jdbc.queryForObject("SELECT birth_date_context IS NULL AND sex_context='unknown' FROM observation WHERE id=?",Boolean.class,id)).isTrue();
+    }
+
+    @Test void protectedAssessmentClassesUseTheirLocalNamespaceAndRemainHeld() throws Exception {
+        for(String code:List.of("ABSL","SUBU","MHEV")) {
+            String e=urn();ObjectNode observation=observation("Patient/"+patient,"29463-7","kg",60);observation.set("encounter",ref(e));
+            var response=post(bundle(entry(observation,urn()),entry(encounter("Patient/"+patient,code,clinician),e)),key());
+            assertThat(response.statusCode()).as(code).isEqualTo(200);
+            String observationId=created(JSON.readTree(response.body()),0);
+            assertThat(jdbc.queryForObject("SELECT e.class FROM observation o JOIN encounter e ON e.id=o.encounter_id WHERE o.id=?",String.class,observationId)).isEqualTo(code);
+            assertThat(jdbc.queryForObject("SELECT released_at IS NULL FROM observation_review WHERE observation_id=?",Boolean.class,observationId)).isTrue();
+        }
+    }
+
+    @Test void chunkedBodiesDuplicateHeadersAndEntryCountAreBounded() throws Exception {
+        try(HttpClient client=HttpClient.newHttpClient()) {
+            var request=HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/fhir")).timeout(Duration.ofSeconds(15))
+                    .header("Content-Type","application/fhir+json").header("X-Test-Actor-Id",clinician).header("X-Test-Actor-Role","CLINICIAN").header("X-Idempotency-Key",key())
+                    .POST(HttpRequest.BodyPublishers.ofInputStream(() -> new java.io.ByteArrayInputStream(new byte[FhirController.MAX_BODY_BYTES+1]))).build();
+            assertThat(client.send(request,HttpResponse.BodyHandlers.ofString()).statusCode()).isEqualTo(413);
+            var duplicate=HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/fhir")).timeout(Duration.ofSeconds(15))
+                    .header("Content-Type","application/fhir+json").header("X-Test-Actor-Id",clinician).header("X-Test-Actor-Id",otherClinician)
+                    .header("X-Test-Actor-Role","CLINICIAN").header("X-Idempotency-Key",key()).POST(HttpRequest.BodyPublishers.ofString("{}"));
+            assertThat(client.send(duplicate.build(),HttpResponse.BodyHandlers.ofString()).statusCode()).isEqualTo(400);
+        }
+        ObjectNode repeated=entry(newPatient(),urn());ObjectNode[] tooMany=new ObjectNode[1001];Arrays.fill(tooMany,repeated);
+        var response=post(bundle(tooMany),key());assertThat(response.statusCode()).isEqualTo(400);assertThat(response.body()).contains("ENTRY_COUNT_BOUND");
+    }
+
+    private HttpResponse<String> post(String body,String key) throws Exception {return send(body.getBytes(StandardCharsets.UTF_8),key,clinician,"CLINICIAN","application/fhir+json");}
+    private HttpResponse<String> send(byte[] body,String key,String actor,String role,String type) throws Exception {
+        try(HttpClient client=HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build()) {
+            return client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/fhir")).timeout(Duration.ofSeconds(25))
+                    .header("Content-Type",type).header("X-Test-Actor-Id",actor).header("X-Test-Actor-Role",role).header("X-Idempotency-Key",key)
+                    .POST(HttpRequest.BodyPublishers.ofByteArray(body)).build(),HttpResponse.BodyHandlers.ofString());
+        }
+    }
+    private static ObjectNode newPatient() {
+        ObjectNode p=JSON.createObjectNode().put("resourceType","Patient").put("id","client-patient").put("birthDate","2000-01-01").put("gender","male");
+        p.set("extension",JSON.valueToTree(List.of(Map.of("url",FhirDefinitions.SEX_CONTEXT,"extension",List.of(
+                Map.of("url","code","valueCode","female"),Map.of("url","validFrom","valueDate","2000-01-01"))))));return p;
+    }
+    private static ObjectNode observation(String patient,String code,String unit,double value) {
+        ObjectNode o=JSON.createObjectNode().put("resourceType","Observation").put("status","final").put("effectiveDateTime","2026-01-01T00:00:00Z");
+        o.set("code",concept("http://loinc.org",code));o.set("subject",ref(patient));o.set("valueQuantity",quantity(unit,value));return o;
+    }
+    private static ObjectNode encounter(String patient,String encounterClass,String clinician) {
+        ObjectNode e=JSON.createObjectNode().put("resourceType","Encounter").put("status","finished");
+        e.set("class",JSON.valueToTree(Map.of("system",Set.of("ABSL","SUBU","MHEV").contains(encounterClass)?BundlePlanner.LOCAL_CLASS:BundlePlanner.ACT_CODE,"code",encounterClass)));
+        e.set("subject",ref(patient));e.set("participant",JSON.valueToTree(List.of(Map.of("individual",ref("Practitioner/"+clinician)))));return e;
+    }
+    private static ObjectNode concept(String system,String code) {ObjectNode c=JSON.createObjectNode();c.set("coding",JSON.valueToTree(List.of(Map.of("system",system,"code",code))));return c;}
+    private static ObjectNode ref(String reference) {return JSON.createObjectNode().put("reference",reference);}
+    private static ObjectNode quantity(String unit,double value) {return JSON.createObjectNode().put("value",value).put("system","http://unitsofmeasure.org").put("code",unit);}
+    private static ObjectNode entry(JsonNode resource,String fullUrl) {ObjectNode e=JSON.createObjectNode();e.set("resource",resource);e.put("fullUrl",fullUrl);e.set("request",JSON.valueToTree(Map.of("method","POST","url",resource.path("resourceType").asText())));return e;}
+    private static String bundle(ObjectNode... entries) {return FhirReplies.encode(Map.of("resourceType","Bundle","type","transaction","entry",List.of(entries)));}
+    private static void correction(ObjectNode observation,String reference) {observation.set("extension",JSON.valueToTree(List.of(Map.of("url",FhirDefinitions.CORRECTION,"valueReference",Map.of("reference",reference)))));}
+    private static String created(JsonNode response,int index) {String location=response.at("/entry/"+index+"/response/location").asText();assertThat(location).contains("/");return location.substring(location.indexOf('/')+1);}
+    private int count(String table) {return jdbc.queryForObject("SELECT count(*) FROM "+table,Integer.class);}
+    private int audits(String patient,String outcome) {return jdbc.queryForObject("SELECT count(*) FROM access_log WHERE actor_id=? AND patient_id=? AND action='INGEST' AND outcome=?",Integer.class,clinician,patient,outcome);}
+    private boolean waitForTwoLocks(String kind,String relation) throws InterruptedException {
+        long deadline=System.nanoTime()+Duration.ofSeconds(2).toNanos();
+        do {
+            int waiting=owner.queryForObject("SELECT count(*) FROM pg_locks WHERE NOT granted AND locktype=? AND database=(SELECT oid FROM pg_database WHERE datname=current_database()) AND (CAST(? AS text) IS NULL OR relation=to_regclass(?))",
+                    Integer.class,kind,relation,relation);
+            if(waiting>=2) {return true;}Thread.sleep(10);
+        } while(System.nanoTime()<deadline);
+        return false;
+    }
+    private static String id() {return UUID.randomUUID().toString();}
+    private static String key() {return "g4-"+UUID.randomUUID();}
+    private static String urn() {return "urn:uuid:"+UUID.randomUUID();}
+}

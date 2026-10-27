@@ -1,0 +1,17 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "atlas-encounter-class",
+  "url": "https://example.org/fhir/CodeSystem/atlas-encounter-class",
+  "version": "1.0.0",
+  "name": "AtlasAssessmentEncounterClass",
+  "status": "draft",
+  "experimental": true,
+  "description": "The fictional assessment's protected encounter class labels. No real upstream namespace or clinical terminology equivalence is asserted.",
+  "caseSensitive": true,
+  "content": "complete",
+  "concept": [
+    {"code": "ABSL"},
+    {"code": "SUBU"},
+    {"code": "MHEV"}
+  ]
+}

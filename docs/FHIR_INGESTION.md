@@ -1,0 +1,57 @@
+# Assessment FHIR ingestion contract
+
+This is a bounded JSON FHIR R4 (4.0.1) ingestion adapter, not a general FHIR server. The supported subset is an adopted assessment choice, not a claim that every restriction was specified by the employer. Actual upstream representations remain unverified; they must pass feed/clinical-owner verification before production use. See [decisions](DECISIONS.md), immutable Packages A/B and [Group4 clarifications](decisions/group-4-clarifications.md).
+
+## Request and identity
+
+`POST /fhir`, `Content-Type: application/fhir+json` or `application/json`, UTF-8 only. Compressed/XML requests are unsupported. Body size is at most 2 MiB, including chunked bodies; at most 1000 entries. JSON rejects duplicate properties, trailing documents, nesting beyond 64, strings beyond 16384 characters and numeric tokens beyond 128 characters. Quantities also have an absolute decimal-scale bound of 1000 to prevent pathological representations; this is a resource bound, not a clinical measuring interval.
+
+Exactly one each of:
+
+- `X-Test-Actor-Id`: 1–64 ASCII letters, digits, dot, underscore or hyphen.
+- `X-Test-Actor-Role`: exact `PATIENT`, `PROXY`, `CLINICIAN` or `STAFF`.
+- `X-Idempotency-Key`: 1–128 ASCII letters, digits, dot, underscore or hyphen.
+
+Only a matching seeded CLINICIAN roster entry may ingest. Headers remain impersonatable test declarations; roster validation is not authentication. The audit flag `actor_roster_verified` means only that the declared pair matched that test roster. Invalid header/key syntax gives 400; a well-formed unknown/mismatched actor or other known role gives the same 404 unavailable outcome. A roster check precedes every replay.
+
+The Bundle must have `resourceType: Bundle` and `type: transaction`. Each entry has a resource and `request: {"method":"POST","url":"Patient|Encounter|Observation"}` matching that resource. Conditional fields, other interactions/resources, Bundle security/other metadata and unsupported semantics reject the whole operation. An empty transaction omits `entry`; present empty arrays are not valid FHIR JSON. No caller URL is fetched.
+
+## Resource mapping and deliberate limits
+
+Each supported resource undergoes raw-field/type checks, HAPI R4 structure/invariant validation, strict HAPI parsing and application checks. Unknown fields, modifier/primitive extensions, contained resources, security labels and unimplemented clinical representations reject; they cannot silently disappear through parsing. The raw adapter only accepts root extensions that it implements. Bundled R4 resources and local extension definitions provide validation; HL7 managed HTTP access is prohibited before initialization. Local snapshots are generated from those bundled definitions. Build/dependency retrieval is separate from serving-time validation.
+
+- **Patient:** optional full/partial FHIR birthDate, explicit dated clinical-sex extension, and ordinary validated name/identifier/administrative-gender metadata. Names, identifiers and administrative gender are not retained or used for identity/clinical-sex inference. A full birth date is stored; a valid partial date produces a null date with its original precision in demographic provenance. Missing history remains unknown. `active:false` and unhandled fields reject. Clinical-sex intervals must not overlap. `patient.sex` is the assertion applicable at ingestion's UTC date; each observation stores its own historical context. There is no demographic-editing/upsert API.
+- **Encounter:** required status/class/subject and exactly one principal participant referencing a known seeded `Practitioner/{clinicianId}`. The stored `practitioner_id` is that explicit clinician. FHIR status is retained separately. Ordinary supported class codes use `http://terminology.hl7.org/CodeSystem/v3-ActCode`: AMB, IMP, EMER, HH, VR, ACUTE, NONAC, OBSENC, SS, PRENC. The task's fictional ABSL/SUBU/MHEV codes use locally defined `https://example.org/fhir/CodeSystem/atlas-encounter-class`; no upstream/standard terminology equivalence is asserted. The class code retains its supplied model meaning and drives later proxy filtering. Principal participant type/display metadata does not grant other authority.
+- **Observation:** supplied analytes with canonical UCUM Quantity (or an explicit dataAbsentReason), and BP parent85354-9 with exactly the two required components. Scalar BP and incoming BMI/eGFR reject under the adopted derived-only policy. Only `effectiveDateTime` with a full four-digit-year date, seconds and explicit offset is supported; fractions may have 1–9 digits. PostgreSQL's microsecond timestamp is floored, with a residual0–999 nanoseconds column, preserving the exact supported Instant rather than rounding across a clinical-date boundary. Other effective/value representations, referenceRange, method, device/body-site and unsupported fields reject. Code/quantity/components/absence, clinical context and interpretation provenance are retained; ordinary identifiers/server metadata/category/display are validated metadata, not authority. Source display text never governs conversion.
+
+Patient/Observation resource IDs and fullUrls are temporary input aliases, never overwrite authority. All created records receive fresh server UUIDs. Patient/Encounter/Observation IDs follow FHIR's bounded ID syntax. A complete alias map resolves forward/backward `urn:uuid:` fullUrls and supported relative `Patient/id`, `Encounter/id`, `Observation/id` aliases/references. Duplicate aliases, wrong types, remote, unresolved and inconsistent patient/encounter references reject atomically. A caller cannot obtain access to an existing patient by creating an encounter in the same Bundle: existing stored encounter entitlement is checked before returning demographics/context. Missing and unauthorized stored patient references have identical indexed `REFERENCE_UNAVAILABLE` failures under D-12. New in-Bundle patients can be created by the allowed ingester; actor/proxy provisioning remains a separate synthetic fixture concern.
+
+The three local extension definitions use example HTTPS canonicals; these are identifiers supplied in the package, not deployed/owned production endpoints:
+
+1. `atlas-clinical-sex-context`: Patient complex extension, child `code` (valueCode male/female/unknown), `validFrom` (full valueDate) and optional `validToExclusive` (full valueDate), using UTC [from,to) intervals.
+2. `atlas-correction-of`: Observation valueReference to an Observation.
+3. `atlas-standardized-creatinine`: Observation valueBoolean, accepted only for creatinine; it explicitly asserts the synthetic input's standardization. It does not prove a real assay's traceability or interval.
+
+Their full canonical prefix is `https://example.org/fhir/StructureDefinition/`. App checks enforce clinical interval/code/context semantics in addition to the local definitions. The definitions were parsed/checked and exercised by valid/invalid instances; no full implementation-guide/FHIR certification is claimed. Historical proposed URN spellings remain immutable and are superseded by D-11.
+
+## Atomicity, replay and corrections
+
+Validation/planning completes before the first clinical insert. One bounded Repeatable Read, read-write action contains stored clinical-reference reads, all clinical inserts, held review rows, patient-scoped categorical audits and the completed receipt. The HTTP body is materialized and returned after commit. Audit failure rolls back the clinical rows and receipt; infrastructure failures remain retryable. Denials are returned inside the action so their audit can commit. A complete database outage prevents auditing into that same database; content is withheld and only a constant, non-clinical operational warning is emitted.
+
+Idempotency binds actor ID + role + key to SHA-256 of the exact received UTF-8 bytes. Whitespace changes count as changed input. A completed success or deterministic validation failure is durably retained for the assessment DB lifetime; same scope/key/bytes returns the saved status/body/IDs. Changed bytes give409. Receipts retain only request hash, status, response identifiers/outcomes and affected patient IDs, never the raw request or clinical-resource payload. Replays are auditable operation receipts belonging to the checked ingester, not a general clinical-read endpoint.
+
+Transaction advisory locks coordinate a key; the receipt primary key is the final duplicate guard. Waiting on a lock does not refresh a Repeatable Read snapshot. Therefore serialization/deadlock/unique conflicts roll back the whole action and retry in a new transaction, at most3 attempts. Each attempt uses one connection; no second connection waits while holding a request transaction. Exhausted/other DB failures give503 with no completed failure receipt.
+
+An amended/corrected Observation requires the correction extension; other statuses cannot carry it. The target must be available, same patient/analyte/encounter/exact effective Instant, and the current head. A correction gets a new ID and new held review state. Original content is immutable. In-Bundle forward correction chains are validated then inserted in dependency order; self-links, cycles and branches reject. A unique successor index protects cross-request races; the loser retries fresh validation and receives a deterministic non-head rejection. Context-changing corrections are unsupported and explicitly rejected, rather than changing the wrong original or silently losing its privacy classification.
+
+Every new source result remains held. Source HH/LL/AA signals on the parent/components are preserved as CRITICAL; other signals never invent a noncritical threshold/classification. Calculated HIGH/LOW is not criticality. Clinician review/release and visibility are subsequent workflow/read-layer work, and must not be bypassed by `status:final` or direct source flags.
+
+## Responses and intentional R4 departure
+
+- Success: HTTP200, Bundle(transaction-response), input-order response entries with201 Created and actual `Resource/serverId` locations.
+- Parseable transaction with invalid entries: HTTP400, Bundle(transaction-response), each offending entry marked400 with a categorical OperationOutcome and zero-based `Bundle.entry[i]` expression. Valid siblings are424 Failed Dependency and are not committed. No values, submitted references or internal validator diagnostics are echoed.
+- Malformed JSON/UTF-8, non-Bundle/wrong transaction type, transport/header errors: safe top-level OperationOutcome. Oversize413, unsupported media415, key conflict409, temporary infrastructure503.
+
+**The assessment explicitly requests invalid entries in a transaction-response; normative R4 requires a single OperationOutcome for a failed transaction.** The candidate adopted the task-first envelope and disclosed this departure. Successful processing still remains atomic. See [R4 transaction response](https://hl7.org/fhir/R4/http.html#transaction-response), [R4 JSON representation](https://hl7.org/fhir/R4/json.html), [R4 extension rules](https://hl7.org/fhir/R4/extensibility.html) and [Encounter.class](https://hl7.org/fhir/R4/encounter-definitions.html#Encounter.class).
+
+Evidence and remaining integration limits are recorded separately; a written contract alone does not complete Tasks42–47, the dataset, the four GET routes or final regression.

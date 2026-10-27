@@ -409,6 +409,21 @@
       ],
       "agentMessages": [],
       "requestRecord": "Actual source questions/answers retained in Group4 clarifications. AI audit agent threads01a17bc7-a332-77a1-91d5-dd1715aae911 and01a17bc7-cbd1-7b11-8069-bffda6f28508; scratch reports retained; root integrates/tests. Final audit output locators reconciled later."
+    },
+    {
+      "id": "G4-002",
+      "topic": "Actual atomic-ingestion code, AI reviews and forced-overlap HTTP tests",
+      "requestMessages": [
+        "01a17bc7-5815-77d0-b6b3-a7b10a79634d"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_0fadcf161a6692c9016ae03c461a8081919f21bad4c068245c",
+        "msg_0fadcf161a6692c9016ae039019b9081918a6cd11cb9a560f6",
+        "msg_0f4deff779876861016ae03c17c4408191b53006fdb51d295d",
+        "msg_0f4deff779876861016ae033dcea608191b5c490a147563060"
+      ],
+      "requestRecord": "Actual source outputs recovered; scratch-only workers, root integration/testing. Initial15-test result14pass+1observationfailure retained; strengthened18-test suite passed. Secured detail dependency remains before Group4 closure."
     }
   ],
   "limits": [
