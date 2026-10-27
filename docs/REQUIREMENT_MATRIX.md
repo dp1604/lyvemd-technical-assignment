@@ -11,10 +11,10 @@ Primary sources: **T** = supplied Technical Task (three pages); **A** = Attachme
 Delivery aliases below identify planned areas, not assertions that modules or evidence already exist:
 
 - **N1/N2**: sections 1/2 of the [Specification and Architecture Note](../SPECIFICATION_AND_ARCHITECTURE.md), currently an outline.
-- **APP/DB/UI**: application code, migrations and browser client under the [reserved project structure](PROJECT_STRUCTURE.md); implementation pending.
+- **APP/DB/UI**: application code, migrations and browser client under the [project structure](PROJECT_STRUCTURE.md); [Group2 foundation](evidence/group-2-foundation.md) exists; clinical endpoints/UI remain pending.
 - **SCOPE**: [build scope boundaries](SCOPE_BOUNDARIES.md); initial inventory checked in Task 9, continuing/final scope inspection pending.
 - **DATA/TEST**: deterministic generator and meaningful tests under the reserved scripts/test locations; implementation pending.
-- **RUN**: [README](../README.md), currently no verified build/start or dataset command.
+- **RUN**: [README](../README.md); Group2 build/start verified locally, dataset command and final clean-run pending.
 - **PR**: [static review](../PR_REVIEW.md), currently pending. **LOG**: [AI working log](../AI_WORKING_LOG.md), maintained incrementally.
 - **ENV**: [verified environment probe](evidence/environment.md); **HIST**: [history process](HISTORY.md) and snapshot-specific [Task 5 evidence](evidence/task-5-history.md).
 - **DELEG/PROMPT**: [R1-R6 delegation](ai/DELEGATION.md) and [exact adopted instruction/provenance](ai/ACCESS_RULE_INSTRUCTION.md).
@@ -100,16 +100,16 @@ Preserve all 27 listed columns and their meanings. “pk”, “fk” and “nul
 
 | ID | Source | Obligation | Planned delivery; tasks | Evidence required | Current status |
 |---|---|---|---|---|---|
-| DM-01 | T p2 §2.3 | patient: id (pk), sex, birth_date | DB / APP / TEST; 15,34 | Migration/schema inspection and demographic policy cases | PENDING |
-| DM-02 | T p2 §2.3 | encounter: id (pk), patient_id (fk), class, practitioner_id | DB / APP / TEST; 34,36,38 | Migration plus patient/clinician/protected-class relationship checks | PENDING |
-| DM-03 | T p2 §2.3 | proxy_link: patient_id, proxy_id (pk pair) | DB / APP / TEST; 34,37 | Composite-key semantics; revocation remains possible and logged | PENDING |
-| DM-04 | T p2 §2.3 | observation: id (pk), patient_id (fk), encounter_id (nullable), code, unit_code, value_num (nullable), effective, status, correction_of (nullable), component (jsonb, nullable) | DB / APP / TEST; 13,15-16,34,42-46,52-62 | All 10 meanings and 4 explicit nullable fields retained; corrections/components/effective-time checks | PENDING |
-| DM-05 | T p2 §2.3 | access_log: id (pk), actor_id, actor_role, patient_id, action, outcome, source, at | DB / APP / TEST; 17,34,40,51,84 | All 8 fields populated with actual attribution/action/outcome/source/time | PENDING |
+| DM-01 | T p2 §2.3 | patient: id (pk), sex, birth_date | DB / APP / TEST; 15,34 | Migration/schema inspection and demographic policy cases | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
+| DM-02 | T p2 §2.3 | encounter: id (pk), patient_id (fk), class, practitioner_id | DB / APP / TEST; 34,36,38 | Migration plus patient/clinician/protected-class relationship checks | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
+| DM-03 | T p2 §2.3 | proxy_link: patient_id, proxy_id (pk pair) | DB / APP / TEST; 34,37 | Composite-key semantics; revocation remains possible and logged | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
+| DM-04 | T p2 §2.3 | observation: id (pk), patient_id (fk), encounter_id (nullable), code, unit_code, value_num (nullable), effective, status, correction_of (nullable), component (jsonb, nullable) | DB / APP / TEST; 13,15-16,34,42-46,52-62 | All 10 meanings and 4 explicit nullable fields retained; corrections/components/effective-time checks | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
+| DM-05 | T p2 §2.3 | access_log: id (pk), actor_id, actor_role, patient_id, action, outcome, source, at | DB / APP / TEST; 17,34,40,51,84 | All 8 fields populated with actual attribution/action/outcome/source/time | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
 | CT-01 | T p2 §2.3 | X-Test-Actor-Id and X-Test-Actor-Role, roles PATIENT/PROXY/CLINICIAN/STAFF, untrusted input | N2 / APP / TEST; 14,35,83 | Missing/malformed/unsupported values and authoritative stored rights checked; document impersonation limitation | PENDING — Q-04 |
-| CT-02 | T p2 §2.3 | May add columns/indexes but cannot change listed meanings | N2 / DB / TEST; 10,34,90 | Source-to-schema review and reasons for additions, no unsupported source constraint claim | PENDING |
-| ST-01 | T p2 §2.3 | Java 21+ and Spring Boot 3.x | APP / RUN; 3,33,88-89 | ENV confirms probe; own build/runtime and clean instructions still required | PARTIAL — ENV |
-| ST-02 | T p2 §2.3 | HAPI FHIR R4, FHIR 4.0.1 | APP / TEST / RUN; 3,33,42,88-89 | ENV confirms probe; final dependencies/parser/validation checked on own build | PARTIAL — ENV |
-| ST-03 | T p2 §2.3 | PostgreSQL 16 | DB / RUN; 3,33-34,88-89 | ENV confirms isolated 16.15; final app/schema and clean database checks pending | PARTIAL — ENV |
+| CT-02 | T p2 §2.3 | May add columns/indexes but cannot change listed meanings | N2 / DB / TEST; 10,34,90 | Source-to-schema review and reasons for additions, no unsupported source constraint claim | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
+| ST-01 | T p2 §2.3 | Java 21+ and Spring Boot 3.x | APP / RUN; 3,33,88-89 | ENV confirms probe; own build/runtime and clean instructions still required | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
+| ST-02 | T p2 §2.3 | HAPI FHIR R4, FHIR 4.0.1 | APP / TEST / RUN; 3,33,42,88-89 | ENV confirms probe; final dependencies/parser/validation checked on own build | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
+| ST-03 | T p2 §2.3 | PostgreSQL 16 | DB / RUN; 3,33-34,88-89 | ENV confirms isolated 16.15; final app/schema and clean database checks pending | PARTIAL — [Group2 schema/runtime foundation](evidence/group-2-foundation.md); feature/final checks pending |
 
 ## Every required endpoint
 

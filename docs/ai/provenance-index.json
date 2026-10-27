@@ -316,6 +316,43 @@
         "msg_02db6a6f960881c3016ae01ddbb3e48191beef8b7462dbac9e"
       ],
       "requestRecord": "Actual group request/adoption answers and unchanged reviewed package hashes retained; question context explicitly summarized."
+    },
+    {
+      "id": "G2-001",
+      "topic": "Service and PostgreSQL foundation, scripts, tests and own-code review",
+      "requestMessages": [
+        "01a17b8d-8e2c-7211-ae8f-0927addb4e34"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_022233db4e81ff94016ae0279767ec8191ba81f0d987d4bf69",
+        "msg_022233db4e81ff94016ae029781cf88191a508a231cf9fcc22"
+      ],
+      "requestRecord": "Exact current user request retained; own-code audit and follow-up actual source locators; runtime evidence is root executed."
+    },
+    {
+      "id": "G8-001",
+      "topic": "Parallel specification draft, not final adoption/completion",
+      "requestMessages": [
+        "01a17b8d-8e2c-7211-ae8f-0927addb4e34"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_05b8047b65414630016ae0272ac44081919a8276ea54f82ba0"
+      ],
+      "requestRecord": "Root delegated under agreed parallel plan; agent01a17b90-7616-7841-ab43-fa7a7b6147a8; scratch draft/hash retained, candidate review pending."
+    },
+    {
+      "id": "G9-001",
+      "topic": "Parallel static AttachmentA review draft, candidate walkthrough pending",
+      "requestMessages": [
+        "01a17b8d-8e2c-7211-ae8f-0927addb4e34"
+      ],
+      "returnedMessages": [],
+      "agentMessages": [
+        "msg_022233db4e81ff94016ae0268cf4908191bd52230a187ea70b"
+      ],
+      "requestRecord": "Root delegated static-only plan; agent01a17b90-9e10-7ea3-8876-c2799c2562db; draft/hash retained, no source execution."
     }
   ],
   "limits": [

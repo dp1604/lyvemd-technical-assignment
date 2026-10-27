@@ -1,6 +1,6 @@
 # Decision register — Group 1
 
-Status: Tasks 10-17 decisions are recorded from actual candidate adoptions; document/source checks passed. Application implementation and verification remain pending. This register does not finalize the two-section note.
+Status: Tasks 10-17 decisions are recorded from actual candidate adoptions; document/source checks passed. Clinical implementation and verification remain pending; the Group2 service/schema foundation is separately documented. This register does not finalize the two-section note.
 
 ## Record rules
 
@@ -44,6 +44,6 @@ All rows above are adopted as assessment policies. A was adopted in source messa
 4. The synthetic input contract asserts standardized creatinine; neither an ordinary Quantity nor LOINC alone verifies a real assay. Actual feed format, assay traceability/measuring interval and historical-demographic evidence remain production gates.
 5. Critical-path completion is a recorded demonstration attestation, not proof of real contact or a complete production workflow. No clinical thresholds, legal jurisdiction or vendor facts are invented.
 6. Test actors remain impersonatable. PostgreSQL unavailability prevents writing to that same database; fail closed without claiming impossible outage audit durability. Snapshot authorization cannot retract an already-authorized in-flight response.
-7. Official extension definitions, profile examples, code, migrations, dataset commands and all actual tests are forthcoming in their implementation groups. A decided policy is not a passed behavior.
+7. The Group2 service/schema foundation and focused tests exist; official FHIR extensions/profile examples, clinical/endpoint code, feature migrations, dataset commands and acceptance tests remain their implementation groups. A decided policy is not a passed behavior.
 
 Future unclear facts/policies are added here with source, options, candidate decision, reason, affected matrix IDs, implementation/evidence links and limitations. Preserve adopted versions and explain changes. The production-design duties and scope exclusions remain intact.

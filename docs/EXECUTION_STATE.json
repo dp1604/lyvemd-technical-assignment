@@ -2,7 +2,8 @@
   "schemaVersion": 1,
   "activeMainGroup": null,
   "completedGroups": [
-    1
+    1,
+    2
   ],
   "completedChecklistTasks": [
     1,
@@ -21,7 +22,9 @@
     14,
     15,
     16,
-    17
+    17,
+    33,
+    34
   ],
   "mainSequence": [
     1,
@@ -42,8 +45,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "Complete private publication/history checkpoint for this policy milestone; on next-group instruction start Group2 Tasks33-34, with document/review lanes8/9 alongside. Check ignored work/resume-state.json and actual Git/publication state after interruption.",
-  "recordedAtUtc": "2026-10-27 03:58:44 UTC",
+  "nextAction": "Finish Group2 private publication/history checkpoint; on next-group instruction start Group3 Tasks52–62 clinical engine and independent numeric checks. Parallel8/9 drafts retained in ignored work/parallel; root review/integration and guided checks remain open. Inspect work/resume-state.json after interruption.",
+  "recordedAtUtc": "2026-10-27 04:36:02 UTC",
   "groups": [
     {
       "group": 1,
@@ -68,7 +71,7 @@
         33,
         34
       ],
-      "status": "pending",
+      "status": "complete",
       "completionGate": "Build/start and schema checks pass; added constraints are documented as choices."
     },
     {
@@ -172,7 +175,7 @@
         31,
         32
       ],
-      "status": "pending",
+      "status": "in-progress",
       "completionGate": "Draft alongside 2–12; finish against actual decisions, implementation and evidence. Never describe a projection as a measurement."
     },
     {
@@ -185,7 +188,7 @@
         80,
         81
       ],
-      "status": "pending",
+      "status": "in-progress",
       "completionGate": "Static only: do not fix, build or run Attachment A. Clinical-source checks and actual candidate walkthrough completed."
     },
     {
@@ -246,5 +249,5 @@
     }
   ],
   "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification.",
-  "nextMainGroup": 2
+  "nextMainGroup": 3
 }
