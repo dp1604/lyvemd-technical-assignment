@@ -4,7 +4,7 @@ I used Codex for implementation, research, test execution and document drafting.
 
 ## Access-rule instruction
 
-The instruction I adopted is preserved [verbatim](docs/ai/prompts/access-rules-v1.txt). Codex drafted it and I adopted it unchanged with the response `Adopt v1 exactly as written`. Its SHA-256 is `af23a7677bf0163b2ae7ff20938f123b22d24e8bd43ac9c333fe605a08628680`. Subsequent choices are in the [decision register](docs/DECISIONS.md); they supplement the original instruction rather than rewriting it.
+The instruction I adopted is preserved [verbatim](docs/ai/prompts/access-rules-v1.txt). Codex drafted it based on my detailed prompt and the documents I provided, and I adopted it unchanged with the response `Adopt v1 exactly as written`. Its SHA-256 is `af23a7677bf0163b2ae7ff20938f123b22d24e8bd43ac9c333fe605a08628680`. Subsequent choices are in the [decision register](docs/DECISIONS.md); they supplement the original instruction rather than rewriting it.
 
 ## Requests, outputs and changes
 
