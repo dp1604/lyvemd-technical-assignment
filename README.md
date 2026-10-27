@@ -1,66 +1,78 @@
-# LyveMD technical lead assignment - Aldercrest Atlas
+# LyveMD technical assignment — Aldercrest Atlas
 
-**Known terminology conflict:** the brief labels `2947-0` as potassium; official LOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](docs/decisions/group-6-loinc-clarification.md).
+**Terminology conflict:** the brief labels `2947-0` as potassium; official LOINC identifies sodium in blood. This synthetic assessment retains the supplied convention with a prominent notice, following the [recorded candidate decision](docs/decisions/group-6-loinc-clarification.md). Real clinical use requires verified specimen/terminology mapping and clinical-owner approval.
 
+Aldercrest, Careline and Atlas are fictional assessment context. The application is local and synthetic. The four required components are:
 
-This private repository contains the supplied technical assessment. Aldercrest, Careline and Atlas are fictional assessment context.
+| Component | Start here |
+|---|---|
+| Specification and Architecture Note | [Two sections: Dana and engineering](SPECIFICATION_AND_ARCHITECTURE.md) |
+| Build, generator, run instructions and authentic history | This README, `pom.xml`, `src/`, `scripts/` and [history/recovery process](docs/HISTORY.md) |
+| Static review of Attachment A | [PR review](PR_REVIEW.md): 19 blockers, 3 preferences, 2 follow-up checks; supplied code never built, run or fixed |
+| AI working log | [Actual contributions, changes and evidence](AI_WORKING_LOG.md), [R1–R6 delegation](docs/ai/DELEGATION.md), [exact adopted instruction and provenance](docs/ai/ACCESS_RULE_INSTRUCTION.md) |
 
-**Current status:** Groups 1–6 are complete. All five required API routes, caller-visible clinical views, clinician release, individual proxy revocation and the deterministic 100-patient / 106-encounter / 10,000-source dataset are implemented. The current build passed 163 unit cases; the actual load, eight required scenarios and fresh-local-journal recovery passed. [Group 6 evidence](docs/evidence/group-6-dataset.md) records the earlier failures and preservation checks. The previous complete 204-case backend checkpoint and affected 21-case recheck are [Group 5 evidence](docs/evidence/group-5-reads-and-workflow.md), not a newly executed full suite after these changes. Group7 client Tasks63–65 are implemented: eight focused client cases and actual IAB results/chart/log/keyboard/privacy checks passed. [Client evidence](docs/evidence/group-7-client.md) preserves the decimal fix and exact scope. Actual candidate86 is pending. The complete regression passed163unit+74integration cases (237), with a subsequent separate connection-provider failure/recovery IT also passing. [Group10 evidence](docs/evidence/group-10-regression.md) records the original failure, scoped test correction, exact checkpoints and limits; Tasks82–85 are complete. The two-section note and complete static review are integrated. The [measured read probe](docs/PERFORMANCE.md) met its prior500ms per-case p95 target on100patients/106encounters/10,000sources, with551HTTP200/exact551audits and retained maxima above500ms. The [isolated restore drill](docs/evidence/group-12-restore.md) passed full10-table/schema/grant/sequence equality and restored access/audit checks. Fresh-checkout/two-command acceptance, final reconciliation/package and remaining candidate walkthroughs are pending. The candidate expressly deferred remaining manual client tests; those remain incomplete. This is not yet a complete submission or production system.
+## Prerequisites
 
-| Required component | Location | Status |
-|---|---|---|
-| Specification and Architecture Note | [SPECIFICATION_AND_ARCHITECTURE.md](SPECIFICATION_AND_ARCHITECTURE.md) | Completed two-section note; bounded later evidence reconciliation remains |
-| Build, history, generator and instructions | src/, scripts/, this README and authentic Git history | Five API routes, clinical engine, local workflow and actual dataset/replay verified; final acceptance pending |
-| Static Attachment A review | [PR_REVIEW.md](PR_REVIEW.md) | Complete static review; actual joint walkthrough remains open; supplied code never built/run/fixed |
-| AI working log | [AI_WORKING_LOG.md](AI_WORKING_LOG.md), docs/ai/ | Maintained incrementally; final reconciliation pending |
+The verified Windows path uses PowerShell 7, JDK 21+, Maven 3.9+ and PostgreSQL 16 binaries, including `initdb`, `pg_ctl`, `psql`, `pg_dump` and `pg_restore`. Put Java/Maven on PATH with JAVA_HOME set; set ATLAS_PG_BIN to PostgreSQL's bin directory or make those tools available on PATH. Existing ignored workspace tools are detected, but are not shipped. First dependency resolution needs Maven Central; verification used an already populated external Maven cache, not a clean machine or cold download.
 
-One Spring Boot service serves the API and same-origin plain HTML/CSS/JavaScript client, with no client build step or external runtime dependencies. Required stack: Java21+, Spring Boot3.x, HAPI FHIR R4/4.0.1 and PostgreSQL16. Pinned build: Boot3.5.16 and HAPI8.12.1; dependency/plugin versions otherwise come from that exact parent. The local tools verified are Java21.0.12.1, Maven3.9.16 and PostgreSQL16.15. See [environment evidence](docs/evidence/environment.md), [foundation evidence](docs/evidence/group-2-foundation.md) and [schema choices](docs/DATABASE.md).
+Pinned application: Java 21, Spring Boot 3.5.16, HAPI FHIR 8.12.1 using R4/FHIR 4.0.1, PostgreSQL 16. Locally verified tools: JDK 21.0.12.1+1, Maven 3.9.16, PostgreSQL 16.15. Optional client-model/performance tools use Node 24 without downloaded packages. The browser must support standard JSON.parse reviver source context; unsupported clients receive an explicit unavailable-capability message. [Environment](docs/evidence/environment.md), [client contract](docs/CLIENT.md).
 
-## Build and start
+## The two required commands
 
-Prerequisites for the tested Windows path: PowerShell7, JDK21+, Maven3.9+ and PostgreSQL16 binaries (including initdb, pg_ctl and psql). Java and Maven must be on PATH/JAVA_HOME; PostgreSQL can be on PATH or its bin directory set in ATLAS_PG_BIN. Existing ignored workspace tools are detected automatically but are not shipped. First build needs access to Maven Central for pinned dependencies; later offline use requires the complete cache. Do not commit downloaded tools or credentials.
-
-From the repository root, one command builds, prepares/migrates the isolated database and starts the service:
+From the repository root, build, prepare/migrate the isolated database and start the service:
 
 ```powershell
 pwsh -NoProfile -File ./scripts/start.ps1
 ```
 
-Default HTTP address: http://127.0.0.1:18081 (ATLAS_HTTP_PORT can override the port). POST /fhir and the four required GET routes are implemented under the [bounded ingestion](docs/FHIR_INGESTION.md), [visibility](docs/RESULT_VISIBILITY.md), [result-read](docs/RESULT_READS.md) and [access-log](docs/ACCESS_LOG.md) contracts. The root URL serves the [minimal client](docs/CLIENT.md); its test context is a declaration, not a login. The separate [dataset command](docs/DATASET.md) creates and loads the synthetic assignment cohort; integration tests use the separate atlas_test database. Ctrl+C stops the serving process. The database remains available for subsequent work. To stop only this assessment's database after the application stops:
-
-```powershell
-pwsh -NoProfile -File ./scripts/stop-local-database.ps1
-```
-
-The local bootstrap uses a separate loopback cluster on55433, database atlas, schema atlas, random ignored credentials and separate migration/runtime roles. It preserves existing data. atlas_test is reserved for verification; tests must never point at the assessment dataset. Local PostgreSQL uses SCRAM authentication; the HTTP server binds loopback. These scripts are a Windows development path, not a deployment or authentication solution. See [script details](scripts/README.md).
-
-## Verify
-
-The meaningful automated foundation checks use real PostgreSQL16 in the designated test database:
-
-```powershell
-pwsh -NoProfile -File ./scripts/verify.ps1
-```
-
-This runs the normal unit tests and the integration profile. Maven package runs unit tests alone; it does not imply PostgreSQL/endpoint acceptance. Verification does not delete/reset a database. Synthetic test IDs vary to avoid clashes; the deterministic assignment cohort remains separate from those test fixtures. Raw local test reports/logs stay ignored; curated outcomes belong in docs/evidence.
-
-## Dataset and clinical engine
-
-The required generator/loader and its actual cohort are documented in [DATASET.md](docs/DATASET.md). After the prerequisites above, one command creates and loads the fixed recipe:
+After readiness, use a second terminal in the same repository to create and load the deterministic dataset:
 
 ```powershell
 pwsh -NoProfile -File ./scripts/load-dataset.ps1
 ```
 
-The command preserves existing data, uses its own bounded loopback helper, submits clinical inputs over real HTTP and performs actual clinician workflow actions. It verifies the eight cases and stops its own helper. [Execution evidence](docs/evidence/group-6-dataset.md) records 100 patients, 106 encounters, 10,000 stored sources, exact input reproduction and safe replay. It also records the original rejection, its unresolved cause and the narrowly guarded explicit recovery option; ordinary runs do not rotate failed keys. [Measured read performance](docs/PERFORMANCE.md) is recorded with target, actual dataset/conditions and all p50/p95/p99/max values; final fresh-checkout/empty-database acceptance remains pending.
- The implemented [clinical engine](docs/CLINICAL_RULES.md) and [124-case verification](docs/evidence/group-3-clinical.md) use the [2021 adult CKD-EPI equation](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults) and [LOINC98979-8](https://loinc.org/98979-8). SCr umol/L divides by88.4 to canonical mg/dL; eGFR uses sex-specific κ/α,142,0.9938^age and female1.012, then converts the unrounded per-minute result by exactly60. Output display is mL/s/1.73m2, machine UCUM mL/s/{1.73_m2}. No race term/normal range is added. Only age18+ with explicit applicable clinical sex, positive standardized creatinine is computable; missing/inconsistent/unverified inputs return a reason. [NKF published examples](https://www.kidney.org/sites/default/files/example_it_ticket-implement_2021_ckd-epi_equation_to_calculate_egfr_from_creatinine_1.pdf) and a separate24-case oracle verify the calculation. Optional reproduction: node scripts/verify-clinical-oracle.mjs. Inbound BMI/eGFR values are rejected under the [adopted derived-only profile](docs/decisions/group-3-clarifications.md); ingestion storage and secured source-detail integration are verified in [Group4](docs/evidence/group-4-ingestion.md); derived list/trend/detail integration passed focused [Group5 checks](docs/RESULT_READS.md); the browser UI displays these server-provided values and source details; its actual Codex checks passed as recorded in Group7; candidate verification remains separate.
+Open http://127.0.0.1:18081/. The same Spring Boot service serves the API and plain HTML/CSS/JavaScript client; there is no client installation/build step or remote chart/font dependency. Use the synthetic IDs and relationships in the generated `work/dataset/v1/load-manifest.json`, as explained in [DATASET](docs/DATASET.md). Test actor controls declare X-Test-Actor-Id/Role; they are impersonatable assessment input, **not authentication**.
 
-## Scope and safeguards
+The local bootstrap binds PostgreSQL to 127.0.0.1:55433, uses random ignored SCRAM credentials, separates migration/runtime roles, and preserves existing data. The dataset command uses its own bounded loopback helper on 18091, performs real HTTP ingestion and local clinician/proxy workflow actions, verifies the scenarios and stops its helper. Ctrl+C stops the foreground service; the database persists. After stopping the app, `pwsh -NoProfile -File ./scripts/stop-local-database.ps1` stops only this assessment cluster. [Script behavior](scripts/README.md).
 
-Follow [AGENTS.md](AGENTS.md), [engineering/security rules](docs/ENGINEERING_AND_SECURITY.md), [scope](docs/SCOPE_BOUNDARIES.md), [adopted decisions](docs/DECISIONS.md) and [requirement matrix](docs/REQUIREMENT_MATRIX.md). Test actor headers are untrusted and impersonatable; real authentication is explicitly excluded. Identity provisioning/login, notifications, billing/insurance, scheduling, Careline write-back and container/cloud deployment are excluded. The required production architecture discussion remains in scope. Do not execute Attachment A.
+The two public commands were exercised from a fresh full-history checkout and new empty cluster, using external installed tools and a warm dependency cache. The actual result, counts, scenarios, asset checks, additional-wrapper failure and source restoration are in [clean-start evidence](docs/evidence/group-12-clean-start.md). This is a fresh-source/database check, not a fresh-machine test.
 
-The intentional assessment-first failed transaction-response envelope and bounded create-only FHIR profile are implemented, disclosed assessment limitations, not universal FHIR conformance. Current validation uses bundled definitions and prohibits managed HTTP resolution; runtime payload diagnostics are not logged. No legal/clinical/security certification or full assignment compliance is claimed. Local tools, database files, raw logs, original attachments/correspondence, transcripts and secrets are excluded from Git and final artifacts.
+## Dataset and clinical interpretation
 
-See the [application/operator path inventory](docs/READ_PATH_INVENTORY.md), [group plan](docs/EXECUTION_PLAN.md), [actual state](docs/EXECUTION_STATE.json), [history preservation](docs/HISTORY.md) and [project structure](docs/PROJECT_STRUCTURE.md). Final source/deliverables, history, dataset, tests, restore and recipient access must be reconciled before delivery.
+The fixed recipe `atlas-g6-v1`, seed 20261027, semantic date 2026-10-27 generates **100 patients, 106 encounters and 10,000 stored source Observations**. Clinician lists additionally contained 3,693 calculated/unavailable view rows; these are not stored source Observations. The eight required cases include both creatinine units, age-13/16 proxy confidentiality, same-patient haemoglobin across age 14, retained amendments, weight with no height ever, a 94-point multi-year series, actual exact-Bundle replay and actual invalid-Bundle rollback. [Recipe/reproduction](docs/DATASET.md), [actual scenario and recovery proof](docs/evidence/group-6-dataset.md).
 
-Browser: the clinical client requires standard JSON.parse reviver source-context support; it explicitly withholds affected content if unsupported. This was observed in the actual assessment browser. Optional Node24checks/measurement are separate from the Java build/client runtime. [Exact client behavior](docs/CLIENT.md) and [performance method/results](docs/PERFORMANCE.md) state their bounds.
+Replays preserve committed IDs. A genuinely fresh database assigns fresh server IDs while reproducing the recipe's clinical inputs. Existing historical failed receipts and narrowly guarded explicit recovery are documented; ordinary runs never silently rotate a completed failed key. Proxy access uses the current UTC request date, while clinical ranges use the observation's effective date; fixed dated fixtures are not a promise of unchanged ages forever.
+
+Creatinine UCUM `umol/L` divides by **88.4** into canonical `mg/dL` before calculation. Adult eGFR uses race-free **2021 CKD-EPI creatinine**, with the [NIDDK equation/source and conversion](https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults), and chosen [LOINC 98979-8](https://loinc.org/98979-8). The per-minute estimate is divided by exactly 60 for display `mL/s/1.73m2`, machine UCUM `mL/s/{1.73_m2}`. Explicit suitable clinical sex, completed effective-time age 18+, positive standardized serum creatinine and valid context are required; otherwise a reason is returned. No race factor or invented normal eGFR range is added. [Independent oracle and published NKF examples](docs/evidence/clinical-oracle.md), [rules](docs/CLINICAL_RULES.md).
+
+## Verification and measurements
+
+- **Backend:** one complete 237-case run (163 unit + 74 integration), followed by a separately executed new connection-provider failure/recovery IT. Its overlapping runtime unit is not added as a distinct case or called a full 238-case rerun. [Exact checkpoints, original failure/correction and scope](docs/evidence/group-10-regression.md).
+- **Client:** eight focused model cases plus actual Codex browser/keyboard/role/privacy checks. Candidate observations are partial; remaining manual client checks were expressly deferred. [Attributed evidence](docs/evidence/group-7-client.md).
+- **Performance:** prior declared p95 ≤500 ms per case, five cases spanning all four GET routes, 10 warmups +100 measurements each, one discovery call: **551 valid HTTP 200 responses and exactly 551 audits**, unchanged source inventory. Measured p95 ranged 27.0271–57.7036 ms; list/sodium maxima 631.5012/761.7399 ms remain disclosed. [Conditions, every percentile/maximum and query-plan limits](docs/PERFORMANCE.md).
+- **Restore:** all ten tables/content/schema/grants/sequences matched in a fresh restored database before four attributable allowed/denied HTTP checks. Total drill 103.386 s; pg_restore phase 5.786 s. Existing roles were prerequisites; this is not cluster-global/key recovery or approved production RPO/RTO proof. [Executed restore](docs/evidence/group-12-restore.md).
+- **Clean startup:** [fresh checkout, empty cluster and both public commands](docs/evidence/group-12-clean-start.md), with explicit warm prerequisites and preservation checks.
+
+To run the backend suite against the designated separate `atlas_test` database:
+
+```powershell
+pwsh -NoProfile -File ./scripts/verify.ps1
+```
+
+Optional client checks: `node scripts/client/client-model.test.mjs`. Optional clinical oracle: `node scripts/verify-clinical-oracle.mjs`. Performance and restore reproduction procedures are linked above. Do not run loads, tests, restore or benchmarks concurrently on the same database. Generated data, credentials and raw reports stay ignored.
+
+## Scope and material limits
+
+The adapter supports bounded JSON R4 transaction Bundles with POST creates of Patient, Encounter and Observation; it is not a general FHIR server. Incoming BMI/eGFR is rejected under the adopted derived-only profile. The invalid-Bundle transaction-response follows the brief and intentionally differs from normative R4's failed-transaction OperationOutcome envelope. [Adopted decisions](docs/DECISIONS.md), [ingestion contract](docs/FHIR_INGESTION.md).
+
+Stored authorization, release/confidentiality, visible-only derivation/counts and synchronous same-transaction auditing apply to the application paths. [Auditor path inventory and trusted-operator boundary](docs/READ_PATH_INVENTORY.md), [requirement matrix](docs/REQUIREMENT_MATRIX.md). Hidden/missing status/body equality and metadata controls are tested; finite unequal timing samples do **not** establish timing indistinguishability or absence of a classifier. That literal limb of HR5/R2 remains unestablished and is disclosed.
+
+Full eligible patient history is materialized before Java derivation/window/paging; neither an index nor a transaction timeout hard-bounds arbitrary Java work. The 10k serial-loopback measurements do not establish 9M/90M, concurrent, cold, remote-network or production capacity. Structural validation has a cooperative budget, not interruption of a single validator call. Clinician critical-process attestation records an action, not proof of real patient contact. Real feed/specimen/assay verification, clinical approval, production identity and operator/key/recovery governance remain production gates.
+
+Identity provisioning/login, notifications, billing/insurance, scheduling, Careline write-back, native apps and container/cloud deployment are outside this assessment build. No real clinical data, vendor integration or external disclosure is implemented. [Scope boundaries](docs/SCOPE_BOUNDARIES.md). Remaining actual candidate walkthroughs are not replaced by AI checks, and no legal/clinical/security certification or guaranteed interview outcome is claimed.
+
+## Development history and AI disclosure
+
+The private Git repository retains authentic incremental commits. The submission archive additionally includes the verified `history.bundle`, checksum, `HISTORY_RECOVERY.md` and exact-file `SUBMISSION_MANIFEST.json`; clone the bundle to inspect earlier revisions without private GitHub access. No local Git configuration, tools, database, original PDFs/correspondence/transcripts or raw logs are included.
+
+Codex and AI reviewers produced the code, drafts and checks with the attribution, candidate decisions, actual partial observations and material revisions recorded in [AI_WORKING_LOG](AI_WORKING_LOG.md). The [exact adopted access-rule instruction](docs/ai/ACCESS_RULE_INSTRUCTION.md) remains unchanged; later decisions are separate. See the note for reasons and production proposals, and the linked evidence for what was actually executed.

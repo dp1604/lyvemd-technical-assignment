@@ -708,6 +708,22 @@
       "returnedMessages": [],
       "agentMessages": [],
       "requestRecord": "Actualusercontinuedeliverables/manual86deferral; rootdelegatedboundedsourceaudits/currenttasknames=root/group4_transaction_review,/root/group5_read_audit,/root/group5_workflow_audit.139rowmap/readpathinventory/disclosuregaps+preservingindexmerge/optionalguide+localemaildraftreturned. Rootintegratedactualboundedfacts; retainedcompleteearly/laterG8/G9recordsandfourmissingG7/G10items; exactv1unchanged. Guideonlylocaloutputsnotemployerarchive. Clean89/finalhistory/package/sendingnotyetclaimed."
+    },
+    {
+      "id": "G12-002",
+      "topic": "Actual fresh checkout and documented commands, retained additional-wrapper failure",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Root executed both public commands once from freshf109684checkout/newemptycluster. Bothcommands/scenariospassed; wrapperfailedwhenchangingalreadyusedHttpClient.Timeout beforeextrasupplementalGET. Localprobe reproducedexception. Cleanup/sourcecounts+credentialsunchanged. Fullrootreportanddatasetverificationretainedignored; curatedboundedfactsincluded. No humanverificationclaim."
+    },
+    {
+      "id": "FINAL-002",
+      "topic": "Final artifact/AI reconciliation and bounded history privacy inspection",
+      "requestMessages": [],
+      "returnedMessages": [],
+      "agentMessages": [],
+      "requestRecord": "Rootintegratedactualcleanoutcome,polishedREADME/note/currentwrappersandstable139rowmatrix,correctedoraclelink,reviewedpreservingprovenance,exactv1hashandarchivebuilderrecoveryorder. IndependentAIsourceauditidentifiedstalestrings/link. Readonlyhistoryinspectionpassedafterauthorizedsandboxretry. Finalpackage/historyproofremainversionedexternalfacts; noinventeduserprompt/approvalorhumancheck."
     }
   ],
   "limits": [

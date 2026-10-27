@@ -13,7 +13,7 @@ For each meaningful completed increment:
 5. Push reviewed changes to the private repository and check the remote commit matches the intended local commit. Recheck private ownership at checkpoints. No collaborators or submission recipients are added without the candidate's instruction.
 6. Create a history checkpoint after a coherent committed milestone and again after the final delivery commits.
 
-Use focused commits and independent review where it helps. Application CI/checks will be added when a runnable build exists. Feature correctness requires its own verification evidence.
+Use focused commits and independent review where it helps. The runnable build has local backend, integration, client-model and documented execution checks; hosted CI is not claimed. Feature correctness requires its own verification evidence.
 
 ## Verified checkpoint command
 
@@ -33,7 +33,7 @@ The first test used a separate synthetic fixture with three commits, a nonmerged
 
 The bundle contains committed reachable Git objects and refs, including earlier versions and other included branches. Ignore rules do not remove secrets already committed, even if later deleted. Review the included history before final packaging; the checkpoint command verifies integrity, not secret-free content or application correctness.
 
-It does not back up uncommitted files, ignored work, the index, local Git configuration/hooks, credentials, tools or PostgreSQL data. This history recovery check does not replace the planned database restore verification.
+It does not back up uncommitted files, ignored work, the index, local Git configuration/hooks, credentials, tools or PostgreSQL data. This history recovery check is separate from the [executed synthetic database restore](evidence/group-12-restore.md).
 
 ## Delivery with history
 

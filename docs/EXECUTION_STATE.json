@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeMainGroup": 12,
+  "activeMainGroup": 13,
   "completedGroups": [
     1,
     2,
@@ -10,7 +10,8 @@
     6,
     8,
     10,
-    11
+    11,
+    12
   ],
   "completedChecklistTasks": [
     1,
@@ -99,6 +100,8 @@
     85,
     87,
     88,
+    89,
+    90,
     95
   ],
   "mainSequence": [
@@ -120,7 +123,7 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "85taskscomplete including75-76actualperformanceand87actualrestore. Current89freshcheckout/twocommand runsession57824inprogress; no otherDBworkloads, oldsourceclustertemporarilystopped/freshcluster55433. Poll existingrunandrequirecleanup/source-restartPASS. Complete88/89onlyafteractualacceptance, then90/91/93package/reconciliation and94/95deliveryprep. Actualhuman81/86/92remainopen (86expresslydeferred);96candidate-sentonly.",
+  "nextAction": "89/96taskscomplete. Current13:91finalAI/historyverification,93archivefreeze. Documentedcommandsfresh89qualifiedscopeand90reconciliationcomplete. Human81/86/92remainopen;86expresslydeferred. Then94exactarchive/recipientcheckandcandidate96sendby22:00Asia/Colombo.",
   "recordedAtUtc": "2026-10-27 13:31:32 UTC",
   "groups": [
     {
@@ -296,7 +299,7 @@
         88,
         89
       ],
-      "status": "in-progress",
+      "status": "complete",
       "completionGate": "Use designated synthetic databases; prove commands work and protect the working dataset. Integrate fixes and rerun affected checks."
     },
     {
@@ -308,7 +311,7 @@
         92,
         93
       ],
-      "status": "pending",
+      "status": "in-progress",
       "completionGate": "Actual user walkthrough required; package/history/privacy checks completed. A later fix reopens affected checks and requires a new package/checksum."
     },
     {
@@ -324,5 +327,5 @@
     }
   ],
   "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification. Neweractualuserinstructionatcall_f89b0c538a704048a1d3629be5ff0b17 permitsadvancingotherworkwhilemanual86deferred; this doesnotcompleteGroup7. Followactualstate11next, then12/13/14; retainunperformedhumangatesexplicitly.",
-  "nextMainGroup": 12
+  "nextMainGroup": 13
 }

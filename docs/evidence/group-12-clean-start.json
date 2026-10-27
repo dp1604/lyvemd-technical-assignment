@@ -1,0 +1,116 @@
+{
+  "schema": "atlas-group-12-clean-start-v1",
+  "status": "QUALIFIED_COMMAND_ACCEPTANCE",
+  "scope": "Two documented public commands and actual fresh dataset verification succeeded; enclosing wrapper failed afterward. No overall wrapper PASS is claimed.",
+  "sourceCommit": "f109684701b88ca38dd424205fcb68537c0a5364",
+  "startedAtUtc": "2026-10-27T13:10:42.3095302Z",
+  "finishedAtUtc": "2026-10-27T13:43:50.1485549Z",
+  "elapsedSecondsIncludingCleanup": 1987.5221117,
+  "freshSource": {
+    "expectedHeadMatched": true,
+    "initialTrackedStatusClean": true,
+    "fullHistoryNonShallow": true,
+    "ignoredToolsDataCredentialsManifestAndTargetInitiallyAbsent": true,
+    "postRunHeadAndStatusCheck": "NOT_REACHED_BY_WRAPPER"
+  },
+  "prerequisites": {
+    "java": "21.0.12.1+1",
+    "postgresql": "16.15",
+    "mavenAndBinaries": "Existing external prerequisites, not copied into checkout",
+    "mavenRepository": "External warm cache",
+    "cleanMachineOrColdDependenciesClaimed": false
+  },
+  "documentedCommands": {
+    "status": "PASS_WITHIN_STATED_SCOPE",
+    "start": {
+      "command": "pwsh -NoProfile -File ./scripts/start.ps1",
+      "status": "FOREGROUND_SERVICE_READY",
+      "readySeconds": 356.7714693,
+      "migrationsApplied": 3,
+      "port": 18081,
+      "successfulProcessExitClaimed": false
+    },
+    "load": {
+      "command": "pwsh -NoProfile -File ./scripts/load-dataset.ps1",
+      "status": "SUCCESSFUL_EXIT_AND_DATASET_VERIFIED",
+      "invocations": 1,
+      "publicCommandRetries": 0,
+      "revalidateRejectedSwitch": false,
+      "seconds": 1601.6094996,
+      "successMarker": "ATLAS_DATASET 200 LOAD_AND_VERIFICATION_COMPLETED",
+      "ownedHelperPort": 18091
+    }
+  },
+  "freshDatabase": {
+    "actualDataDirectoryMatchedNewCheckout": true,
+    "independentlyGeneratedCredentials": true,
+    "beforeLoad": {"patients": 0, "encounters": 0, "sourceObservations": 0, "audits": 0},
+    "afterLoad": {"patients": 100, "encounters": 106, "sourceObservations": 10000, "audits": 20241},
+    "derivedRowsInClinicianLists": 3693
+  },
+  "staticAssets": {"count": 4, "status": 200, "exactSource": true, "noStore": true},
+  "separatePostCleanupRootGitChecks": {
+    "status": "PASS",
+    "executor": "Root; read-only follow-up independent of failed wrapper",
+    "freshTrackedAndNonignoredUntrackedStatusClean": true,
+    "freshHead": "f109684701b88ca38dd424205fcb68537c0a5364",
+    "testedCommitToCurrentCanonicalDiffEmptyFor": ["src/", "pom.xml", "scripts/start.ps1", "scripts/load-dataset.ps1", "scripts/lib/"],
+    "wrapperPostRunGitChecksRemainNotReached": true,
+    "supplementalHttpOrDatabaseWorkPerformed": false
+  },
+  "datasetVerification": {
+    "version": "atlas-g6-v1",
+    "status": "PASS",
+    "verifiedAtUtc": "2026-10-27T13:43:21.986331300Z",
+    "sha256": "c0af8e1f0492e58523bde1cee3ca9b2d6d3455fd1b0f617b04ccaffee7c9684b",
+    "scenarios": {
+      "DS-01_creatinine_both_units": true,
+      "DS-02_teen_protected_encounters": true,
+      "DS-03_age14_haemoglobin": true,
+      "DS-04_amendment_both_versions": true,
+      "DS-05_weight_without_height": true,
+      "DS-06_multi_year_series": true,
+      "DS-07_exact_bundle_replay": true,
+      "DS-08_atomic_invalid_bundle": true,
+      "additional_held_critical_expired_revoked_scope_cases": true
+    },
+    "duplicateEvidence": {"sameResponseBytes": true, "totalBefore": 5, "totalAfter": 5},
+    "invalidEvidence": {"httpStatus": 400, "invalidEntryIndex": 1, "totalBefore": 5, "totalAfter": 5, "wholeBundleRejected": true},
+    "representativeReads": "Actual secured HTTP reads through owned helper using same fresh JAR/database; no supplemental foreground GET proof is inferred"
+  },
+  "wrapper": {
+    "status": "FAIL",
+    "category": "ATLAS_CLEAN_ACTION_FAILED",
+    "scriptSha256": "490eb4abe52fc81e786990b53fd77c35e6c9deb02ac1c91153e6101f680a14ff",
+    "originalFailReportSha256": "6d6eb2f4e4f0d515b793f8e179f7d4b14490a5c6e95c968872f58d1e9865726e",
+    "failureBoundary": "Changing Timeout on an already-used HttpClient before supplemental foreground GET",
+    "rootDiagnostic": "Isolated .NET probe reproduced InvalidOperationException",
+    "supplementalGet": "NOT_PERFORMED",
+    "supplementalAuditAssertion": "NOT_PERFORMED",
+    "beforeAuditCursorOutputPresent": true,
+    "afterAuditCursorOutputPresent": false,
+    "originalFailureArtifactsPreserved": true,
+    "overallPassClaimed": false
+  },
+  "cleanup": {
+    "freshClusterStopped": true,
+    "preservedSourceRestarted": true,
+    "sourceCountsAndCredentialFileHashUnchanged": true,
+    "preservedSourceCounts": {"patients": 100, "encounters": 106, "sourceObservations": 10000, "audits": 54877},
+    "sourceDataResetDroppedOrDeleted": false,
+    "allSourceValueOrDataFileEqualityClaimed": false
+  },
+  "attribution": {
+    "harnessDraft": "Workflow AI reviewer; root reviewed and corrected typed audit comparison before execution",
+    "executionAndDiagnostic": "Root",
+    "curation": "Workflow AI reviewer read original report/logs/verification; root independently reviews scope before canonical integration",
+    "candidateManualExecutionClaimed": false
+  },
+  "limits": [
+    "Task89 is evaluated against actual documented-command scope, not a fictional overall wrapper PASS.",
+    "Post-failure supplemental GET/audit and final Git checks are not claimed.",
+    "Existing external binaries and warm dependency cache; not a fresh-machine/cold-download check.",
+    "No new full backend regression, production-scale guarantee, clinical approval or manual81/86/92 completion.",
+    "Later material application changes require affected verification; final history/package/access/delivery remain separate."
+  ]
+}

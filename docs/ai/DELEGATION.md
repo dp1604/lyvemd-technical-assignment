@@ -17,7 +17,7 @@ The per-row reasons are Codex's documented engineering rationale for the agreed 
 
 ## Access-rule instruction status
 
-The candidate adopted the prospective AI-drafted v1 unchanged: "Adopt v1 exactly as written" (source message 01a17b3c-2173-7002-8e7f-867679493c0b). See the [exact body and provenance](ACCESS_RULE_INSTRUCTION.md). AI authorship and actual candidate adoption remain distinct. Implementation and unresolved policy decisions are still pending; no earlier prompt is reconstructed or backdated.
+The candidate adopted the prospective AI-drafted v1 unchanged: "Adopt v1 exactly as written" (source message 01a17b3c-2173-7002-8e7f-867679493c0b). See the [exact body and provenance](ACCESS_RULE_INSTRUCTION.md). AI authorship and actual candidate adoption remain distinct. The shipped R1–R6 implementation and subsequent candidate decisions D-01–D-17 are recorded separately in the working log and decision register; no earlier prompt is reconstructed or backdated.
 
 ## Continuing ownership and verification
 
