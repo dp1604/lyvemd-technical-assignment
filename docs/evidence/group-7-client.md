@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Group7 — minimal-client implementation and actual Codex checks
 
 Original Tasks63–65 are complete. Actual candidate Task86 remains open; Group7 is therefore still in progress. The candidate has the running client and a separate guided worksheet. A policy adoption, AI source review, automated browser check or elapsed time does not count as that human gate.

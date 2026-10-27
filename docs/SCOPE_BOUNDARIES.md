@@ -1,6 +1,8 @@
 # Build scope boundaries
 
-Status: boundaries recorded in Task 9 and checked against the supplied brief/current tracked inventory. Application implementation remains pending. Preserve these boundaries through implementation, the Task 90 reconciliation and Tasks 93-94 package/access checks; this is not a final scope-compliance certificate.
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
+Status: boundaries recorded in Task 9 and checked against the supplied brief/current tracked inventory. The implemented build and bounded verification are linked from the current requirement matrix. Preserve these boundaries through implementation, the Task 90 reconciliation and Tasks 93-94 package/access checks; this is not a final scope-compliance certificate.
 
 The [source record](SOURCE_RECORD.md), [requirement matrix](REQUIREMENT_MATRIX.md) and supplied Technical Task govern this document. The brief's literal exclusions, our agreed delivery choices and still-required design obligations are distinct. A filename or documentation mention of an excluded subject is not itself a feature implementation.
 

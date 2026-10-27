@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Executed synthetic backup and restore
 
 Task87 is complete. Root executed the full default restore check using PostgreSQL16.15. A custom-format logical backup of the preserved synthetic assessment database was restored into a fresh isolated database as the nonsuperuser migration owner. All10atlas tables, canonical row counts/content, columns/constraints/indexes/table and column grants, migration history and sequence state matched before any restored HTTP read. Source inventories before/after the dump, restore and restored HTTP checks agreed. [Sanitized report](group-12-restore.json) records the backup SHA-256, size, table counts, script/JAR hashes and exact times.

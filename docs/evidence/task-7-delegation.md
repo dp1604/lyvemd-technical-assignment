@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Task 7 - delegation and exact access instruction
 
 Status: candidate adoption and documentation/provenance checks passed. Implementation remains pending.

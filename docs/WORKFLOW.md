@@ -1,5 +1,7 @@
 # Local clinician workflow and individual proxy revocation
 
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
 These explicit local assessment commands implement [candidate-adopted C1/C2](decisions/group-5-clarifications.md) and Package B. They add no public endpoint, login, provisioning, notification or Careline write-back. Actor IDs are impersonatable test declarations matched against the roster and stored rights, not production authentication. A trusted local operator runs these commands; production authority and clinical governance require separate validation.
 
 ## Review, critical path and separate release

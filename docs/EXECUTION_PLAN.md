@@ -1,6 +1,6 @@
 # Grouped execution plan
 
-This grouping baseline assigned the87 items pending after Tasks1–9 exactly once to14 primary groups. Current completion is authoritative in EXECUTION_STATE.json. Groups1–6,8,10–12 are complete; Group7 has partial actual candidate86 checks, expressly deferred under later user steering. Group9 focused joint review81 is complete with AI attribution; Group13 guided defense92 remains incomplete. Independent delivery work advances under the actual deferral without treating AI checks as human completion.
+This grouping baseline assigned the87 items pending after Tasks1–9 exactly once to14 primary groups. Current completion is authoritative in EXECUTION_STATE.json. Groups1–6,8,10–12 are complete; Group7 has partial actual candidate86 checks, expressly deferred under later user steering. Group9 focused joint review81 is complete with AI attribution; Group13 candidate-reported independent walkthrough92 is recorded, with package revalidation following this update. Independent delivery work advances under the actual deferral without treating AI checks as human completion.
 
 Main implementation order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 10 → 11 → 12 → 13 → 14. Start Groups 8 and 9 after Group 1 and run them alongside implementation; finish both before Group 13. Independent API/evidence work can continue if a guided check in Group 7 is awaiting the candidate.
 
@@ -74,7 +74,7 @@ Original tasks: **77–81**. Start: Start after 1; finish before 13.
 
 Review all eight supplied files; verify printed locations, consequences/remedies/severity/origin; guided review walkthrough.
 
-Completion gate: Static only: do not fix, build or run Attachment A. Clinical-source checks and focused joint written/chat walkthrough recorded; findings remain AI-origin and independent human source verification is not claimed.
+Completion gate: Static only: do not fix, build or run Attachment A. Original AI source checks and focused joint discussion are preserved; later candidate-reported independent review of11blockers and partial review of13 are recorded separately. Findings remain AI-origin.
 
 ## 10. Integrated correctness and security regression
 
@@ -114,7 +114,7 @@ Original tasks: **94–96**. Start: After 13.
 
 Verify actual recipient/method/access, prepare exact submission reply, assist candidate submission and verify correct version delivered.
 
-Completion gate: Candidate sends. No inferred address, public access, collaborator invitation or automatic send; confirm delivery before 22:00 Asia/Colombo.
+Completion gate: Candidate sends. No inferred address, public access, collaborator invitation or automatic send; confirm delivery before 22:30 Asia/Colombo.
 
 ## Interruption, stall and recovery precautions
 
@@ -129,6 +129,8 @@ Completion gate: Candidate sends. No inferred address, public access, collaborat
 9. Candidate decisions, guided verification and final sending are real gates. Bundle related questions with clear recommendations; hold affected work until the answer arrives. Keep pending human-check items open while independent lanes proceed. Static review remains static; preserve all assignment/security/privacy duties.
 10. Reforecast after the first working ingestion/read slices (Groups 4–5), using actual coding/testing throughput. These groups do not establish a new promise that all remaining work fits 12 hours. Protect final verification, packaging and delivery time.
 
-Coverage check:87 assigned items,87unique, no omissions/duplicates. Currentstate/checklist marks93of96taskscomplete; active main13, then14. Partial/deferred86 and incomplete92 remain explicit; focusedjoint81 is recorded; do not infer their completion.
+Coverage check:87 assigned items,87unique, no omissions/duplicates. Currentstate/checklist marks94of96taskscomplete; active main13, then14. Partial86 and not-submitted96 remain explicit; independent walkthrough92 is candidate-reported; focusedjoint81 is recorded; do not infer their completion.
 
 Group4 completion dependency: originalTask46 required both retained versions retrievable with correctionOf, so Task49 was implemented and verified early. It remains assigned once toGroup5; currentstate/checklist mark it complete. Group5 subsequently completed its remaining ten tasks and corresponding workflow/cross-route checks; Task49 is not counted again. No other original group allocation is changed.
+
+Current candidate report and exact review scope: [CANDIDATE_REVIEW](CANDIDATE_REVIEW.md). Historical allocation and execution checkpoints remain preserved.

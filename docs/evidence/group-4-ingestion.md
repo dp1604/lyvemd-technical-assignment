@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Group4 — ingestion and retained correction history
 
 Group4 Tasks42–47 are complete for the declared assessment profile. Task49 was brought forward from Group5 because Task46 explicitly requires both retained versions retrievable with correctionOf. This is an authorized dependency, not a claim that the rest of Group5 or the submission is complete. The other three GET endpoints, actual clinician review/release commands, deterministic assignment dataset, UI, performance/timing/restore/final checks and candidate walkthrough remain open.

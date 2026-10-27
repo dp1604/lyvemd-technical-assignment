@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Group 1 — decision/source checkpoint
 
 Status: actual candidate adoptions, independent audits and final documentation checks passed; private publication/recovery remain final milestone gates. This group covers Tasks10-17. Application work and application tests remain pending.

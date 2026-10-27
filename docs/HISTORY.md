@@ -1,5 +1,7 @@
 # Development history and delivery
 
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
 The assignment requires the build with its history. The candidate chose a private GitHub repository. Authentic commits begin with the actual Task 4 scaffold; earlier planning and the isolated environment probe are not reconstructed into invented development commits.
 
 ## Workflow through delivery
@@ -39,7 +41,7 @@ It does not back up uncommitted files, ignored work, the index, local Git config
 
 - Repository delivery: preserve the complete Git history in the private repository and verify that the intended reviewer can access it in Task 94. A link alone does not establish access.
 - Archive delivery if used: include the final committed source/documents plus the fresh self-contained `history.bundle`, its SHA-256 digest and recovery instructions. A source-only ZIP has no commit history. Do not copy the local working folder indiscriminately.
-- Regenerate and verify the bundle after final commits, compare its HEAD with the source in the package, inspect contents for secrets/unrelated files, and recheck integrity. Tasks 91-94 remain pending until that final work is performed.
+- Regenerate and verify the bundle after final commits, compare its HEAD with the source in the package, inspect contents for secrets/unrelated files, and recheck integrity. The v2 checkpoint was verified; every later committed change requires fresh bundle/package verification. Its final manifest and external verification identify the delivered version.
 
 When a delivered bundle is in the current directory, a normal working copy can be recovered with:
 

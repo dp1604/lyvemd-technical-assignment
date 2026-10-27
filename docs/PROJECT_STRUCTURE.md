@@ -1,6 +1,8 @@
 # Project structure
 
-Status: Groups 1–6 complete: foundation, clinical rules, all five API routes, local workflow and deterministic dataset with actual scenario/recovery checks. Client Tasks63–65 are implemented and Codex-checked; actual candidate86 and final assignment acceptance remain pending. Directory names are delivery choices; the supplied assignment remains authoritative.
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
+Status: the application, all five routes, local workflow, deterministic dataset, client, regression, local performance and qualified recovery/start evidence are recorded. Current human review is itemized above; client execution remains partial and sending remains open.
 
 ```text
 README.md                              Run instructions and submission entry point
@@ -27,4 +29,4 @@ The candidate approved one Spring Boot service and a plain browser client. Servi
 
 Local work/ and outputs/ remain outside version control. work/ includes downloaded dependencies, a synthetic database and its credentials, environment probes and source-text review material. A curated environment summary is deliberately included under docs/evidence; the local inventory and raw logs are not uploaded.
 
-The final delivery must include all four completed components, source, tests, migrations, dataset generator, verified run instructions and recoverable history. GitHub access for employer reviewers remains a later delivery check.
+The final delivery must include all four completed components, source, tests, migrations, dataset generator, verified run instructions and recoverable history. Archive delivery with recoverable history is the selected method; private GitHub access is not required to inspect that archive.

@@ -1,5 +1,7 @@
 # Assessment FHIR ingestion contract
 
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
 **Known terminology conflict:** the brief labels `2947-0` as potassium; official LOINC defines it as sodium in blood. The candidate adopted retaining this convention only for the synthetic assessment with prominent disclosure. Verified specimen/terminology mapping and clinical-owner approval are required before real clinical use; [source conflict and actual adoption](decisions/group-6-loinc-clarification.md).
 
 
@@ -47,7 +49,7 @@ Transaction advisory locks coordinate a key; the receipt primary key is the fina
 
 An amended/corrected Observation requires the correction extension; other statuses cannot carry it. The target must be available, same patient/analyte/encounter/exact effective Instant, and the current head. A correction gets a new ID and new held review state. Original content is immutable. In-Bundle forward correction chains are validated then inserted in dependency order; self-links, cycles and branches reject. A unique successor index protects cross-request races; the loser retries fresh validation and receives a deterministic non-head rejection. Context-changing corrections are unsupported and explicitly rejected, rather than changing the wrong original or silently losing its privacy classification.
 
-Every new source result remains held. Source HH/LL/AA signals on the parent/components are preserved as CRITICAL; other signals never invent a noncritical threshold/classification. Calculated HIGH/LOW is not criticality. Clinician review/release and visibility are subsequent workflow/read-layer work, and must not be bypassed by `status:final` or direct source flags.
+Every new source result remains held. Source HH/LL/AA signals on the parent/components are preserved as CRITICAL; other signals never invent a noncritical threshold/classification. Calculated HIGH/LOW is not criticality. Clinician review/release and visibility are implemented in the subsequent workflow/read layer, and must not be bypassed by `status:final` or direct source flags.
 
 ## Responses and intentional R4 departure
 
@@ -57,7 +59,7 @@ Every new source result remains held. Source HH/LL/AA signals on the parent/comp
 
 **The assessment explicitly requests invalid entries in a transaction-response; normative R4 requires a single OperationOutcome for a failed transaction.** The candidate adopted the task-first envelope and disclosed this departure. Successful processing still remains atomic. See [R4 transaction response](https://hl7.org/fhir/R4/http.html#transaction-response), [R4 JSON representation](https://hl7.org/fhir/R4/json.html), [R4 extension rules](https://hl7.org/fhir/R4/extensibility.html) and [Encounter.class](https://hl7.org/fhir/R4/encounter-definitions.html#Encounter.class).
 
-Evidence and remaining integration limits are recorded separately; a written contract alone does not complete Tasks42–47, the dataset, the four GET routes or final regression.
+Actual ingestion, dataset, read-route and regression evidence is linked below; a written contract alone is not execution proof.
 
 The historical Group4 baseline passed154automated tests and secured original/correction detail; see [Group4 evidence](evidence/group-4-ingestion.md). Group5 subsequently completed the other reads and actual local workflow, with its [separate evidence](evidence/group-5-reads-and-workflow.md). Empty objects/arrays/strings and unsupported null properties remain rejected under R4 JSON representation rules; primitive-extension alignment forms remain unsupported. [Group 6 actual dataset, scenario and recovery verification](evidence/group-6-dataset.md) records the later runtime checks and limitations.
 

@@ -1,6 +1,8 @@
 # Engineering, privacy and security working rules
 
-Status: required working rules and verification plan. Their presence is not evidence that application controls have already been implemented. This assessment is not a claim of regulatory certification or production readiness.
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
+Status: working rules with implemented controls and bounded evidence linked below; current human contribution is recorded separately. This assessment is not a claim of regulatory certification or production readiness.
 
 ## Sources and scope
 
@@ -29,4 +31,4 @@ These references support engineering verification without replacing the assignme
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/): use applicable testable accessibility criteria, including keyboard access and use of color. The assignment's explicit client requirements remain mandatory; full WCAG conformance requires broader verification.
 - [HL7 FHIR R4](https://hl7.org/fhir/R4/): use version 4.0.1 for the required input. Record and resolve any assessment-versus-standard discrepancy explicitly before implementing it.
 
-Each substantial decision must later have its reason, source, affected requirements and verification evidence recorded. The [requirement-to-evidence matrix](REQUIREMENT_MATRIX.md) establishes baseline coverage in Task 8; update it with actual evidence through reconciliation. The [decision register](DECISIONS.md) records actual Group 1 adoptions and their limitations; all implementation evidence remains pending. Follow the [group plan](EXECUTION_PLAN.md) and [state](EXECUTION_STATE.json) for continuation and bounded recovery.
+Each substantial decision has its reason, source, affected requirements and bounded evidence recorded; later changes require the same traceability. The [requirement-to-evidence matrix](REQUIREMENT_MATRIX.md) establishes baseline coverage in Task 8; update it with actual evidence through reconciliation. The [decision register](DECISIONS.md) records actual Group 1 adoptions and their limitations; implemented behavior and its bounded evidence are linked from the reconciled matrix. Follow the [group plan](EXECUTION_PLAN.md) and [state](EXECUTION_STATE.json) for continuation and bounded recovery.

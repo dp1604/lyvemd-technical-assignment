@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Task 5 - history preservation and recovery verification
 
 Status: the history-preservation workflow is established and its initial recovery test passed. Meaningful commits and final history/package/access verification remain duties through delivery; Tasks 91-94 are not completed by this record.

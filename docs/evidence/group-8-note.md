@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Group8 — specification and architecture note
 
 Original Tasks18–32 are complete as bounded writing/integration obligations. The [two-section note](../../SPECIFICATION_AND_ARCHITECTURE.md) addresses every supplied fictional fact and Part1 duty: Dana's one-sentence goal, included/excluded release scope and reasons, conflicting requests, reversible vendor recommendation/diligence, conditional7–13-week order/first cut and nine testable criteria; engineering storage/index rationale at9M/175k/+3Mannually, explicit10x forecasts/detection, all8house-rule enforcement/auditor evidence, clinical units/equation ownership/versioning/oracle/input behavior, outbound/upstream gates and one operations paragraph with restore proof/three alerts/dependency behavior.

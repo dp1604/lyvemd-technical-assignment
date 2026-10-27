@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Fresh-checkout two-command evidence — qualified outcome
 
 Root executed both documented public commands against a fresh full-history local checkout at **f109684701b88ca38dd424205fcb68537c0a5364** and a newly initialized, empty PostgreSQL cluster. The build/start command reached its real client; the create/load command completed once and its actual HTTP/workflow dataset verifier passed. **The enclosing verification wrapper nevertheless finished FAIL after those checks**, before its supplemental GET. These outcomes are deliberately separate; there is no claimed overall wrapper PASS. [Sanitized record](group-12-clean-start.json).

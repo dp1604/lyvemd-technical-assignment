@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Group3 — clinical rules and calculation verification
 
 Tasks52–62 clinical-layer implementation and verification passed on27October2026. This is the pure calculation/input-mapping checkpoint, not completed HTTP ingestion, persisted datasets, authorization or clinical release. Those integrations remain Groups4–7/10. Actual code increments are privately pushed as c1b8d3c (units/ranges) and db823b0 (derivations/history/oracle); the workflow instruction has its own c100d2e commit. Final evidence/state publication and history recovery are separate milestone gates recorded after commit.

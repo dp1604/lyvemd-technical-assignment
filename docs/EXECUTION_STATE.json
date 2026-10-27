@@ -105,6 +105,7 @@
     89,
     90,
     91,
+    92,
     93,
     94,
     95
@@ -128,8 +129,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "93/96taskscomplete. Task81fullreview/naturalreports/focusedjointdiscussioncomplete;90/91/93/94revalidatedat21dbfd3reviewpackage,finalv2regeneration+exactverificationrequiredafterthiscommitbeforehandoff. Runtimeunchanged. Remaining86partial/expresslydeferred,92guideddefenseincomplete,96candidateowned sendcorrectlatestarchivebefore22:00Asia/Colombo. OldZIPnot sent.",
-  "recordedAtUtc": "2026-10-27 13:31:32 UTC",
+  "nextAction": "94/96tasksrecordedcomplete; client86partial and96not submitted. Candidate review incorporated; current documentation/history/newarchive verification required before replacement release. Latestcandidateworkingcutoff22:30Asia/Colombo; noemployerextensionasserted.",
+  "recordedAtUtc": "2026-10-27T17:02:10.707Z",
   "groups": [
     {
       "group": 1,
@@ -272,7 +273,7 @@
         81
       ],
       "status": "complete",
-      "completionGate": "Staticreview/sourcechecks andactualfocusedwritten/chatwalkthroughcompleted; allfindingsAI-origin, noindependenthumanverificationclaim."
+      "completionGate": "OriginalAIstaticreview/focusedjointdiscussion preserved; subsequentcandidate-reported11independent/13partialblockerreviews separatelyrecorded;AttachmentAstaticonly."
     },
     {
       "group": 10,
@@ -317,7 +318,7 @@
         93
       ],
       "status": "in-progress",
-      "completionGate": "Actual user walkthrough required; package/history/privacy checks completed. A later fix reopens affected checks and requires a new package/checksum."
+      "completionGate": "Candidate-reported independent walkthrough92 recorded; new document/history/package revalidation follows the review update."
     },
     {
       "group": 14,
@@ -328,17 +329,24 @@
         96
       ],
       "status": "in-progress",
-      "completionGate": "Candidate sends. No inferred address, public access, collaborator invitation or automatic send; confirm delivery before 22:00 Asia/Colombo."
+      "completionGate": "Candidate manually sends the latest verified archive; do not infer delivery. Latestcandidateworkingcutoff22:30Asia/Colombo, noemployerextensionasserted."
     }
   ],
-  "selectionRule": "On next-group request, read this state and the checklist. Finish an in-progress group before advancing; follow mainSequence; start parallel8/9 alongside2 after1. Never skip an unfinished gate or infer human verification. Neweractualuserinstructionatcall_f89b0c538a704048a1d3629be5ff0b17 permitsadvancingotherworkwhilemanual86deferred; this doesnotcompleteGroup7. Followactualstate11next, then12/13/14; retainunperformedhumangatesexplicitly.",
+  "selectionRule": "Current human review is in docs/CANDIDATE_REVIEW.md. Finish document/history/replacement-package revalidation, then candidate-owned delivery. Client86 remains partial and can proceed only from actual further observations. Do not repeat completed implementation groups or infer human verification.",
   "nextMainGroup": 13,
-  "revalidationRequired": [],
+  "revalidationRequired": [
+    90,
+    91,
+    93,
+    94
+  ],
   "lastReviewPackageVerification": {
     "sourceCommit": "21dbfd3d73f5ea61ab7851882eac124a4a274db3",
     "status": "PASS",
     "files": 222,
     "commits": 41,
-    "finalVersionPolicy": "Regenerate and independently verify v2 after the final evidence/status commit before handoff."
-  }
+    "finalVersionPolicy": "Historical review package checkpoint; verify the replacement archive after the candidate-contribution update."
+  },
+  "candidateReviewRecord": "docs/CANDIDATE_REVIEW.md",
+  "task92CompletionBasis": "Candidate reports independent submission walkthrough Yes/Yes; not a new AI-observed oral assessment."
 }

@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Group 6 — deterministic dataset and actual execution evidence
 
 Codex executed the fixed synthetic cohort, all eight required scenarios, accepted-prefix preservation and a separate fresh-local-journal replay. These are automated results, not candidate-run verification or production certification. Client, final regression, measured read performance, restore/clean-start acceptance, final note/review integration and candidate walkthroughs remain their separate gates.

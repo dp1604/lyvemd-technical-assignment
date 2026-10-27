@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Group2 — service/database foundation
 
 Tasks33–34 implementation and focused checks passed on27October2026. Private publication/recovery remain milestone gates recorded in ignored work after the final commit. This checkpoint does not complete R1–R6, clinical behavior, the dataset, UI or the final submission.

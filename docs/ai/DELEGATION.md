@@ -1,6 +1,6 @@
 # R1-R6 delegation and retained decisions
 
-Status: the original candidate-confirmed R1–R6 split remains unchanged: all implementation was delegated to Codex, with actual decisions/guided review retained by the candidate. Prospective implementation/verification described at the original checkpoint is now documented in the working log/evidence. Actual partial client reports and the focused joint PR walkthrough are separately attributed; independent human source verification and unperformed checks are not inferred. Per-row reasons are Codex rationale, not invented candidate quotations.
+Status: original R1–R6 implementation remains delegated to Codex. The candidate made the recorded policy decisions and subsequently independently reviewed selected work and partially exercised it outside Codex. The [current contribution record](../CANDIDATE_REVIEW.md) gives the separate scope for each requirement. AI authorship, candidate accountability, independent review and execution are distinct. Per-row historical rationale below is Codex reasoning, not a candidate quotation.
 
 The candidate selected: "Codex writes the code; you review decisions and verify the result" (source message 01a1785c-a50b-7093-91e0-3d301a5ccd16). The candidate then requested assistance at every step (source message 01a17862-b802-7551-be14-462edf849a9f). Thus all six implementation requirements are delegated to Codex; none is reserved for exclusively human implementation.
 
@@ -22,3 +22,7 @@ The candidate adopted the prospective AI-drafted v1 unchanged: "Adopt v1 exactly
 ## Continuing ownership and verification
 
 Delegation does not transfer the candidate's responsibility to understand and defend the submission. Codex will guide review and preserve actual evidence; it will not invent candidate-run tests, clinical approval or final acceptance. Update this record if the division changes and reconcile what actually shipped in Task 91.
+
+## Subsequent candidate review
+
+The candidate independently reviewed all17adopted policies and the stated R1/R2/R5 topics. Clinical review is mixed by row, and client/dataset execution remains partial. See the [147-item contribution record](../CANDIDATE_REVIEW.md). This fulfills a later review role without rewriting the initial all-code allocation or exact access instruction.

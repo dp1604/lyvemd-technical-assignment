@@ -1,5 +1,7 @@
 # Deterministic synthetic dataset
 
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
 **Assessment convention:** the supplied table calls code `2947-0` potassium, while official LOINC defines it as sodium in blood. Under the candidate's [D-17 decision](decisions/group-6-loinc-clarification.md), this adapter retains that mapping only for the synthetic assessment. It must not process real clinical feeds unchanged. Confirmed specimen, verified terminology mapping and clinical-owner approval are prerequisites for production use. This conflict does not establish the cause of the separate validation failure described below.
 
 Version `atlas-g6-v1` defines **100 patients, 106 encounters and 10,000 stored source Observations**. The complete load, all eight secured end-to-end scenario checks and a separate fresh-local-journal replay passed. See the execution evidence for actual counts, failures investigated, preservation checks and limits. BP components belong to one source Observation. Calculated BMI/eGFR views are additional response rows, not stored source Observations. The deliberately rejected Bundle contributes no sources, and submitting the replay case twice contributes one source.
@@ -79,4 +81,4 @@ The first `p013` rejection's cause remains unresolved. A later `p066` rejection 
 
 Known primitive-pattern engine exceptions and regex timeouts at error/fatal severity now return audited temporary unavailability, without a completed receipt or accepted source. Mandatory validation still has to succeed. The loader can retry only an explicit HTTP `503`, with the exact same prebuilt request, actor, bytes and key: at most three attempts, with one-second and two-second pauses. It stops on the final failure, other statuses, interruption or an unknown transport exception. It never converts a failed validation into acceptance. No validator deadline, definition or dependency was relaxed.
 
-Dataset performance targets and measurements remain a later gate. Neither a successful load nor the earlier bounded hidden/missing timing probe measures the fictional nine-million-observation production workload.
+The declared target and actual 100-patient/10,000-source measurements are recorded in [PERFORMANCE](PERFORMANCE.md). Neither a successful load nor the earlier bounded hidden/missing timing probe measures the fictional nine-million-observation production workload.

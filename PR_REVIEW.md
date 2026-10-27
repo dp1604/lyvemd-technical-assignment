@@ -2,9 +2,9 @@
 
 **Request changes; do not merge.** The review identifies 24 blockers, three preferences and five follow-up checks. The main risks are confidential results reaching the wrong reader, clinical values being misinterpreted, loss of correction history and reads succeeding without a durable audit. Two separate type errors also contradict the claim that this exact listing builds.
 
-All findings originated with AI assistance. The eight supplied files—724 numbered lines—were inspected against the task and the primary sources linked below. The attachment was not changed, compiled, built or run. Its examples describe possible consequences, not observed patient events. As instructed, unshown helpers are treated as defect-free. The author's 14 passing tests, 88% coverage and staging performance remain unverified because the tests and measurements were not supplied.
+All findings originated with AI assistance. The original review inspected the eight supplied files—724 numbered lines—against the task and the primary sources linked below. The attachment was not changed, compiled, built or run. Its examples describe possible consequences, not observed patient events. As instructed, unshown helpers are treated as defect-free. The author's 14 passing tests, 88% coverage and staging performance remain unverified because the tests and measurements were not supplied.
 
-The [written walkthrough](PR_REVIEW_WALKTHROUGH.md) explains each blocker through an example. The candidate requested the review and discussed key findings; that does not make AI-origin findings human discoveries or establish a completed line-by-line verification. Actual discussion, source checks and review history are in the [Task 81 record](docs/evidence/task-81-review.md).
+The [written walkthrough](PR_REVIEW_WALKTHROUGH.md) explains each blocker through an example. The candidate subsequently reported independent static review of 11 blockers and partial review of the other 13, with partial review of the preferences and follow-up checks. The [candidate review record](docs/CANDIDATE_REVIEW.md) identifies that scope; discovery remains attributed to AI. The earlier focused discussion and source-check history are preserved in the [Task 81 record](docs/evidence/task-81-review.md).
 
 ## Files reviewed
 
@@ -232,7 +232,7 @@ Define a total order—effective time plus immutable ID—and use it consistentl
 
 The review covers this partial results PR, not the entire Part 2 application. It assigns no extra defects to Actor, DateUtil, AgeUtil, FhirCodec or unshown repositories/DTOs, and does not demand production authentication, notifications or other excluded features. Where a finding depends on input admission, external callers, schema or transaction configuration, the qualification remains with it.
 
-Checks consisted of reading the listing, tracing all three success/denial paths, comparing the supplied table and clinical equation, and consulting FHIR, Spring and Java sources. Relevant printed pages were visually checked and official-library entry names inspected without loading classes. Exact source checks, provenance and discussion are retained in the [Task 81 evidence](docs/evidence/task-81-review.md). No payload attack, timing/load result or successful build is claimed. The focused joint walkthrough is recorded separately; it does not establish independent human verification of every finding.
+The original AI checks consisted of reading the listing, tracing all three success/denial paths, comparing the supplied table and clinical equation, and consulting FHIR, Spring and Java sources. Relevant printed pages were visually checked and official-library entry names inspected without loading classes. Exact source checks, provenance and the earlier discussion are retained in the [Task 81 evidence](docs/evidence/task-81-review.md). The candidate later reported static inspection and manual reasoning for the subset identified in the [candidate review record](docs/CANDIDATE_REVIEW.md). Neither stage involved executing the supplied listing; no payload attack, timing/load result or successful build is claimed.
 
 ## Conflict in the supplied terminology
 

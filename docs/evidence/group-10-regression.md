@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Group 10 — integrated correctness and security evidence
 
 Original Tasks 82–85 are complete against the adopted assessment contract. Root executed all reported checks. The candidate's actual client walkthrough (Task 86), dataset performance measurement (75–76), restore/clean-start checks and final reconciliation remain separate gates.

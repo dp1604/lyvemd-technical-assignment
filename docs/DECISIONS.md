@@ -1,6 +1,8 @@
 # Decision register
 
-Status: actual candidate-adopted assessment policies are recorded with immutable source/adoption records. Foundation, clinical, ingestion, allGETs/localworkflow, actual dataset/recovery, client automation, two-section note/static review, full regression, measured performance and scoped restore are documented. Manual client86 is partial/deferred; focused joint review81 is recorded and guided defense92 is incomplete. Qualified clean-start evidence is recorded. Final history/package verification is repeated after later document changes; candidate delivery remains open.
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
+Status: actual candidate-adopted assessment policies are recorded with immutable source/adoption records. Foundation, clinical, ingestion, allGETs/localworkflow, actual dataset/recovery, client automation, two-section note/static review, full regression, measured performance and scoped restore are documented. Client86 remains partial; focused joint review81 and subsequent independent review are recorded, as is the candidate-reported independent submission walkthrough92. Qualified clean-start evidence is recorded. Final history/package verification is repeated after later document changes; candidate delivery remains open.
 
 ## Record rules
 
@@ -44,13 +46,13 @@ All rows above are adopted as assessment policies. A was adopted in source messa
 4. The synthetic input contract asserts standardized creatinine; neither an ordinary Quantity nor LOINC alone verifies a real assay. Actual feed format, assay traceability/measuring interval and historical-demographic evidence remain production gates.
 5. Critical-path completion is a recorded demonstration attestation, not proof of real contact or a complete production workflow. No clinical thresholds, legal jurisdiction or vendor facts are invented.
 6. Test actors remain impersonatable. PostgreSQL unavailability prevents writing to that same database; fail closed without claiming impossible outage audit durability. Snapshot authorization cannot retract an already-authorized in-flight response.
-7. Foundation/clinical/ingestion/allGETs/localworkflow evidence is recorded through [Group5](evidence/group-5-reads-and-workflow.md), with local extension definitions and V1–V3 implemented. [Dataset/scenario/recovery evidence](evidence/group-6-dataset.md) is recorded through Group 6. Client, final specification/review integration and wider acceptance remain their groups. A decided policy alone is not a passed behavior.
+7. Foundation/clinical/ingestion/allGETs/localworkflow evidence is recorded through [Group5](evidence/group-5-reads-and-workflow.md), with local extension definitions and V1–V3 implemented. [Dataset/scenario/recovery evidence](evidence/group-6-dataset.md) is recorded through Group 6. Client, specification/review integration and wider regression have their separately scoped evidence. A decided policy alone is not a passed behavior.
 
 Future unclear facts/policies are added here with source, options, candidate decision, reason, affected matrix IDs, implementation/evidence links and limitations. Preserve adopted versions and explain changes. The production-design duties and scope exclusions remain intact.
 
 ## Group3 clarifications
 
-D-09 derived-only incoming BMI/eGFR restriction and D-10 March1 leap-day completed-age convention were explicitly adopted in actual candidate replies. See [source answers, reasons and limits](decisions/group-3-clarifications.md). A/B presentation files and exact access instruction remain immutable. Clinical core checks do not yet complete ingestion/read-route enforcement.
+D-09 derived-only incoming BMI/eGFR restriction and D-10 March1 leap-day completed-age convention were explicitly adopted in actual candidate replies. See [source answers, reasons and limits](decisions/group-3-clarifications.md). A/B presentation files and exact access instruction remain immutable. Clinical core checks are supplemented by the later ingestion/read-route enforcement evidence.
 
 ## Group4 clarifications
 

@@ -21,3 +21,5 @@ The instruction quotes all eight house rules with PDF line wrapping normalized a
 Preserve subsequent actual instructions as separate versions with their source and adoption, rather than editing v1. Record what finally shipped and why it differs in the working log and Task 91 reconciliation. Earlier general planning/AGENTS directions remain earlier provenance; they are not relabelled as this exact instruction.
 
 The original review document accidentally placed the instruction immediately after the opening code-fence marker without a newline. Its complete instruction body was present unchanged. That original draft is preserved locally; a correctly formatted adopted copy is provided separately. This wrapper correction changes no instruction wording or adoption.
+
+The candidate subsequently independently reviewed the adopted policies; [current contribution record](../CANDIDATE_REVIEW.md). This changes neither v1 authorship nor the original exact body/adoption/hash.

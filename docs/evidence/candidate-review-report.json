@@ -1,0 +1,2784 @@
+{
+  "schema": "atlas-candidate-review-record-v1",
+  "recordedAtUtc": "2026-10-27T17:02:10.707Z",
+  "worksheetBaseline": "575022ecd09e06d4d7cfad2843d03114019423ea",
+  "originalReportSha256": "193284a284d5851e945803761c79e64ea5d6fae7e8b1bf1c127cdbf2a84bc92a",
+  "exportedAtUtc": "2026-10-27T16:49:52.946Z",
+  "reviewDatesSpecified": false,
+  "reviewedVersionsSpecified": false,
+  "executionResultsSpecified": false,
+  "basis": "Candidate report of subsequent work outside Codex, followed by direct clarification; not AI-observed execution.",
+  "clarifications": {
+    "attachmentA": "static inspection/manual reasoning",
+    "submission": "not submitted. but I will be doing it manually by myself"
+  },
+  "counts": {
+    "independentReview": {
+      "Yes": 100,
+      "Partial": 45,
+      "No": 2
+    },
+    "reportedExecution": {
+      "Yes": 25,
+      "Partial": 103,
+      "No": 19
+    }
+  },
+  "originalResponses": [
+    {
+      "id": 1,
+      "title": "Set the working clock",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 2,
+      "title": "Lock the submission scope",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 3,
+      "title": "Establish the mandatory environment",
+      "independentReview": "No",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 4,
+      "title": "Create the project structure",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 5,
+      "title": "Preserve real development history",
+      "independentReview": "Yes",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 6,
+      "title": "Start the AI working log immediately",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 7,
+      "title": "Record AI delegation explicitly",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 8,
+      "title": "Create the requirement-to-evidence matrix",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 9,
+      "title": "Preserve the stated exclusions",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 10,
+      "title": "Establish a decision register",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 11,
+      "title": "Define the FHIR surface",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 12,
+      "title": "Resolve the failure-response discrepancy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 13,
+      "title": "Define idempotency and correction policies",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 14,
+      "title": "Define identity and access-log policies",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 15,
+      "title": "Define time and demographic policies",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 16,
+      "title": "Define release and critical-value representation",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 17,
+      "title": "State the audit interpretation",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 18,
+      "title": "Begin the two-section note and static review in parallel",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 19,
+      "title": "Respect and summarize the fictional context",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 20,
+      "title": "Write Dana's one-sentence goal",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 21,
+      "title": "Define release 1",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 22,
+      "title": "Resolve and raise Dana's conflicting requests",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 23,
+      "title": "Write the vendor recommendation",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 24,
+      "title": "Give the product build order, rough estimates and first cut",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 25,
+      "title": "End Dana's section with testable acceptance criteria",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 26,
+      "title": "Write the storage and scale decisions with reasons",
+      "independentReview": "Yes",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 27,
+      "title": "Explain tenfold-scale failure and detection",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 28,
+      "title": "Explain enforcement of all eight house rules",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 29,
+      "title": "Explain clinical calculation governance",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 30,
+      "title": "Write one operations paragraph",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 31,
+      "title": "State the outbound-data rule",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 32,
+      "title": "State the upstream-verification gate",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 33,
+      "title": "Scaffold the service and migrations",
+      "independentReview": "No",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 34,
+      "title": "Preserve the supplied data-model meanings and constraints",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 35,
+      "title": "Handle the untrusted test headers",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 36,
+      "title": "Enforce patient and clinician access",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 37,
+      "title": "Enforce individual proxy access",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 38,
+      "title": "Enforce adolescent confidentiality and expiry",
+      "independentReview": "Yes",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 39,
+      "title": "Enforce non-disclosure consistently",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 40,
+      "title": "Implement transactional read auditing",
+      "independentReview": "Yes",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 41,
+      "title": "Verify audit-failure behaviour",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 42,
+      "title": "Accept the required FHIR input",
+      "independentReview": "Yes",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 43,
+      "title": "Resolve urn:uuid: references",
+      "independentReview": "Yes",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 44,
+      "title": "Make Bundle processing atomic",
+      "independentReview": "Yes",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 45,
+      "title": "Make ingestion idempotent under X-Idempotency-Key",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 46,
+      "title": "Retain amendment history",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 47,
+      "title": "Return the ingestion contract",
+      "independentReview": "Yes",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 48,
+      "title": "Implement the results-list endpoint",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 49,
+      "title": "Implement the result-detail endpoint",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 50,
+      "title": "Implement the trend endpoint",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 51,
+      "title": "Implement the access-log endpoint",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 52,
+      "title": "Normalize clinical units at ingestion",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 53,
+      "title": "Implement component blood pressure",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 54,
+      "title": "Implement height and weight",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 55,
+      "title": "Implement BMI",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 56,
+      "title": "Implement haemoglobin",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 57,
+      "title": "Implement sodium and potassium",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 58,
+      "title": "Implement creatinine ranges",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 59,
+      "title": "Implement HbA1c",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 60,
+      "title": "Implement eGFR correctly",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 61,
+      "title": "Handle all non-computable derived values",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 62,
+      "title": "Verify clinical calculations independently",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 63,
+      "title": "Build the results client",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 64,
+      "title": "Build the trend and access-log client views",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 65,
+      "title": "Make the client accessible as required",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 66,
+      "title": "Script deterministic dataset generation",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 67,
+      "title": "Include dataset case 1",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 68,
+      "title": "Include dataset case 2",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 69,
+      "title": "Include dataset case 3",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 70,
+      "title": "Include dataset case 4",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 71,
+      "title": "Include dataset case 5",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 72,
+      "title": "Include dataset case 6",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 73,
+      "title": "Include dataset case 7",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 74,
+      "title": "Include dataset case 8",
+      "independentReview": "Partial",
+      "personallyRan": "No",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 75,
+      "title": "Declare dataset and performance facts",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 76,
+      "title": "Record reproducible performance evidence",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 77,
+      "title": "Review all eight supplied PR files statically",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 78,
+      "title": "Write each review finding completely",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 79,
+      "title": "Check the review's evidence and scope",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 80,
+      "title": "Preserve true review attribution",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 81,
+      "title": "Walk through the review together",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 82,
+      "title": "Run ingestion and retention tests on our own build",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 83,
+      "title": "Run the access matrix and confidentiality tests",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 84,
+      "title": "Run audit and failure tests",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 85,
+      "title": "Verify hidden/missing and clinical boundary behaviour",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 86,
+      "title": "Verify client behaviour together",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 87,
+      "title": "Perform our chosen small backup/restore check",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 88,
+      "title": "Prepare the run instructions",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 89,
+      "title": "Verify a clean start",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 90,
+      "title": "Reconcile every artifact",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 91,
+      "title": "Finalize the AI working log and included history",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 92,
+      "title": "Complete the guided submission walkthrough",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 93,
+      "title": "Freeze features and assemble the final package",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 94,
+      "title": "Confirm delivery details and inspect access",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 95,
+      "title": "Draft the exact submission reply together",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 96,
+      "title": "Submit before the confirmed deadline",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "You",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "T",
+      "changesNeeded": ""
+    },
+    {
+      "id": 97,
+      "title": "Reserve the final interview slot",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 98,
+      "title": "Submit relevant academic transcripts",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 99,
+      "title": "B01: Proxy confidentiality depends on a fixed list of encounter IDs",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 100,
+      "title": "B02: Patient reads do not check clinician release or critical handling",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 101,
+      "title": "B03: The total reveals observations removed from the page",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 102,
+      "title": "B04: The denial path creates and logs patient-identifying information",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 103,
+      "title": "B05: A clinical response can succeed without its audit",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 104,
+      "title": "B06: Denied attempts never reach the audit writer",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 105,
+      "title": "B07: Conversion uses display text, and the eGFR path bypasses it",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 106,
+      "title": "B08: The eGFR formula mixes versions and includes a race multiplier",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 107,
+      "title": "B09: The per-minute result is not converted to the advertised per-second unit",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 108,
+      "title": "B10: The calculator accepts unsuitable inputs and hides failure reasons",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 109,
+      "title": "B11: Historical results are interpreted using today's demographics",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 110,
+      "title": "B12: One age-14 switch applies to every analyte",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 111,
+      "title": "B13: A missing range is returned as NORMAL",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 112,
+      "title": "B14: The mapper assumes every result has one scalar value",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 113,
+      "title": "B15: Correction writes delete the original",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 114,
+      "title": "B16: Dynamic search interpolates values into SQL",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 115,
+      "title": "B17: A small page still loads and decodes the entire history",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 116,
+      "title": "B18: The declared return type cannot accept the result of round",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 117,
+      "title": "B19: The routes do not match the required URLs",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 118,
+      "title": "B20: Both clinical classes name the wrong R4 gender enum",
+      "independentReview": "Yes",
+      "personallyRan": "Yes",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 119,
+      "title": "B21: Clinical meaning changes with coding order",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 120,
+      "title": "B22: Writes store a reference while reads use a patient key",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 121,
+      "title": "B23: A qualified value is turned into an exact measurement",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 122,
+      "title": "B24: Equal-time results can move between pages",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 123,
+      "title": "P01: Remove unused wiring and correct the comments",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 124,
+      "title": "P02: Remove or deliberately support optional sort",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 125,
+      "title": "P03: Agree display precision",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 126,
+      "title": "V01: Investigate hidden/missing timing",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 127,
+      "title": "V02: Put revocation and reads under a declared snapshot",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 128,
+      "title": "V03: Specify accepted effective-time and request forms",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 129,
+      "title": "V04: Verify the write transaction",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 130,
+      "title": "V05: Define status eligibility and derived provenance",
+      "independentReview": "Partial",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 131,
+      "title": "D-01: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 132,
+      "title": "D-02: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 133,
+      "title": "D-03: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 134,
+      "title": "D-04: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 135,
+      "title": "D-05: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 136,
+      "title": "D-06: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 137,
+      "title": "D-07: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 138,
+      "title": "D-08: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 139,
+      "title": "D-09: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 140,
+      "title": "D-10: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 141,
+      "title": "D-11: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 142,
+      "title": "D-12: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 143,
+      "title": "D-13: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 144,
+      "title": "D-14: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 145,
+      "title": "D-15: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 146,
+      "title": "D-16: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    },
+    {
+      "id": 147,
+      "title": "D-17: review the adopted policy",
+      "independentReview": "Yes",
+      "personallyRan": "Partial",
+      "chosenApproach": "",
+      "reviewDate": "",
+      "reviewedCommit": "",
+      "actions": [],
+      "notes": "",
+      "changesNeeded": ""
+    }
+  ],
+  "normalized": [
+    {
+      "id": 1,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 2,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 3,
+      "independentReview": "No",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 4,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 5,
+      "independentReview": "Yes",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 6,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 7,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 8,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 9,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 10,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 11,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 12,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 13,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 14,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 15,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 16,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 17,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 18,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 19,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 20,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 21,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 22,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 23,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 24,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 25,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 26,
+      "independentReview": "Yes",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 27,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 28,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 29,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 30,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 31,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 32,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 33,
+      "independentReview": "No",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 34,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 35,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 36,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 37,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 38,
+      "independentReview": "Yes",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 39,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 40,
+      "independentReview": "Yes",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 41,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 42,
+      "independentReview": "Yes",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 43,
+      "independentReview": "Yes",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 44,
+      "independentReview": "Yes",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 45,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 46,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 47,
+      "independentReview": "Yes",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 48,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 49,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 50,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 51,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 52,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 53,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 54,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 55,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 56,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 57,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 58,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 59,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 60,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 61,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 62,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 63,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 64,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 65,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 66,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 67,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 68,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 69,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 70,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 71,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 72,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 73,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 74,
+      "independentReview": "Partial",
+      "reportedExecution": "No",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 75,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 76,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 77,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 78,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 79,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 80,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 81,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 82,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 83,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 84,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 85,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 86,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 87,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 88,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 89,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 90,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 91,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 92,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 93,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 94,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 95,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 96,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Not submitted; latest explicit clarification supersedes the form execution selection."
+    },
+    {
+      "id": 97,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 98,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 99,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 100,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 101,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 102,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 103,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 104,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 105,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 106,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 107,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 108,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 109,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 110,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 111,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 112,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 113,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 114,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 115,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 116,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 117,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 118,
+      "independentReview": "Yes",
+      "reportedExecution": "Yes",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 119,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 120,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 121,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 122,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 123,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 124,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 125,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 126,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 127,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 128,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 129,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 130,
+      "independentReview": "Partial",
+      "reportedExecution": "Partial",
+      "interpretation": "Static inspection/manual reasoning only; not execution of supplied Attachment A code."
+    },
+    {
+      "id": 131,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 132,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 133,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 134,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 135,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 136,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 137,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 138,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 139,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 140,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 141,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 142,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 143,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 144,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 145,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 146,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    },
+    {
+      "id": 147,
+      "independentReview": "Yes",
+      "reportedExecution": "Partial",
+      "interpretation": "Candidate-reported activity at the selected extent; no individual command, outcome or pass inferred."
+    }
+  ],
+  "findings": {
+    "independentlyReviewedBlockers": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B16",
+      "B19",
+      "B20",
+      "B22",
+      "B23"
+    ],
+    "partiallyReviewedBlockers": [
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B17",
+      "B18",
+      "B21",
+      "B24"
+    ],
+    "preferences": "Partial",
+    "followups": "Partial"
+  },
+  "originalAiAuthorshipUnchanged": true,
+  "limitations": [
+    "No individual review dates, reviewed versions, action details or test outcomes were supplied.",
+    "Worksheet baseline is not separately confirmed as the version inspected for every item.",
+    "Partial review/execution is not full independent verification.",
+    "Reviewing an AI-origin finding does not change its discovery origin.",
+    "Timing indistinguishability remains unestablished; production-scale capacity and clinical approval are not established."
+  ],
+  "contributionsThroughCodex": [
+    {
+      "area": "Business and interview context",
+      "contribution": "Provided the job description, invitation, attachments, startup/adviser impression, reported Flutter/Spring Boot/AWS/Rust stack, and the first-interview device/edge/security/reliability scenario. These inputs shaped the analysis; fictional Aldercrest facts remained separate.",
+      "evidence": "AI_WORKING_LOG.md P01; original candidate messages"
+    },
+    {
+      "area": "Working model and boundaries",
+      "contribution": "Explicitly selected AI-written code with candidate decision review and verification, requested assistance at every step, required no guessing and primary-source checking, and required defensible engineering/privacy/security practices throughout delivery.",
+      "evidence": "AI_WORKING_LOG.md P02/T7-001; AGENTS.md"
+    },
+    {
+      "area": "Environment and delivery choices",
+      "contribution": "Selected isolated tools, the existing LyveMD workspace, private repository name, plain same-service HTML/CSS/JavaScript client and configured commit-author email. Chose EDB PostgreSQL rather than the proposed alternative and supplied the downloaded EDB ZIP.",
+      "evidence": "AI_WORKING_LOG.md T3/T4 records; docs/ai/prompts/task-4-decisions.md"
+    },
+    {
+      "area": "Engineering workflow",
+      "contribution": "Required meaningful commits and private pushes for every meaningful change, task-completion announcements, ordered group execution, updated estimates and progress/stall reporting.",
+      "evidence": "AI_WORKING_LOG.md W01/P06; docs/HISTORY.md; docs/EXECUTION_PLAN.md"
+    },
+    {
+      "area": "Access instruction and initial policies",
+      "contribution": "Adopted the AI-drafted exact access instruction and Packages A/B, choosing the stated ingestion, replay/correction, access-log, time/context, release and audit policies. Draft authorship remains AI; actual adoption is the candidate decision.",
+      "evidence": "docs/ai/ACCESS_RULE_INSTRUCTION.md; docs/DECISIONS.md D-01–D-08"
+    },
+    {
+      "area": "Subsequent policy choices",
+      "contribution": "Asked for reasoning before deciding ambiguous issues, then adopted derived-only BMI/eGFR input, the 1 March age convention, HTTPS extension identifiers, identical unavailable POST-reference errors, one-way clinical workflow, patient-self proxy revocation, retained/derived trend conventions, the 100-patient/about-10k dataset and disclosed synthetic terminology handling.",
+      "evidence": "docs/DECISIONS.md D-09–D-17; preserved clarification/adoption records"
+    },
+    {
+      "area": "Historical haemoglobin browser check",
+      "contribution": "Personally reported the two displayed 11.5 g/dL haemoglobin results: 30 June 2026 range11–14/Normal and 1 July range12–15.5/Low.",
+      "evidence": "AI_WORKING_LOG.md G7-004; docs/evidence/group-7-client.md; candidate messages"
+    },
+    {
+      "area": "Missing-height and keyboard browser checks",
+      "contribution": "Personally reported weight74kg and BMI cannot compute/height unavailable, the matching no-point chart and exact-value table, and visible focus/Tab/Enter working on the trend controls.",
+      "evidence": "docs/evidence/group-7-client.md; candidate messages"
+    },
+    {
+      "area": "Date filtering and role checks",
+      "contribution": "Personally reported sodium trend94points before filtering and10 for the stated2026window. Reported STAFF allowed log/denied results and assigned CLINICIAN allowed results/denied log, including the observed normal sodium140mmol/L.",
+      "evidence": "docs/evidence/group-7-client.md; candidate messages"
+    },
+    {
+      "area": "Review direction and feedback",
+      "contribution": "Requested a deeper full static review and an accurately scoped joint walkthrough, participated in the written/chat explanation, and requested more natural report wording. The later form adds the separate independent/partial static reviews listed below.",
+      "evidence": "AI_WORKING_LOG.md G9-002; docs/evidence/task-81-review.md"
+    },
+    {
+      "area": "Prioritization and preparation",
+      "contribution": "Explicitly deferred further manual client checks to prioritize delivery, requested an explanation of audit-failure behavior, then later reported the independent submission walkthrough and itemized repository reviews outside Codex.",
+      "evidence": "docs/ai/prompts/manual-test-deferral.md; current candidate response record"
+    },
+    {
+      "area": "Administration and submission responsibility",
+      "contribution": "Reported the interview slot reserved and relevant transcripts submitted; clarified that the assignment is not yet submitted and that the candidate will send it manually.",
+      "evidence": "Candidate messages; entries96–98 and latest explicit clarification"
+    }
+  ],
+  "contributionStages": [
+    "Candidate context, choices, adoptions and reported checks through Codex",
+    "Original AI research/drafting/implementation/automated execution",
+    "Subsequent independent/partial candidate work outside Codex"
+  ]
+}

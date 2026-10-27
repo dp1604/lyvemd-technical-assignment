@@ -2,7 +2,7 @@
 
 **I would request changes before merging this PR.** Several problems affect who can see a result, whether its clinical interpretation is correct, and whether access is recorded reliably.
 
-This companion gives an example for each of the 24 blockers in the [detailed review](PR_REVIEW.md). All findings originated with AI assistance. The examples explain what the code permits; they are reasoning examples, not executed requests or observed patient incidents. The supplied listing was not fixed, compiled, built or run.
+This companion gives an example for each of the 24 blockers in the [detailed review](PR_REVIEW.md). AI produced the original findings and examples. The candidate later reported independent static review of 11 blockers and partial review of the remaining 13; review of the three preferences and five follow-up checks was partial. The [candidate review record](docs/CANDIDATE_REVIEW.md) preserves that distinction. The examples describe possible behavior, not executed requests or observed patient incidents. The supplied listing was not fixed, compiled, built or run.
 
 The locations below use the attachment's printed line numbers. Controller, Service, Resolver, Calculator, Normalizer, Mapper, Repository and Writer refer respectively to ResultController, ResultService, ReferenceRangeResolver, EgfrCalculator, UnitNormalizer, ResultMapper, ResultRepository and AccessLogWriter. The attachment says the unshown helpers are defect-free; this review respects that boundary.
 
@@ -49,4 +49,4 @@ Keep the smaller cleanup items separate: unused wiring and misleading comments, 
 4. Where do BMI/eGFR derived rows, reasons for noncomputation, versions and input provenance come from across list, detail and trend? This listing covers only part of the feature.
 5. What are the agreed date/time, amendment-trend and revocation boundaries? DateUtil and AgeUtil remain defect-free; their callers still need a clear contract.
 
-The task's potassium 2947-0 discrepancy stays in the specification caveats. Following the supplied table is not another junior defect. The [Task81 record](docs/evidence/task-81-review.md) describes the focused joint discussion and candidate feedback; it does not credit independent human source verification.
+The task's potassium 2947-0 discrepancy stays in the specification caveats. Following the supplied table is not another junior defect. The [Task 81 record](docs/evidence/task-81-review.md) preserves the earlier focused discussion and presentation feedback; the later [candidate review record](docs/CANDIDATE_REVIEW.md) identifies the independently reviewed and partially reviewed findings.

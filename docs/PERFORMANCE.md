@@ -1,5 +1,7 @@
 # Measured local read performance
 
+Current human contribution: [candidate decisions, independent review and partial execution](CANDIDATE_REVIEW.md). Original AI execution evidence remains scoped to its recorded checkpoint.
+
 The five representative read cases met the **p95 ≤500 ms per case** target on the actual synthetic cohort: **100 patients, 106 encounters and 10,000 stored source Observations**. All 551 requests returned 200 with the expected basic response contracts; audits increased by exactly 551. This is a warmed, serial, loopback assessment result, not a production SLO or a capacity test.
 
 The [target and fixed method](PERFORMANCE_PLAN.md) were declared at 2026-10-27T12:52:12.6873129Z and committed as `3449416b974c4cf1999216e741bd3abf19d900fa` before the measurement. The brief supplies no numerical performance target; 500 ms was chosen for a responsive local read including interpretation and committed auditing. Earlier smaller-view timings were known and disclosed before selection. [Curated machine-readable evidence](evidence/group-11-performance.json) records conditions, counts, results and query-plan observations.

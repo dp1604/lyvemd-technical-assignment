@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 # Task 6 - AI working log reconciliation
 
 Status: the working log is established and reconciled through Task 6. It remains a maintained development artifact; Task 7 and final Task 91 disclosure checks are pending.

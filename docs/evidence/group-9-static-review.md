@@ -1,3 +1,5 @@
+Current contribution status: [subsequent candidate review](../CANDIDATE_REVIEW.md). The evidence below preserves its original checkpoint; later human review does not alter that historical execution or result.
+
 Current update: the [Task81 expanded review](task-81-review.md) has24blockers,3preferences,5qualifiedfollow-ups and a written walkthrough; the actual focused joint walkthrough is complete, with independent human source verification unclaimed. The earlier milestone below is preserved as history.
 
 # Group9 — complete static Attachment A review

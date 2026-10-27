@@ -32,7 +32,45 @@
     "classesLoaded": false,
     "juniorVersionClaimed": false
   },
-  "reviewSha256": "597af520eeb50955561681f8a0abe3047b9fe415d067030e24888cc912553cf2",
-  "walkthroughSha256": "20cb52d9141a977f158aeb5590e07c01c643591b3e9d0a0315217a7741951510",
-  "runtimeChanged": false
+  "reviewSha256": "5781ab0f1fcf0358294d560fd81886546ba467dce17b5111b1e8695fca7760ae",
+  "walkthroughSha256": "313e31aff6de2e3b24a9d81d1dc4b0af3d01369f74b56e81263b02d43f4a082d",
+  "runtimeChanged": false,
+  "subsequentCandidateReview": {
+    "independentStaticReviewBlockers": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B16",
+      "B19",
+      "B20",
+      "B22",
+      "B23"
+    ],
+    "followups": "All five partially reviewed",
+    "preferences": "All three partially reviewed",
+    "reviewDates": null,
+    "partialStaticReviewBlockers": [
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "B12",
+      "B13",
+      "B14",
+      "B15",
+      "B17",
+      "B18",
+      "B21",
+      "B24"
+    ],
+    "reviewedCommit": null,
+    "allDiscoveriesRemainAiOrigin": true,
+    "record": "docs/CANDIDATE_REVIEW.md",
+    "basis": "Candidate self-report and subsequent clarification",
+    "personallyRanMeaning": "Static inspection and manual reasoning; no supplied-code execution"
+  }
 }
