@@ -27,7 +27,7 @@ The command refuses staged/unstaged or nonignored untracked work, shallow/unborn
 
 It exports all reviewed refs and reachable objects into a self-contained `history.bundle`, verifies the bundle, restores it into a new mirror, runs object-integrity checks, and compares every ref/object map, reachable commit set, HEAD and complete file tree. It checks source stability and writes a SHA-256 sidecar plus a verification manifest. The manifest identifies the exact snapshotted commit; later commits are outside that snapshot.
 
-The first test used a separate synthetic fixture with three commits, a nonmerged branch, a tag and an ignored environment-file sentinel. Recovery passed, the ignored file was absent, and a nonignored uncommitted file caused refusal before any new checkpoint was created. This fixture is test data, not assignment development history. Actual-repository recovery is recorded separately after execution.
+The first test used a separate synthetic fixture with three commits, a nonmerged branch, a tag and an ignored environment-file sentinel. Recovery passed, the ignored file was absent, and a nonignored uncommitted file caused refusal before any new checkpoint was created. This fixture is test data, not assignment development history. Actual-repository mirror and normal working-copy recovery also passed; see [the exact snapshot and outcomes](evidence/task-5-history.md).
 
 ## What the checkpoint contains
 
