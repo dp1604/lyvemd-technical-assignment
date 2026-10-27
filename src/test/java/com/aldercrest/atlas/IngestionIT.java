@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ class IngestionIT {
     @Autowired JdbcTemplate jdbc;
     @org.springframework.test.context.bean.override.mockito.MockitoSpyBean FhirValidation validator;
     @org.springframework.test.context.bean.override.mockito.MockitoSpyBean IngestionRepository repository;
+    @org.springframework.test.context.bean.override.mockito.MockitoSpyBean BundlePlanner planner;
     @Autowired com.aldercrest.atlas.workflow.WorkflowService workflow;
     @LocalServerPort int port;
     private JdbcTemplate owner;
@@ -156,23 +158,79 @@ class IngestionIT {
     }
 
     @Test void concurrentIdenticalRequestsContendInDatabaseAndReturnOneCommittedEffect() throws Exception {
+        owner.setQueryTimeout(2); // Bound this test's operational lock/snapshot proof queries.
         String key=key(),body=bundle(entry(newPatient(),urn()));int before=count("patient");
-        try(var gate=owner.getDataSource().getConnection();ExecutorService pool=Executors.newFixedThreadPool(2)) {
-            try(var lock=gate.prepareStatement("SELECT pg_advisory_lock(hashtextextended(?,0))")) {lock.setString(1,clinician+":CLINICIAN:"+key);lock.execute();}
-            CountDownLatch start=new CountDownLatch(1);
-            Callable<HttpResponse<String>> request=() -> {start.await();return post(body,key);};
-            Future<HttpResponse<String>> a=pool.submit(request),b=pool.submit(request);start.countDown();
+        JsonNode expected=JSON.readTree(body);
+        CountDownLatch validated=new CountDownLatch(2),enterTransactions=new CountDownLatch(1);
+        CountDownLatch snapshotsReady=new CountDownLatch(2),enterDatabaseLock=new CountDownLatch(1);
+        AtomicInteger lockCalls=new AtomicInteger();Map<Integer,String> snapshots=new ConcurrentHashMap<>();
+        ExecutorService pool=Executors.newFixedThreadPool(2,Thread.ofPlatform().daemon().factory());
+        Future<HttpResponse<String>> a=null,b=null;
+        org.mockito.Mockito.doAnswer(call -> {
+            var checks=(BundlePlanner.StructuralChecks)call.callRealMethod();
+            assertThat(org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive()).isFalse();
+            assertThat(checks.available()).as("Actual local prevalidation available").isTrue();
+            assertThat(checks.invalidEntries()).isEmpty();
+            validated.countDown();
+            assertThat(enterTransactions.await(20,TimeUnit.SECONDS)).as("Release outside-transaction prevalidation rendezvous").isTrue();
+            return checks;
+        }).when(planner).prevalidate(org.mockito.ArgumentMatchers.argThat(input -> expected.equals(input)));
+        org.mockito.Mockito.doAnswer(call -> {
+            // Only the initial two real transactions rendezvous. A serialization/unique retry
+            // must call the real lock immediately in its new transaction/snapshot.
+            if(lockCalls.getAndIncrement()<2) {
+                assertThat(org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive()).isTrue();
+                Map<String,Object> snapshot=jdbc.queryForMap("SELECT pg_backend_pid() AS pid, current_setting('transaction_isolation') AS isolation, pg_current_snapshot()::text AS snapshot");
+                assertThat(snapshot.get("isolation")).isEqualTo("repeatable read");
+                int pid=((Number)snapshot.get("pid")).intValue();String value=(String)snapshot.get("snapshot");
+                assertThat(value).isNotBlank();assertThat(snapshots.putIfAbsent(pid,value)).isNull();
+                snapshotsReady.countDown();
+                assertThat(enterDatabaseLock.await(10,TimeUnit.SECONDS)).as("Release initial transaction lock rendezvous").isTrue();
+            }
+            call.callRealMethod();return null;
+        }).when(repository).lockKey(org.mockito.ArgumentMatchers.argThat(actor -> actor!=null && clinician.equals(actor.id()) && "CLINICIAN".equals(actor.role())),org.mockito.ArgumentMatchers.eq(key));
+        try(var gate=owner.getDataSource().getConnection()) {
+            int gatePid;
+            try(var statement=gate.createStatement()) {
+                statement.setQueryTimeout(3);
+                try(var result=statement.executeQuery("SELECT pg_backend_pid()")) {assertThat(result.next()).isTrue();gatePid=result.getInt(1);}
+            }
+            try(var lock=gate.prepareStatement("SELECT pg_advisory_lock(hashtextextended(?,0))")) {lock.setQueryTimeout(3);lock.setString(1,clinician+":CLINICIAN:"+key);lock.execute();}
             boolean waiting=false;
-            try {waiting=waitForTwoLocks("advisory",null);}
-            finally {
-                try(var unlock=gate.prepareStatement("SELECT pg_advisory_unlock(hashtextextended(?,0))")) {unlock.setString(1,clinician+":CLINICIAN:"+key);unlock.execute();}
+            try {
+                Callable<HttpResponse<String>> request=() -> concurrentPost(body,key);
+                a=pool.submit(request);b=pool.submit(request);
+                assertThat(validated.await(15,TimeUnit.SECONDS)).as("Both real prevalidations completed before transaction rendezvous").isTrue();
+                enterTransactions.countDown();
+                assertThat(snapshotsReady.await(5,TimeUnit.SECONDS)).as("Both initial roster reads established real RR snapshots").isTrue();
+                assertThat(snapshots).hasSize(2);List<Integer> pids=new ArrayList<>(snapshots.keySet());
+                enterDatabaseLock.countDown();
+                // This two-second clock measures only the coordinated PostgreSQL lock phase.
+                waiting=waitForScopedAdvisoryWaiters(gatePid,pids.get(0),pids.get(1));
+            } finally {
+                enterTransactions.countDown();enterDatabaseLock.countDown();
+                try(var unlock=gate.prepareStatement("SELECT pg_advisory_unlock(hashtextextended(?,0))")) {
+                    unlock.setQueryTimeout(3);
+                    unlock.setString(1,clinician+":CLINICIAN:"+key);
+                    try(var result=unlock.executeQuery()) {assertThat(result.next()).isTrue();assertThat(result.getBoolean(1)).isTrue();}
+                }
             }
             var first=a.get(20,TimeUnit.SECONDS);var second=b.get(20,TimeUnit.SECONDS);
             assertThat(waiting).as("Both requests blocked in PostgreSQL after acquiring their old snapshots").isTrue();
             assertThat(first.statusCode()).isEqualTo(200);assertThat(second.statusCode()).isEqualTo(200);assertThat(first.body()).isEqualTo(second.body());
             assertThat(count("patient")).isEqualTo(before+1);
-            assertThat(jdbc.queryForObject("SELECT count(*) FROM ingestion_receipt WHERE actor_id=? AND idempotency_key=?",Integer.class,clinician,key)).isEqualTo(1);
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM ingestion_receipt WHERE actor_id=? AND actor_role='CLINICIAN' AND idempotency_key=?",Integer.class,clinician,key)).isEqualTo(1);
             assertThat(audits(created(JSON.readTree(first.body()),0),"ALLOWED")).isEqualTo(2);
+            org.mockito.Mockito.verify(planner,org.mockito.Mockito.times(2)).prevalidate(org.mockito.ArgumentMatchers.argThat(input -> expected.equals(input)));
+        } finally {
+            enterTransactions.countDown();enterDatabaseLock.countDown();
+            if(a!=null && !a.isDone()) {a.cancel(true);}if(b!=null && !b.isDone()) {b.cancel(true);}
+            pool.shutdownNow();
+            try {assertThat(pool.awaitTermination(5,TimeUnit.SECONDS)).as("Owned HTTP workers terminated").isTrue();}
+            finally {
+                org.mockito.Mockito.doCallRealMethod().when(planner).prevalidate(org.mockito.ArgumentMatchers.argThat(input -> expected.equals(input)));
+                org.mockito.Mockito.doCallRealMethod().when(repository).lockKey(org.mockito.ArgumentMatchers.argThat(actor -> actor!=null && clinician.equals(actor.id()) && "CLINICIAN".equals(actor.role())),org.mockito.ArgumentMatchers.eq(key));
+            }
         }
     }
 
@@ -463,6 +521,15 @@ class IngestionIT {
     }
 
     private HttpResponse<String> post(String body,String key) throws Exception {return send(body.getBytes(StandardCharsets.UTF_8),key,clinician,"CLINICIAN","application/fhir+json");}
+    private HttpResponse<String> concurrentPost(String body,String key) throws Exception {
+        // Specific test orchestration budget: prevalidation rendezvous plus a real 15s DB action.
+        // Production request/transaction deadlines are unchanged.
+        try(HttpClient client=HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build()) {
+            return client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/fhir")).timeout(Duration.ofSeconds(45))
+                    .header("Content-Type","application/fhir+json").header("X-Test-Actor-Id",clinician).header("X-Test-Actor-Role","CLINICIAN").header("X-Idempotency-Key",key)
+                    .POST(HttpRequest.BodyPublishers.ofByteArray(body.getBytes(StandardCharsets.UTF_8))).build(),HttpResponse.BodyHandlers.ofString());
+        }
+    }
     private HttpResponse<String> get(String observation,String actor,String role) throws Exception {
         try(HttpClient client=HttpClient.newHttpClient()) {
             return client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/patients/"+patient+"/results/"+observation)).timeout(Duration.ofSeconds(15))
@@ -516,12 +583,22 @@ class IngestionIT {
         } while(System.nanoTime()<deadline);
         return false;
     }
-    private boolean waitForTwoLocks(String kind,String relation) throws InterruptedException {
+    private boolean waitForScopedAdvisoryWaiters(int gatePid,int firstPid,int secondPid) throws InterruptedException {
         long deadline=System.nanoTime()+Duration.ofSeconds(2).toNanos();
         do {
-            int waiting=owner.queryForObject("SELECT count(*) FROM pg_locks WHERE NOT granted AND locktype=? AND database=(SELECT oid FROM pg_database WHERE datname=current_database()) AND (CAST(? AS text) IS NULL OR relation=to_regclass(?))",
-                    Integer.class,kind,relation,relation);
-            if(waiting>=2) {return true;}Thread.sleep(10);
+            int waiting=owner.queryForObject("""
+                    SELECT count(DISTINCT waiting.pid)
+                    FROM pg_locks waiting JOIN pg_locks held
+                      ON held.pid=? AND held.granted AND held.locktype='advisory'
+                      AND held.database=waiting.database AND held.classid=waiting.classid
+                      AND held.objid=waiting.objid AND held.objsubid=waiting.objsubid
+                    JOIN pg_stat_activity actor ON actor.pid=waiting.pid
+                    WHERE waiting.pid IN (?,?) AND NOT waiting.granted AND waiting.locktype='advisory'
+                      AND waiting.mode='ExclusiveLock' AND held.mode='ExclusiveLock'
+                      AND actor.datname=current_database() AND actor.usename='atlas_runtime'
+                      AND waiting.database=(SELECT oid FROM pg_database WHERE datname=current_database())
+                    """,Integer.class,gatePid,firstPid,secondPid);
+            if(waiting==2) {return true;}Thread.sleep(10);
         } while(System.nanoTime()<deadline);
         return false;
     }
