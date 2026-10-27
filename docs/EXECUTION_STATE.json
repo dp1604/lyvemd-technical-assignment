@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeMainGroup": null,
+  "activeMainGroup": 6,
   "completedGroups": [
     1,
     2,
@@ -76,8 +76,8 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "On the next-group request select Group6 Tasks66–74: read the exact eight dataset scenarios, implement deterministic generator/loader with actual FHIR replay/invalid submissions and actual workflow calls; assert cases and preserve synthetic atlas data. AllfiveAPIroutes and localworkflow verified; no assignment dataset/client exists yet. Group8/9 drafts ready for later integration/candidate walkthrough. Every meaningful increment commit/private push; never infer human checks or employer facts.",
-  "recordedAtUtc": "2026-10-27 08:12:26 UTC",
+  "nextAction": "Group6 active: candidateapproved100syntheticpatients/about10000sourceObservations; D16 actualreply01a17c85-0aa5-7591-8064-e5ba870532fc. Implementfixedrecipe +realHTTPingest/replay/invalid +actualworkflow +owner-onlyroster/proxysetup; verify8cases and deterministicrerun. Preserveatlas; no datasetreset, no simulatedsubmission/releasedSQL. Rootssolecanonicalwriter/Git. Nextsourceincrementcompile/tests beforecommit/privatepush; keepallrequiredgatesopenuntilactualevidence.",
+  "recordedAtUtc": "2026-10-27 08:55:18 UTC",
   "groups": [
     {
       "group": 1,
@@ -171,7 +171,7 @@
         73,
         74
       ],
-      "status": "pending",
+      "status": "in-progress",
       "completionGate": "Reproduce scenarios and assert their effects; manual-looking rows do not substitute for actual submissions."
     },
     {

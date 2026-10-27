@@ -17,6 +17,11 @@ public class AtlasApplication {
             if(exit!=0) {System.exit(exit);}
             return;
         }
+        if(args.length>0 && "--dataset".equals(args[0])) {
+            int exit=com.aldercrest.atlas.dataset.DatasetTool.run(args);
+            if(exit!=0) {System.exit(exit);}
+            return;
+        }
         SpringApplication.run(AtlasApplication.class, args);
     }
 }

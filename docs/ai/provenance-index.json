@@ -487,6 +487,19 @@
         "msg_081edc3217a18fcd016ae05db148e0819198b4e3b60497f99c"
       ],
       "requestRecord": "Actual same two AI scratch workers, source/test/renderer/workflow/task audits retained and root-reconciled. Root executed204-case full run and final21-case affected recheck, actual two-process CLI and100-pair timing probe. Root identified/fixed display notice, added batch mode, actual correction/release overlap and updated old lock-stage assertion. No candidate-run verification claimed."
+    },
+    {
+      "id": "G6-001",
+      "topic": "Deterministic recipe, real ingestion/workflow loader and guarded fixture bootstrap",
+      "requestMessages": [
+        "01a17c7d-b4df-7fd1-8300-231e35be41c2",
+        "01a17c85-0aa5-7591-8064-e5ba870532fc"
+      ],
+      "returnedMessages": [
+        "call_9aff429f8f8a4d4a95734fb3ec35552e"
+      ],
+      "agentMessages": [],
+      "requestRecord": "Actual continued AI scratch threads01a17c28-82d1-7861-be76-af23874491ef and01a17c28-b2a2-7351-ad48-88e131b40511 supplied recipe/tests, fixture guard and loader script; root authored orchestration integration/scenario checks and executed10focused recipe/profile checks. Runtime effects pending at this increment."
     }
   ],
   "limits": [

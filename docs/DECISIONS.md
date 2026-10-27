@@ -59,3 +59,7 @@ D-11 corrects the extension canonical identifiers to HTTPS example URLs with loc
 ## Group5 clarifications
 
 D-13–D-15 were explicitly adopted unchanged in actual candidate answer `01a17c40-e984-73a0-a0d1-3510d6e6cb1f`. [Preserved proposal, exact answer, reasons and limits](decisions/group-5-clarifications.md) define the one-way local workflow, patient-self individual proxy revocation, retained raw/derived list and latest-visible-head trend conventions. Adoption is separate from [actual Group5 implementation verification](evidence/group-5-reads-and-workflow.md); original packages and source decisions remain preserved.
+
+## Group6 dataset size
+
+D-16: the task leaves dataset size to the candidate. Codex proposed100syntheticpatients/about10,000sourceObservations, with all eight required scenarios plus held/critical/revoked cases, and explicitly separated this from the9-million-record production context. Candidate actually approved in `01a17c85-0aa5-7591-8064-e5ba870532fc`: "Approve 100 patients / about 10,000 Observations (Recommended)". [Actual request/adoption](ai/prompts/group-6-user-request.md) and [recipe/run contract](DATASET.md) preserve the rationale and limits. This is a sizing decision, not a measured performance claim or employer clarification.
