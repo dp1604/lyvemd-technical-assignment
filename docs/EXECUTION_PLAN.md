@@ -129,6 +129,6 @@ Completion gate: Candidate sends. No inferred address, public access, collaborat
 9. Candidate decisions, guided verification and final sending are real gates. Bundle related questions with clear recommendations; hold affected work until the answer arrives. Keep pending human-check items open while independent lanes proceed. Static review remains static; preserve all assignment/security/privacy duties.
 10. Reforecast after the first working ingestion/read slices (Groups 4–5), using actual coding/testing throughput. These groups do not establish a new promise that all remaining work fits 12 hours. Protect final verification, packaging and delivery time.
 
-Coverage check:87 assigned items,87unique, no omissions/duplicates. Currentstate/checklist marks89of96taskscomplete; active main13, then14. Unperformed human81/86/92remainexplicit; do not infer their completion.
+Coverage check:87 assigned items,87unique, no omissions/duplicates. Currentstate/checklist marks92of96taskscomplete; active main13, then14. Unperformed human81/86/92remainexplicit; do not infer their completion.
 
 Group4 completion dependency: originalTask46 required both retained versions retrievable with correctionOf, so Task49 was implemented and verified early. It remains assigned once toGroup5; currentstate/checklist mark it complete. Group5 subsequently completed its remaining ten tasks and corresponding workflow/cross-route checks; Task49 is not counted again. No other original group allocation is changed.

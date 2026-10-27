@@ -102,6 +102,9 @@
     88,
     89,
     90,
+    91,
+    93,
+    94,
     95
   ],
   "mainSequence": [
@@ -123,7 +126,7 @@
     9
   ],
   "parallelStartAfterGroup": 1,
-  "nextAction": "89/96taskscomplete. Current13:91finalAI/historyverification,93archivefreeze. Documentedcommandsfresh89qualifiedscopeand90reconciliationcomplete. Human81/86/92remainopen;86expresslydeferred. Then94exactarchive/recipientcheckandcandidate96sendby22:00Asia/Colombo.",
+  "nextAction": "92/96taskscomplete. Group13remainsopenonlyforactualguideddefense92;Group7human86partial/expresslydeferredandGroup9human81unperformed. Task91/93/94actualreviewarchive/history/destinationverified; regeneratefinalcheckpoint/archiveafterthiscommitandrepeatexactversionchecks. Candidate96mustsendcorrectfinalarchiveandconfirmdeliverybefore22:00Asia/Colombo. Noautomaticexternalmessage.",
   "recordedAtUtc": "2026-10-27 13:31:32 UTC",
   "groups": [
     {
@@ -322,7 +325,7 @@
         95,
         96
       ],
-      "status": "pending",
+      "status": "in-progress",
       "completionGate": "Candidate sends. No inferred address, public access, collaborator invitation or automatic send; confirm delivery before 22:00 Asia/Colombo."
     }
   ],
